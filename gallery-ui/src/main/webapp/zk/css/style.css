@@ -23,12 +23,17 @@
     padding-left: 15px;
 }
 
-.vertical-align {
-    vertical-align: middle;
+
+.modal-dialog{
+    position: relative;
+    display: table;
+    overflow-y: auto;
+    max-width: 100%;
+    overflow-x: auto;
+    width: auto;
+    min-width: 300px;
 }
 
-.catalogueSelection {
-    max-height: 150px;
-    overflow-y: scroll;
-    margin-top: 60px !important;
+.imgggg:hover {
+    color:red;
 }

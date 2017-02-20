@@ -1,7 +1,7 @@
 <?link rel="stylesheet" type="text/css" href="zk/bootstrap/css/bootstrap.css" ?>
 <?page zscriptLanguage="javascript"?>
 <zk xmlns:n="native" xmlns:x="xhtml">
-    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewImageVM')" >
+    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewImageVM', seletedImage = edu.norbertzardin.vm.ImageListVM.selectedImage)" >
         <n:div class="container-fluid">
             <n:div class="row">
 

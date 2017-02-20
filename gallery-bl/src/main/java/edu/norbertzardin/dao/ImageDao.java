@@ -12,4 +12,6 @@ public interface ImageDao {
     List<ImageEntity> getImageList();
 
     ImageEntity getImageById(int id);
+
+    List<ImageEntity> findImagesByName(String name);
 }

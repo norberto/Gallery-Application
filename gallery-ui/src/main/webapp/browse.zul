@@ -14,7 +14,7 @@
 
             <n:div class="row">
                 <n:div class="col-md-12">
-                    <n:div id="image-container" class="container-fluid top-buffer" width="auto" style="margin-left:50px">
+                    <n:div id="catalogue-container" class="container-fluid top-buffer" width="auto" style="margin-left:50px">
                         <n:div class="row">
                             <div id="load1" children="@load(vm.catalogueList)">
                                 <template name="children" var="cat">
@@ -42,6 +42,37 @@
                     </n:div>
                 </n:div>
             </n:div>
+
+            <!--<n:div class="row">-->
+                <!--<n:div class="col-md-12">-->
+                    <!--<n:div id="image-container" class="container-fluid top-buffer" width="auto" style="margin-left:50px">-->
+                        <!--<n:div class="row">-->
+                            <!--<div id="load1" children="@load(vm.imageList)">-->
+                                <!--<template name="children" var="cat">-->
+                                    <!--<div class="col-md-2">-->
+
+                                        <!--<div class="container">-->
+                                            <!--<div class="row">-->
+                                                <!--<div class="col-md-2">-->
+                                                    <!--<image width="200px" height="200px" src="images/catalogue-icon.png" onClick="@command('selectCatalogue',selectedCatalogue=cat)"/>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="row">-->
+                                                <!--<div class="col-md-2">-->
+                                                    <!--<label value="@load(cat.title)" style="margin-right:10px" onClick="@command('selectCatalogue',selectedCatalogue=cat)"/>-->
+                                                    <!--<x:button type="button" class="btn btn-primary glyphicon glyphicon-edit"-->
+                                                              <!--data-toggle="modal" data-target="#editCatalogue"-->
+                                                              <!--onClick="@command('selectCatalogue',selectedCatalogue=cat)"/>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</template>-->
+                            <!--</div>-->
+                        <!--</n:div>-->
+                    <!--</n:div>-->
+                <!--</n:div>-->
+            <!--</n:div>-->
 
         </n:div>
 

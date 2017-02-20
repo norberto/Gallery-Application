@@ -17,13 +17,15 @@ import java.util.List;
 
 public class ImageListVM {
 
+    private String searchString;
+
     @Wire("#selectedImage")
     private ImageEntity selectedImage;
 
     @WireVariable
     private ImageService imageService;
 
-    List<ImageEntity> imageList;
+    private List<ImageEntity> imageList;
 
     @AfterCompose
     public void afterCompose(@ContextParam(ContextType.VIEW) Component view){
@@ -34,7 +36,16 @@ public class ImageListVM {
     @Init
     public void init(@ContextParam(ContextType.VIEW) Component view){
         Selectors.wireComponents(view, this, false);
-//        imageList = getImages();
+        imageList = getImages();
+    }
+
+    @NotifyChange("imageList")
+    @Command
+    public void doSearch() {
+        if((getSearchString() != null) && !getSearchString().equals("")) {
+            imageList = imageService.findImagesByName(getSearchString());
+
+        }
     }
 
     public ImageListVM() {}
@@ -75,5 +86,13 @@ public class ImageListVM {
         imageService.deleteImage(id);
         selectedImage = null;
         Executions.getCurrent().sendRedirect("/view.zul");
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
     }
 }

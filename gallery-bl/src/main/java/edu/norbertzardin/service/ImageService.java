@@ -45,5 +45,8 @@ public class ImageService {
 
     public void pairImageWithTag(ImageEntity image, TagEntity tag){ tagDao.pair(image, tag); }
 
+    public List<ImageEntity> findImagesByName(String name) {
+        return imageDao.findImagesByName(name);
+    }
 
 }

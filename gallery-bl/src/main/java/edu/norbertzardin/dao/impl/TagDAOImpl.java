@@ -31,7 +31,7 @@ public class TagDAOImpl implements TagDao {
 
     @Transactional
     public void createTag(TagEntity tag) {
-        entityManager.persist(tag);
+//        entityManager.persist(tag);
     }
 
     public List<TagEntity> getTagList() {

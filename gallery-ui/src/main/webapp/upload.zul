@@ -43,17 +43,17 @@
                     <!--</label>-->
                 </n:div>
             </n:div>
-            <div viewModel="@id('vm2') @init('edu.norbertzardin.vm.BrowseVM')">
+            <div>
                 <n:div class="row top-buffer">
                     <n:div class="col-md-6 col-md-push-3">
                         <label value="Selected catalogue:"/>
-                        <label value="@load(vm2.selectedCatalogue.title)"/>
+                        <label value="@load(uploadVM.selectedCatalogue.title)"/>
                     </n:div>
                 </n:div>
-                <div class="row top-buffer">
+                <div zclass="row top-buffer">
                     <n:div class="col-md-4 col-md-push-3">
                         <n:div class="catalogueSelection">
-                            <x:div id="load" children="@load(vm2.catalogueList)">
+                            <x:div id="load" children="@load(uploadVM.catalogueList)">
                                 <template name="children" var="cat">
                                     <x:button class="btn btn-default" textContent="@load(cat.title)" onClick="@command('selectCatalogue', selectedCatalogue=cat)"/>
                                 </template>

@@ -2,6 +2,7 @@ package edu.norbertzardin.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import edu.norbertzardin.entities.CatalogueEntity;
 
 @Entity
 @Table(name = "NORBERT_IMAGE_TEST", uniqueConstraints = {

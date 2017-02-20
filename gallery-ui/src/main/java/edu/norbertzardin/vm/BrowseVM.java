@@ -14,9 +14,6 @@ public class BrowseVM {
 
     private String name;
     private List<CatalogueEntity> catalogueList;
-
-
-//    @Wire("#selectedCatalogue")
     private CatalogueEntity selectedCatalogue;
 
     @WireVariable
@@ -81,5 +78,4 @@ public class BrowseVM {
         System.out.println("editing");
         catalogueService.editCatalogue(selectedCatalogue);
     }
-
 }

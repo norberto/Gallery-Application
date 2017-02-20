@@ -1,0 +1,5 @@
+edu\norbertzardin\vm\ViewImageVM.class
+edu\norbertzardin\vm\BrowseVM.class
+edu\norbertzardin\vm\UploadVM.class
+edu\norbertzardin\vm\ImageListVM.class
+edu\norbertzardin\vm\MessageVM.class

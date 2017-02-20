@@ -1,0 +1,9 @@
+<zk xmlns="native">
+    <div id="footer">
+        <div class="container">
+            <p class="footer-block">        Gallery Application 2017 Training camp
+                <a class="pull-right" href="http://localhost:8080">http://localhost:8080</a></p>
+        </div>
+    </div>
+
+</zk>

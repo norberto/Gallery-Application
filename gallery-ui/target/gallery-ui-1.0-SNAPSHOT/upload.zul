@@ -1,0 +1,80 @@
+<?page title="Gallery Application - Upload"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="zk/layout/template.zul"?>
+<!--<zk>-->
+<zk xmlns:x="xhtml" xmlns:z="zul" xmlns:n="native" self="@define(content)">
+    <div viewModel="@id('uploadVM') @init('edu.norbertzardin.vm.UploadVM')">
+        <n:div class="container-fluid">
+            <n:div class="row top-buffer">
+                <n:div class="col-md-6 col-md-push-3">
+                    <n:h1>Upload Image</n:h1>
+                </n:div>
+            </n:div>
+            <n:div class="row top-buffer">
+                <n:div class="col-md-6 col-md-push-3">
+                    <n:div class="input-group">
+                        <n:span class="input-group-addon" style="width:220px">Image name</n:span>
+                        <textbox class="form-control" id ="imageName" value="@save(uploadVM.name)" cols="50"
+                        placeholder="Enter a name for the image..."/>
+                    </n:div>
+                </n:div>
+            </n:div>
+
+            <n:div class="row top-buffer">
+                <n:div class="col-md-6 col-md-push-3">
+                    <n:div class="input-group" >
+                        <n:span class=" input-group-addon" style="width:220px">Description</n:span>
+                        <z:textbox width="406px" zclass="form-control" id="imageDescription" value="@save(uploadVM.description)"
+                                   placeholder="Enter a short description that would describe the picture you are willing to upload..." multiline="true" rows="3" cols="53"/>
+                    </n:div>
+                </n:div>
+            </n:div>
+            <n:div class="row top-buffer">
+                <n:div class="col-md-6 col-md-push-3">
+                    <n:div class="input-group" >
+                        <n:span class="input-group-addon" style="width:220px">Tags</n:span>
+                        <z:textbox class="form-control" id ="imageTags" value="@save(uploadVM.tags)"
+                                   placeholder="Enter tags separated by commas..." cols="50"/>
+                    </n:div>
+                </n:div>
+            </n:div>
+            <n:div class="row top-buffer">
+                <n:div class="col-md-6 col-md-push-3">
+                    <z:button zclass="btn btn-default" width="200px" label="Upload image" upload="true,maxsize=1000000" onUpload="@command('onUpload', upEvent=event)"/>
+                    <!--<label class="btn btn-default btn-file">-->
+                        <!--Browse <input type="file" style="display: none;"/>-->
+                    <!--</label>-->
+                </n:div>
+            </n:div>
+            <div>
+                <n:div class="row top-buffer">
+                    <n:div class="col-md-6 col-md-push-3">
+                        <x:h4>Selected catalogue <x:span class="label label-default" textContent="@load(uploadVM.selectedCatalogue.title)"/></x:h4>
+                    </n:div>
+                </n:div>
+                <div zclass="row top-buffer">
+                    <n:div class="col-md-4 col-md-push-3">
+                        <n:div class="catalogueSelection">
+                            <x:div id="load" children="@load(uploadVM.catalogueList)">
+                                <template name="children" var="cat">
+                                    <x:button class="btn btn-default" textContent="@load(cat.title)" onClick="@command('selectCatalogue', selectedCatalogue=cat)"/>
+                                </template>
+                            </x:div>
+                        </n:div>
+                    </n:div>
+                </div>
+            </div>
+            <n:div class="row top-buffer">
+                <n:div class="col-md-6 col-md-push-3">
+                    <z:image id="image" src="images/no-image-slide.webp" height="200px" width="200px"/>
+                </n:div>
+            </n:div>
+            <n:div class="row top-buffer">
+                <n:div class="col-md-6 col-md-push-3">
+                    <x:button class="btn btn-success" width = "200px" onClick="@command('createImage')">Submit</x:button>
+
+                </n:div>
+            </n:div>
+        </n:div>
+    </div>
+</zk>

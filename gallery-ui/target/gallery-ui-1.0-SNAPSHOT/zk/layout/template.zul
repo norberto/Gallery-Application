@@ -1,0 +1,29 @@
+<zk  xmlns:n="xhtml">
+    <n:head>
+        <n:link rel="stylesheet" type="text/css" href="zk/bootstrap/css/bootstrap.css"/>
+        <n:link rel="stylesheet" type="text/css" href="zk/css/style.css"/>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
+    </n:head>
+
+    <n:div>
+        <n:div class="container-fluid">
+            <!-- ********** Navbar ********** -->
+            <n:div class="row">
+                <n:div id="navbar" class="col-md">
+                    <include src="zk/layout/navbar.zul"/>
+                </n:div>
+            </n:div>
+            <!-- ********** Content ********** -->
+            <n:div class="row">
+                <n:div class="container-fluid" self="@insert(content)"/>
+            </n:div>
+            <!--&lt;!&ndash; ********** Footer ********** &ndash;&gt;-->
+            <!--<n:div class="row">-->
+                <!--<n:div id="footer" class="col-md-12">-->
+                    <!--<include src="zk/layout/footer.zul"/>-->
+                <!--</n:div>-->
+            <!--</n:div>-->
+        </n:div>
+    </n:div>
+</zk>
+

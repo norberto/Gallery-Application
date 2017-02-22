@@ -1,0 +1,31 @@
+<?link rel="stylesheet" type="text/css" href="zk/bootstrap/css/bootstrap.css" ?>
+<?page zscriptLanguage="javascript"?>
+<zk xmlns:n="native" xmlns:x="xhtml">
+    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewImageVM', seletedImage = edu.norbertzardin.vm.ImageListVM.selectedImage)" >
+        <n:div class="container-fluid">
+            <n:div class="row">
+
+                <n:div class="col-md-6" align="right">
+                    <n:div>
+                        <image id="imageContainer" src="images/no-image-slide.webp" width="400px" height="400px"/>
+                    </n:div>
+                </n:div>
+
+                <n:div class="col-md-5" align="left">
+                    <div id="nameContainter">
+                        <n:h3>Title</n:h3>
+                    </div>
+                    <div id="descriptionContainer">
+                        <n:p>
+                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
+                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
+                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
+                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
+                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
+                        </n:p>
+                    </div>
+                </n:div>
+            </n:div>
+        </n:div>
+    </div>
+</zk>

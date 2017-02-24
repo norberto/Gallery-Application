@@ -11,11 +11,13 @@ public interface TagDao {
 
     List<TagEntity> getTagList();
 
-    TagEntity getTagById(int id);
+    TagEntity getTagById(Long id);
 
-    TagEntity getTagByIdWithFetch(int id);
+    TagEntity getTagByIdWithFetch(Long id);
 
     TagEntity getTagByName(String name);
 
     void updateTag(TagEntity tag);
+
+
 }

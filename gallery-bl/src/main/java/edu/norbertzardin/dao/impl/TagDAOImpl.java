@@ -20,8 +20,8 @@ public class TagDAOImpl implements TagDao {
     @PersistenceContext(name = "imagePersistence")
     private EntityManager entityManager;
 
-    public TagEntity getTagById(int _id){
-        TagEntity result = entityManager.find(TagEntity.class, _id);
+    public TagEntity getTagById(Long id){
+        TagEntity result = entityManager.find(TagEntity.class, id);
         return result;
     }
 
@@ -46,7 +46,7 @@ public class TagDAOImpl implements TagDao {
         return entityManager.createQuery("from TagEntity ", TagEntity.class).getResultList();
     }
 
-    public TagEntity getTagByIdWithFetch(int id) {
+    public TagEntity getTagByIdWithFetch(Long id) {
 //        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 //        CriteriaQuery<TagEntity> cq = cb.createQuery(TagEntity.class);
 //        Root<TagEntity> root = cq.from(TagEntity.class);

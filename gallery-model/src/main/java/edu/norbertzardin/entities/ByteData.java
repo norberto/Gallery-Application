@@ -8,15 +8,12 @@ import javax.persistence.*;
 })
 public class ByteData {
     @Id
-    @SequenceGenerator(name = "messageIdSeq", sequenceName = "MESSAGE_ID_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "messageIdSeq")
+    @SequenceGenerator(name = "byteDataIdSeq", sequenceName = "NORBERT_BYTEDATA_ID_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "byteDataIdSeq")
     @Column(name = "ID")
     private Long id;
     @Column(name = "DATA", length = 1000000)
     private byte[] data;
-
-//    @OneToOne
-//    private ImageEntity image;
 
     public Long getId() {
         return id;
@@ -33,12 +30,4 @@ public class ByteData {
     public void setData(byte[] data) {
         this.data = data;
     }
-//
-//    public ImageEntity getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(ImageEntity image) {
-//        this.image = image;
-//    }
 }

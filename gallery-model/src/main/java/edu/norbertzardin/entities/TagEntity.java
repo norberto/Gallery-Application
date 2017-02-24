@@ -16,7 +16,7 @@ public class TagEntity implements Serializable {
     @SequenceGenerator(name = "tagIdSeq", sequenceName = "NORBERT_TAG_ID_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tagIdSeq")
     @Column(name = "TAG_ID")
-    private int id;
+    private Long id;
 
     @Column(name ="NAME", length= 50)
     private String name;
@@ -39,11 +39,11 @@ public class TagEntity implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int messageId) {
+    public void setId(Long messageId) {
         this.id = messageId;
     }
 
@@ -63,9 +63,7 @@ public class TagEntity implements Serializable {
         return images;
     }
 
-    public void addImage(ImageEntity image) {
-//        if(images == null) { images = new ArrayList<ImageEntity>(); }
-        this.images.add(image); }
+    public void addImage(ImageEntity image) { this.images.add(image); }
 
     public void setImages(List<ImageEntity> images) {
         this.images = images;

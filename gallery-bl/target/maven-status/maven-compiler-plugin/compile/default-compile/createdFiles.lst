@@ -1,5 +1,3 @@
-edu\norbertzardin\util\ImageUtil.class
-edu\norbertzardin\util\ImageConverter.class
 edu\norbertzardin\service\CatalogueService.class
 edu\norbertzardin\dao\ImageDao.class
 edu\norbertzardin\service\ImageService.class

@@ -11,9 +11,11 @@ public interface CatalogueDao {
 
     void editCatalogue(CatalogueEntity ce);
 
-    void deleteCatalogue(int id);
+    void deleteCatalogue(Long id);
 
     CatalogueEntity getCatalogueByName(String name);
 
-    CatalogueEntity getCatalogueById(int id);
+    CatalogueEntity getCatalogueById(Long id);
+
+    CatalogueEntity getCatalogueByIdMediumFetch(Long id);
 }

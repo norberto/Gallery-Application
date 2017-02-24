@@ -12,7 +12,7 @@ public abstract class CatalogueEntity_ {
 
 	public static volatile ListAttribute<CatalogueEntity, ImageEntity> images;
 	public static volatile SingularAttribute<CatalogueEntity, Date> createdDate;
-	public static volatile SingularAttribute<CatalogueEntity, Integer> id;
+	public static volatile SingularAttribute<CatalogueEntity, Long> id;
 	public static volatile SingularAttribute<CatalogueEntity, String> title;
 
 }

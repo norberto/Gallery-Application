@@ -40,15 +40,13 @@ public class UploadVM {
     private String name;
     private String description;
     private String tags;
+    private String datatype;
     private byte[] thumbnail;
     private byte[] mediumSize;
     private byte[] download;
     private CatalogueEntity selectedCatalogue;
 
     private List<CatalogueEntity> catalogueList;
-
-    @Wire("#image")
-    org.zkoss.zul.Image image;
 
     @WireVariable
     private ImageService imageService;
@@ -71,7 +69,8 @@ public class UploadVM {
 
 
     @Init
-    public void init(){
+    public void init(@ContextParam(ContextType.VIEW) Component view){
+        Selectors.wireComponents(view, this, false);
         catalogueList = catalogueService.getCatalogueList();
         defaultCatalogue = catalogueService.getCatalogueByName(defaultCatalogueName);
         setSelectedCatalogue(defaultCatalogue);
@@ -96,6 +95,7 @@ public class UploadVM {
         ie.setThumbnail(thumbnail_);
         ie.setMediumImage(mediumImage_);
         ie.setDownload(download_);
+        ie.setDatatype(datatype);
 
         imageService.createImage(ie);
 
@@ -117,14 +117,15 @@ public class UploadVM {
         Executions.getCurrent().sendRedirect("/view.zul");
     }
     @Command("onUpload")
+    @NotifyChange("thumbnail")
     public void onUpload(@BindingParam("upEvent") UploadEvent event){
         Media media = event.getMedia();
         if (media instanceof Image) {
             Image img = (Image) media;
-            image.setContent(img);
-            setDownload(image.getContent().getByteData());
+            setDownload(img.getByteData());
             setMediumSize(ImageUtil.scaleImageToSize(img, 650));
             setThumbnail(ImageUtil.scaleImageToSize(img, 200));
+            setDatatype(img.getFormat());
         } else {
             Messagebox.show("Not an image: " + media, "Error", Messagebox.OK, Messagebox.ERROR);
         }
@@ -137,7 +138,7 @@ public class UploadVM {
     }
 
 
-    public String[] parseTags(String tags) {
+    private String[] parseTags(String tags) {
         String[] tagList = tags.split(",");
         for(int i = 0; i < tagList.length; i++) {
             if(tagList[i].charAt(0) == ' ') {
@@ -177,14 +178,6 @@ public class UploadVM {
         this.tags = tags;
     }
 
-//    public byte[] getImageData() {
-//        return imageData;
-//    }
-//
-//    public void setImageData(byte[] imageData) {
-//        this.imageData = imageData;
-//    }
-
     public CatalogueEntity getSelectedCatalogue() {
         return selectedCatalogue;
     }
@@ -213,8 +206,10 @@ public class UploadVM {
         this.tagService = tagService;
     }
 
-    public void setThumbnail(byte[] thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setThumbnail(byte[] thumbnail) { this.thumbnail = thumbnail; }
+
+    public byte[] getThumbnail () {
+        return thumbnail;
     }
 
     public void setMediumSize(byte[] mediumSize) {
@@ -227,5 +222,13 @@ public class UploadVM {
 
     public void setDataService(DataService dataService) {
         this.dataService = dataService;
+    }
+
+    public String getDatatype() {
+        return datatype;
+    }
+
+    public void setDatatype(String datatype) {
+        this.datatype = datatype;
     }
 }

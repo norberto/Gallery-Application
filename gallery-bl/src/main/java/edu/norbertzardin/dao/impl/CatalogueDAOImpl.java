@@ -3,6 +3,7 @@ package edu.norbertzardin.dao.impl;
 import edu.norbertzardin.dao.CatalogueDao;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.CatalogueEntity_;
+import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.ImageEntity_;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,27 +38,41 @@ public class CatalogueDAOImpl implements CatalogueDao {
     }
 
     @Transactional
-    public void deleteCatalogue(int id) { entityManager.remove(entityManager.find(CatalogueEntity.class, id)); }
+    public void deleteCatalogue(Long id) { entityManager.remove(entityManager.find(CatalogueEntity.class, id)); }
 
     @Transactional
     public CatalogueEntity getCatalogueByName(String name) {
         cb = entityManager.getCriteriaBuilder();
         cq = cb.createQuery(CatalogueEntity.class);
         root = cq.from(CatalogueEntity.class);
-        root.fetch(CatalogueEntity_.images, JoinType.LEFT);
+        root.fetch(CatalogueEntity_.images, JoinType.LEFT).fetch(ImageEntity_.thumbnail, JoinType.LEFT);
 
         Predicate name_ = cb.equal(root.get(CatalogueEntity_.title), name);
         cq.where(name_).select(root);
         return entityManager.createQuery(cq).getSingleResult();
     }
 
-    public CatalogueEntity getCatalogueById(int id) {
+    public CatalogueEntity getCatalogueById(Long id) {
         cb = entityManager.getCriteriaBuilder();
         cq = cb.createQuery(CatalogueEntity.class);
         root = cq.from(CatalogueEntity.class);
-        root.fetch(CatalogueEntity_.images, JoinType.LEFT);
+
+        root.fetch(CatalogueEntity_.images, JoinType.LEFT).fetch(ImageEntity_.thumbnail, JoinType.LEFT);
         Predicate name_ = cb.equal(root.get(CatalogueEntity_.id), id);
         cq.where(name_).select(root);
         return entityManager.createQuery(cq).getSingleResult();
     }
+
+    public CatalogueEntity getCatalogueByIdMediumFetch(Long id) {
+        cb = entityManager.getCriteriaBuilder();
+        cq = cb.createQuery(CatalogueEntity.class);
+        root = cq.from(CatalogueEntity.class);
+
+        root.fetch(CatalogueEntity_.images, JoinType.LEFT).fetch(ImageEntity_.mediumImage, JoinType.LEFT);
+        Predicate name_ = cb.equal(root.get(CatalogueEntity_.id), id);
+        cq.where(name_).select(root);
+        return entityManager.createQuery(cq).getSingleResult();
+    }
+
+
 }

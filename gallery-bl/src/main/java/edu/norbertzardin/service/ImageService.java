@@ -1,7 +1,9 @@
 package edu.norbertzardin.service;
 
+import edu.norbertzardin.dao.ByteDataDao;
 import edu.norbertzardin.dao.ImageDao;
 import edu.norbertzardin.dao.TagDao;
+import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
@@ -19,11 +21,12 @@ public class ImageService {
     @Autowired
     private TagDao tagDao;
 
+
     public void createImage(ImageEntity image){
         imageDao.createImage(image);
     }
 
-    public ImageEntity getImageByIdWithFetch(Integer id) { return imageDao.getImageByIdWithFetch(id); }
+    public ImageEntity getImageByIdWithFetch(Long id) { return imageDao.getImageByIdWithFetch(id); }
 
     public void deleteImage(ImageEntity ie) { imageDao.deleteImage(ie); }
 
@@ -31,10 +34,6 @@ public class ImageService {
 
     public void setImageDao(ImageDao imageDao){
         this.imageDao = imageDao;
-    }
-
-    public ImageDao getImageDao(){
-        return imageDao;
     }
 
     public List<ImageEntity> getImageList() {
@@ -45,11 +44,11 @@ public class ImageService {
         return imageDao.getImageList(page, pageMax);
     }
 
-    public int getPageCount(int pageMax) {
+    public Integer getPageCount(int pageMax) {
         return imageDao.getPageCount(pageMax);
     }
 
-    public ImageEntity getImageById(int id) {
+    public ImageEntity getImageById(Long id) {
         return imageDao.getImageById(id);
     }
 
@@ -57,4 +56,7 @@ public class ImageService {
         return imageDao.findImagesByName(name);
     }
 
+    public void editImage(ImageEntity ie) { imageDao.updateImage(ie); }
+
+    public ImageEntity getImageByIdFullFetch(Long id) { return imageDao.getImageByIdFullFetch(id); }
 }

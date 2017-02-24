@@ -1,4 +1,6 @@
 edu\norbertzardin\vm\ViewImageVM.class
+edu\norbertzardin\util\ImageUtil.class
 edu\norbertzardin\vm\BrowseVM.class
 edu\norbertzardin\vm\UploadVM.class
+edu\norbertzardin\util\ImageConverter.class
 edu\norbertzardin\vm\ImageListVM.class

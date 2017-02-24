@@ -34,7 +34,7 @@ public class ImageDAOImpl implements ImageDao {
     }
 
     @Transactional
-    public List<ImageEntity> getImageList(Integer page, int pageMax) {
+    public List<ImageEntity> getImageList(Integer page, Integer pageMax) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<ImageEntity> cq = cb.createQuery(ImageEntity.class);
         Root<ImageEntity> root = cq.from(ImageEntity.class);
@@ -52,12 +52,12 @@ public class ImageDAOImpl implements ImageDao {
     }
 
     @Transactional
-    public ImageEntity getImageById(int id){
+    public ImageEntity getImageById(Long id){
         return entityManager.find(ImageEntity.class, id);
     }
 
     @Transactional
-    public ImageEntity getImageByIdWithFetch(int id) {
+    public ImageEntity getImageByIdWithFetch(Long id) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<ImageEntity> cq = cb.createQuery(ImageEntity.class);
         Root<ImageEntity> root = cq.from(ImageEntity.class);
@@ -86,7 +86,7 @@ public class ImageDAOImpl implements ImageDao {
         return entityManager.createQuery(cq).getResultList();
     }
 
-    public int getPageCount(int pageMax) {
+    public Integer getPageCount(Integer pageMax) {
         int imageCount = entityManager
                 .createQuery("from ImageEntity ", ImageEntity.class)
                 .getResultList()
@@ -97,6 +97,24 @@ public class ImageDAOImpl implements ImageDao {
         } else {
             return pageCount;
         }
+    }
+
+    public ImageEntity getImageByIdFullFetch(Long id) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ImageEntity> cq = cb.createQuery(ImageEntity.class);
+        Root<ImageEntity> root = cq.from(ImageEntity.class);
+        root.fetch(ImageEntity_.mediumImage, JoinType.INNER);
+        root.fetch(ImageEntity_.download, JoinType.INNER);
+        root.fetch(ImageEntity_.tags, JoinType.INNER);
+
+        Predicate name_ = cb.equal(root.get(ImageEntity_.id), id);
+        cq.where(name_).select(root);
+        return entityManager.createQuery(cq).getSingleResult();
+    }
+
+    @Transactional
+    public void updateImage(ImageEntity ie) {
+        entityManager.merge(ie);
     }
 
     @PersistenceContext

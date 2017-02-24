@@ -1,5 +1,6 @@
 package edu.norbertzardin.vm;
 
+import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.service.ImageService;
 import org.zkoss.bind.annotation.*;
@@ -9,6 +10,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.Filedownload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class ImageListVM {
     private Integer page;
     private Integer pageCount;
     private List<Integer> pageLabels;
-    private boolean editMode;
+    private Boolean editMode;
 
     @Wire("#selectedImage")
     private ImageEntity selectedImage;
@@ -53,7 +55,6 @@ public class ImageListVM {
     @NotifyChange("imageList")
     @Command
     public void doSearch(@ContextParam(ContextType.TRIGGER_EVENT) Event event) {
-        System.out.println(searchString);
         if ((getSearchString() != null) && !getSearchString().equals("")) {
             imageList = imageService.findImagesByName(getSearchString());
         } else {
@@ -61,8 +62,7 @@ public class ImageListVM {
         }
     }
 
-    public ImageListVM() {
-    }
+    public ImageListVM() {}
 
     public void setImageList(List<ImageEntity> list) {
         this.imageList = list;
@@ -73,7 +73,7 @@ public class ImageListVM {
     }
 
     @Command
-    @NotifyChange("selectedImage")
+    @NotifyChange({"selectedImage", "editMode"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
         setSelectedImage(imageService.getImageByIdWithFetch(image.getId()));
         setEditMode(false);
@@ -81,7 +81,14 @@ public class ImageListVM {
 //        Clients.evalJavaScript(openModal);
     }
 
-    public void loadImages() {
+    @Command
+    @NotifyChange({"selectedImage", "editMode"})
+    public void editImage() {
+        imageService.editImage(selectedImage);
+        setEditMode(false);
+    }
+
+    private void loadImages() {
         imageList = imageService.getImageList(this.page, 15);
     }
 
@@ -97,7 +104,7 @@ public class ImageListVM {
         return this.selectedImage;
     }
 
-    public void setSelectedImage(ImageEntity image) {
+    private void setSelectedImage(ImageEntity image) {
         this.selectedImage = image;
     }
 
@@ -154,7 +161,7 @@ public class ImageListVM {
 
     @Command
     public void nextPage() {
-        if (page != pageCount) {
+        if (!page.equals(pageCount)) {
             page++;
             changePage();
         }
@@ -167,11 +174,20 @@ public class ImageListVM {
         else setEditMode(false);
     }
 
-    public boolean isEditMode() {
+    @Command
+    public void onDownload() {
+        setSelectedImage(imageService.getImageByIdFullFetch(selectedImage.getId()));
+        Filedownload.save(selectedImage.getDownload().getData(),
+                "image/" + selectedImage.getDatatype(),
+                "download_" + selectedImage.toString());
+
+    }
+
+    public Boolean getEditMode() {
         return editMode;
     }
 
-    public void setEditMode(boolean editMode) {
+    public void setEditMode(Boolean editMode) {
         this.editMode = editMode;
     }
 

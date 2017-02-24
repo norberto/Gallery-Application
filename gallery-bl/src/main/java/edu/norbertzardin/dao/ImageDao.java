@@ -1,6 +1,7 @@
 package edu.norbertzardin.dao;
 
 import edu.norbertzardin.entities.ImageEntity;
+import org.zkoss.zul.Image;
 
 import java.util.List;
 
@@ -9,15 +10,20 @@ public interface ImageDao {
 
     void deleteImage(ImageEntity ie);
 
-    List<ImageEntity> getImageList(Integer page, int pageMax);
+    List<ImageEntity> getImageList(Integer page, Integer pageMax);
 
     List<ImageEntity> getImageList();
 
-    ImageEntity getImageById(int id);
+    ImageEntity getImageById(Long id);
 
-    ImageEntity getImageByIdWithFetch(int id);
+    ImageEntity getImageByIdWithFetch(Long id);
+
+    ImageEntity getImageByIdFullFetch(Long id);
 
     List<ImageEntity> findImagesByName(String name);
 
-    int getPageCount(int pageMax);
+    Integer getPageCount(Integer pageMax);
+
+    void updateImage(ImageEntity ie);
+
 }

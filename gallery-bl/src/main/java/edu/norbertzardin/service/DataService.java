@@ -15,7 +15,7 @@ public class DataService {
         byteDataDao.createByteData(bd);
     }
 
-    public ByteData getByteDataById(Integer id) {
+    public ByteData getByteDataById(Long id) {
         return byteDataDao.getByteDataById(id);
     }
 

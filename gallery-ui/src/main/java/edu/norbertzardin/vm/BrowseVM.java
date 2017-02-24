@@ -24,7 +24,7 @@ public class BrowseVM {
     private CatalogueEntity selectedCatalogue;
     private ImageEntity selectedImage;
     private CatalogueEntity editCatalogue;
-    private boolean backButton;
+    private Boolean backButton;
 
 
     private CatalogueEntity defaultCatalogue;
@@ -60,13 +60,14 @@ public class BrowseVM {
 
     // Commands
     @Command
-    @NotifyChange("catalogueList")
+    @NotifyChange({"catalogueList", "name"})
     public void createCatalogue() {
         CatalogueEntity ce = new CatalogueEntity();
         ce.setTitle(name);
         ce.setCreatedDate(new Date());
         catalogueService.createCatalogue(ce);
         catalogueList = catalogueService.getCatalogueList();
+        setName(""); // clear name property after catalogue is created
     }
 
     @Command
@@ -79,7 +80,7 @@ public class BrowseVM {
     @NotifyChange({"imageList", "selectedCatalogue", "backButton"})
     @Command
     public void selectCatalogue(@BindingParam("selectedCatalogue") CatalogueEntity ce) {
-        setSelectedCatalogue(catalogueService.getCatalogueById(ce.getId()));
+        setSelectedCatalogue(catalogueService.getCatalogueByIdMediumFetch(ce.getId()));
         loadImages();
         setBackButton(true);
     }
@@ -115,12 +116,13 @@ public class BrowseVM {
 
 
     @Command
-    @NotifyChange({"selectedCatalogue", "catalogueList", "backButton"})
+    @NotifyChange({"selectedCatalogue", "catalogueList", "backButton", "imageList"})
     public void deleteCatalogue() {
-        if (selectedCatalogue == editCatalogue) {
+        if (selectedCatalogue.getId().equals(editCatalogue.getId())) {
             setSelectedCatalogue(defaultCatalogue);
             loadImages();
             setImageList(selectedCatalogue.getImages());
+            setBackButton(false);
         }
         catalogueService.deleteCatalogue(editCatalogue);
         setCatalogueList(catalogueService.getCatalogueList());
@@ -156,7 +158,7 @@ public class BrowseVM {
         this.defaultCatalogue = defaultCatalogue;
     }
 
-    public void setBackButton(boolean backButton) {
+    public void setBackButton(Boolean backButton) {
         this.backButton = backButton;
     }
 
@@ -195,7 +197,7 @@ public class BrowseVM {
         return editCatalogue;
     }
 
-    public boolean getBackButton() {
+    public Boolean getBackButton() {
         return backButton;
     }
 
@@ -219,16 +221,11 @@ public class BrowseVM {
         return catalogueService;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-
     public List<TagEntity> getTagList() {
         return tagList;
     }
 
-    public void setTagList(List<TagEntity> tagList) {
+    private void setTagList(List<TagEntity> tagList) {
         this.tagList = tagList;
     }
 }

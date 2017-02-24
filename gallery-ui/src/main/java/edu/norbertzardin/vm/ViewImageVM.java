@@ -27,8 +27,7 @@ public class ViewImageVM {
     }
 
     @Init
-    public void init(@ContextParam(ContextType.VIEW) Component view, @QueryParam("id") Integer id) {
-        if(id == null) System.out.println("ID IS NULL");
+    public void init(@ContextParam(ContextType.VIEW) Component view, @QueryParam("id") Long id) {
         Selectors.wireComponents(view, this, false);
 
         setSelectedImage(imageService.getImageById(id));

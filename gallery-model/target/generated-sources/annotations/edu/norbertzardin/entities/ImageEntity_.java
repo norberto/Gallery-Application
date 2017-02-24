@@ -13,10 +13,11 @@ public abstract class ImageEntity_ {
 	public static volatile SingularAttribute<ImageEntity, ByteData> thumbnail;
 	public static volatile SingularAttribute<ImageEntity, ByteData> download;
 	public static volatile SingularAttribute<ImageEntity, Date> createdDate;
+	public static volatile SingularAttribute<ImageEntity, String> datatype;
 	public static volatile SingularAttribute<ImageEntity, ByteData> mediumImage;
 	public static volatile SingularAttribute<ImageEntity, String> name;
 	public static volatile SingularAttribute<ImageEntity, String> description;
-	public static volatile SingularAttribute<ImageEntity, Integer> id;
+	public static volatile SingularAttribute<ImageEntity, Long> id;
 	public static volatile SingularAttribute<ImageEntity, CatalogueEntity> catalogue;
 	public static volatile ListAttribute<ImageEntity, TagEntity> tags;
 

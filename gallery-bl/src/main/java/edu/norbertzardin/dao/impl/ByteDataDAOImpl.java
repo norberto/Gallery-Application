@@ -15,7 +15,7 @@ public class ByteDataDAOImpl implements ByteDataDao {
     private EntityManager entityManager;
 
     @Override
-    public ByteData getByteDataById(Integer id) {
+    public ByteData getByteDataById(Long id) {
         return entityManager.find(ByteData.class, id);
     }
 

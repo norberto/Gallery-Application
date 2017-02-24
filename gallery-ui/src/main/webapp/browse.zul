@@ -102,7 +102,7 @@
                             <div class="row top-buffer">
                                 <div class="input-group">
                                     <span class="input-group-addon">Catalogue Name:</span>
-                                    <z:textbox class="form-control" id ="catalogueName" value="@bind(vm.name)" cols="50"/>
+                                    <textbox zclass="form-control" id ="catalogueName" value="@save(vm.name)" cols="50"/>
                                 </div>
                             </div>
                         </div>

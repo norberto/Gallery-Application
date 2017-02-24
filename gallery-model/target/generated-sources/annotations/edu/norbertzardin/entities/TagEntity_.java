@@ -13,7 +13,7 @@ public abstract class TagEntity_ {
 	public static volatile ListAttribute<TagEntity, ImageEntity> images;
 	public static volatile SingularAttribute<TagEntity, Date> createdDate;
 	public static volatile SingularAttribute<TagEntity, String> name;
-	public static volatile SingularAttribute<TagEntity, Integer> id;
+	public static volatile SingularAttribute<TagEntity, Long> id;
 
 }
 

@@ -9,7 +9,7 @@
             <n:div class="row">
                 <n:div class="col-lg-4 col-md-push-7">
                     <n:div class="input-group">
-                        <textbox class="form-control" value="@bind(vm.searchString)" onChanging="@command('doSearch')"/>
+                        <textbox zclass="form-control" value="@bind(vm.searchString)" onChanging="@command('doSearch')"/>
                         <n:span class="input-group-btn">
                             <x:button class="btn btn-default" type="button" onClick="@command('doSearch')">Search</x:button>
                         </n:span>
@@ -58,12 +58,9 @@
                                 <n:div class="col-md-1">
                                     <n:span class="glyphicon glyphicon-picture" style="font-size: 2.0em" aria-hidden="true"/>
                                 </n:div>
-
                                 <n:div class="col-md-10">
-                                    <textbox value="@bind(vm.selectedImage.name)" visible="@load(vm.editMode)"/>
-                                    <x:h4 class="modal-title" textContent="@load(vm.selectedImage.name)" visible="@load(!vm.editMode)"/>
+                                    <x:h4 textContent="@load(vm.selectedImage.name)"/>
                                 </n:div>
-
                                 <n:div class="col-md-1">
                                     <n:button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <n:span aria-hidden="true">×</n:span>
@@ -84,11 +81,16 @@
 
                                 <n:div class="col-md-4" align="left">
                                     <div id="nameContainter">
-                                        <textbox value="@bind(vm.selectedImage.name)" visible="@load(vm.editMode)"/>
+                                        <textbox zclass="form-control" value="@load(vm.selectedImage.name) @save(vm.selectedImage.name, before='editImage')" visible="@load(vm.editMode)"/>
                                         <x:h3 textContent="@load(vm.selectedImage.name)" visible="@load(!vm.editMode)"/>
                                     </div>
+
+                                    <div id="dateContainer">
+                                        <x:h6 textContent="@load(vm.selectedImage.createdDate)"/>
+                                    </div>
+                                    <n:hr/>
                                     <div id="descriptionContainer">
-                                        <textbox value="@bind(vm.selectedImage.name)" visible="@load(vm.editMode)"/>
+                                        <textbox zclass="form-control" value="@load(vm.selectedImage.description) @save(vm.selectedImage.description, before='editImage')" visible="@load(vm.editMode)"/>
                                         <x:p textContent="@load(vm.selectedImage.description)" visible="@load(!vm.editMode)"/>
                                     </div>
                                 </n:div>
@@ -97,9 +99,18 @@
                     </n:div>
 
                     <n:div class="modal-footer">
-                        <button type="button" zclass="btn btn-danger" label="Remove" onClick="@command('deleteImage')"
+                        <button type="button" zclass="btn btn-sm btn-info pull-left" label="Download" onClick="@command('onDownload')"/>
+                        <button type="button" zclass="btn btn-sm btn-danger pull-left" label="Remove" onClick="@command('deleteImage')"
                                 visible="@load(vm.editMode)"/>
-                        <button type="button" zclass="btn btn-primary" onClick="@command('editMode')">Edit mode</button>
+
+                        <x:div class="btn-group" role="group" aria-label="Basic example" visible="@load(vm.editMode)">
+                            <x:a class="btn btn-success" onClick="@command('editImage')">
+                                <x:span class="glyphicon glyphicon-ok"/>
+                            </x:a>
+                            <x:a href="#" class="btn btn-danger" onClick="@command('editMode')"><n:span class="glyphicon glyphicon-remove"/></x:a>
+                        </x:div>
+
+                        <button type="button" zclass="btn btn-primary" onClick="@command('editMode')" visible="@load(!vm.editMode)">Edit mode</button>
                         <n:button type="button" class="btn btn-secondary" data-dismiss="modal">Close</n:button>
                     </n:div>
                 </x:div>

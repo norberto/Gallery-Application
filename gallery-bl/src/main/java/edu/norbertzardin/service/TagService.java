@@ -23,7 +23,7 @@ public class TagService {
 
     public TagEntity getTagByName(String name) { return tagDao.getTagByName(name); }
 
-    public TagEntity getTagById(int id) { return tagDao.getTagById(id); }
+    public TagEntity getTagById(Long id) { return tagDao.getTagById(id); }
 
     public List<TagEntity> getTagList() {
         return tagDao.getTagList();

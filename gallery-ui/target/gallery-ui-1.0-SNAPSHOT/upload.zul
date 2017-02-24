@@ -72,7 +72,6 @@
             <n:div class="row top-buffer">
                 <n:div class="col-md-6 col-md-push-3">
                     <x:button class="btn btn-success" width = "200px" onClick="@command('createImage')">Submit</x:button>
-
                 </n:div>
             </n:div>
         </n:div>

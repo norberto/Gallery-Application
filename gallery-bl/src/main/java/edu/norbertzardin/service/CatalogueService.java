@@ -1,7 +1,6 @@
 package edu.norbertzardin.service;
 
 import edu.norbertzardin.dao.CatalogueDao;
-import edu.norbertzardin.dao.ImageDao;
 import edu.norbertzardin.entities.CatalogueEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

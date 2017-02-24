@@ -53,8 +53,10 @@
                                         <n:div class="container">
                                             <n:div class="row">
                                                 <n:div class="col-md-2">
-                                                    <image width="200px" height="200px" onClick="@command('viewImage', selectedImage=image)"
-                                                           content="@load(image.imageData) @converter('edu.norbertzardin.util.ImageConverter', maxSize='200.0')"/>
+                                                    <x:a onClick="@command('viewImage', selectedImage=image)"
+                                                         class="" href="#viewImageModal" data-toggle="modal" data-target="#viewImageModal" >
+                                                        <image width="200px" height="200px" content="@load(image.thumbnail.data) @converter('edu.norbertzardin.util.ImageConverter', maxSize='200.0')"/>
+                                                    </x:a>
                                                 </n:div>
                                             </n:div>
                                         </n:div>
@@ -198,7 +200,7 @@
 
                                 <n:div class="col-md-8" align="center" width="auto">
                                     <image id="imageContainer"
-                                           content="@load(vm.selectedImage.imageData, after='viewImage')
+                                           content="@load(vm.selectedImage.thumbnail.data, after='viewImage')
                                                @converter('edu.norbertzardin.util.ImageConverter', maxSize='500.0')"/>
                                 </n:div>
 
@@ -211,6 +213,13 @@
                                     </div>
                                 </n:div>
                             </n:div>
+                            <x:div class="row">
+                                <x:div id="load12" children="@load(vm.tagList)">
+                                    <template name="children" var="tag">
+                                            <label value="@load(tag.name)" style="margin-right:10px"/>
+                                    </template>
+                                </x:div>
+                            </x:div>
                             <n:div class="row">
                                 <n:div class="col-md-12" align="right">
                                     <n:div id="buttonContainer">

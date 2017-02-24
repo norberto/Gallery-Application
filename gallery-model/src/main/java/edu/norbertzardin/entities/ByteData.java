@@ -15,6 +15,9 @@ public class ByteData {
     @Column(name = "DATA", length = 1000000)
     private byte[] data;
 
+//    @OneToOne
+//    private ImageEntity image;
+
     public Long getId() {
         return id;
     }
@@ -30,4 +33,12 @@ public class ByteData {
     public void setData(byte[] data) {
         this.data = data;
     }
+//
+//    public ImageEntity getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(ImageEntity image) {
+//        this.image = image;
+//    }
 }

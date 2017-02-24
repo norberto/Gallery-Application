@@ -1,19 +1,19 @@
 package edu.norbertzardin.dao.impl;
 
 import edu.norbertzardin.dao.ImageDao;
+import edu.norbertzardin.entities.CatalogueEntity;
+import edu.norbertzardin.entities.CatalogueEntity_;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.ImageEntity_;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Messagebox;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class ImageDAOImpl implements ImageDao {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<ImageEntity> cq = cb.createQuery(ImageEntity.class);
         Root<ImageEntity> root = cq.from(ImageEntity.class);
-
+        root.fetch(ImageEntity_.thumbnail, JoinType.INNER);
         CriteriaQuery<ImageEntity> select = cq.select(root);
         TypedQuery<ImageEntity> typedQuery = entityManager.createQuery(select);
         typedQuery.setFirstResult((page - 1) * pageMax);
@@ -54,6 +54,18 @@ public class ImageDAOImpl implements ImageDao {
     @Transactional
     public ImageEntity getImageById(int id){
         return entityManager.find(ImageEntity.class, id);
+    }
+
+    @Transactional
+    public ImageEntity getImageByIdWithFetch(int id) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ImageEntity> cq = cb.createQuery(ImageEntity.class);
+        Root<ImageEntity> root = cq.from(ImageEntity.class);
+        root.fetch(ImageEntity_.mediumImage, JoinType.INNER);
+        root.fetch(ImageEntity_.tags, JoinType.INNER);
+        Predicate name_ = cb.equal(root.get(ImageEntity_.id), id);
+        cq.where(name_).select(root);
+        return entityManager.createQuery(cq).getSingleResult();
     }
 
     @Transactional

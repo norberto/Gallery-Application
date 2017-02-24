@@ -23,6 +23,8 @@ public class ImageService {
         imageDao.createImage(image);
     }
 
+    public ImageEntity getImageByIdWithFetch(Integer id) { return imageDao.getImageByIdWithFetch(id); }
+
     public void deleteImage(ImageEntity ie) { imageDao.deleteImage(ie); }
 
     public void createTag(TagEntity tag) { tagDao.createTag(tag); }

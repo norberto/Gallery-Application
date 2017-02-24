@@ -1,10 +1,8 @@
 edu\norbertzardin\entities\ImageEntity.class
 edu\norbertzardin\entities\CatalogueEntity_.class
 edu\norbertzardin\entities\CatalogueEntity.class
-edu\norbertzardin\entities\MessageEntity_.class
 edu\norbertzardin\entities\TagEntity_.class
 edu\norbertzardin\entities\ByteData_.class
 edu\norbertzardin\entities\ImageEntity_.class
-edu\norbertzardin\entities\MessageEntity.class
 edu\norbertzardin\entities\TagEntity.class
 edu\norbertzardin\entities\ByteData.class

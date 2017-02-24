@@ -15,6 +15,8 @@ public interface ImageDao {
 
     ImageEntity getImageById(int id);
 
+    ImageEntity getImageByIdWithFetch(int id);
+
     List<ImageEntity> findImagesByName(String name);
 
     int getPageCount(int pageMax);

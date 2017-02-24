@@ -2,7 +2,9 @@ package edu.norbertzardin.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "NORBERT_TAGS", uniqueConstraints = {
@@ -22,9 +24,12 @@ public class TagEntity implements Serializable {
     @Column(name = "CREATED_DATE", length = 100)
     private Date createdDate;
 
-    @ManyToOne
-    @JoinColumn(name = "IMAGE_ID")
-    private ImageEntity image;
+    @ManyToMany
+    @JoinTable(
+            name = "NORBERT_IMG_TAGS",
+            joinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "TAG_ID"),
+            inverseJoinColumns = @JoinColumn(name = "IMAGE_ID", referencedColumnName = "IMAGE_ID"))
+    private List<ImageEntity> images = new ArrayList<ImageEntity>();
 
     public Date getCreatedDate() {
         return createdDate;
@@ -54,12 +59,15 @@ public class TagEntity implements Serializable {
 
     public String getName(){return this.name; }
 
-
-    public ImageEntity getImage() {
-        return image;
+    public List<ImageEntity> getImages() {
+        return images;
     }
 
-    public void setImage(ImageEntity image) {
-        this.image = image;
+    public void addImage(ImageEntity image) {
+//        if(images == null) { images = new ArrayList<ImageEntity>(); }
+        this.images.add(image); }
+
+    public void setImages(List<ImageEntity> images) {
+        this.images = images;
     }
 }

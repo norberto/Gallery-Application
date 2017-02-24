@@ -12,9 +12,9 @@
     <persistence-unit name="imagePersistence">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>edu.norbertzardin.entities.ImageEntity</class>
-        <class>edu.norbertzardin.entities.TagEntity</class>
         <class>edu.norbertzardin.entities.CatalogueEntity</class>
         <class>edu.norbertzardin.entities.ByteData</class>
+        <class>edu.norbertzardin.entities.TagEntity</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
         </properties>

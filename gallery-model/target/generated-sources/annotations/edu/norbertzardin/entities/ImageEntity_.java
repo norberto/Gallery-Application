@@ -10,8 +10,10 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(ImageEntity.class)
 public abstract class ImageEntity_ {
 
+	public static volatile SingularAttribute<ImageEntity, ByteData> thumbnail;
+	public static volatile SingularAttribute<ImageEntity, ByteData> download;
 	public static volatile SingularAttribute<ImageEntity, Date> createdDate;
-	public static volatile SingularAttribute<ImageEntity, byte[]> imageData;
+	public static volatile SingularAttribute<ImageEntity, ByteData> mediumImage;
 	public static volatile SingularAttribute<ImageEntity, String> name;
 	public static volatile SingularAttribute<ImageEntity, String> description;
 	public static volatile SingularAttribute<ImageEntity, Integer> id;

@@ -2,17 +2,13 @@ package edu.norbertzardin.vm;
 
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.service.ImageService;
-import edu.norbertzardin.util.ImageUtil;
 import org.zkoss.bind.annotation.*;
-import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +20,7 @@ public class ImageListVM {
     private Integer page;
     private Integer pageCount;
     private List<Integer> pageLabels;
+    private boolean editMode;
 
     @Wire("#selectedImage")
     private ImageEntity selectedImage;
@@ -34,21 +31,21 @@ public class ImageListVM {
     private List<ImageEntity> imageList;
 
     @AfterCompose
-    public void afterCompose(@ContextParam(ContextType.VIEW) Component view){
+    public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
         loadImages();
     }
 
     @Init
-    public void init(@QueryParam("page") Integer page){
-        if(page != null) {
+    public void init(@QueryParam("page") Integer page) {
+        if (page != null) {
             this.page = page;
         } else {
             this.page = 1;
         }
         pageCount = imageService.getPageCount(15);
         pageLabels = new ArrayList<Integer>();
-        for(int i = 1; i <= pageCount; i++){
+        for (int i = 1; i <= pageCount; i++) {
             pageLabels.add(i);
         }
     }
@@ -57,38 +54,46 @@ public class ImageListVM {
     @Command
     public void doSearch(@ContextParam(ContextType.TRIGGER_EVENT) Event event) {
         System.out.println(searchString);
-        if((getSearchString() != null) && !getSearchString().equals("")) {
+        if ((getSearchString() != null) && !getSearchString().equals("")) {
             imageList = imageService.findImagesByName(getSearchString());
         } else {
             imageList = imageService.getImageList(1, 15);
         }
     }
 
-    public ImageListVM() {}
+    public ImageListVM() {
+    }
 
-    public void setImageList(List<ImageEntity> list){ this.imageList = list; }
+    public void setImageList(List<ImageEntity> list) {
+        this.imageList = list;
+    }
 
-    public List<ImageEntity> getImageList(){ return imageList; }
+    public List<ImageEntity> getImageList() {
+        return imageList;
+    }
 
     @Command
     @NotifyChange("selectedImage")
-    public void viewImage(@BindingParam("selectedImage") ImageEntity  image){
-        setSelectedImage(image);
+    public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
+        setSelectedImage(imageService.getImageByIdWithFetch(image.getId()));
+        setEditMode(false);
 //        String openModal = "$('#myModal').modal('show')";
 //        Clients.evalJavaScript(openModal);
     }
 
-    public void loadImages(){
-        imageList =  imageService.getImageList(this.page, 15);
+    public void loadImages() {
+        imageList = imageService.getImageList(this.page, 15);
     }
 
-    public void setImageService(ImageService imageService){
+    public void setImageService(ImageService imageService) {
         this.imageService = imageService;
     }
 
-    public ImageService getImageService(){ return imageService; }
+    public ImageService getImageService() {
+        return imageService;
+    }
 
-    public ImageEntity getSelectedImage(){
+    public ImageEntity getSelectedImage() {
         return this.selectedImage;
     }
 
@@ -96,13 +101,6 @@ public class ImageListVM {
         this.selectedImage = image;
     }
 
-    @Command
-    @NotifyChange("selectedImage")
-    public void deleteImage(){
-        imageService.deleteImage(selectedImage);
-        selectedImage = null;
-        Executions.getCurrent().sendRedirect("/view.zul");
-    }
 
     public String getSearchString() {
         return searchString;
@@ -120,7 +118,7 @@ public class ImageListVM {
         this.pageCount = pageCount;
     }
 
-    public Integer getPage(){
+    public Integer getPage() {
         return this.page;
     }
 
@@ -132,9 +130,8 @@ public class ImageListVM {
         this.pageLabels = pageLabels;
     }
 
-
     @Command
-    public void goToPage(@BindingParam("page") Integer p){
+    public void goToPage(@BindingParam("page") Integer p) {
         this.page = p;
         changePage();
 
@@ -142,20 +139,44 @@ public class ImageListVM {
 
     @Command
     public void previousPage() {
-        if(page != 1) {
+        if (page != 1) {
             page--;
         }
     }
 
     @Command
+    @NotifyChange("selectedImage")
+    public void deleteImage() {
+        imageService.deleteImage(selectedImage);
+        selectedImage = null;
+        Executions.getCurrent().sendRedirect("/view.zul");
+    }
+
+    @Command
     public void nextPage() {
-        if(page != pageCount) {
+        if (page != pageCount) {
             page++;
             changePage();
         }
     }
 
+    @Command
+    @NotifyChange("editMode")
+    public void editMode() {
+        if (!editMode) setEditMode(true);
+        else setEditMode(false);
+    }
+
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+
     public void changePage() {
         Executions.getCurrent().sendRedirect("/view.zul?page=" + this.page);
     }
+
 }

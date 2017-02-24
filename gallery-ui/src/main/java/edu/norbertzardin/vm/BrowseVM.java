@@ -2,16 +2,15 @@ package edu.norbertzardin.vm;
 
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
+import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.service.CatalogueService;
 import edu.norbertzardin.service.ImageService;
+import edu.norbertzardin.service.TagService;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
-import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
-
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class BrowseVM {
 
     private List<CatalogueEntity> catalogueList;
     private List<ImageEntity> imageList;
-
+    private List<TagEntity> tagList;
     private CatalogueEntity selectedCatalogue;
     private ImageEntity selectedImage;
     private CatalogueEntity editCatalogue;
@@ -35,6 +34,9 @@ public class BrowseVM {
 
     @WireVariable
     private ImageService imageService;
+
+    @WireVariable
+    private TagService tagService;
 
 
     // Initializers
@@ -68,11 +70,10 @@ public class BrowseVM {
     }
 
     @Command
-    @NotifyChange("selectedImage")
+    @NotifyChange({"selectedImage", "tagList"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
-        setSelectedImage(image);
-        String openModal = "$('#viewImageModal').modal('show')";
-        Clients.evalJavaScript(openModal);
+        setSelectedImage(imageService.getImageByIdWithFetch(image.getId()));
+        loadTags();
     }
 
     @NotifyChange({"imageList", "selectedCatalogue", "backButton"})
@@ -124,6 +125,22 @@ public class BrowseVM {
         catalogueService.deleteCatalogue(editCatalogue);
         setCatalogueList(catalogueService.getCatalogueList());
     }
+
+    @Command
+    @NotifyChange("tagList")
+    public void loadTags() {
+        setTagList(selectedImage.getTags());
+    }
+
+    @Command
+    @NotifyChange("selectedImage")
+    public void deleteImage(){
+        imageService.deleteImage(selectedImage);
+        selectedImage = null;
+//        Executions.getCurrent().sendRedirect("/browse.zul");
+    }
+
+
 
     // Setters
 
@@ -207,4 +224,11 @@ public class BrowseVM {
     }
 
 
+    public List<TagEntity> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(List<TagEntity> tagList) {
+        this.tagList = tagList;
+    }
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "NORBERT_IMAGES", uniqueConstraints = {
+@Table(name = "NORBERT_IMAGE_TEST", uniqueConstraints = {
         @UniqueConstraint(columnNames = "IMAGE_ID")
 })
 public class ImageEntity implements Serializable {
@@ -21,16 +21,20 @@ public class ImageEntity implements Serializable {
     @Column(name = "DESCRIPTION", length = 500)
     private String description;
 
-    @Column(name = "IMAGE_DATA", length = 1000000)
-    private byte[] imageData;
-
-//    @OneToOne
-//    private ByteData imageData;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "THUMB_ID")
+    private ByteData thumbnail;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "MED_ID")
+    private ByteData mediumImage;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "DOWNLOAD_ID")
+    private ByteData download;
 
     @Column(name = "CREATED_DATE", length = 100)
     private Date createdDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "image", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "images", cascade = CascadeType.ALL)
     private List<TagEntity> tags;
 
     @ManyToOne
@@ -54,22 +58,6 @@ public class ImageEntity implements Serializable {
     }
 
     public ImageEntity() {}
-
-    public byte[] getImageData() {
-        return imageData;
-    }
-
-    public void setImageData(byte[] data) {
-        this.imageData = data;
-    }
-//
-//    public ByteData getImageData() {
-//        return imageData;
-//    }
-//
-//    public void setImageData(ByteData data) {
-//        this.imageData = data;
-//    }
 
     public String toString(){
         return "id=" + id;
@@ -98,4 +86,29 @@ public class ImageEntity implements Serializable {
     public List<TagEntity> getTags() { return tags; }
 
     public void setTags(List<TagEntity> tags) { this.tags = tags; }
+
+    public ByteData getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(ByteData thumbnail) {
+        this.thumbnail = thumbnail;
+        System.out.println("Thumbnail " + this.thumbnail);
+    }
+
+    public ByteData getMediumImage() {
+        return mediumImage;
+    }
+
+    public void setMediumImage(ByteData mediumImage) {
+        this.mediumImage = mediumImage;
+    }
+
+    public ByteData getDownload() {
+        return download;
+    }
+
+    public void setDownload(ByteData download) {
+        this.download = download;
+    }
 }

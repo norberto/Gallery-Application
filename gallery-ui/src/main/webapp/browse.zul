@@ -1,13 +1,22 @@
 <?page title="Gallery Application - Browse"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="zk/layout/template.zul"?>
 <zk xmlns:n="native" xmlns:x="xhtml" xmlns:z="http://www.zkoss.org/2005/zul">
     <div self="@define(content)" align="center" viewModel="@id('vm') @init('edu.norbertzardin.vm.BrowseVM')">
         <n:div class="container-fluid">
             <n:div class="row">
-                <n:div class="col-md-3 col-md-push-9">
+                <n:div class="col-md-9" align="left">
+                    <n:h3>
+                        <x:span class="label label-default" textContent="@load(vm.selectedCatalogue.title)"/>
+                        <button zclass="btn btn-primary" label="Go Back" visible="@load(vm.backButton)" onClick="@command('goBack')"/>
+                    </n:h3>
+                </n:div>
+                <n:div class="col-md-3">
                     <n:div id="buttons">
-                        <n:button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCatalogueModal">Create Catalogue</n:button>
+                        <n:button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCatalogueModal">
+                            <n:span class="glyphicon glyphicon-plus"/> Create Catalogue
+                        </n:button>
                     </n:div>
                 </n:div>
             </n:div>
@@ -16,69 +25,54 @@
                 <n:div class="col-md-12">
                     <n:div id="catalogue-container" class="container-fluid top-buffer" width="auto" style="margin-left:50px">
                         <n:div class="row">
-                            <div id="load1" children="@load(vm.catalogueList)">
+                            <x:div id="load1" children="@load(vm.catalogueList)">
                                 <template name="children" var="cat">
-                                    <div class="col-md-2">
-
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <image width="200px" height="200px" src="images/catalogue-icon.png" onClick="@command('selectCatalogue',selectedCatalogue=cat)"/>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <label value="@load(cat.title)" style="margin-right:10px" onClick="@command('selectCatalogue',selectedCatalogue=cat)"/>
-                                                    <x:button type="button" class="btn btn-primary glyphicon glyphicon-edit"
-                                                              data-toggle="modal" data-target="#editCatalogue"
-                                                              onClick="@command('selectCatalogue',selectedCatalogue=cat)"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <x:div class="col-md-1 top-buffer" style="margin-right: 15px" align="left"
+                                           if="${cat.title ne vm.defaultCatalogue.title}">
+                                        <image width="100px" height="100px" src="images/catalogue-icon.png" onClick="@command('selectCatalogue', selectedCatalogue=cat)"/>
+                                        <n:br/>
+                                        <x:button type="button" class="btn btn-xs btn-primary glyphicon glyphicon-pencil"
+                                                  data-toggle="modal" data-target="#editCatalogue"
+                                                  onClick="@command('selectEditCatalogue', editCatalogue=cat)"/>
+                                        <label value="@load(cat.title)" style="margin-right:10px" onClick="@command('selectCatalogue', selectedCatalogue=cat)"/>
+                                    </x:div>
                                 </template>
-                            </div>
+                            </x:div>
                         </n:div>
                     </n:div>
                 </n:div>
             </n:div>
-
-            <!--<n:div class="row">-->
-                <!--<n:div class="col-md-12">-->
-                    <!--<n:div id="image-container" class="container-fluid top-buffer" width="auto" style="margin-left:50px">-->
-                        <!--<n:div class="row">-->
-                            <!--<div id="load1" children="@load(vm.imageList)">-->
-                                <!--<template name="children" var="cat">-->
-                                    <!--<div class="col-md-2">-->
-
-                                        <!--<div class="container">-->
-                                            <!--<div class="row">-->
-                                                <!--<div class="col-md-2">-->
-                                                    <!--<image width="200px" height="200px" src="images/catalogue-icon.png" onClick="@command('selectCatalogue',selectedCatalogue=cat)"/>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                            <!--<div class="row">-->
-                                                <!--<div class="col-md-2">-->
-                                                    <!--<label value="@load(cat.title)" style="margin-right:10px" onClick="@command('selectCatalogue',selectedCatalogue=cat)"/>-->
-                                                    <!--<x:button type="button" class="btn btn-primary glyphicon glyphicon-edit"-->
-                                                              <!--data-toggle="modal" data-target="#editCatalogue"-->
-                                                              <!--onClick="@command('selectCatalogue',selectedCatalogue=cat)"/>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</template>-->
-                            <!--</div>-->
-                        <!--</n:div>-->
-                    <!--</n:div>-->
-                <!--</n:div>-->
-            <!--</n:div>-->
+            <n:hr />
+            <n:div class="row">
+                <n:div class="col-md-12">
+                    <n:div id="image-container" class="container-fluid top-buffer" width="auto" style="margin-left:50px">
+                        <x:div class="row">
+                            <x:div id="load2" children="@load(vm.imageList)">
+                                <template name="children" var="image">
+                                    <n:div class="col-md-2">
+                                        <n:div class="container">
+                                            <n:div class="row">
+                                                <n:div class="col-md-2">
+                                                    <x:a onClick="@command('viewImage', selectedImage=image)"
+                                                         class="" href="#viewImageModal" data-toggle="modal" data-target="#viewImageModal" >
+                                                        <image width="200px" height="200px" content="@load(image.thumbnail.data) @converter('edu.norbertzardin.util.ImageConverter', maxSize='200.0')"/>
+                                                    </x:a>
+                                                </n:div>
+                                            </n:div>
+                                        </n:div>
+                                    </n:div>
+                                </template>
+                            </x:div>
+                        </x:div>
+                    </n:div>
+                </n:div>
+            </n:div>
 
         </n:div>
 
 
         <!-- CREATION Modal -->
-        <n:div class="modal fade" id="addCatalogueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" width="800px">
+        <n:div class="modal fade" id="addCatalogueModal" tabindex="-1" role="dialog" aria-hidden="true" width="800px">
             <n:div class="modal-dialog" role="document">
                 <n:div class="modal-content">
                     <n:div class="modal-header">
@@ -93,7 +87,7 @@
                                     <n:h4 class="modal-title">Create a Catalogue</n:h4>
                                 </n:div>
 
-                                <n:div class="coll-md-1">
+                                <n:div class="col-md-1">
                                     <n:button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <n:span aria-hidden="true">×</n:span>
                                     </n:button>
@@ -108,21 +102,23 @@
                             <div class="row top-buffer">
                                 <div class="input-group">
                                     <span class="input-group-addon">Catalogue Name:</span>
-                                    <z:textbox class="form-control" id ="catalogueName" value="@bind(vm.name)" cols="50"/>
+                                    <textbox zclass="form-control" id ="catalogueName" value="@save(vm.name)" cols="50"/>
                                 </div>
                             </div>
                         </div>
                     </n:div>
                     <n:div class="modal-footer">
-                        <button zclass="btn btn-success" width = "200px" onClick="@command('createCatalogue')">Submit</button>
-                        <n:button type="button" class="btn btn-secondary" data-dismiss="modal">Close</n:button>
+                        <x:button tyhpe="button" class="btn btn-success" width="200px" data-dismiss="modal"
+                                  onClick="@command('createCatalogue')">Submit
+                        </x:button>
+                        <!--<n:button type="button" class="btn btn-default" data-dismiss="modal">Close</n:button>-->
                     </n:div>
                 </n:div>
             </n:div>
         </n:div>
 
-        <!-- DELETION Modal -->
-        <n:div class="modal fade" id="editCatalogue" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" width="800px">
+        <!-- EDITION Modal -->
+        <n:div class="modal fade" id="editCatalogue" tabindex="-1" role="dialog" aria-hidden="true" width="800px">
             <n:div class="modal-dialog" role="document">
                 <n:div class="modal-content">
                     <n:div class="modal-header">
@@ -132,9 +128,61 @@
                                     <n:span class="glyphicon glyphicon-edit" style="font-size: 2.0em"
                                             aria-hidden="true"/>
                                 </n:div>
-
                                 <n:div class="col-md-10">
                                     <n:h4 class="modal-title">Edit a Catalogue</n:h4>
+                                </n:div>
+                                <n:div class="coll-md-1">
+                                    <n:button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <n:span aria-hidden="true">×</n:span>
+                                    </n:button>
+                                </n:div>
+                            </n:div>
+                        </n:div>
+                    </n:div>
+
+                    <n:div class="modal-body">
+                        <n:div class="form-group">
+                            <n:div class="container-fluid">
+                                <n:div class="row top-buffer">
+                                    <n:div class="col-md-12" align="center">
+                                        <n:div class="input-group">
+                                            <span class="input-group-addon">Catalogue Name:</span>
+                                            <z:textbox zclass="form-control" value="@save(vm.editCatalogue.title)"
+                                            placeholder="@load(c:cat('Enter a new name for ', vm.editCatalogue.title))"/>
+                                        </n:div>
+                                    </n:div>
+                                </n:div>
+
+                            </n:div>
+                        </n:div>
+                    </n:div>
+                    <n:div class="modal-footer">
+                        <x:button type="button" class="btn btn-danger pull-left " data-dismiss="modal" onClick="@command('deleteCatalogue')">
+                            <n:span class="glyphicon glyphicon-trash"/>
+                        </x:button>
+                        <x:button type="button" class="btn btn-success" data-dismiss="modal" onClick="@command('editCatalogue')">
+                            <n:span class="glyphicon glyphicon-ok"/> Save
+                        </x:button>
+                        <!--<n:button type="button" class="btn btn-secondary" data-dismiss="modal">Close</n:button>-->
+                    </n:div>
+                </n:div>
+            </n:div>
+        </n:div>
+
+        <!--  VIEW IMAGE Modal -->
+        <n:div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-hidden="true" width="800px">
+            <n:div class="modal-dialog modal-lg" role="document">
+                <n:div class="modal-content">
+                    <n:div class="modal-header">
+                        <n:div class="container-fluid">
+                            <n:div class="row vertical-align">
+                                <n:div class="col-md-1">
+                                    <n:span class="glyphicon glyphicon-picture" style="font-size: 2.0em"
+                                            aria-hidden="true"/>
+                                </n:div>
+
+                                <n:div class="col-md-10">
+                                    <x:h4 class="modal-title" textContent="@load(vm.selectedImage.name)"/>
                                 </n:div>
 
                                 <n:div class="coll-md-1">
@@ -146,35 +194,125 @@
                         </n:div>
 
                     </n:div>
-
                     <n:div class="modal-body">
-                        <n:div class="form-group">
-                            <n:div class="container-fluid">
-                                <n:div class="row top-buffer">
-                                    <n:div class="col-md-12" align="center">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Catalogue Name:</span>
-                                            <z:textbox class="form-control" value="@bind(vm.selectedCatalogue.title)" />
-                                        </div>
-                                    </n:div>
+                        <n:div class="container-fluid">
+                            <n:div class="row">
+
+                                <n:div class="col-md-8" align="center" width="auto">
+                                    <image id="imageContainer"
+                                           content="@load(vm.selectedImage.mediumImage.data, after='viewImage')
+                                               @converter('edu.norbertzardin.util.ImageConverter', maxSize='650.0')"/>
                                 </n:div>
 
+                                <n:div class="col-md-4" align="left">
+                                    <div id="nameContainter">
+                                        <x:h3 textContent="@load(vm.selectedImage.name) "/>
+                                    </div>
+                                    <div id="descriptionContainer">
+                                        <x:p textContent="@load(vm.selectedImage.description)"/>
+                                    </div>
+                                </n:div>
+                            </n:div>
+                            <x:div class="row">
+                                <x:div id="load12" children="@load(vm.tagList)">
+                                    <template name="children" var="tag">
+                                            <label value="@load(tag.name)" style="margin-right:10px"/>
+                                    </template>
+                                </x:div>
+                            </x:div>
+                            <n:div class="row">
+                                <n:div class="col-md-12" align="right">
+                                    <n:div id="buttonContainer">
+                                        <x:button type="button" class="btn btn-danger" data-dismiss="modal" onClick="@command('deleteImage')">Remove</x:button>
+                                    </n:div>
+                                </n:div>
                             </n:div>
                         </n:div>
                     </n:div>
                     <n:div class="modal-footer">
-                        <n:button type="button" class="btn btn-danger pull-left">Remove</n:button>
-                        <x:button type="button" class="btn btn-success" onClick="@command('editCatalogue')">Save</x:button>
                         <n:button type="button" class="btn btn-secondary" data-dismiss="modal">Close</n:button>
                     </n:div>
                 </n:div>
             </n:div>
         </n:div>
-    </div>
-    <!--<script type="text/javascript">-->
-        <!--$('#removalSelection').change(function(event) {-->
-            <!--console.log('log');-->
-        <!--});-->
-    <!--</script>-->
 
+
+        <!-- Modal -->
+        <!--<n:div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" width="800px">-->
+            <!--<n:div class="modal-dialog modal-lg" role="document">-->
+                <!--<x:div class="modal-content">-->
+                    <!--&lt;!&ndash;<include src="@load(c:cat('image.zul?id=', vm.selectedImage.id), after='viewImage')"/>&ndash;&gt;-->
+                    <!--<x:div class="modal-header">-->
+                        <!--<n:div class="container-fluid">-->
+                            <!--<n:div class="row vertical-align">-->
+                                <!--<n:div class="col-md-1">-->
+                                    <!--<n:span class="glyphicon glyphicon-picture" style="font-size: 2.0em" aria-hidden="true"/>-->
+                                <!--</n:div>-->
+                                <!--<n:div class="col-md-10">-->
+                                    <!--<x:h4 textContent="@load(vm.selectedImage.name)"/>-->
+                                <!--</n:div>-->
+                                <!--<n:div class="col-md-1">-->
+                                    <!--<n:button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                                        <!--<n:span aria-hidden="true">×</n:span>-->
+                                    <!--</n:button>-->
+                                <!--</n:div>-->
+                            <!--</n:div>-->
+                        <!--</n:div>-->
+                    <!--</x:div>-->
+
+                    <!--<n:div class="modal-body">-->
+                        <!--<n:div class="container-fluid">-->
+                            <!--<n:div class="row">-->
+                                <!--<n:div class="col-md-8" align="center" width="auto">-->
+                                    <!--<image id="imageContainer"-->
+                                           <!--content="@load(vm.selectedImage.mediumImage.data, after='viewImage')-->
+                                    <!--@converter('edu.norbertzardin.util.ImageConverter', maxSize='500.0')"/>-->
+                                <!--</n:div>-->
+
+                                <!--<n:div class="col-md-4" align="left">-->
+                                    <!--<div id="nameContainter">-->
+                                        <!--<textbox zclass="form-control" value="@load(vm.selectedImage.name) @save(vm.selectedImage.name, before='editImage')" visible="@load(vm.editMode)"/>-->
+                                        <!--<x:h3 textContent="@load(vm.selectedImage.name)" visible="@load(!vm.editMode)"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div id="dateContainer">-->
+                                        <!--<x:h6 textContent="@load(vm.selectedImage.createdDate)"/>-->
+                                    <!--</div>-->
+                                    <!--<n:hr/>-->
+                                    <!--<div id="descriptionContainer">-->
+                                        <!--<textbox zclass="form-control" value="@load(vm.selectedImage.description) @save(vm.selectedImage.description, before='editImage')" visible="@load(vm.editMode)"/>-->
+                                        <!--<x:p textContent="@load(vm.selectedImage.description)" visible="@load(!vm.editMode)"/>-->
+                                    <!--</div>-->
+                                <!--</n:div>-->
+                            <!--</n:div>-->
+                        <!--</n:div>-->
+                    <!--</n:div>-->
+
+                    <!--<n:div class="modal-footer">-->
+
+                        <!--<x:button type="button" class="btn btn-info btn-sm pull-left" onClick="@command('onDownload')">-->
+                            <!--<n:span class="glyphicon glyphicon-download-alt"/> Download-->
+                        <!--</x:button>-->
+
+                        <!--<x:button type="button" class="btn btn-danger btn-sm pull-left" data-dismiss="modal" onClick="@command('deleteImage')" visible="@load(vm.editMode)">-->
+                            <!--<n:span class="glyphicon glyphicon-trash"/> Remove-->
+                        <!--</x:button>-->
+
+                        <!--<x:div class="btn-group" role="group" visible="@load(vm.editMode)">-->
+                            <!--<x:button type="button" class="btn btn-success custom" onClick="@command('editImage')">-->
+                                <!--<x:span class="glyphicon glyphicon-ok"/>-->
+                            <!--</x:button>-->
+                            <!--<x:button type="button" class="btn btn-danger custom" onClick="@command('editMode')">-->
+                                <!--<n:span class="glyphicon glyphicon-remove"/>-->
+                            <!--</x:button>-->
+                        <!--</x:div>-->
+
+                        <!--<button type="button" zclass="btn btn-primary" onClick="@command('editMode')" visible="@load(!vm.editMode)" width="100px">Edit</button>-->
+                        <!--<n:button type="button" class="btn btn-secondary" data-dismiss="modal">Close</n:button>-->
+                    <!--</n:div>-->
+                <!--</x:div>-->
+            <!--</n:div>-->
+        <!--</n:div>-->
+
+    </div>
 </zk>

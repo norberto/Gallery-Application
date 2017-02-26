@@ -10,4 +10,12 @@ public interface CatalogueDao {
     List<CatalogueEntity> getCatalogueList();
 
     void editCatalogue(CatalogueEntity ce);
+
+    void deleteCatalogue(Long id);
+
+    CatalogueEntity getCatalogueByName(String name);
+
+    CatalogueEntity getCatalogueById(Long id);
+
+    CatalogueEntity getCatalogueByIdMediumFetch(Long id);
 }

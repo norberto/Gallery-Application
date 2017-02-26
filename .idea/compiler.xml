@@ -12,9 +12,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="gallery-app" target="1.5" />
-      <module name="gallery-bl" target="1.5" />
-      <module name="gallery-model" target="1.5" />
+      <module name="gallery-app" target="1.6" />
+      <module name="gallery-bl" target="1.6" />
+      <module name="gallery-model" target="1.6" />
       <module name="gallery-ui" target="1.5" />
     </bytecodeTargetLevel>
   </component>

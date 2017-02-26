@@ -1,7 +1,6 @@
 package edu.norbertzardin.service;
 
 import edu.norbertzardin.dao.CatalogueDao;
-import edu.norbertzardin.dao.ImageDao;
 import edu.norbertzardin.entities.CatalogueEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,15 @@ public class CatalogueService {
         catalogueDao.createCatalogue(ce);
     }
 
+    public void deleteCatalogue(CatalogueEntity ce) {
+        catalogueDao.deleteCatalogue(ce.getId());
+    }
+
+    public CatalogueEntity getCatalogueByName(String name) { return catalogueDao.getCatalogueByName(name); }
+
+    public CatalogueEntity getCatalogueById(Long id) { return catalogueDao.getCatalogueById(id); }
+
+
     public List<CatalogueEntity> getCatalogueList() {
         return catalogueDao.getCatalogueList();
     }
@@ -33,5 +41,7 @@ public class CatalogueService {
     public void editCatalogue(CatalogueEntity ce) {
         catalogueDao.editCatalogue(ce);
     }
+
+    public CatalogueEntity getCatalogueByIdMediumFetch(Long id) { return catalogueDao.getCatalogueByIdMediumFetch(id); }
 
 }

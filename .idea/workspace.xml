@@ -1,7 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd6787f3-b768-40d5-8557-2f567ddcdfc7" name="Default" comment="" />
+    <list default="true" id="dd6787f3-b768-40d5-8557-2f567ddcdfc7" name="Default" comment="Merge branch 'master' of https://github.com/norberto/Gallery-Application&#10;&#10;# Conflicts:&#10;#&#9;.idea/artifacts/gallery_ui_war_exploded.xml&#10;#&#9;.idea/compiler.xml&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d.xml&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata.values.at&#10;#&#9;.idea/workspace.xml&#10;#&#9;gallery-app.iml&#10;#&#9;gallery-bl/gallery-bl.iml&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java&#10;#&#9;gallery-bl/src/main/resources/META-INF/persistence.xml&#10;#&#9;gallery-bl/target/classes/META-INF/persistence.xml&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/CatalogueDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/ImageDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/MessageDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/TagDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/CatalogueDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/ImageDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/MessageDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/TagDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/CatalogueService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/ImageService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/MessageService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/util/ImageConverter.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/util/ImageUtil.class&#10;#&#9;gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;gallery-model/gallery-model.iml&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/CatalogueEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/ImageEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/MessageEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/TagEntity.class&#10;#&#9;gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;gallery-ui/gallery-ui.iml&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java&#10;#&#9;gallery-ui/src/main/webapp/browse.zul&#10;#&#9;gallery-ui/src/main/webapp/image.zul&#10;#&#9;gallery-ui/src/main/webapp/images/catalogue-icon.png&#10;#&#9;gallery-ui/src/main/webapp/upload.zul&#10;#&#9;gallery-ui/src/main/webapp/view.zul&#10;#&#9;gallery-ui/src/main/webapp/zk/css/style.css&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/BrowseVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/ImageListVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/UploadVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/ViewImageVM.class&#10;#&#9;gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;pom.xml&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/images/folder-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_jpamodelgen_5_2_7_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ByteDataDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ByteDataDAOImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/DataService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/TagService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ByteData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/util/ImageConverter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/util/ImageUtil.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/MessageDao.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/MessageDAOImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/MessageService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/META-INF/persistence.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/CatalogueDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/ImageDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/MessageDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/TagDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/impl/CatalogueDAOImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/impl/ImageDAOImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/impl/MessageDAOImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/impl/TagDAOImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/service/CatalogueService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/service/ImageService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/service/MessageService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/util/ImageConverter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/util/ImageUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/spring/applicationContext.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/MessageEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/classes/edu/norbertzardin/entities/CatalogueEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/classes/edu/norbertzardin/entities/ImageEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/classes/edu/norbertzardin/entities/MessageEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/classes/edu/norbertzardin/entities/TagEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/MessageVM.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/BrowseVM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/ImageListVM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/MessageVM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/UploadVM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/ViewImageVM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/tomcat/conf/logging.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/tomcat/conf/tomcat-users.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/tomcat/conf/web.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata" afterPath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata.values.at" afterPath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata.values.at" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/images/catalogue-icon.png" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/images/catalogue-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/gallery_ui_war.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/gallery_ui_war.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/gallery_ui_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/gallery_ui_war_exploded.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/storage.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/storage.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/norbert_zardin.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/norbert_zardin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_1_5_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_1_5_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_attrs_1_5_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_attrs_1_5_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_2_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_2_1_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_oracle_ojdbc6_11_2_0_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_oracle_ojdbc6_11_2_0_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_8.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_8.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_2_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_2_1_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_2_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_persistence_api_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_persistence_api_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_jta_1_0_1B.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_jta_1_0_1B.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_6_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_6_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ehcache_ehcache_1_2_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ehcache_ehcache_1_2_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_extras_beanshell_bsh_2_0b6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_extras_beanshell_bsh_2_0b6.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jta_1_1_spec_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jta_1_1_spec_1_1_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_9.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_9.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_3_2_1_ga.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_3_2_1_ga.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_annotations_3_3_0_ga.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_annotations_3_3_0_ga.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_commons_annotations_3_3_0_ga.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_commons_annotations_3_3_0_ga.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_2_7_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_2_7_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_2_7_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_2_7_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_0_api_1_0_1_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_0_api_1_0_1_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_3_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_3_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_5.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_jdk14_1_7_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_jdk14_1_7_5.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_3_6_RELEASE.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zcommon_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zcommon_8_0_2_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zel_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zel_8_0_2_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zweb_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zweb_8_0_2_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zhtml_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zhtml_8_0_2_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zk_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zk_8_0_2_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zkbind_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zkbind_8_0_2_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zkplus_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zkplus_8_0_2_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zul_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zul_8_0_2_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zsoup_1_8_2_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zsoup_1_8_2_5.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-app.iml" afterPath="$PROJECT_DIR$/gallery-app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/gallery-bl.iml" afterPath="$PROJECT_DIR$/gallery-bl/gallery-bl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/gallery-bl/src/main/resources/META-INF/persistence.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/resources/spring/applicationContext.xml" afterPath="$PROJECT_DIR$/gallery-bl/src/main/resources/spring/applicationContext.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-model/gallery-model.iml" afterPath="$PROJECT_DIR$/gallery-model/gallery-model.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java" afterPath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java" afterPath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java" afterPath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/gallery-ui.iml" afterPath="$PROJECT_DIR$/gallery-ui/gallery-ui.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/META-INF/persistence.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/browse.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/browse.zul" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/image.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/image.zul" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/index.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/index.zul" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/upload.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/upload.zul" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/view.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/view.zul" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/css/style.css" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/footer.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/footer.zul" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/navbar.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/navbar.zul" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/template.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/template.zul" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/gallery-model/target/" />
@@ -48,6 +194,48 @@
         <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
       </PATH_ELEMENT>
     </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="NORBERT_CATALOGUES" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -55,72 +243,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BrowseVM.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java">
+      <file leaf-file-name="index.zul" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/index.zul">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="11" />
-              <folding>
-                <element signature="e#1438#1439#0" expanded="false" />
-                <element signature="e#1494#1495#0" expanded="false" />
-                <element signature="e#1608#1609#0" expanded="false" />
-                <element signature="e#1640#1641#0" expanded="false" />
-                <element signature="e#1743#1744#0" expanded="false" />
-                <element signature="e#1783#1784#0" expanded="false" />
-                <element signature="e#1858#1859#0" expanded="false" />
-                <element signature="e#1916#1917#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="23" lean-forward="false" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CatalogueDAOImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="24" column="27" lean-forward="false" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
-              <folding>
-                <element signature="e#636#637#0" expanded="false" />
-                <element signature="e#677#678#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImageListVM.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="39" column="10" lean-forward="false" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
-              <folding>
-                <element signature="e#1569#1570#0" expanded="false" />
-                <element signature="e#1619#1620#0" expanded="false" />
-                <element signature="e#1680#1681#0" expanded="false" />
-                <element signature="e#1728#1729#0" expanded="false" />
-                <element signature="e#1839#1840#0" expanded="false" />
-                <element signature="e#1880#1881#0" expanded="false" />
-                <element signature="e#1935#1936#0" expanded="false" />
-                <element signature="e#1977#1978#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="upload.zul" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/upload.zul">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+            <state relative-caret-position="68">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -129,18 +256,72 @@
       <file leaf-file-name="view.zul" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/view.zul">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="31" lean-forward="false" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+            <state relative-caret-position="340">
+              <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="browse.zul" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/browse.zul">
+      <file leaf-file-name="navbar.zul" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/navbar.zul">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2295">
-              <caret line="135" column="104" lean-forward="false" selection-start-line="135" selection-start-column="91" selection-end-line="135" selection-end-column="104" />
+            <state relative-caret-position="102">
+              <caret line="65" column="2" lean-forward="false" selection-start-line="65" selection-start-column="2" selection-end-line="65" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="footer.zul" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/footer.zul">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BrowseVM.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="12">
+              <caret line="149" column="10" lean-forward="false" selection-start-line="149" selection-start-column="4" selection-end-line="149" selection-end-column="10" />
+              <folding>
+                <element signature="e#4069#4070#0" expanded="true" />
+                <element signature="e#4120#4121#0" expanded="true" />
+                <element signature="e#4465#4466#0" expanded="true" />
+                <element signature="e#4515#4516#0" expanded="true" />
+                <element signature="e#4705#4706#0" expanded="true" />
+                <element signature="e#4761#4762#0" expanded="true" />
+                <element signature="e#4814#4815#0" expanded="true" />
+                <element signature="e#4858#4859#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UploadVM.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="73">
+              <caret line="219" column="4" lean-forward="false" selection-start-line="219" selection-start-column="4" selection-end-line="219" selection-end-column="4" />
+              <folding>
+                <element signature="e#5480#5481#0" expanded="true" />
+                <element signature="e#5538#5539#0" expanded="true" />
+                <element signature="e#6349#6350#0" expanded="true" />
+                <element signature="e#6389#6390#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1275">
+              <caret line="75" column="16" lean-forward="false" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -159,41 +340,43 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>push</find>
-      <find>zk</find>
-      <find>zkmax</find>
-      <find>setBorder</find>
+      <find>'vm'</find>
       <find>search</find>
-      <find>viewImage</find>
-      <find>ids</find>
-      <find>submit</find>
-      <find>200</find>
-      <find>650</find>
-      <find>onUpload</find>
-      <find>QKLY</find>
-      <find>Q</find>
-      <find>messagePers</find>
-      <find>imagePersistence</find>
-      <find>x:</find>
-      <find>id('vm</find>
-      <find>modal</find>
-      <find>catalogue</find>
-      <find>h2</find>
-      <find>h4</find>
-      <find>template</find>
-      <find>catalogueList</find>
-      <find>children</find>
-      <find>)</find>
-      <find>(</find>
-      <find>removeCatalogue</find>
-      <find>templ</find>
+      <find>select</find>
+      <find>getC</find>
+      <find>getCatalogueBy</find>
+      <find>getCatalogueByID</find>
+      <find>selectCatalogue</find>
+      <find>selectIMa</find>
+      <find>viewIMage</find>
+      <find>sele</find>
+      <find>vi</find>
+      <find>getImageById</find>
+      <find>thumbnail</find>
+      <find>deleteImage</find>
+      <find>delete</find>
       <find>remove</find>
-      <find>getCatalogueList</find>
+      <find>&lt;a</find>
+      <find>&lt;x:a</find>
+      <find>edit</find>
+      <find>parseTags</find>
+      <find>create Catalogue</find>
+      <find>Modal</find>
+      <find>Remove</find>
+      <find>getImageByIdFullFetch</find>
+      <find>viewImage</find>
+      <find>name</find>
+      <find>&lt;</find>
+      <find>&lt;n:/</find>
+      <find>login</find>
+      <find>new here</find>
     </findStrings>
     <replaceStrings>
       <replace>p_</replace>
       <replace>uploadVM</replace>
       <replace>col</replace>
+      <replace>&lt;n:</replace>
+      <replace>&lt;/n:</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -207,17 +390,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/SidebarPageConfig.java" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/SidebarVM.java" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/MessageService.java" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/SidebarPageConfigImpl.java" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/MessageVM.java" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageVM.java" />
-        <option value="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/MessageEntity.java" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/Converter.java" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/style.css" />
-        <option value="$PROJECT_DIR$/gallery-bl/pom.xml" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/NavigationVM.java" />
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/WEB-INF/zk.xml" />
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/image.zul" />
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/browse.zul" />
@@ -227,37 +399,48 @@
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/uploadView.zul" />
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/browseView.zul" />
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/home.zul" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/navbar.zul" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/index.zul" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/footer.zul" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/template.zul" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/image.zul" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java" />
-        <option value="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java" />
         <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/MessageDAOImpl.java" />
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java" />
-        <option value="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/2e304815-0f61-4a69-beb9-175c0d7f418d/console.sql" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/2e304815-0f61-4a69-beb9-175c0d7f418d/console_1.sql" />
         <option value="$PROJECT_DIR$/gallery-bl/src/main/resources/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/view.zul" />
-        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/template.zul" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java" />
+        <option value="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/TagService.java" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/util/ImageConverter.java" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/upload.zul" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ByteDataDao.java" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/DataService.java" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ByteDataDAOImpl.java" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/2e304815-0f61-4a69-beb9-175c0d7f418d/console.sql" />
+        <option value="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ByteData.java" />
+        <option value="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java" />
+        <option value="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java" />
         <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java" />
         <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java" />
         <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/resources/spring/applicationContext.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ba1f8642-9fa3-4986-b033-5d08e17ec7dc/console.sql" />
+        <option value="dbtable:/e1b3b01a/ba1f8642-9fa3-4986-b033-5d08e17ec7dc/SYSTEM.NORBERT_CATALOGUES" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java" />
+        <option value="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/index.zul" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/image.zul" />
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/browse.zul" />
         <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/css/style.css" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java" />
-        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/upload.zul" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/navbar.zul" />
+        <option value="$PROJECT_DIR$/gallery-ui/src/main/webapp/view.zul" />
       </list>
     </option>
   </component>
@@ -283,96 +466,8 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="gallery-ui" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Dependencies" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="gallery-ui" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="gallery-ui" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Plugins" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="gallery-ui" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Plugins" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="tomcat7" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
           <option name="myItemId" value="gallery-app" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="gallery-app" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Plugins" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="tomcat7" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="gallery-app" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Plugins" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -397,7 +492,22 @@
     <option name="width" value="1936" />
     <option name="height" value="1050" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Android</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -413,8 +523,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -519,6 +627,10 @@
               <option name="myItemId" value="zk" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -580,37 +692,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gallery-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gallery-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gallery-ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
+              <option name="myItemId" value="zk" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -662,7 +744,45 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="norbertzardin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="vm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gallery-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gallery-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gallery-ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="norbertzardin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -837,10 +957,6 @@
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -869,10 +985,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="norbertzardin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -984,20 +1096,23 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.JPA/Hibernate QL" />
+    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Oracle" />
+    <property name="SearchEverywhereHistoryKey" value="Byte[]&#9;null&#9;null" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -1006,16 +1121,22 @@
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-bl\src\main\resources" />
+      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-ui\src\main\resources" />
+      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-model\src\main\resources" />
+      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-bl\src\main\java\edu\norbertzardin\util" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.norbertzardin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-ui\src\main\webapp\images" />
-      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-ui\src\main\java\edu\norbertzardin\vm" />
-      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-bl\src\main\java\edu\norbertzardin\util" />
-      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-ui\src\main\webapp" />
-      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-ui\src\main\webapp\zk\layout" />
+      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-bl\src\main\java\edu\norbertzardin\dao\impl" />
+      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-bl\src\main\java\edu\norbertzardin\dao" />
+      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-bl\src\main\java\edu\norbertzardin\service" />
+      <recent name="C:\Users\norbert.zardin\IdeaProjects\gallery-app\gallery-model\src\main\java\edu\norbertzardin\entities" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.gallery-app [tomcat7:run]">
+  <component name="RunManager" selected="Maven.gallery-ui [tomcat7:run]">
     <configuration default="false" name="gallery-app [tomcat7:run]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -1040,7 +1161,7 @@
       </MavenSettings>
       <method />
     </configuration>
-    <configuration default="false" name="gallery-ui [tomcat7:run]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+    <configuration default="false" name="gallery-ui [tomcat7:run]" type="MavenRunConfiguration" factoryName="Maven" singleton="true" temporary="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -1423,8 +1544,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Maven.gallery-app [tomcat7:run]" />
-        <item index="1" class="java.lang.String" itemvalue="Maven.gallery-ui [tomcat7:run]" />
+        <item index="0" class="java.lang.String" itemvalue="Maven.gallery-ui [tomcat7:run]" />
+        <item index="1" class="java.lang.String" itemvalue="Maven.gallery-app [tomcat7:run]" />
       </list>
     </recent_temporary>
   </component>
@@ -1457,13 +1578,20 @@
       <workItem from="1487055945052" duration="31087000" />
       <workItem from="1487143739519" duration="30359000" />
       <workItem from="1487315738690" duration="26232000" />
-      <workItem from="1487575113003" duration="29438000" />
-      <workItem from="1487615243092" duration="926000" />
+      <workItem from="1487575113003" duration="29531000" />
+      <workItem from="1487663176123" duration="469000" />
+      <workItem from="1487663670396" duration="49995000" />
+      <workItem from="1487776971965" duration="2950000" />
+      <workItem from="1487834965582" duration="27782000" />
+      <workItem from="1487921695555" duration="24702000" />
+      <workItem from="1487952602809" duration="503000" />
+      <workItem from="1487953585776" duration="9395000" />
+      <workItem from="1488145780816" duration="447000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="261761000" />
+    <option name="totallyTimeSpent" value="377171000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1476,31 +1604,32 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1050" extended-state="7" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34565216" sideWeight="0.39498934" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1652452" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1652452" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26279318" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15831557" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.487055" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26532888" sideWeight="0.6050107" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26086956" sideWeight="0.58635396" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.4978678" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.022826087" sideWeight="0.49573562" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.4978678" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2831661" sideWeight="0.6817697" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.4978678" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.4978678" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21268657" sideWeight="0.43527508" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24520256" sideWeight="0.5647249" order="0" side_tool="false" content_ui="combo" x="1" y="0" width="363" height="1038" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.49573562" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2826087" sideWeight="0.6684435" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.49573562" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24786781" sideWeight="0.44224924" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18496802" sideWeight="0.55775076" order="0" side_tool="false" content_ui="combo" x="1" y="0" width="363" height="1038" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -1508,48 +1637,12 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="JPA Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="JPA Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.48933902" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125" sideWeight="0.48720682" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3478261" sideWeight="0.31556502" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1652452" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14605543" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.487055" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3110368" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.4978678" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2831661" sideWeight="0.68443495" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.4978678" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.4978678" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21055438" sideWeight="0.42880258" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.48933902" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21055438" sideWeight="0.5711974" order="0" side_tool="false" content_ui="combo" x="1" y="0" width="363" height="1038" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -1557,12 +1650,16 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'master' of https://github.com/norberto/Gallery-Application&#10;&#10;# Conflicts:&#10;#&#9;.idea/artifacts/gallery_ui_war_exploded.xml&#10;#&#9;.idea/compiler.xml&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d.xml&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata.values.at&#10;#&#9;.idea/workspace.xml&#10;#&#9;gallery-app.iml&#10;#&#9;gallery-bl/gallery-bl.iml&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java&#10;#&#9;gallery-bl/src/main/resources/META-INF/persistence.xml&#10;#&#9;gallery-bl/target/classes/META-INF/persistence.xml&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/CatalogueDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/ImageDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/MessageDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/TagDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/CatalogueDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/ImageDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/MessageDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/TagDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/CatalogueService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/ImageService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/MessageService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/util/ImageConverter.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/util/ImageUtil.class&#10;#&#9;gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;gallery-model/gallery-model.iml&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/CatalogueEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/ImageEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/MessageEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/TagEntity.class&#10;#&#9;gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;gallery-ui/gallery-ui.iml&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java&#10;#&#9;gallery-ui/src/main/webapp/browse.zul&#10;#&#9;gallery-ui/src/main/webapp/image.zul&#10;#&#9;gallery-ui/src/main/webapp/images/catalogue-icon.png&#10;#&#9;gallery-ui/src/main/webapp/upload.zul&#10;#&#9;gallery-ui/src/main/webapp/view.zul&#10;#&#9;gallery-ui/src/main/webapp/zk/css/style.css&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/BrowseVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/ImageListVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/UploadVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/ViewImageVM.class&#10;#&#9;gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;pom.xml&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/norberto/Gallery-Application&#10;&#10;# Conflicts:&#10;#&#9;.idea/artifacts/gallery_ui_war_exploded.xml&#10;#&#9;.idea/compiler.xml&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d.xml&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata.values.at&#10;#&#9;.idea/workspace.xml&#10;#&#9;gallery-app.iml&#10;#&#9;gallery-bl/gallery-bl.iml&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java&#10;#&#9;gallery-bl/src/main/resources/META-INF/persistence.xml&#10;#&#9;gallery-bl/target/classes/META-INF/persistence.xml&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/CatalogueDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/ImageDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/MessageDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/TagDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/CatalogueDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/ImageDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/MessageDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/TagDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/CatalogueService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/ImageService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/MessageService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/util/ImageConverter.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/util/ImageUtil.class&#10;#&#9;gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;gallery-model/gallery-model.iml&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/CatalogueEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/ImageEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/MessageEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/TagEntity.class&#10;#&#9;gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;gallery-ui/gallery-ui.iml&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java&#10;#&#9;gallery-ui/src/main/webapp/browse.zul&#10;#&#9;gallery-ui/src/main/webapp/image.zul&#10;#&#9;gallery-ui/src/main/webapp/images/catalogue-icon.png&#10;#&#9;gallery-ui/src/main/webapp/upload.zul&#10;#&#9;gallery-ui/src/main/webapp/view.zul&#10;#&#9;gallery-ui/src/main/webapp/zk/css/style.css&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/BrowseVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/ImageListVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/UploadVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/ViewImageVM.class&#10;#&#9;gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;pom.xml&#10;" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="74" />
+      <option name="time" value="215" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1571,338 +1668,398 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/navbar.zul">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/zkoss/common/zcommon/8.0.2.2/zcommon-8.0.2.2.jar!/org/zkoss/image/AImage.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        <state relative-caret-position="220">
+          <caret line="54" column="11" lean-forward="false" selection-start-line="54" selection-start-column="11" selection-end-line="54" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/zkoss/zk/zkbind/8.0.2.2/zkbind-8.0.2.2.jar!/org/zkoss/bind/impl/BinderImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="220">
+          <caret line="2237" column="0" lean-forward="false" selection-start-line="2237" selection-start-column="0" selection-end-line="2237" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/zkoss/zk/zkbind/8.0.2.2/zkbind-8.0.2.2.jar!/org/zkoss/bind/impl/LoadPropertyBindingImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="131" column="21" lean-forward="true" selection-start-line="110" selection-start-column="7" selection-end-line="131" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="220">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/template.zul">
+    <entry file="file://$PROJECT_DIR$/gallery-ui/target/tomcat/logs/access_log.2017-02-24" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/zkoss/common/zcommon/8.0.2.2/zcommon-8.0.2.2-sources.jar!/org/zkoss/image/AImage.java" />
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/util/ImageConverter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="24" column="24" lean-forward="false" selection-start-line="19" selection-start-column="10" selection-end-line="24" selection-end-column="24" />
+        <state relative-caret-position="390">
+          <caret line="34" column="23" lean-forward="false" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/index.zul">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="74" lean-forward="false" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/footer.zul">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="6" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/MessageService.java">
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/util/ImageUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <caret line="13" column="52" lean-forward="false" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/MessageDao.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/zkoss/zk/zul/8.0.2.2/zul-8.0.2.2.jar!/org/zkoss/zul/Filedownload.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="63" column="23" lean-forward="false" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/zkoss/zk/zul/8.0.2.2/zul-8.0.2.2-sources.jar!/org/zkoss/zul/Filedownload.java" />
+    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ByteDataDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
-          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/e9ac8388/2e304815-0f61-4a69-beb9-175c0d7f418d/MOKYMAI.NORBERT_IMAGES_TAGS" />
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/resources/properties/app.properties" />
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/WEB-INF/zk.xml" />
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/images/banner-logo.jpg" />
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/images/browse.png" />
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/images/banner-logo.png" />
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/images/home.png" />
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/images/upload.png" />
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/images/no-image-slide.webp">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/images/home_icon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/MessageEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/TagService.java" />
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="25" column="59" lean-forward="false" selection-start-line="25" selection-start-column="59" selection-end-line="25" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="51" lean-forward="false" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="10" column="3" lean-forward="false" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/resources/spring/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="24" column="52" lean-forward="false" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="378">
+          <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2e304815-0f61-4a69-beb9-175c0d7f418d/console.sql" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/zkoss/common/zcommon/8.0.2.2/zcommon-8.0.2.2.jar!/org/zkoss/util/resource/ResourceCache.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/image.zul">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="24" column="23" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/resources/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="57" lean-forward="false" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/MessageDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-          <folding>
-            <element signature="e#485#486#0" expanded="false" />
-            <element signature="e#531#532#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="dbDummy://dbtable:/e9ac8388/2e304815-0f61-4a69-beb9-175c0d7f418d/MOKYMAI.NORBERT_BYTEDATA" />
+    <entry file="dbDummy://dbtable:/e9ac8388/2e304815-0f61-4a69-beb9-175c0d7f418d/MOKYMAI.NORBERT_TAGS" />
+    <entry file="dbDummy://dbtable:/e9ac8388/2e304815-0f61-4a69-beb9-175c0d7f418d/MOKYMAI.NORBERT_IMG_TAGS" />
+    <entry file="dbDummy://dbtable:/e9ac8388/2e304815-0f61-4a69-beb9-175c0d7f418d/MOKYMAI.NORBERT_IMAGES" />
     <entry file="dbDummy://dbtable:/e9ac8388/2e304815-0f61-4a69-beb9-175c0d7f418d/MOKYMAI.NORBERT_IMAGE_TEST" />
     <entry file="dbDummy://dbtable:/e9ac8388/2e304815-0f61-4a69-beb9-175c0d7f418d/MOKYMAI.NORBERT_CATALOGUES" />
-    <entry file="dbDummy://dbtable:/e9ac8388/2e304815-0f61-4a69-beb9-175c0d7f418d/MOKYMAI.NORBERT_IMAGES" />
-    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java">
+    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state relative-caret-position="394">
+          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+        <state relative-caret-position="289">
+          <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/DataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#382#383#0" expanded="false" />
+            <element signature="e#428#429#0" expanded="false" />
+            <element signature="e#476#477#0" expanded="false" />
+            <element signature="e#530#531#0" expanded="false" />
+            <element signature="e#574#575#0" expanded="false" />
+            <element signature="e#608#609#0" expanded="false" />
+            <element signature="e#667#668#0" expanded="false" />
+            <element signature="e#713#714#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/resources/spring/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="53" lean-forward="false" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/e1b3b01a/ba1f8642-9fa3-4986-b033-5d08e17ec7dc/SYSTEM.NORBERT_CATALOGUES">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="163" column="30" lean-forward="false" selection-start-line="163" selection-start-column="20" selection-end-line="163" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ByteData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="2" lean-forward="false" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ba1f8642-9fa3-4986-b033-5d08e17ec7dc/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="459">
+          <caret line="44" column="36" lean-forward="false" selection-start-line="44" selection-start-column="36" selection-end-line="44" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/e1b3b01a/ba1f8642-9fa3-4986-b033-5d08e17ec7dc/SYSTEM.NORBERT_BYTEDATA">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ROWID" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/e1b3b01a/ba1f8642-9fa3-4986-b033-5d08e17ec7dc/SYSTEM.NORBERT_TAGS">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ROWID" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/e1b3b01a/ba1f8642-9fa3-4986-b033-5d08e17ec7dc/SYSTEM.NORBERT_IMG_TAGS">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ROWID" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/e1b3b01a/ba1f8642-9fa3-4986-b033-5d08e17ec7dc/SYSTEM.NORBERT_IMAGE_TEST">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+          <column-attributes>
+            <column name="ROWID" enabled="false" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/upload.zul">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="28" column="99" lean-forward="false" selection-start-line="28" selection-start-column="99" selection-end-line="28" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ByteDataDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="40" lean-forward="false" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="24" column="27" lean-forward="false" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
-          <folding>
-            <element signature="e#636#637#0" expanded="false" />
-            <element signature="e#677#678#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="39" column="10" lean-forward="false" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
-          <folding>
-            <element signature="e#1569#1570#0" expanded="false" />
-            <element signature="e#1619#1620#0" expanded="false" />
-            <element signature="e#1680#1681#0" expanded="false" />
-            <element signature="e#1728#1729#0" expanded="false" />
-            <element signature="e#1839#1840#0" expanded="false" />
-            <element signature="e#1880#1881#0" expanded="false" />
-            <element signature="e#1935#1936#0" expanded="false" />
-            <element signature="e#1977#1978#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/view.zul">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="31" lean-forward="false" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+        <state relative-caret-position="320">
+          <caret line="51" column="63" lean-forward="false" selection-start-line="51" selection-start-column="63" selection-end-line="51" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/css/style.css">
+    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="23" lean-forward="false" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+        <state relative-caret-position="-324">
+          <caret line="20" column="40" lean-forward="false" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/browse.zul">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2295">
-          <caret line="135" column="104" lean-forward="false" selection-start-line="135" selection-start-column="91" selection-end-line="135" selection-end-column="104" />
+        <state relative-caret-position="199">
+          <caret line="225" column="148" lean-forward="false" selection-start-line="225" selection-start-column="148" selection-end-line="225" selection-end-column="148" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="90" column="27" lean-forward="false" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="108" column="51" lean-forward="false" selection-start-line="108" selection-start-column="51" selection-end-line="108" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="516">
+          <caret line="60" column="23" lean-forward="false" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="114" column="0" lean-forward="true" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="46" column="29" lean-forward="true" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/image.zul">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="75" column="16" lean-forward="false" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/index.zul">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/view.zul">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/navbar.zul">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="65" column="2" lean-forward="false" selection-start-line="65" selection-start-column="2" selection-end-line="65" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/footer.zul">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="219" column="4" lean-forward="false" selection-start-line="219" selection-start-column="4" selection-end-line="219" selection-end-column="4" />
+          <folding>
+            <element signature="e#5480#5481#0" expanded="true" />
+            <element signature="e#5538#5539#0" expanded="true" />
+            <element signature="e#6349#6350#0" expanded="true" />
+            <element signature="e#6389#6390#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="11" />
+        <state relative-caret-position="12">
+          <caret line="149" column="10" lean-forward="false" selection-start-line="149" selection-start-column="4" selection-end-line="149" selection-end-column="10" />
           <folding>
-            <element signature="e#1438#1439#0" expanded="false" />
-            <element signature="e#1494#1495#0" expanded="false" />
-            <element signature="e#1608#1609#0" expanded="false" />
-            <element signature="e#1640#1641#0" expanded="false" />
-            <element signature="e#1743#1744#0" expanded="false" />
-            <element signature="e#1783#1784#0" expanded="false" />
-            <element signature="e#1858#1859#0" expanded="false" />
-            <element signature="e#1916#1917#0" expanded="false" />
+            <element signature="e#4069#4070#0" expanded="true" />
+            <element signature="e#4120#4121#0" expanded="true" />
+            <element signature="e#4465#4466#0" expanded="true" />
+            <element signature="e#4515#4516#0" expanded="true" />
+            <element signature="e#4705#4706#0" expanded="true" />
+            <element signature="e#4761#4762#0" expanded="true" />
+            <element signature="e#4814#4815#0" expanded="true" />
+            <element signature="e#4858#4859#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery-ui/src/main/webapp/upload.zul">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1985,6 +2142,17 @@
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
           <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

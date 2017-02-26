@@ -2,12 +2,17 @@ package edu.norbertzardin.dao.impl;
 
 import edu.norbertzardin.dao.TagDao;
 import edu.norbertzardin.entities.ImageEntity;
+import edu.norbertzardin.entities.ImageEntity_;
 import edu.norbertzardin.entities.TagEntity;
+import edu.norbertzardin.entities.TagEntity_;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -15,8 +20,8 @@ public class TagDAOImpl implements TagDao {
     @PersistenceContext(name = "imagePersistence")
     private EntityManager entityManager;
 
-    public ImageEntity getImageById(int _id){
-        ImageEntity result = entityManager.find(ImageEntity.class, _id);
+    public TagEntity getTagById(Long id){
+        TagEntity result = entityManager.find(TagEntity.class, id);
         return result;
     }
 
@@ -31,18 +36,46 @@ public class TagDAOImpl implements TagDao {
 
     @Transactional
     public void createTag(TagEntity tag) {
-//        entityManager.persist(tag);
+        entityManager.persist(tag);
     }
+
+    @Transactional
+    public void updateTag(TagEntity tag) { entityManager.merge(tag); }
 
     public List<TagEntity> getTagList() {
         return entityManager.createQuery("from TagEntity ", TagEntity.class).getResultList();
     }
 
-    public TagEntity getTagById(int id) {
-        return entityManager.find(TagEntity.class, id);
+    public TagEntity getTagByIdWithFetch(Long id) {
+//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<TagEntity> cq = cb.createQuery(TagEntity.class);
+//        Root<TagEntity> root = cq.from(TagEntity.class);
+//        root.fetch(TagEntity_.images, JoinType.LEFT);
+
+//        Predicate id_ = cb.equals(root.get(TagEntity_.id), id);
+
+//        cq.where(id_).select(root);
+
+//        return entityManager.createQuery(cq).getSingleResult();
+        TagEntity result = entityManager.find(TagEntity.class, id);
+        return result;
     }
 
-    public void pair(ImageEntity image, TagEntity tag) {
+    public TagEntity getTagByName(String name) {
 
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<TagEntity> cq = cb.createQuery(TagEntity.class);
+        Root<TagEntity> root = cq.from(TagEntity.class);
+        root.fetch(TagEntity_.images, JoinType.INNER);
+        String nameSearchTerm = (name == null) ? "%" : ("%" + name.toLowerCase() + "%");
+        Predicate name_ = cb.like(cb.lower(root.get(TagEntity_.name)), nameSearchTerm);
+
+        cq.where(name_).select(root);
+
+        try{
+            return entityManager.createQuery(cq).getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
     }
 }

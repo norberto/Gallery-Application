@@ -1,31 +1,58 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="zk/bootstrap/css/bootstrap.css" ?>
 <?page zscriptLanguage="javascript"?>
-<zk xmlns:n="native" xmlns:x="xhtml">
-    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewImageVM', seletedImage = edu.norbertzardin.vm.ImageListVM.selectedImage)" >
-        <n:div class="container-fluid">
-            <n:div class="row">
 
-                <n:div class="col-md-6" align="right">
-                    <n:div>
-                        <image id="imageContainer" src="images/no-image-slide.webp" width="400px" height="400px"/>
+<zk xmlns:n="native" xmlns:x="xhtml">
+    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewImageVM')">
+        <x:div class="modal-header">
+            <n:div class="container-fluid">
+                <n:div class="row vertical-align">
+                    <n:div class="col-md-1">
+                        <n:span class="glyphicon glyphicon-picture" style="font-size: 2.0em" aria-hidden="true"/>
+                    </n:div>
+
+                    <n:div class="col-md-10">
+                        <textbox value="@bind(vm.selectedImage.name)" visible="@load(vm.editMode)"/>
+                        <x:h4 class="modal-title" textContent="@load(vm.selectedImage.name)" visible="@load(!vm.editMode)"/>
+                    </n:div>
+
+                    <n:div class="col-md-1">
+                        <n:button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <n:span aria-hidden="true">×</n:span>
+                        </n:button>
                     </n:div>
                 </n:div>
+            </n:div>
+        </x:div>
 
-                <n:div class="col-md-5" align="left">
-                    <div id="nameContainter">
-                        <n:h3>Title</n:h3>
-                    </div>
-                    <div id="descriptionContainer">
-                        <n:p>
-                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
-                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
-                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
-                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
-                            Description will go here. Because its a description it is contained in description box. This text is provided for description mocking purposes.
-                        </n:p>
-                    </div>
+        <n:div class="modal-body">
+            <n:div class="container-fluid">
+                <n:div class="row">
+                    <n:div class="col-md-8" align="center" width="auto">
+                        <image id="imageContainer"
+                               content="@load(vm.selectedImage.imageData)
+                                        @converter('edu.norbertzardin.util.ImageConverter', maxSize='500.0')"/>
+                    </n:div>
+
+                    <n:div class="col-md-4" align="left">
+                        <div id="nameContainter">
+                            <textbox value="@bind(vm.selectedImage.name)" visible="@load(vm.editMode)"/>
+                            <x:h3 textContent="@load(vm.selectedImage.name)" visible="@load(!vm.editMode)"/>
+                        </div>
+                        <div id="descriptionContainer">
+                            <textbox value="@bind(vm.selectedImage.name)" visible="@load(vm.editMode)"/>
+                            <x:p textContent="@load(vm.selectedImage.description)" visible="@load(!vm.editMode)"/>
+                        </div>
+                    </n:div>
                 </n:div>
             </n:div>
+        </n:div>
+
+        <n:div class="modal-footer">
+                <button type="button" zclass="btn btn-danger" label="Remove" onClick="@command('deleteImage')"
+                        visible="@load(vm.editMode)"/>
+            <button type="button" zclass="btn btn-primary" onClick="@command('editMode')">Edit mode</button>
+            <n:button type="button" class="btn btn-secondary" data-dismiss="modal">Close</n:button>
         </n:div>
     </div>
 </zk>

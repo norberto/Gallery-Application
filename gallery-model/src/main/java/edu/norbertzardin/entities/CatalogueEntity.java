@@ -2,6 +2,7 @@ package edu.norbertzardin.entities;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,12 +11,11 @@ import java.util.List;
         @UniqueConstraint(columnNames = "CATALOGUE_ID")
 })
 public class CatalogueEntity {
-
     @Id
-    @SequenceGenerator(name = "messageIdSeq", sequenceName = "MESSAGE_ID_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "messageIdSeq")
+    @SequenceGenerator(name = "cataloguesIdSeq", sequenceName = "NORBERT_CATALOGUE_ID_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cataloguesIdSeq")
     @Column(name = "CATALOGUE_ID")
-    private int id;
+    private Long id;
 
     @Column(name = "TITLE")
     private String title;
@@ -23,7 +23,7 @@ public class CatalogueEntity {
     @Column(name = "CREATED_DATE", length = 100)
     private Date createdDate;
 
-    @OneToMany(mappedBy = "catalogue")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogue", cascade = CascadeType.ALL)
     private List<ImageEntity> images;
 
     public Date getCreatedDate() {
@@ -34,12 +34,11 @@ public class CatalogueEntity {
         this.createdDate = createdDate;
     }
 
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,7 +50,11 @@ public class CatalogueEntity {
         this.title = title;
     }
 
-    public void addImage(ImageEntity image) {
+    public List<ImageEntity> getImages() {
+        return images;
+    }
 
+    public void setImages(List<ImageEntity> images) {
+        this.images = images;
     }
 }

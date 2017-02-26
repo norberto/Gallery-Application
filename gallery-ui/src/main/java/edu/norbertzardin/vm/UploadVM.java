@@ -1,11 +1,18 @@
 package edu.norbertzardin.vm;
 
-import edu.norbertzardin.entities.*;
+import edu.norbertzardin.entities.ByteData;
+import edu.norbertzardin.entities.CatalogueEntity;
+import edu.norbertzardin.entities.ImageEntity;
+import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.service.CatalogueService;
+import edu.norbertzardin.service.DataService;
 import edu.norbertzardin.service.ImageService;
+import edu.norbertzardin.service.TagService;
 import edu.norbertzardin.util.ImageUtil;
+import org.hibernate.type.ByteType;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.image.*;
+import org.zkoss.image.Image;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -15,73 +22,112 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UploadVM {
+
+    private final String defaultCatalogueName = "Non-categorized";
+
+    private CatalogueEntity defaultCatalogue;
+
     private String name;
     private String description;
     private String tags;
-    private byte[] imageData;
+    private String datatype;
+    private byte[] thumbnail;
+    private byte[] mediumSize;
+    private byte[] download;
     private CatalogueEntity selectedCatalogue;
 
     private List<CatalogueEntity> catalogueList;
-
-    @Wire("#image")
-    org.zkoss.zul.Image image;
 
     @WireVariable
     private ImageService imageService;
 
     @WireVariable
+    private TagService tagService;
+
+    @WireVariable
     private CatalogueService catalogueService;
+
+    @WireVariable
+    private DataService dataService;
 
     @AfterCompose
     public void afterCompose(@ContextParam(ContextType.VIEW) Component view){
         Selectors.wireComponents(view, this, false);
-        System.out.println("getting compose");
-        catalogueList = catalogueService.getCatalogueList();
     }
 
     public UploadVM() {}
 
+
     @Init
-    public void init(){}
+    public void init(@ContextParam(ContextType.VIEW) Component view){
+        Selectors.wireComponents(view, this, false);
+        catalogueList = catalogueService.getCatalogueList();
+        defaultCatalogue = catalogueService.getCatalogueByName(defaultCatalogueName);
+        setSelectedCatalogue(defaultCatalogue);
+    }
 
     @Command
     public void createImage(){
         ImageEntity ie = new ImageEntity();
         ie.setName(name);
         ie.setDescription(description);
-        ie.setImageData(imageData);
         ie.setCreatedDate(new Date());
         ie.setCatalogue(selectedCatalogue);
 
+        ByteData thumbnail_ = new ByteData();
+        ByteData mediumImage_ = new ByteData();
+        ByteData download_ = new ByteData();
+
+        thumbnail_.setData(thumbnail);
+        mediumImage_.setData(mediumSize);
+        download_.setData(download);
+
+        ie.setThumbnail(thumbnail_);
+        ie.setMediumImage(mediumImage_);
+        ie.setDownload(download_);
+        ie.setDatatype(datatype);
+
+        imageService.createImage(ie);
+
         String[] tagList = parseTags(tags);
         for(String tag : tagList){
-            TagEntity te = new TagEntity();
-            te.setName(tag);
-            imageService.createTag(te);
-            imageService.pairImageWithTag(ie, te);
+            TagEntity tag_ = tagService.getTagByName(tag);
+            if(tag_ == null){
+                TagEntity te = new TagEntity();
+                te.setName(tag);
+                te.addImage(ie);
+                te.setCreatedDate(new Date());
+                imageService.createTag(te);
+            } else {
+                tag_.addImage(ie);
+                tagService.updateTag(tag_);
+            }
         }
-        imageService.createImage(ie);
+
         Executions.getCurrent().sendRedirect("/view.zul");
     }
     @Command("onUpload")
+    @NotifyChange("thumbnail")
     public void onUpload(@BindingParam("upEvent") UploadEvent event){
         Media media = event.getMedia();
         if (media instanceof Image) {
             Image img = (Image) media;
-            image.setContent(img);
-            double scale = ImageUtil.getScalingRatio((AImage) img, 200.0);
-
-            image.setHeight((img.getHeight() * scale) + "px");
-            image.setWidth((img.getWidth() * scale) + "px");
-
-            setImageData(media.getByteData());
-
+            setDownload(img.getByteData());
+            setMediumSize(ImageUtil.scaleImageToSize(img, 650));
+            setThumbnail(ImageUtil.scaleImageToSize(img, 200));
+            setDatatype(img.getFormat());
         } else {
-            Messagebox.show("Not an image: "+media, "Error", Messagebox.OK, Messagebox.ERROR);
+            Messagebox.show("Not an image: " + media, "Error", Messagebox.OK, Messagebox.ERROR);
         }
     }
 
@@ -92,8 +138,14 @@ public class UploadVM {
     }
 
 
-    public String[] parseTags(String tags){
-        String[] tagList = tags.split("/\\w+/g", ',');
+    private String[] parseTags(String tags) {
+        if(tags == null) return new String[0];
+        String[] tagList = tags.split(",");
+        for(int i = 0; i < tagList.length; i++) {
+            if(tagList[i].charAt(0) == ' ') {
+                tagList[i] = tagList[i].substring(1, tagList[i].length());
+            }
+        }
         return tagList;
     }
 
@@ -127,14 +179,6 @@ public class UploadVM {
         this.tags = tags;
     }
 
-    public byte[] getImageData() {
-        return imageData;
-    }
-
-    public void setImageData(byte[] imageData) {
-        this.imageData = imageData;
-    }
-
     public CatalogueEntity getSelectedCatalogue() {
         return selectedCatalogue;
     }
@@ -144,7 +188,6 @@ public class UploadVM {
     }
 
     public List<CatalogueEntity> getCatalogueList() {
-        System.out.println("Getting list.");
         return catalogueList;
     }
 
@@ -154,5 +197,39 @@ public class UploadVM {
 
     public void setCatalogueService(CatalogueService catalogueService) {
         this.catalogueService = catalogueService;
+    }
+
+    public TagService getTagService() {
+        return tagService;
+    }
+
+    public void setTagService(TagService tagService) {
+        this.tagService = tagService;
+    }
+
+    public void setThumbnail(byte[] thumbnail) { this.thumbnail = thumbnail; }
+
+    public byte[] getThumbnail () {
+        return thumbnail;
+    }
+
+    public void setMediumSize(byte[] mediumSize) {
+        this.mediumSize = mediumSize;
+    }
+
+    public void setDownload(byte[] download) {
+        this.download = download;
+    }
+
+    public void setDataService(DataService dataService) {
+        this.dataService = dataService;
+    }
+
+    public String getDatatype() {
+        return datatype;
+    }
+
+    public void setDatatype(String datatype) {
+        this.datatype = datatype;
     }
 }

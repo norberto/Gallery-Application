@@ -161,7 +161,7 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/</path>
-                    <port>8121</port>
+                    <port>8181</port>
                 </configuration>
             </plugin>
 

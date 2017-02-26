@@ -2,32 +2,47 @@ package edu.norbertzardin.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import edu.norbertzardin.entities.CatalogueEntity;
+import java.util.List;
 
 @Entity
 @Table(name = "NORBERT_IMAGE_TEST", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "ID")
+        @UniqueConstraint(columnNames = "IMAGE_ID")
 })
 public class ImageEntity implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "messageIdSeq", sequenceName = "MESSAGE_ID_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "messageIdSeq")
-    @Column(name = "ID")
-    private int id;
+    @SequenceGenerator(name = "imageIdSeq", sequenceName = "NORBERT_IMAGE_ID_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imageIdSeq")
+    @Column(name = "IMAGE_ID")
+    private Long id;
 
     @Column(name ="NAME", length= 50)
     private String name;
     @Column(name = "DESCRIPTION", length = 500)
     private String description;
-    @Column(name = "IMAGE_DATA", length = 1000000)
-    private byte[] imageData;
+
+    @Column(name = "DATATYPE", length = 20)
+    private String datatype;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "THUMB_ID")
+    private ByteData thumbnail;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "MED_ID")
+    private ByteData mediumImage;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "DOWNLOAD_ID")
+    private ByteData download;
 
     @Column(name = "CREATED_DATE", length = 100)
     private Date createdDate;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "images", cascade = CascadeType.ALL)
+    private List<TagEntity> tags;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "CATALOGUE_ID")
     private CatalogueEntity catalogue;
 
@@ -39,23 +54,15 @@ public class ImageEntity implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int messageId) {
+    public void setId(Long messageId) {
         this.id = messageId;
     }
 
     public ImageEntity() {}
-
-    public byte[] getImageData() {
-        return imageData;
-    }
-
-    public void setImageData(byte[] data) {
-        this.imageData = data;
-    }
 
     public String toString(){
         return "id=" + id;
@@ -79,5 +86,39 @@ public class ImageEntity implements Serializable {
 
     public void setCatalogue(CatalogueEntity catalogue) {
         this.catalogue = catalogue;
+    }
+
+    public List<TagEntity> getTags() { return tags; }
+
+    public void setTags(List<TagEntity> tags) { this.tags = tags; }
+
+    public ByteData getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(ByteData thumbnail) { this.thumbnail = thumbnail; }
+
+    public ByteData getMediumImage() {
+        return mediumImage;
+    }
+
+    public void setMediumImage(ByteData mediumImage) {
+        this.mediumImage = mediumImage;
+    }
+
+    public ByteData getDownload() {
+        return download;
+    }
+
+    public void setDownload(ByteData download) {
+        this.download = download;
+    }
+
+    public String getDatatype() {
+        return datatype;
+    }
+
+    public void setDatatype(String datatype) {
+        this.datatype = datatype;
     }
 }

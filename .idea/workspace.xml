@@ -2,151 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd6787f3-b768-40d5-8557-2f567ddcdfc7" name="Default" comment="Merge branch 'master' of https://github.com/norberto/Gallery-Application&#10;&#10;# Conflicts:&#10;#&#9;.idea/artifacts/gallery_ui_war_exploded.xml&#10;#&#9;.idea/compiler.xml&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d.xml&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata&#10;#&#9;.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata.values.at&#10;#&#9;.idea/workspace.xml&#10;#&#9;gallery-app.iml&#10;#&#9;gallery-bl/gallery-bl.iml&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java&#10;#&#9;gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java&#10;#&#9;gallery-bl/src/main/resources/META-INF/persistence.xml&#10;#&#9;gallery-bl/target/classes/META-INF/persistence.xml&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/CatalogueDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/ImageDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/MessageDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/TagDao.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/CatalogueDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/ImageDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/MessageDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/dao/impl/TagDAOImpl.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/CatalogueService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/ImageService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/service/MessageService.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/util/ImageConverter.class&#10;#&#9;gallery-bl/target/classes/edu/norbertzardin/util/ImageUtil.class&#10;#&#9;gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;gallery-model/gallery-model.iml&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java&#10;#&#9;gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/CatalogueEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/ImageEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/MessageEntity.class&#10;#&#9;gallery-model/target/classes/edu/norbertzardin/entities/TagEntity.class&#10;#&#9;gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;gallery-ui/gallery-ui.iml&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java&#10;#&#9;gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java&#10;#&#9;gallery-ui/src/main/webapp/browse.zul&#10;#&#9;gallery-ui/src/main/webapp/image.zul&#10;#&#9;gallery-ui/src/main/webapp/images/catalogue-icon.png&#10;#&#9;gallery-ui/src/main/webapp/upload.zul&#10;#&#9;gallery-ui/src/main/webapp/view.zul&#10;#&#9;gallery-ui/src/main/webapp/zk/css/style.css&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/BrowseVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/ImageListVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/UploadVM.class&#10;#&#9;gallery-ui/target/classes/edu/norbertzardin/vm/ViewImageVM.class&#10;#&#9;gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst&#10;#&#9;gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst&#10;#&#9;pom.xml&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/images/folder-icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_jpamodelgen_5_2_7_Final.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ByteDataDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ByteDataDAOImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/DataService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/TagService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ByteData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/util/ImageConverter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/util/ImageUtil.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/MessageDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/MessageDAOImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/MessageService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/META-INF/persistence.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/CatalogueDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/ImageDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/MessageDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/TagDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/impl/CatalogueDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/impl/ImageDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/impl/MessageDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/dao/impl/TagDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/service/CatalogueService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/service/ImageService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/service/MessageService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/util/ImageConverter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/edu/norbertzardin/util/ImageUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/classes/spring/applicationContext.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/MessageEntity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/classes/edu/norbertzardin/entities/CatalogueEntity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/classes/edu/norbertzardin/entities/ImageEntity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/classes/edu/norbertzardin/entities/MessageEntity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/classes/edu/norbertzardin/entities/TagEntity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/MessageVM.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/BrowseVM.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/ImageListVM.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/MessageVM.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/UploadVM.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/classes/edu/norbertzardin/vm/ViewImageVM.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/tomcat/conf/logging.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/tomcat/conf/tomcat-users.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-ui/target/tomcat/conf/web.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata" afterPath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata.values.at" afterPath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/_metadata_/metadata.values.at" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/images/catalogue-icon.png" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/images/catalogue-icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/gallery_ui_war.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/gallery_ui_war.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/gallery_ui_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/gallery_ui_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/storage.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/2e304815-0f61-4a69-beb9-175c0d7f418d/storage.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/norbert_zardin.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/norbert_zardin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_1_5_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_1_5_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_attrs_1_5_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_attrs_1_5_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_2_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_2_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_oracle_ojdbc6_11_2_0_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_oracle_ojdbc6_11_2_0_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_8.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_8.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_2_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_2_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_persistence_api_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_persistence_api_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_jta_1_0_1B.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_jta_1_0_1B.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_6_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_6_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ehcache_ehcache_1_2_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ehcache_ehcache_1_2_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_extras_beanshell_bsh_2_0b6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_extras_beanshell_bsh_2_0b6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jta_1_1_spec_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jta_1_1_spec_1_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_9.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_9.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_3_2_1_ga.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_3_2_1_ga.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_annotations_3_3_0_ga.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_annotations_3_3_0_ga.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_commons_annotations_3_3_0_ga.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_commons_annotations_3_3_0_ga.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_2_7_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_2_7_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_2_7_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_2_7_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_0_api_1_0_1_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_0_api_1_0_1_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_3_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_3_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_jdk14_1_7_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_jdk14_1_7_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_3_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_3_6_RELEASE.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zcommon_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zcommon_8_0_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zel_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zel_8_0_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zweb_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_common_zweb_8_0_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zhtml_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zhtml_8_0_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zk_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zk_8_0_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zkbind_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zkbind_8_0_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zkplus_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zkplus_8_0_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zul_8_0_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zk_zul_8_0_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zsoup_1_8_2_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zkoss_zsoup_1_8_2_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-app.iml" afterPath="$PROJECT_DIR$/gallery-app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/gallery-bl.iml" afterPath="$PROJECT_DIR$/gallery-bl/gallery-bl.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/CatalogueDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/ImageDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/TagDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/CatalogueDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/ImageDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/dao/impl/TagDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/CatalogueService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/service/ImageService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java" afterPath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/gallery-bl/src/main/resources/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-bl/src/main/resources/spring/applicationContext.xml" afterPath="$PROJECT_DIR$/gallery-bl/src/main/resources/spring/applicationContext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-model/gallery-model.iml" afterPath="$PROJECT_DIR$/gallery-model/gallery-model.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java" afterPath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/CatalogueEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java" afterPath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/ImageEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java" afterPath="$PROJECT_DIR$/gallery-model/src/main/java/edu/norbertzardin/entities/TagEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/gallery-ui.iml" afterPath="$PROJECT_DIR$/gallery-ui/gallery-ui.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/BrowseVM.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ImageListVM.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/UploadVM.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java" afterPath="$PROJECT_DIR$/gallery-ui/src/main/java/edu/norbertzardin/vm/ViewImageVM.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/browse.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/browse.zul" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/image.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/image.zul" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/index.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/index.zul" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/upload.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/upload.zul" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/view.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/view.zul" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/css/style.css" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/footer.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/footer.zul" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/navbar.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/navbar.zul" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/template.zul" afterPath="$PROJECT_DIR$/gallery-ui/src/main/webapp/zk/layout/template.zul" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gallery-bl/src/main/java/edu/norbertzardin/util/ImageUtil.java" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -987,36 +844,6 @@
               <option name="myItemId" value="norbertzardin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gallery-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gallery-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gallery-bl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="norbertzardin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -1586,12 +1413,12 @@
       <workItem from="1487921695555" duration="24702000" />
       <workItem from="1487952602809" duration="503000" />
       <workItem from="1487953585776" duration="9395000" />
-      <workItem from="1488145780816" duration="447000" />
+      <workItem from="1488145780816" duration="564000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="377171000" />
+    <option name="totallyTimeSpent" value="377288000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1603,7 +1430,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1050" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1050" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1624,12 +1451,12 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.49573562" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.49573562" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2826087" sideWeight="0.6684435" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.49573562" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24786781" sideWeight="0.44224924" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18496802" sideWeight="0.55775076" order="0" side_tool="false" content_ui="combo" x="1" y="0" width="363" height="1038" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18496802" sideWeight="0.55775076" order="0" side_tool="false" content_ui="combo" x="1" y="0" width="363" height="1038" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />

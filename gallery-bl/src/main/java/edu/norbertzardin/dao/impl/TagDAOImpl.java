@@ -1,8 +1,6 @@
 package edu.norbertzardin.dao.impl;
 
 import edu.norbertzardin.dao.TagDao;
-import edu.norbertzardin.entities.ImageEntity;
-import edu.norbertzardin.entities.ImageEntity_;
 import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.entities.TagEntity_;
 import org.springframework.stereotype.Repository;
@@ -11,8 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.*;
-import java.util.ArrayList;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -47,16 +48,6 @@ public class TagDAOImpl implements TagDao {
     }
 
     public TagEntity getTagByIdWithFetch(Long id) {
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<TagEntity> cq = cb.createQuery(TagEntity.class);
-//        Root<TagEntity> root = cq.from(TagEntity.class);
-//        root.fetch(TagEntity_.images, JoinType.LEFT);
-
-//        Predicate id_ = cb.equals(root.get(TagEntity_.id), id);
-
-//        cq.where(id_).select(root);
-
-//        return entityManager.createQuery(cq).getSingleResult();
         TagEntity result = entityManager.find(TagEntity.class, id);
         return result;
     }

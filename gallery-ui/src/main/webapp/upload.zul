@@ -66,7 +66,7 @@
             </n:div>
             <n:div class="row top-buffer">
                 <n:div class="col-md-6 col-md-push-3">
-                    <image content="@load(uploadVM.thumbnail, after='onUpload') @converter('edu.norbertzardin.util.ImageConverter', maxSize='200.0')" />
+                    <image content="@load(uploadVM.thumbnail, after='onUpload') @converter('edu.norbertzardin.util.ImageConverter')" />
                 </n:div>
             </n:div>
             <n:div class="row top-buffer">

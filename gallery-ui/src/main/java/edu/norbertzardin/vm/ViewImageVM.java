@@ -15,6 +15,7 @@ public class ViewImageVM {
     private ImageEntity selectedImage;
     private boolean editMode;
 
+
     private int id;
 
     @AfterCompose

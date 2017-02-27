@@ -1,24 +1,22 @@
 package edu.norbertzardin.dao.impl;
 
 import edu.norbertzardin.dao.ImageDao;
-import edu.norbertzardin.entities.CatalogueEntity;
-import edu.norbertzardin.entities.CatalogueEntity_;
-import edu.norbertzardin.entities.ImageEntity;
-import edu.norbertzardin.entities.ImageEntity_;
+import edu.norbertzardin.entities.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.zkoss.zul.Image;
-import org.zkoss.zul.Messagebox;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class ImageDAOImpl implements ImageDao {
+
+    private CriteriaBuilder cb;
+    private CriteriaQuery<ImageEntity> cq;
+    private Root<ImageEntity> image;
 
     @PersistenceContext(name = "imagePersistence")
     private EntityManager entityManager;
@@ -35,11 +33,9 @@ public class ImageDAOImpl implements ImageDao {
 
     @Transactional
     public List<ImageEntity> getImageList(Integer page, Integer pageMax) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ImageEntity> cq = cb.createQuery(ImageEntity.class);
-        Root<ImageEntity> root = cq.from(ImageEntity.class);
-        root.fetch(ImageEntity_.thumbnail, JoinType.INNER);
-        CriteriaQuery<ImageEntity> select = cq.select(root);
+        setUpCriteriaBuilderForImage();
+        fetchThumbnail();
+        CriteriaQuery<ImageEntity> select = cq.select(image);
         TypedQuery<ImageEntity> typedQuery = entityManager.createQuery(select);
         typedQuery.setFirstResult((page - 1) * pageMax);
         typedQuery.setMaxResults(pageMax);
@@ -58,30 +54,29 @@ public class ImageDAOImpl implements ImageDao {
 
     @Transactional
     public ImageEntity getImageByIdWithFetch(Long id) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ImageEntity> cq = cb.createQuery(ImageEntity.class);
-        Root<ImageEntity> root = cq.from(ImageEntity.class);
-        root.fetch(ImageEntity_.mediumImage, JoinType.INNER);
-        root.fetch(ImageEntity_.tags, JoinType.INNER);
-        Predicate name_ = cb.equal(root.get(ImageEntity_.id), id);
-        cq.where(name_).select(root);
-        return entityManager.createQuery(cq).getSingleResult();
+        setUpCriteriaBuilderForImage();
+        image.fetch(ImageEntity_.mediumImage, JoinType.INNER);
+        image.fetch(ImageEntity_.tags, JoinType.INNER);
+
+        Predicate name_ = cb.equal(image.get(ImageEntity_.id), id);
+
+        return entityManager
+                .createQuery( cq.where(name_).select(image))
+                .getSingleResult();
     }
 
     @Transactional
-    public List<ImageEntity> findImagesByName(String name) {
-        List<Predicate> predicates = new ArrayList<Predicate>();
+    public List<ImageEntity> findImagesByKey(String keyword) {
+        setUpCriteriaBuilderForImage();
+        fetchThumbnail();
 
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ImageEntity> cq = cb.createQuery(ImageEntity.class);
-        Root<ImageEntity> root = cq.from(ImageEntity.class);
+        ListJoin<ImageEntity, TagEntity> join = image.join(ImageEntity_.tags, JoinType.INNER);
+        String key = (keyword == null) ? "%" : ("%" + keyword.toLowerCase() + "%");
 
-        String nameSearchTerm = (name == null) ? "%" : ("%" + name.toLowerCase() + "%");
-        Predicate name_ = cb.like(cb.lower(root.get(ImageEntity_.name)), nameSearchTerm);
-        Predicate description_ = cb.like(cb.lower(root.get(ImageEntity_.description)), nameSearchTerm);
-        Predicate OR  = cb.or(name_, description_);
-
-        cq.where(OR).select(root);
+        Predicate name = cb.like(cb.lower(image.get(ImageEntity_.name)), key);
+        Predicate description = cb.like(cb.lower(image.get(ImageEntity_.description)), key);
+        Predicate tags = cb.like(join.get(TagEntity_.name), key);
+        cq.select(image).where(cb.or(name, description, tags));
 
         return entityManager.createQuery(cq).getResultList();
     }
@@ -100,16 +95,11 @@ public class ImageDAOImpl implements ImageDao {
     }
 
     public ImageEntity getImageByIdFullFetch(Long id) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<ImageEntity> cq = cb.createQuery(ImageEntity.class);
-        Root<ImageEntity> root = cq.from(ImageEntity.class);
-        root.fetch(ImageEntity_.thumbnail, JoinType.INNER);
-        root.fetch(ImageEntity_.mediumImage, JoinType.INNER);
-        root.fetch(ImageEntity_.download, JoinType.INNER);
-        root.fetch(ImageEntity_.tags, JoinType.LEFT);
+        setUpCriteriaBuilderForImage();
+        fetchAll();
 
-        Predicate name_ = cb.equal(root.get(ImageEntity_.id), id);
-        cq.where(name_).select(root);
+        Predicate name_ = cb.equal(image.get(ImageEntity_.id), id);
+        cq.where(name_).select(image);
         return entityManager.createQuery(cq).getSingleResult();
     }
 
@@ -127,4 +117,20 @@ public class ImageDAOImpl implements ImageDao {
         return entityManager;
     }
 
+    private void setUpCriteriaBuilderForImage() {
+        cb = entityManager.getCriteriaBuilder();
+        cq = cb.createQuery(ImageEntity.class);
+        image = cq.from(ImageEntity.class);
+    }
+
+    private void fetchAll() {
+        image.fetch(ImageEntity_.thumbnail, JoinType.INNER);
+        image.fetch(ImageEntity_.mediumImage, JoinType.INNER);
+        image.fetch(ImageEntity_.download, JoinType.INNER);
+        image.fetch(ImageEntity_.tags, JoinType.LEFT);
+    }
+
+    private void fetchThumbnail() {
+        image.fetch(ImageEntity_.thumbnail, JoinType.INNER);
+    }
 }

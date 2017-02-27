@@ -52,8 +52,8 @@ public class ImageService {
         return imageDao.getImageById(id);
     }
 
-    public List<ImageEntity> findImagesByName(String name) {
-        return imageDao.findImagesByName(name);
+    public List<ImageEntity> findImagesByKey(String key) {
+        return imageDao.findImagesByKey(key);
     }
 
     public void editImage(ImageEntity ie) { imageDao.updateImage(ie); }

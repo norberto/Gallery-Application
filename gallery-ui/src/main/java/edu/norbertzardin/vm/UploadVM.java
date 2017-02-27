@@ -123,7 +123,7 @@ public class UploadVM {
         if (media instanceof Image) {
             Image img = (Image) media;
             setDownload(img.getByteData());
-            setMediumSize(ImageUtil.scaleImageToSize(img, 650));
+            setMediumSize(ImageUtil.scaleImageToSize(img, 500));
             setThumbnail(ImageUtil.scaleImageToSize(img, 200));
             setDatatype(img.getFormat());
         } else {

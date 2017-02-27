@@ -2,6 +2,7 @@ package edu.norbertzardin.vm;
 
 import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.ImageEntity;
+import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.service.ImageService;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Component;
@@ -22,7 +23,9 @@ public class ImageListVM {
     private Integer page;
     private Integer pageCount;
     private List<Integer> pageLabels;
+    private List<TagEntity> tagList;
     private Boolean editMode;
+
 
     @Wire("#selectedImage")
     private ImageEntity selectedImage;
@@ -56,9 +59,9 @@ public class ImageListVM {
     @Command
     public void doSearch(@ContextParam(ContextType.TRIGGER_EVENT) Event event) {
         if ((getSearchString() != null) && !getSearchString().equals("")) {
-            imageList = imageService.findImagesByName(getSearchString());
+            setImageList(imageService.findImagesByKey(getSearchString()));
         } else {
-            imageList = imageService.getImageList(1, 15);
+            setImageList(imageService.getImageList(1, 15));
         }
     }
 
@@ -73,10 +76,11 @@ public class ImageListVM {
     }
 
     @Command
-    @NotifyChange({"selectedImage", "editMode"})
+    @NotifyChange({"selectedImage", "editMode", "tagList"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
         setSelectedImage(imageService.getImageByIdWithFetch(image.getId()));
         setEditMode(false);
+        loadTags();
 //        String openModal = "$('#myModal').modal('show')";
 //        Clients.evalJavaScript(openModal);
     }
@@ -168,6 +172,12 @@ public class ImageListVM {
     }
 
     @Command
+    @NotifyChange("tagList")
+    public void loadTags() {
+        setTagList(selectedImage.getTags());
+    }
+
+    @Command
     @NotifyChange("editMode")
     public void editMode() {
         if (!editMode) setEditMode(true);
@@ -195,4 +205,11 @@ public class ImageListVM {
         Executions.getCurrent().sendRedirect("/view.zul?page=" + this.page);
     }
 
+    public List<TagEntity> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(List<TagEntity> tagList) {
+        this.tagList = tagList;
+    }
 }

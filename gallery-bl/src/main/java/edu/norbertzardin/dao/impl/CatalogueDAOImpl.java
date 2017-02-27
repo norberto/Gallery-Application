@@ -3,7 +3,6 @@ package edu.norbertzardin.dao.impl;
 import edu.norbertzardin.dao.CatalogueDao;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.CatalogueEntity_;
-import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.ImageEntity_;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

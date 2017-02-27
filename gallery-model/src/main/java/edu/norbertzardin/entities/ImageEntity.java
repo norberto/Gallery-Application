@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "NORBERT_IMAGE_TEST", uniqueConstraints = {
+@Table(name = "NORBERT_IMAGES", uniqueConstraints = {
         @UniqueConstraint(columnNames = "IMAGE_ID")
 })
 public class ImageEntity implements Serializable {

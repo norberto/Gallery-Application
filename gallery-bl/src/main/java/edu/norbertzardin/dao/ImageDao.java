@@ -1,7 +1,6 @@
 package edu.norbertzardin.dao;
 
 import edu.norbertzardin.entities.ImageEntity;
-import org.zkoss.zul.Image;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public interface ImageDao {
 
     ImageEntity getImageByIdFullFetch(Long id);
 
-    List<ImageEntity> findImagesByName(String name);
+    List<ImageEntity> findImagesByKey(String keyword);
 
     Integer getPageCount(Integer pageMax);
 

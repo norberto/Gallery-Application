@@ -14,7 +14,6 @@ public class ByteDataDAOImpl implements ByteDataDao {
     @PersistenceContext(name = "imagePersistence")
     private EntityManager entityManager;
 
-    @Override
     public ByteData getByteDataById(Long id) {
         return entityManager.find(ByteData.class, id);
     }

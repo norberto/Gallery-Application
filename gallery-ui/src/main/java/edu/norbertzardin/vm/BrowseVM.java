@@ -11,6 +11,8 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Filedownload;
+
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +23,12 @@ public class BrowseVM {
     private List<CatalogueEntity> catalogueList;
     private List<ImageEntity> imageList;
     private List<TagEntity> tagList;
+
     private CatalogueEntity selectedCatalogue;
     private ImageEntity selectedImage;
     private CatalogueEntity editCatalogue;
     private Boolean backButton;
+    private boolean editMode;
 
 
     private CatalogueEntity defaultCatalogue;
@@ -86,6 +90,16 @@ public class BrowseVM {
     }
 
     @Command
+    public void onDownload() {
+        setSelectedImage(imageService.getImageByIdFullFetch(selectedImage.getId()));
+        Filedownload.save(selectedImage.getDownload().getData(),
+                "image/" + selectedImage.getDatatype(),
+                "download_" + selectedImage.toString());
+
+    }
+
+
+    @Command
     @NotifyChange({"selectedCatalogue", "backButton", "imageList"})
     public void goBack() {
         setSelectedCatalogue(defaultCatalogue);
@@ -138,13 +152,24 @@ public class BrowseVM {
     @NotifyChange({"selectedImage", "imageList", "selectedCatalogue"})
     public void deleteImage(){
         imageService.deleteImage(selectedImage);
-        imageList.remove(selectedImage);
+        setSelectedCatalogue(catalogueService.getCatalogueById(selectedCatalogue.getId()));
         selectedImage = null;
         loadImages();
     }
 
+    @Command
+    @NotifyChange({"selectedImage", "editMode"})
+    public void editImage() {
+        imageService.editImage(selectedImage);
+        setEditMode(false);
+    }
 
-
+    @Command
+    @NotifyChange("editMode")
+    public void editMode() {
+        if (!editMode) setEditMode(true);
+        else setEditMode(false);
+    }
     // Setters
 
     public void setSelectedImage(ImageEntity selectedImage) {
@@ -187,6 +212,12 @@ public class BrowseVM {
         this.name = name;
     }
 
+    private void setTagList(List<TagEntity> tagList) {
+        this.tagList = tagList;
+    }
+
+    public void setEditMode(boolean editMode) { this.editMode = editMode; }
+
 
     // Getters
 
@@ -226,7 +257,7 @@ public class BrowseVM {
         return tagList;
     }
 
-    private void setTagList(List<TagEntity> tagList) {
-        this.tagList = tagList;
+    public Boolean getEditMode() {
+        return editMode;
     }
 }

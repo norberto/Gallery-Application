@@ -7,7 +7,7 @@
     <groupId>edu.norbertzardin</groupId>
     <artifactId>gallery-app</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <modules>
         <module>gallery-model</module>
@@ -16,155 +16,125 @@
     </modules>
 
     <properties>
-        <hibernate.version>5.2.7.Final</hibernate.version>
+        <hibernate.groupid>org.hibernate</hibernate.groupid>
+        <hibernate.version>5.2.8.Final</hibernate.version>
+
+        <spring.groupid>org.springframework</spring.groupid>
         <spring.version>4.3.6.RELEASE</spring.version>
-        <zkjsp.version>2.3</zkjsp.version>
+
+        <zk.groupid>org.zkoss.zk</zk.groupid>
         <zk.version>8.0.2.2</zk.version>
     </properties>
 
-    <dependencies>
-        <!-- ******* JPA/Hibernate ******** -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Hibernate -->
+            <dependency>
+                <groupId>${hibernate.groupid}</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-commons-annotations</artifactId>
-            <version>3.3.0.ga</version>
-        </dependency>
+            <dependency>
+                <groupId>${hibernate.groupid}</groupId>
+                <artifactId>hibernate-jpamodelgen</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <version>3.3.0.ga</version>
-        </dependency>
+            <!-- JPA -->
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>1.0.0.Final</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
-        </dependency>
+            <!-- Spring -->
+            <dependency>
+                <groupId>${spring.groupid}</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <!-- ******* SPRING Framework ******* -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>${spring.groupid}</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>${spring.groupid}</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+                <!--<exclusions>-->
+                <!--<exclusion>-->
+                <!--<groupId>commons-logging</groupId>-->
+                <!--<artifactId>commons-logging</artifactId>-->
+                <!--</exclusion>-->
+                <!--</exclusions>-->
+            </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+            <dependency>
+                <groupId>${spring.groupid}</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>${spring.groupid}</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>${spring.groupid}</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>${spring.groupid}</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.3</version>
-        </dependency>
+            <!-- ZK Framework -->
+            <dependency>
+                <groupId>${zk.groupid}</groupId>
+                <artifactId>zkbind</artifactId>
+                <version>${zk.version}</version>
+            </dependency>
 
-        <!-- ******* ZK dependencies ******* -->
+            <dependency>
+                <groupId>${zk.groupid}</groupId>
+                <artifactId>zul</artifactId>
+                <version>${zk.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkbind</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zul</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkplus</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zhtml</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>${zk.groupid}</groupId>
+                <artifactId>zkplus</artifactId>
+                <version>${zk.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-    </dependencies>
+            <dependency>
+                <groupId>${zk.groupid}</groupId>
+                <artifactId>zhtml</artifactId>
+                <version>${zk.version}</version>
+            </dependency>
 
-    <repositories>
-        <repository>
-            <id>codelds</id>
-            <url>https://code.lds.org/nexus/content/groups/main-repo</url>
-        </repository>
-        <repository>
-            <id>ZK CE</id>
-            <url>http://mavensync.zkoss.org/maven2</url>
-        </repository>
-        <repository>
-            <id>ZK PE/EE Evaluation</id>
-            <url>http://mavensync.zkoss.org/eval/</url>
-        </repository>
-    </repositories>
+            <!-- Oracle JDBC -->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>11.2.0.3</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <path>/</path>
-                    <port>8181</port>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -177,4 +147,17 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <!-- ojdbc6 driver repository -->
+            <id>codelds</id>
+            <url>https://code.lds.org/nexus/content/groups/main-repo</url>
+        </repository>
+
+        <repository>
+            <id>ZK CE</id>
+            <url>http://mavensync.zkoss.org/maven2</url>
+        </repository>
+    </repositories>
 </project>

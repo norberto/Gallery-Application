@@ -14,7 +14,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Entities" />
-          <factory-entry name="imagePersistence" value="dataSource" />
+          <factory-entry name="imagePersistence" value="f5f03589-19de-42c5-bc53-37769833af86" />
           <factory-entry name="messagePersistance" value="2e304815-0f61-4a69-beb9-175c0d7f418d" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />

@@ -22,8 +22,7 @@ public class TagDAOImpl implements TagDao {
     private EntityManager entityManager;
 
     public TagEntity getTagById(Long id){
-        TagEntity result = entityManager.find(TagEntity.class, id);
-        return result;
+        return entityManager.find(TagEntity.class, id);
     }
 
     @PersistenceContext
@@ -48,17 +47,15 @@ public class TagDAOImpl implements TagDao {
     }
 
     public TagEntity getTagByIdWithFetch(Long id) {
-        TagEntity result = entityManager.find(TagEntity.class, id);
-        return result;
+        return entityManager.find(TagEntity.class, id);
     }
 
     public TagEntity getTagByName(String name) {
-
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<TagEntity> cq = cb.createQuery(TagEntity.class);
         Root<TagEntity> root = cq.from(TagEntity.class);
         root.fetch(TagEntity_.images, JoinType.INNER);
-        String nameSearchTerm = (name == null) ? "%" : ("%" + name.toLowerCase() + "%");
+        String nameSearchTerm = (name == null) ? "%" : (name.toLowerCase() + "%");
         Predicate name_ = cb.like(cb.lower(root.get(TagEntity_.name)), nameSearchTerm);
 
         cq.where(name_).select(root);

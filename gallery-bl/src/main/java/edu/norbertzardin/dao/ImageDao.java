@@ -1,9 +1,11 @@
 package edu.norbertzardin.dao;
 
 import edu.norbertzardin.entities.ImageEntity;
+import edu.norbertzardin.entities.TagEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Transactional
 public interface ImageDao {
     void createImage(ImageEntity image);
 
@@ -19,7 +21,7 @@ public interface ImageDao {
 
     ImageEntity getImageByIdFullFetch(Long id);
 
-    List<ImageEntity> findImagesByKey(String keyword);
+    List<ImageEntity> findImagesByKeys(String keyword, TagEntity tag);
 
     Integer getPageCount(Integer pageMax);
 

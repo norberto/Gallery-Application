@@ -1,10 +1,7 @@
 package edu.norbertzardin.service;
 
-import edu.norbertzardin.dao.ByteDataDao;
 import edu.norbertzardin.dao.ImageDao;
 import edu.norbertzardin.dao.TagDao;
-import edu.norbertzardin.entities.ByteData;
-import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +49,8 @@ public class ImageService {
         return imageDao.getImageById(id);
     }
 
-    public List<ImageEntity> findImagesByKey(String key) {
-        return imageDao.findImagesByKey(key);
+    public List<ImageEntity> findImagesByKeys(String key, TagEntity tag) {
+        return imageDao.findImagesByKeys(key, tag);
     }
 
     public void editImage(ImageEntity ie) { imageDao.updateImage(ie); }

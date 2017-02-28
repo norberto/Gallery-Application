@@ -1,15 +1,26 @@
 package edu.norbertzardin.dao.impl;
 
 import edu.norbertzardin.dao.ImageDao;
-import edu.norbertzardin.entities.*;
+import edu.norbertzardin.entities.ImageEntity;
+import edu.norbertzardin.entities.ImageEntity_;
+import edu.norbertzardin.entities.TagEntity;
+import edu.norbertzardin.entities.TagEntity_;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
+// TODO Re-do criteria building
 
 @Repository
 public class ImageDAOImpl implements ImageDao {
@@ -21,17 +32,14 @@ public class ImageDAOImpl implements ImageDao {
     @PersistenceContext(name = "imagePersistence")
     private EntityManager entityManager;
 
-    @Transactional
     public void createImage(ImageEntity image) {
         entityManager.persist(image);
     }
 
-    @Transactional
     public void deleteImage(ImageEntity ie) {
         entityManager.remove(entityManager.find(ImageEntity.class, ie.getId()));
     }
 
-    @Transactional
     public List<ImageEntity> getImageList(Integer page, Integer pageMax) {
         setUpCriteriaBuilderForImage();
         fetchThumbnail();
@@ -42,17 +50,14 @@ public class ImageDAOImpl implements ImageDao {
          return  typedQuery.getResultList();
     }
 
-    @Transactional
     public List<ImageEntity> getImageList() {
         return entityManager.createQuery("from ImageEntity ", ImageEntity.class).getResultList();
     }
 
-    @Transactional
     public ImageEntity getImageById(Long id){
         return entityManager.find(ImageEntity.class, id);
     }
 
-    @Transactional
     public ImageEntity getImageByIdWithFetch(Long id) {
         setUpCriteriaBuilderForImage();
         image.fetch(ImageEntity_.mediumImage, JoinType.INNER);
@@ -65,18 +70,22 @@ public class ImageDAOImpl implements ImageDao {
                 .getSingleResult();
     }
 
-    @Transactional
-    public List<ImageEntity> findImagesByKey(String keyword) {
+    public List<ImageEntity> findImagesByKeys(String keyword, TagEntity tag) {
+        Expression<List<TagEntity>> tagList = image.get("tags");
+
         setUpCriteriaBuilderForImage();
         fetchThumbnail();
-
-        ListJoin<ImageEntity, TagEntity> join = image.join(ImageEntity_.tags, JoinType.INNER);
-        String key = (keyword == null) ? "%" : ("%" + keyword.toLowerCase() + "%");
+        String key = (keyword == null) ? "%" : (keyword.toLowerCase() + "%");
 
         Predicate name = cb.like(cb.lower(image.get(ImageEntity_.name)), key);
         Predicate description = cb.like(cb.lower(image.get(ImageEntity_.description)), key);
-        Predicate tags = cb.like(join.get(TagEntity_.name), key);
-        cq.select(image).where(cb.or(name, description, tags));
+
+        if(tag != null) {
+            Predicate key_tag = cb.isMember(tag, tagList);
+            cq.select(image).where(cb.or(name, description, key_tag));
+        } else {
+            cq.select(image).where(cb.or(name, description));
+        }
 
         return entityManager.createQuery(cq).getResultList();
     }
@@ -103,7 +112,6 @@ public class ImageDAOImpl implements ImageDao {
         return entityManager.createQuery(cq).getSingleResult();
     }
 
-    @Transactional
     public void updateImage(ImageEntity ie) {
         entityManager.merge(ie);
     }

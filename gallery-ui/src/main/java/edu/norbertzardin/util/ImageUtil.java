@@ -135,4 +135,15 @@ public class ImageUtil {
             return null;
         }
     }
+
+    public static String[] parseTags(String tags) {
+        if(tags == null || tags.equals("")) return new String[0];
+        String[] tagList = tags.split(",");
+        for(int i = 0; i < tagList.length; i++) {
+            if(tagList[i].charAt(0) == ' ') {
+                tagList[i] = tagList[i].substring(1, tagList[i].length());
+            }
+        }
+        return tagList;
+    }
 }

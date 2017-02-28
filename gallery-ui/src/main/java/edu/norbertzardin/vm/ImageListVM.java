@@ -4,6 +4,7 @@ import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.service.ImageService;
+import edu.norbertzardin.service.TagService;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -33,6 +34,9 @@ public class ImageListVM {
     @WireVariable
     private ImageService imageService;
 
+    @WireVariable
+    private TagService tagService;
+
     private List<ImageEntity> imageList;
 
     @AfterCompose
@@ -59,7 +63,8 @@ public class ImageListVM {
     @Command
     public void doSearch(@ContextParam(ContextType.TRIGGER_EVENT) Event event) {
         if ((getSearchString() != null) && !getSearchString().equals("")) {
-            setImageList(imageService.findImagesByKey(getSearchString()));
+            TagEntity tag = tagService.getTagByName(searchString);
+            setImageList(imageService.findImagesByKeys(getSearchString(), tag));
         } else {
             setImageList(imageService.getImageList(1, 15));
         }
@@ -88,8 +93,10 @@ public class ImageListVM {
     @Command
     @NotifyChange({"selectedImage", "editMode"})
     public void editImage() {
-        imageService.editImage(selectedImage);
-        setEditMode(false);
+        if(editMode) {
+            imageService.editImage(selectedImage);
+            setEditMode(false);
+        }
     }
 
     private void loadImages() {
@@ -158,9 +165,11 @@ public class ImageListVM {
     @Command
     @NotifyChange({"imageList", "selectedImage"})
     public void deleteImage() {
-        imageService.deleteImage(selectedImage);
-        selectedImage = null;
-        loadImages();
+        if(editMode) {
+            imageService.deleteImage(selectedImage);
+            selectedImage = null;
+            loadImages();
+        }
     }
 
     @Command

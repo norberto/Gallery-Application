@@ -2,17 +2,20 @@ package edu.norbertzardin.vm;
 
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
-import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.service.CatalogueService;
 import edu.norbertzardin.service.ImageService;
 import edu.norbertzardin.service.TagService;
-import org.zkoss.bind.annotation.*;
+import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.annotation.BindingParam;
+import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.ContextParam;
+import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.GlobalCommand;
+import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Filedownload;
-
 import java.util.Date;
 import java.util.List;
 
@@ -22,15 +25,9 @@ public class BrowseVM {
 
     private List<CatalogueEntity> catalogueList;
     private List<ImageEntity> imageList;
-    private List<TagEntity> tagList;
-
     private CatalogueEntity selectedCatalogue;
-    private ImageEntity selectedImage;
     private CatalogueEntity editCatalogue;
     private Boolean backButton;
-    private boolean editMode;
-
-
     private CatalogueEntity defaultCatalogue;
 
     @WireVariable
@@ -41,7 +38,6 @@ public class BrowseVM {
 
     @WireVariable
     private TagService tagService;
-
 
     // Initializers
     @Init
@@ -74,13 +70,6 @@ public class BrowseVM {
         setName(""); // clear name property after catalogue is created
     }
 
-    @Command
-    @NotifyChange({"selectedImage", "tagList"})
-    public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
-        setSelectedImage(imageService.getImageByIdFullFetch(image.getId()));
-        loadTags();
-    }
-
     @NotifyChange({"imageList", "selectedCatalogue", "backButton"})
     @Command
     public void selectCatalogue(@BindingParam("selectedCatalogue") CatalogueEntity ce) {
@@ -89,14 +78,6 @@ public class BrowseVM {
         setBackButton(true);
     }
 
-    @Command
-    public void onDownload() {
-        setSelectedImage(imageService.getImageByIdFullFetch(selectedImage.getId()));
-        Filedownload.save(selectedImage.getDownload().getData(),
-                "image/" + selectedImage.getDatatype(),
-                "download_" + selectedImage.toString());
-
-    }
 
 
     @Command
@@ -119,6 +100,7 @@ public class BrowseVM {
     }
 
     public void loadImages() {
+        setSelectedCatalogue(catalogueService.getCatalogueById(selectedCatalogue.getId()));
         if (selectedCatalogue != null) {
             setImageList(selectedCatalogue.getImages());
         }
@@ -127,7 +109,6 @@ public class BrowseVM {
     public List<ImageEntity> getImageList() {
         return imageList;
     }
-
 
     @Command
     @NotifyChange({"selectedCatalogue", "catalogueList", "backButton", "imageList"})
@@ -142,40 +123,14 @@ public class BrowseVM {
         setCatalogueList(catalogueService.getCatalogueList());
     }
 
-    @Command
-    @NotifyChange("tagList")
-    public void loadTags() {
-        setTagList(selectedImage.getTags());
-    }
+    @GlobalCommand
+    @NotifyChange("imageList")
+    public void reload () {
 
-    @Command
-    @NotifyChange({"selectedImage", "imageList", "selectedCatalogue"})
-    public void deleteImage(){
-        imageService.deleteImage(selectedImage);
-        setSelectedCatalogue(catalogueService.getCatalogueById(selectedCatalogue.getId()));
-        selectedImage = null;
         loadImages();
     }
 
-    @Command
-    @NotifyChange({"selectedImage", "editMode"})
-    public void editImage() {
-        imageService.editImage(selectedImage);
-        setEditMode(false);
-    }
-
-    @Command
-    @NotifyChange("editMode")
-    public void editMode() {
-        if (!editMode) setEditMode(true);
-        else setEditMode(false);
-    }
     // Setters
-
-    public void setSelectedImage(ImageEntity selectedImage) {
-        this.selectedImage = selectedImage;
-    }
-
     public void setEditCatalogue(CatalogueEntity editCatalogue) {
         this.editCatalogue = editCatalogue;
     }
@@ -212,19 +167,7 @@ public class BrowseVM {
         this.name = name;
     }
 
-    private void setTagList(List<TagEntity> tagList) {
-        this.tagList = tagList;
-    }
-
-    public void setEditMode(boolean editMode) { this.editMode = editMode; }
-
-
     // Getters
-
-    public ImageEntity getSelectedImage() {
-        return selectedImage;
-    }
-
     public CatalogueEntity getEditCatalogue() {
         return editCatalogue;
     }
@@ -253,11 +196,7 @@ public class BrowseVM {
         return catalogueService;
     }
 
-    public List<TagEntity> getTagList() {
-        return tagList;
-    }
-
-    public Boolean getEditMode() {
-        return editMode;
+    public void setTagService(TagService tagService) {
+        this.tagService = tagService;
     }
 }

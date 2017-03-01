@@ -1,28 +1,23 @@
-<zk xmlns:x="xhtml" xmlns:n="native" xmlns:zul="zul">
-    <n:nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <n:div class="container-fluid">
+<zk xmlns:n="native" xmlns:x="xhtml">
+    <n:nav class="navbar navbar-default navbar-static-top">
+        <n:div class="container">
             <n:div class="navbar-header">
-                <n:button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <n:span class="icon-bar"/>
-                <n:span class="icon-bar"/>
-                <n:span class="icon-bar"/>
-                </n:button>
+                <x:button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+                    <n:span class="sr-only">Toggle navigation</n:span>
+                    <n:span class="icon-bar"/>
+                    <n:span class="icon-bar"/>
+                    <n:span class="icon-bar"/>
+                </x:button>
                 <n:a class="navbar-brand" href="index.zul">Gallery Application</n:a>
             </n:div>
-            <!--<n:div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
 
-            <n:ul class="nav navbar-nav">
-                <n:li>
-                    <n:a href="upload.zul">Upload</n:a>
-                </n:li>
-                <n:li>
-                    <n:a href="view.zul">View Images</n:a>
-                </n:li>
-                <n:li>
-                    <n:a href="browse.zul">Browse</n:a>
-                </n:li>
-            </n:ul>
+            <x:div  class="navbar-collapse collapse">
+                <n:ul class="nav navbar-nav">
+                    <n:li><n:a href="upload.zul">Upload</n:a></n:li>
+                    <n:li><n:a href="view.zul">View Images</n:a></n:li>
+                    <n:li><n:a href="browse.zul">Browse</n:a></n:li>
+                </n:ul>
+
                 <n:ul class="nav navbar-nav navbar-right">
                     <n:li><n:p class="navbar-text">Already have an account?</n:p></n:li>
                     <n:li class="dropdown">
@@ -31,7 +26,6 @@
                             <n:li>
                                 <n:div class="row">
                                     <n:div class="col-md-12">
-
                                         <n:form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
                                             <n:div class="form-group">
                                                 <n:label class="sr-only" for="exampleInputEmail2">Email address</n:label>
@@ -60,7 +54,7 @@
                         </n:ul>
                     </n:li>
                 </n:ul>
-            <!--</n:div>-->
+            </x:div>
         </n:div>
     </n:nav>
 </zk>

@@ -11,15 +11,5 @@
       <user-name>mokymai</user-name>
       <resolve-scope>*:MOKYMAI,PUBLIC</resolve-scope>
     </data-source>
-    <data-source name="@localhost" uuid="f5f03589-19de-42c5-bc53-37769833af86">
-      <database-info product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production" jdbc-version="4.0" driver-name="Oracle JDBC driver" driver-version="12.1.0.2.0">
-        <extra-name-characters>$#</extra-name-characters>
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>system</user-name>
-      <resolve-scope>*:PUBLIC,SYSTEM</resolve-scope>
-    </data-source>
   </component>
 </project>

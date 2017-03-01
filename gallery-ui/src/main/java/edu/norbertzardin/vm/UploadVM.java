@@ -5,12 +5,9 @@ import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.service.CatalogueService;
-import edu.norbertzardin.service.DataService;
 import edu.norbertzardin.service.ImageService;
 import edu.norbertzardin.service.TagService;
 import edu.norbertzardin.util.ImageUtil;
-import edu.norbertzardin.validators.TitleValidator;
-import org.zkoss.bind.Validator;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -98,17 +95,7 @@ public class UploadVM {
 
         String[] tagList = ImageUtil.parseTags(tags);
         for(String tag : tagList){
-            TagEntity tag_ = tagService.getTagByName(tag);
-            if(tag_ == null){
-                TagEntity te = new TagEntity();
-                te.setName(tag);
-                te.addImage(ie);
-                te.setCreatedDate(new Date());
-                imageService.createTag(te);
-            } else {
-                tag_.addImage(ie);
-                tagService.updateTag(tag_);
-            }
+            tagService.createTag(tag, ie);
         }
 
         Executions.getCurrent().sendRedirect("/view.zul");

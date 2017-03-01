@@ -1,4 +1,4 @@
-<zk xmlns:x="xhtml" xmlns:n="native" xmlns:zul="zul">
+<zk xmlns:n="native">
     <n:nav class="navbar navbar-default navbar-static-top" role="navigation">
         <n:div class="container-fluid">
             <n:div class="navbar-header">

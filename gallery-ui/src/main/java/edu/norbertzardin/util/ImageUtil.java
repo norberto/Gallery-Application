@@ -1,7 +1,10 @@
 package edu.norbertzardin.util;
 
+import edu.norbertzardin.entities.ImageEntity;
+import edu.norbertzardin.entities.TagEntity;
 import org.zkoss.image.AImage;
 import org.zkoss.image.Image;
+import org.zkoss.zul.Filedownload;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class ImageUtil {
     public static AImage byteArrayToImageConverter(byte[] data){
@@ -145,5 +149,21 @@ public class ImageUtil {
             }
         }
         return tagList;
+    }
+
+    public static String tagsToString(List<TagEntity> tags) {
+        String tagString = "";
+
+        for(TagEntity tag : tags) {
+            tagString = tagString.concat(tag.getName() + ", ");
+        }
+
+        return tagString.substring(0, tagString.length() - 2);
+    }
+
+    public static void download(ImageEntity image) {
+        Filedownload.save(image.getDownload().getData(),
+                "image/" + image.getDatatype(),
+                "download_" + image.toString());
     }
 }

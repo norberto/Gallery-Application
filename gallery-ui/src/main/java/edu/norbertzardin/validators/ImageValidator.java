@@ -2,7 +2,6 @@ package edu.norbertzardin.validators;
 
 import org.zkoss.bind.ValidationContext;
 import org.zkoss.bind.validator.AbstractValidator;
-import org.zkoss.zul.Image;
 
 public class ImageValidator extends AbstractValidator{
     @Override

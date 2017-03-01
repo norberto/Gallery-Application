@@ -1,90 +1,98 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" ?>
+
+<?link rel="stylesheet" type="text/css" href="css/style.css" ?>
 <?page zscriptLanguage="javascript"?>
 
-<zk xmlns:n="native" xmlns:x="xhtml">
-
-    <!-- Modal -->
-    <n:div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" width="800px">
-        <n:div class="modal-dialog modal-lg" role="document">
-            <x:div class="modal-content">
-                <!--<include src="@load(c:cat('image.zul?id=', vm.selectedImage.id), after='viewImage')"/>-->
-                <x:div class="modal-header">
-                    <n:div class="container-fluid">
-                        <n:div class="row vertical-align">
-                            <n:div class="col-md-1">
-                                <n:span class="glyphicon glyphicon-picture" style="font-size: 2.0em" aria-hidden="true"/>
-                            </n:div>
-                            <n:div class="col-md-10">
-                                <x:h4 textContent="@load(vm.selectedImage.name)"/>
-                            </n:div>
-                            <n:div class="col-md-1">
-                                <n:button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <n:span aria-hidden="true">×</n:span>
-                                </n:button>
-                            </n:div>
-                        </n:div>
-                    </n:div>
-                </x:div>
-
-                <n:div class="modal-body">
-                    <n:div class="container-fluid">
-                        <n:div class="row">
-                            <n:div class="col-md-8" align="center" width="auto">
-                                <image id="imageContainer"
-                                       content="@load(vm.selectedImage.mediumImage.data, after='viewImage')
-                                    @converter('edu.norbertzardin.util.ImageConverter')"/>
-                            </n:div>
-
-                            <n:div class="col-md-4" align="left">
-                                <n:div id="nameContainter">
-                                    <textbox zclass="form-control" value="@load(vm.selectedImage.name) @save(vm.selectedImage.name, before='editImage')" visible="@load(vm.editMode)"/>
-                                    <x:h3 textContent="@load(vm.selectedImage.name)" visible="@load(!vm.editMode)"/>
+<zk xmlns:n="native" xmlns:x="xhtml" xmlns:zul="zul">
+        <n:div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" width="800px">
+            <n:div class="modal-dialog modal-lg" role="document">
+                <x:div class="modal-content">
+                    <x:div class="modal-header">
+                        <n:div class="container-fluid">
+                            <n:div class="row vertical-align">
+                                <n:div class="col-md-1">
+                                    <n:span class="glyphicon glyphicon-picture" style="font-size: 2.0em" aria-hidden="true"/>
                                 </n:div>
-
-                                <n:div id="dateContainer">
-                                    <x:h6 textContent="@load(vm.selectedImage.createdDate)"/>
+                                <n:div class="col-md-10">
+                                    <x:h4 textContent="@load(modalVM.selectedImage.name)"/>
                                 </n:div>
-
-                                <x:div children="@load(vm.tagList)">
-                                    <template name="children" var="tag">
-                                        <label zclass="label label-primary" value="@load(tag.name)"/>
-                                    </template>
-                                </x:div>
-
-                                <n:hr/>
-                                <n:div id="descriptionContainer">
-                                    <textbox zclass="form-control" value="@load(vm.selectedImage.description) @save(vm.selectedImage.description, before='editImage')" visible="@load(vm.editMode)"/>
-                                    <x:p textContent="@load(vm.selectedImage.description)" visible="@load(!vm.editMode)"/>
+                                <n:div class="col-md-1">
+                                    <n:button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <n:span aria-hidden="true">×</n:span>
+                                    </n:button>
                                 </n:div>
                             </n:div>
                         </n:div>
-                    </n:div>
-                </n:div>
-
-                <n:div class="modal-footer">
-
-                    <x:button type="button" class="btn btn-info btn-sm pull-left" onClick="@command('onDownload')">
-                        <n:span class="glyphicon glyphicon-download-alt"/> Download
-                    </x:button>
-
-                    <x:button type="button" class="btn btn-danger btn-sm pull-left" data-dismiss="modal" onClick="@command('deleteImage')" visible="@load(vm.editMode)">
-                        <n:span class="glyphicon glyphicon-trash"/> Remove
-                    </x:button>
-
-                    <x:div class="btn-group" role="group" visible="@load(vm.editMode)">
-                        <x:button type="button" class="btn btn-success custom" onClick="@command('editImage')">
-                            <x:span class="glyphicon glyphicon-ok"/>
-                        </x:button>
-                        <x:button type="button" class="btn btn-danger custom" onClick="@command('editMode')">
-                            <n:span class="glyphicon glyphicon-remove"/>
-                        </x:button>
                     </x:div>
 
-                    <button type="button" zclass="btn btn-primary" onClick="@command('editMode')" visible="@load(!vm.editMode)" width="100px">Edit</button>
-                    <n:button type="button" class="btn btn-secondary" data-dismiss="modal">Close</n:button>
-                </n:div>
-            </x:div>
+                    <n:div class="modal-body">
+                        <n:div class="container-fluid">
+                            <n:div class="row">
+                                <n:div class="col-md-8" align="center" width="auto">
+                                    <image id="imageContainer"
+                                           content="@load(modalVM.selectedImage.mediumImage.data, after='viewImage')
+                                                    @converter('edu.norbertzardin.util.ImageConverter')"/>
+                                </n:div>
+
+                                <n:div class="col-md-4" align="left">
+                                    <n:div id="nameContainter">
+                                        <x:div visible="@load(modalVM.editMode)">
+                                            <n:label>Name</n:label>
+                                            <textbox zclass="form-control" value="@load(modalVM.selectedImage.name) @save(modalVM.selectedImage.name, before='editImage')"/>
+                                        </x:div>
+                                        <x:h3 textContent="@load(modalVM.selectedImage.name)" visible="@load(!modalVM.editMode)"/>
+                                    </n:div>
+
+                                    <n:div id="dateContainer">
+                                        <x:h6 textContent="@load(modalVM.selectedImage.createdDate)"/>
+                                    </n:div>
+                                    <x:label visible="@load(modalVM.editMode)">Tags</x:label>
+                                    <x:div children="@load(modalVM.tagList)" style="margin-bottom: 20px; padding-bootom: 20px">
+                                        <template name="children" var="tag">
+                                            <x:span class="label label-primary" textContent="@load(tag.name)" style="margin:1px;">
+                                                <x:a onClick="@command('deleteTag', selectedTag=tag)" visible="@load(modalVM.editMode)">×</x:a>
+                                            </x:span>
+                                        </template>
+                                    </x:div>
+                                    <x:input class="form-control" visible="@load(modalVM.editMode)" placeholder="Add new tags..."
+                                             value="@load(modalVM.tags) @save(modalVM.setField('tags').value, before='editImage')"/>
+
+                                    <n:hr/>
+                                    <n:div id="descriptionContainer">
+                                        <x:div visible="@load(modalVM.editMode)">
+                                            <n:label>Description</n:label>
+                                            <textbox rows="5" zclass="form-control" value="@load(modalVM.selectedImage.description) @save(modalVM.selectedImage.description, before='editImage')"/>
+                                        </x:div>
+                                        <x:p textContent="@load(modalVM.selectedImage.description)" placeholder="Add description..." visible="@load(!modalVM.editMode)"/>
+                                    </n:div>
+                                </n:div>
+                            </n:div>
+                        </n:div>
+                    </n:div>
+
+                    <n:div class="modal-footer">
+                        <x:button type="button" class="btn btn-info btn-sm pull-left" onClick="@command('onDownload')">
+                            <n:span class="glyphicon glyphicon-download-alt"/> Download
+                        </x:button>
+
+                        <x:button type="button" class="btn btn-danger btn-sm pull-left" data-dismiss="modal" onClick="@command('deleteImage') @global-command('reload')" visible="@load(modalVM.editMode)">
+                            <n:span class="glyphicon glyphicon-trash"/> Remove
+                        </x:button>
+
+                        <x:div class="btn-group" role="group" visible="@load(modalVM.editMode)">
+                            <x:button type="button" class="btn btn-success custom" onClick="@command('editImage')">
+                                <x:span class="glyphicon glyphicon-ok"/>
+                            </x:button>
+                            <x:button type="button" class="btn btn-danger custom" onClick="@command('editMode')">
+                                <n:span class="glyphicon glyphicon-remove"/>
+                            </x:button>
+                        </x:div>
+
+                        <button type="button" zclass="btn btn-primary" onClick="@command('editMode')" visible="@load(!modalVM.editMode)" width="100px">Edit</button>
+                        <n:button type="button" class="btn btn-secondary" data-dismiss="modal">Close</n:button>
+                    </n:div>
+                </x:div>
+            </n:div>
         </n:div>
-    </n:div>
 </zk>

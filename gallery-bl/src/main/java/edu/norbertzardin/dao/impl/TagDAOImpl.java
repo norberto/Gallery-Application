@@ -66,4 +66,8 @@ public class TagDAOImpl implements TagDao {
             return null;
         }
     }
+    @Transactional
+    public void remove(TagEntity tag) {
+        entityManager.remove(entityManager.find(TagEntity.class, tag.getId()));
+    }
 }

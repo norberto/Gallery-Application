@@ -1,6 +1,5 @@
 package edu.norbertzardin.vm;
 
-import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.service.ImageService;
@@ -12,7 +11,6 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.Filedownload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +22,6 @@ public class ImageListVM {
     private Integer page;
     private Integer pageCount;
     private List<Integer> pageLabels;
-    private List<TagEntity> tagList;
-    private Boolean editMode;
-
 
     @Wire("#selectedImage")
     private ImageEntity selectedImage;
@@ -70,10 +65,14 @@ public class ImageListVM {
         }
     }
 
-    public ImageListVM() {}
-
     public void setImageList(List<ImageEntity> list) {
         this.imageList = list;
+    }
+
+    @GlobalCommand
+    @NotifyChange("imageList")
+    public void reload () {
+        loadImages();
     }
 
     public List<ImageEntity> getImageList() {
@@ -81,22 +80,9 @@ public class ImageListVM {
     }
 
     @Command
-    @NotifyChange({"selectedImage", "editMode", "tagList"})
+    @NotifyChange({"selectedImage", "tagList"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
         setSelectedImage(imageService.getImageByIdWithFetch(image.getId()));
-        setEditMode(false);
-        loadTags();
-//        String openModal = "$('#myModal').modal('show')";
-//        Clients.evalJavaScript(openModal);
-    }
-
-    @Command
-    @NotifyChange({"selectedImage", "editMode"})
-    public void editImage() {
-        if(editMode) {
-            imageService.editImage(selectedImage);
-            setEditMode(false);
-        }
     }
 
     private void loadImages() {
@@ -152,23 +138,12 @@ public class ImageListVM {
     public void goToPage(@BindingParam("page") Integer p) {
         this.page = p;
         changePage();
-
     }
 
     @Command
     public void previousPage() {
         if (page != 1) {
             page--;
-        }
-    }
-
-    @Command
-    @NotifyChange({"imageList", "selectedImage"})
-    public void deleteImage() {
-        if(editMode) {
-            imageService.deleteImage(selectedImage);
-            selectedImage = null;
-            loadImages();
         }
     }
 
@@ -180,45 +155,8 @@ public class ImageListVM {
         }
     }
 
-    @Command
-    @NotifyChange("tagList")
-    public void loadTags() {
-        setTagList(selectedImage.getTags());
-    }
-
-    @Command
-    @NotifyChange("editMode")
-    public void editMode() {
-        if (!editMode) setEditMode(true);
-        else setEditMode(false);
-    }
-
-    @Command
-    public void onDownload() {
-        setSelectedImage(imageService.getImageByIdFullFetch(selectedImage.getId()));
-        Filedownload.save(selectedImage.getDownload().getData(),
-                "image/" + selectedImage.getDatatype(),
-                "download_" + selectedImage.toString());
-
-    }
-
-    public Boolean getEditMode() {
-        return editMode;
-    }
-
-    public void setEditMode(Boolean editMode) {
-        this.editMode = editMode;
-    }
 
     public void changePage() {
         Executions.getCurrent().sendRedirect("/view.zul?page=" + this.page);
-    }
-
-    public List<TagEntity> getTagList() {
-        return tagList;
-    }
-
-    public void setTagList(List<TagEntity> tagList) {
-        this.tagList = tagList;
     }
 }

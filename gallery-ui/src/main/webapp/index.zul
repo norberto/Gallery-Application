@@ -1,9 +1,9 @@
 <?page title="Gallery Application - Home"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
-<zk xmlns:n="native" xmlns:x="xhtml" self="@define(content)">
+<zk xmlns:n="native">
 
-    <div >
+    <div self="@define(content)">
         <!-- Image -->
         <n:div class="row" align="center">
             <n:div class="col-md-12">

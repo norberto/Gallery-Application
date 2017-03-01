@@ -4,7 +4,7 @@
 <?link rel="stylesheet" type="text/css" href="css/style.css" ?>
 <?page zscriptLanguage="javascript"?>
 
-<zk xmlns:n="native" xmlns:x="xhtml" xmlns:zul="zul">
+<zk xmlns:n="native" xmlns:x="xhtml">
         <n:div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" width="800px">
             <n:div class="modal-dialog modal-lg" role="document">
                 <x:div class="modal-content">
@@ -29,13 +29,13 @@
                     <n:div class="modal-body">
                         <n:div class="container-fluid">
                             <n:div class="row">
-                                <n:div class="col-md-8" align="center" width="auto">
-                                    <image id="imageContainer"
+                                <n:div class="col-md-7" align="center">
+                                    <image id="imageContainer" class="img-responsive"
                                            content="@load(modalVM.selectedImage.mediumImage.data, after='viewImage')
                                                     @converter('edu.norbertzardin.util.ImageConverter')"/>
                                 </n:div>
 
-                                <n:div class="col-md-4" align="left">
+                                <n:div class="col-md-5" align="left">
                                     <n:div id="nameContainter">
                                         <x:div visible="@load(modalVM.editMode)">
                                             <n:label>Name</n:label>
@@ -55,8 +55,10 @@
                                             </x:span>
                                         </template>
                                     </x:div>
-                                    <x:input class="form-control" visible="@load(modalVM.editMode)" placeholder="Add new tags..."
-                                             value="@load(modalVM.tags) @save(modalVM.setField('tags').value, before='editImage')"/>
+                                    <x:div visible="@load(modalVM.editMode)">
+                                        <textbox type="text" zclass="form-control" placeholder="Add new tags..."
+                                                 value="@save(modalVM.tags, before='editImage')"/>
+                                    </x:div>
 
                                     <n:hr/>
                                     <n:div id="descriptionContainer">

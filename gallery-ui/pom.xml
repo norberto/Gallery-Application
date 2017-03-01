@@ -44,6 +44,11 @@
             <groupId>${zk.groupid}</groupId>
             <artifactId>zul</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>${zk.groupid}</groupId>
+            <artifactId>zuti</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

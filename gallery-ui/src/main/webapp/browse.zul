@@ -103,14 +103,14 @@
 
                     </n:div>
                     <n:div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row top-buffer">
-                                <div class="input-group">
-                                    <span class="input-group-addon">Catalogue Name:</span>
-                                    <textbox zclass="form-control" id="catalogueName" value="@save(vm.name)" cols="50"/>
-                                </div>
-                            </div>
-                        </div>
+                        <n:div class="container-fluid">
+                            <n:div class="row top-buffer">
+                                <n:div class="input-group">
+                                    <n:span class="input-group-addon">Catalogue Name:</n:span>
+                                    <textbox class="form-control" id="catalogueName" value="@save(vm.name)" cols="50"/>
+                                </n:div>
+                            </n:div>
+                        </n:div>
                     </n:div>
                     <n:div class="modal-footer">
                         <x:button tyhpe="button" class="btn btn-success" width="200px" data-dismiss="modal"
@@ -152,7 +152,7 @@
                                     <n:div class="col-md-12" align="center">
                                         <n:div class="input-group">
                                             <span class="input-group-addon">Catalogue Name:</span>
-                                            <z:textbox zclass="form-control" value="@save(vm.editCatalogue.title)"
+                                            <textbox zclass="form-control" value="@save(vm.editCatalogue.title)"
                                                        placeholder="@load(c:cat('Enter a new name for ', vm.editCatalogue.title))"/>
                                         </n:div>
                                     </n:div>

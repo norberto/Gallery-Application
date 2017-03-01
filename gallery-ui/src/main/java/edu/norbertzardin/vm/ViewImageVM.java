@@ -24,7 +24,7 @@ public class ViewImageVM {
     private List<CatalogueEntity> catalogueList;
     private List<TagEntity> tagList;
     private boolean editMode;
-    private String tags = "fwafwafwafawfawfwa";
+    private String tags;
 
     @WireVariable
     private TagService tagService;

@@ -23,7 +23,7 @@
         <spring.version>4.3.6.RELEASE</spring.version>
 
         <zk.groupid>org.zkoss.zk</zk.groupid>
-        <zk.version>8.0.2.2</zk.version>
+        <zk.version>8.0.3-Eval</zk.version>
     </properties>
 
     <dependencyManagement>
@@ -102,6 +102,12 @@
             <dependency>
                 <groupId>${zk.groupid}</groupId>
                 <artifactId>zkbind</artifactId>
+                <version>${zk.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${zk.groupid}</groupId>
+                <artifactId>zuti</artifactId>
                 <version>${zk.version}</version>
             </dependency>
 

@@ -15,7 +15,11 @@ public interface CatalogueDao {
 
     CatalogueEntity getCatalogueByName(String name);
 
+    CatalogueEntity getCatalogueByNameNoFetch(String name);
+
     CatalogueEntity getCatalogueById(Long id);
 
     CatalogueEntity getCatalogueByIdMediumFetch(Long id);
+
+    Long getPageCount(Integer pageMax);
 }

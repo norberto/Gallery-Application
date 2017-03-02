@@ -16,12 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageListVM {
-
+    private final Integer pageMax = 5;
     private String searchString;
 
     private Integer page;
     private Integer pageCount;
-    private List<Integer> pageLabels;
 
     @Wire("#selectedImage")
     private ImageEntity selectedImage;
@@ -35,23 +34,20 @@ public class ImageListVM {
     private List<ImageEntity> imageList;
 
     @AfterCompose
+    @NotifyChange({"page", "pageCount"})
     public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
+        setPage(1);
+        setPageCount(imageService.getPageCount(pageMax));
         loadImages();
     }
 
     @Init
-    public void init(@QueryParam("page") Integer page) {
-        if (page != null) {
-            this.page = page;
-        } else {
-            this.page = 1;
-        }
-        pageCount = imageService.getPageCount(15);
-        pageLabels = new ArrayList<Integer>();
-        for (int i = 1; i <= pageCount; i++) {
-            pageLabels.add(i);
-        }
+    public void init(@ContextParam(ContextType.VIEW) Component view) {
+        Selectors.wireComponents(view, this, false);
+        setPage(1);
+        setPageCount(imageService.getPageCount(pageMax));
+        loadImages();
     }
 
     @NotifyChange("imageList")
@@ -61,17 +57,16 @@ public class ImageListVM {
             TagEntity tag = tagService.getTagByName(searchString);
             setImageList(imageService.findImagesByKeys(getSearchString(), tag));
         } else {
-            setImageList(imageService.getImageList(1, 15));
+            setImageList(imageService.getImageList(1, pageMax));
         }
     }
 
-    public void setImageList(List<ImageEntity> list) {
-        this.imageList = list;
-    }
-
     @GlobalCommand
-    @NotifyChange("imageList")
+    @NotifyChange({"imageList", "page"})
     public void reload () {
+        if(page < 0 || page > pageCount) {
+            page = 1;
+        }
         loadImages();
     }
 
@@ -85,8 +80,30 @@ public class ImageListVM {
         setSelectedImage(imageService.getImageByIdWithFetch(image.getId()));
     }
 
+    @Command
+    @NotifyChange({"page", "imageList"})
+    public void previousPage() {
+        if (page != 1) {
+            page--;
+            loadImages();
+        }
+    }
+
+    @Command
+    @NotifyChange({"page", "imageList"})
+    public void nextPage() {
+        if (!page.equals(pageCount)) {
+            page++;
+            loadImages();
+        }
+    }
+
     private void loadImages() {
-        imageList = imageService.getImageList(this.page, 15);
+        setImageList(imageService.getImageList(getPage(), pageMax));
+    }
+
+    public void setImageList(List<ImageEntity> list) {
+        this.imageList = list;
     }
 
     public void setImageService(ImageService imageService) {
@@ -118,45 +135,16 @@ public class ImageListVM {
         return pageCount;
     }
 
-    public void setPageCount(Integer pageCount) {
-        this.pageCount = pageCount;
+    public void setPageCount(Long pageCount) {
+        this.pageCount = pageCount.intValue();
     }
 
     public Integer getPage() {
         return this.page;
     }
 
-    public List<Integer> getPageLabels() {
-        return pageLabels;
+    public void setPage(Integer page) {
+        this.page = page;
     }
 
-    public void setPageLabels(List<Integer> pageLabels) {
-        this.pageLabels = pageLabels;
-    }
-
-    @Command
-    public void goToPage(@BindingParam("page") Integer p) {
-        this.page = p;
-        changePage();
-    }
-
-    @Command
-    public void previousPage() {
-        if (page != 1) {
-            page--;
-        }
-    }
-
-    @Command
-    public void nextPage() {
-        if (!page.equals(pageCount)) {
-            page++;
-            changePage();
-        }
-    }
-
-
-    public void changePage() {
-        Executions.getCurrent().sendRedirect("/view.zul?page=" + this.page);
-    }
 }

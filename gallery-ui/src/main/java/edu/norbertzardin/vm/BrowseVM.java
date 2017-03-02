@@ -20,8 +20,14 @@ import java.util.Date;
 import java.util.List;
 
 public class BrowseVM {
+    private final Integer PAGE_MAX = 5;
+
     // Properties
     private String name;
+
+    private Integer page;
+    private Long pageCount;
+    private List<Integer> pageLabels;
 
     private List<CatalogueEntity> catalogueList;
     private List<ImageEntity> imageList;
@@ -41,21 +47,21 @@ public class BrowseVM {
 
     // Initializers
     @Init
-    public void init(@ContextParam(ContextType.VIEW) Component view) {
-        Selectors.wireComponents(view, this, false);
+    public void init() {
         String defaultCatalogueName = "Non-categorized";
-        setDefaultCatalogue(catalogueService.getCatalogueByName(defaultCatalogueName));
+        setPage(1);
+        setPageCount(catalogueService.getPageCount(5));
+        setDefaultCatalogue(catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName));
         setSelectedCatalogue(defaultCatalogue);
         setCatalogueList(catalogueService.getCatalogueList());
-        loadImages();
         setBackButton(false);
+        loadImages();
     }
 
 
     @AfterCompose
     public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
-        loadImages();
     }
 
     // Commands
@@ -78,7 +84,24 @@ public class BrowseVM {
         setBackButton(true);
     }
 
+    @Command
+    @NotifyChange({"page", "imageList"})
+    public void previousPage() {
+        if (page != 1) {
+            page--;
+            loadImages();
+        }
+    }
 
+    @Command
+    @NotifyChange({"page", "imageList"})
+    public void nextPage() {
+        if (!page.equals(pageCount.intValue())) {
+            page++;
+            loadImages();
+
+        }
+    }
 
     @Command
     @NotifyChange({"selectedCatalogue", "backButton", "imageList"})
@@ -100,9 +123,8 @@ public class BrowseVM {
     }
 
     public void loadImages() {
-        setSelectedCatalogue(catalogueService.getCatalogueById(selectedCatalogue.getId()));
         if (selectedCatalogue != null) {
-            setImageList(selectedCatalogue.getImages());
+            setImageList(imageService.getImagesFromFolderForPage(getPage(), PAGE_MAX, selectedCatalogue));
         }
     }
 
@@ -126,7 +148,6 @@ public class BrowseVM {
     @GlobalCommand
     @NotifyChange("imageList")
     public void reload () {
-
         loadImages();
     }
 
@@ -198,5 +219,29 @@ public class BrowseVM {
 
     public void setTagService(TagService tagService) {
         this.tagService = tagService;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Long getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(Long pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public List<Integer> getPageLabels() {
+        return pageLabels;
+    }
+
+    public void setPageLabels(List<Integer> pageLabels) {
+        this.pageLabels = pageLabels;
     }
 }

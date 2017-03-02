@@ -65,7 +65,7 @@ public class UploadVM {
     public void init(@ContextParam(ContextType.VIEW) Component view){
         Selectors.wireComponents(view, this, false);
         catalogueList = catalogueService.getCatalogueList();
-        defaultCatalogue = catalogueService.getCatalogueByName(defaultCatalogueName);
+        defaultCatalogue = catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName);
         setSelectedCatalogue(defaultCatalogue);
         setUploaded(false);
     }

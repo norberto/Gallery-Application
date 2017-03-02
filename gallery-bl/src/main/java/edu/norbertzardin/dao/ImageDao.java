@@ -1,5 +1,6 @@
 package edu.norbertzardin.dao;
 
+import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,8 +24,9 @@ public interface ImageDao {
 
     List<ImageEntity> findImagesByKeys(String keyword, TagEntity tag);
 
-    Integer getPageCount(Integer pageMax);
+    Long getPageCount(Integer pageMax);
 
     void updateImage(ImageEntity ie);
 
+    List<ImageEntity> getImageListFromFolderForPage(Integer page, Integer pageMax, CatalogueEntity catalogue);
 }

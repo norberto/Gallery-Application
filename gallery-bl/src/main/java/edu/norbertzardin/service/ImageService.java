@@ -2,6 +2,7 @@ package edu.norbertzardin.service;
 
 import edu.norbertzardin.dao.ImageDao;
 import edu.norbertzardin.dao.TagDao;
+import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,11 @@ public class ImageService {
         return imageDao.getImageList();
     }
 
-    public List<ImageEntity> getImageList(Integer page, int pageMax){
+    public List<ImageEntity> getImageList(Integer page, Integer pageMax){
         return imageDao.getImageList(page, pageMax);
     }
 
-    public Integer getPageCount(int pageMax) {
+    public Long getPageCount(Integer pageMax) {
         return imageDao.getPageCount(pageMax);
     }
 
@@ -56,4 +57,8 @@ public class ImageService {
     public void editImage(ImageEntity ie) { imageDao.updateImage(ie); }
 
     public ImageEntity getImageByIdFullFetch(Long id) { return imageDao.getImageByIdFullFetch(id); }
+
+    public List<ImageEntity> getImagesFromFolderForPage(Integer page,Integer pageMax, CatalogueEntity catalogue) {
+        return imageDao.getImageListFromFolderForPage(page, pageMax, catalogue);
+    }
 }

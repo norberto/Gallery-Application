@@ -1,5 +1,5 @@
 <zk xmlns:n="native" xmlns:x="xhtml">
-    <n:nav class="navbar navbar-default navbar-static-top">
+    <n:nav class="navbar navbar-default navbar-static-top body">
         <n:div class="container">
             <n:div class="navbar-header">
                 <x:button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">

@@ -45,23 +45,26 @@ public class ViewImageVM {
     @AfterCompose
     public void afterCompose (@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
-
     }
 
     @Command
     @NotifyChange({"selectedImage","catalogueList","tagList","editMode"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
+        // If selected image is not null - fetch image with all contents
         if(image != null) {
             setSelectedImage(imageService.getImageByIdFullFetch(image.getId()));
         }
+        // If fetched image is not null, load its tags to local contents
         if(getSelectedImage() != null) {
             loadTags();
         }
+        // Disable edit mode on modal open
         setEditMode(false);
     }
 
     @Command
     public void loadTags() {
+        // If selected image is not null - fetch tags
         if(selectedImage != null) {
             setTagList(selectedImage.getTags());
         }
@@ -70,10 +73,14 @@ public class ViewImageVM {
     @Command
     @NotifyChange({"tagList", "selectedImage"})
     public void deleteTag(@BindingParam("selectedTag") TagEntity tag) {
+        // If selected tag is not null delete it
         if(tag != null) {
+            // Look up the tag
             TagEntity tag_ = tagService.getTagById(tag.getId());
+            // If tag found start deleting process
             if(tag_ != null) {
                 tagService.removeTag(tag_);
+                // Update local content
                 setSelectedImage(imageService.getImageByIdWithFetch(selectedImage.getId()));
                 setTagList(selectedImage.getTags());
             }
@@ -89,34 +96,38 @@ public class ViewImageVM {
     @Command
     @NotifyChange({"selectedImage", "editMode", "tagList", "tags"})
     public void editImage() {
+        // If selected image is not null process data
         if(selectedImage != null) {
+            // Parse tags
             String[] parsed_tags = ImageUtil.parseTags(tags);
+            // Lookup and update OR create new tags and add them to image
             for(String tag : parsed_tags) {
                 tagService.createTag(tag, selectedImage);
             }
+            // Update image
             imageService.editImage(selectedImage);
+            // Update local content
             setSelectedImage(imageService.getImageByIdWithFetch(selectedImage.getId()));
             loadTags();
-//            setTags(null);
+            setTags(null);
         }
+        // Disable edit mode
         setEditMode(false);
     }
 
     @Command
     @NotifyChange("editMode")
     public void editMode() {
-        if (!editMode) {
-            setEditMode(true);
-        } else {
-            setEditMode(false);
-        }
+        setEditMode(!editMode);
     }
 
     @Command
     public void onDownload() {
+        // Check if currently selected image is not null, if not - fetch image again with its contents
         if(selectedImage != null) {
             setSelectedImage(imageService.getImageByIdFullFetch(selectedImage.getId()));
         }
+        // Check if fetched image is not null, if not, start downloading
         if(selectedImage != null) {
             ImageUtil.download(selectedImage);
         }

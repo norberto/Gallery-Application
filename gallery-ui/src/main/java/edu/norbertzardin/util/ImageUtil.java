@@ -12,7 +12,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ImageUtil {
     public static AImage byteArrayToImageConverter(byte[] data){
@@ -142,13 +146,15 @@ public class ImageUtil {
 
     public static String[] parseTags(String tags) {
         if(tags == null || tags.equals("")) return new String[0];
-        String[] tagList = tags.split(",");
-        for(int i = 0; i < tagList.length; i++) {
-            if(tagList[i].charAt(0) == ' ') {
-                tagList[i] = tagList[i].substring(1, tagList[i].length());
-            }
-        }
-        return tagList;
+        String[] tagList = tags.split("\\W+");
+
+        List<String> list = new ArrayList<String>(Arrays.asList(tagList));
+        return removeDuplicates(list);
+    }
+
+    private static String[] removeDuplicates(List<String> array) {
+        Set set = new HashSet<String>(array); //values must default to false
+        return (String[]) set.toArray(new String[set.size()]);
     }
 
     public static String tagsToString(List<TagEntity> tags) {

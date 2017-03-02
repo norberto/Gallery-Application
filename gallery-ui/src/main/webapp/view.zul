@@ -1,4 +1,5 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?evaluator name="zel"?>
@@ -37,19 +38,15 @@
         </n:div>
 
         <n:div class="col-md-12" align="center">
-            <n:div class="btn-toolbar" role="toolbar">
-                <n:div class="btn-group mr-2" role="group">
-                    <button type="button" onClick="@command('previousPage')" zclass="btn btn-default">Previous</button>
-                    <x:div class="btn-group mr-2" role="group" id="loadPages" children="@load(vm.pageLabels)">
-                        <!-- Template -->
-                        <template name="children" var="pageIndex">
-                            <button type="button" onClick="@command('goToPage', page=pageIndex)" zclass="btn btn-default" label="@load(pageIndex)"/>
-                        </template>
-                    </x:div>
-                    <button type="button" onClick="@command('nextPage')" zclass="btn btn-default">Next</button>
-                </n:div>
-            </n:div>
+            <x:button class="@load(vm.page eq 1 ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
+                      style="width:100px" onClick="@command('previousPage')" disabled="@load(vm.page eq 1 ? true : false)"><n:b>Previous</n:b></x:button>
+
+            <intbox value="@bind(vm.page)" style="text-align:center" width="40px" onOK="@global-command('reload')"/>
+
+            <x:button class="@load(vm.page eq vm.pageCount ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
+                      style="width:100px" onClick="@command('nextPage') " disabled="@{vm.page eq vm.pageCount ? true : false)">${vm.page eq vm.pageCount ? true : false}</x:button>
         </n:div>
+
         <include src="image.zul"/>
     </div>
 </zk>

@@ -1,10 +1,12 @@
 package edu.norbertzardin.dao.impl;
 
 import edu.norbertzardin.dao.ImageDao;
+import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.ImageEntity_;
 import edu.norbertzardin.entities.TagEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +17,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.awt.*;
 import java.util.List;
 // TODO Re-do criteria building
 
@@ -86,18 +89,20 @@ public class ImageDAOImpl implements ImageDao {
         return entityManager.createQuery(cq).getResultList();
     }
 
-    public Integer getPageCount(Integer pageMax) {
-        int imageCount = entityManager
-                .createQuery("from ImageEntity ", ImageEntity.class)
-                .getResultList()
-                .size();
-        int pageCount = imageCount / pageMax;
+    public Long getPageCount(Integer pageMax) {
+        cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
+        criteria.select(cb.count(criteria.from(ImageEntity.class)));
+        Long imageCount = entityManager.createQuery(criteria).getSingleResult();
+
+        Long pageCount = imageCount / pageMax;
         if(pageCount * pageMax < imageCount) {
             return pageCount + 1;
         } else {
             return pageCount;
         }
     }
+
 
     public ImageEntity getImageByIdFullFetch(Long id) {
         setUpCriteriaBuilderForImage();
@@ -108,8 +113,43 @@ public class ImageDAOImpl implements ImageDao {
         return entityManager.createQuery(cq).getSingleResult();
     }
 
+    // Update Image in database
     public void updateImage(ImageEntity ie) {
         entityManager.merge(ie);
+    }
+
+    @Transactional
+    public List<ImageEntity> getImageListFromFolderForPage(Integer page, Integer pageMax, CatalogueEntity catalogue) {
+        setUpCriteriaBuilderForImage();
+        fetchThumbnail();
+
+        Predicate p = cb.equal(image.get(ImageEntity_.catalogue), catalogue);
+        CriteriaQuery<ImageEntity> select = cq.select(image).where(p);
+        TypedQuery<ImageEntity> typedQuery = entityManager.createQuery(select);
+        typedQuery.setFirstResult((page - 1) * pageMax);
+        typedQuery.setMaxResults(pageMax);
+        return  typedQuery.getResultList();
+    }
+
+    // Set up criteria builder for ImageEntity model
+    private void setUpCriteriaBuilderForImage() {
+        cb = entityManager.getCriteriaBuilder();
+        cq = cb.createQuery(ImageEntity.class);
+        image = cq.from(ImageEntity.class);
+    }
+
+
+    // Fetches all contents of an Entity, for viewing an image
+    private void fetchAll() {
+        image.fetch(ImageEntity_.thumbnail, JoinType.INNER);
+        image.fetch(ImageEntity_.mediumImage, JoinType.INNER);
+        image.fetch(ImageEntity_.download, JoinType.INNER);
+        image.fetch(ImageEntity_.tags, JoinType.LEFT);
+    }
+
+    // Fetches only thumbnail - for listing images
+    private void fetchThumbnail() {
+        image.fetch(ImageEntity_.thumbnail, JoinType.INNER);
     }
 
     @PersistenceContext
@@ -119,22 +159,5 @@ public class ImageDAOImpl implements ImageDao {
 
     public EntityManager getEntityManager(){
         return entityManager;
-    }
-
-    private void setUpCriteriaBuilderForImage() {
-        cb = entityManager.getCriteriaBuilder();
-        cq = cb.createQuery(ImageEntity.class);
-        image = cq.from(ImageEntity.class);
-    }
-
-    private void fetchAll() {
-        image.fetch(ImageEntity_.thumbnail, JoinType.INNER);
-        image.fetch(ImageEntity_.mediumImage, JoinType.INNER);
-        image.fetch(ImageEntity_.download, JoinType.INNER);
-        image.fetch(ImageEntity_.tags, JoinType.LEFT);
-    }
-
-    private void fetchThumbnail() {
-        image.fetch(ImageEntity_.thumbnail, JoinType.INNER);
     }
 }

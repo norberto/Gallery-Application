@@ -105,3 +105,27 @@ label span a {
     margin-bottom:0 !important;
 }
 
+.custom-label {
+    display:inline-block;
+    margin:1px;
+    cursor:default;
+}
+
+.btn-round-lg{
+    border-radius: 22.5px;
+}
+.btn-round{
+    border-radius: 17px;
+}
+.btn-round-sm{
+    border-radius: 15px;
+}
+.btn-round-xs{
+    border-radius: 11px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+body {
+    padding: 0 0 0 0;
+}

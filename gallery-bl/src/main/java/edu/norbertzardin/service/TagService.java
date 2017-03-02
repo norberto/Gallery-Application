@@ -21,16 +21,31 @@ public class TagService {
     }
 
     public void createTag(String tag_name, ImageEntity ie) {
-        TagEntity tag_ = getTagByName(tag_name);
-        if(tag_ == null){
-            TagEntity te = new TagEntity();
-            te.setName(tag_name);
-            te.addImage(ie);
-            te.setCreatedDate(new Date());
-            createTag(te);
-        } else {
-            tag_.addImage(ie);
-            updateTag(tag_);
+        // Before creating or updating tags - check if an image already has one
+        List<TagEntity> tags = ie.getTags();
+        boolean contains = false;
+        if(tags != null) {
+            for(TagEntity t : tags) {
+                if(t.getName().equals(tag_name)){
+                    contains = true;
+                    break;
+                }
+            }
+        }
+        // If already has - do nothing
+        if(!contains) {
+            TagEntity tag_ = getTagByName(tag_name);
+            // If tag does not exist yet - create it
+            if(tag_ == null){
+                TagEntity te = new TagEntity();
+                te.setName(tag_name);
+                te.addImage(ie);
+                te.setCreatedDate(new Date());
+                createTag(te);
+            } else { // if tag exists assign it to an image;
+                tag_.addImage(ie);
+                updateTag(tag_);
+            }
         }
     }
 

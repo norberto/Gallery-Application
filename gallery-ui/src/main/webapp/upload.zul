@@ -1,4 +1,5 @@
 <?page title="Gallery Application - Upload"?>
+<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
 
@@ -12,19 +13,6 @@
                 </n:div>
             </n:div>
 
-            <n:div name="errors" class="row">
-                <!--<x:div class="col-xs-12 col-md-7 alert alert-danger alert-dismissable fade in" visible="@load(!empty vmsgs[imageName])">-->
-                    <!--<x:div  textContent="@load(vmsgs[imageName])"/>-->
-                <!--</x:div>-->
-                <x:div class="col-xs-12 col-md-7 alert alert-danger alert-dismissable fade in" visible="@load(!empty vmsgs[imageTags])">
-                    <x:div textContent="@load(vmsgs[imageTags])"/>
-                </x:div>
-
-                <x:div class="col-xs-12 col-md-7 alert alert-danger alert-dismissable fade in" visible="@load(!empty vmsgs[imagePreview])">
-                    <x:div textContent="@load(vmsgs[imagePreview])"/>
-                </x:div>
-            </n:div>
-
             <x:form class="form-horizontal">
                 <n:div class="row">
                     <x:div class="col-lg-6 col-md-6 col-xs-6">
@@ -32,7 +20,6 @@
                             <n:label class="control-label" for="imageName">Name</n:label>
                             <textbox zclass="form-control" id="imageName"  type="text" placeholder="Enter a name for the image..."
                                      value="@save(uploadVM.name, before='submit') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=32)"/>
-                            <x:span class="glyphicon glyphicon-remove form-control-feedback" visible="@load(!empty vmsgs[imageName])"/>
                             <x:span style="color: #a94442;" visible="@load(!empty vmsgs[imageName])" textContent="@load(vmsgs[imageName])"/>
 
                         </x:div>
@@ -42,21 +29,23 @@
 
                 <n:div class="row">
                     <n:div class="col-lg-6 col-md-6 col-xs-6">
-                        <n:div class="form-group">
-                            <n:label for="imageDescription">Description</n:label>
+                        <x:div sclass="@load(empty vmsgs[imageDescription] ? 'form-group' : 'form-group has-error has-feedback')" >
+                            <n:label class="control-label" for="imageDescription">Description</n:label>
                             <textbox type="text" zclass="form-control" id="imageDescription" value="@save(uploadVM.description)"
                                      placeholder="Enter a short description that would describe the picture you are willing to upload..." rows="3"/>
-                        </n:div>
+                            <x:span style="color: #a94442;" visible="@load(!empty vmsgs[imageDescription])" textContent="@load(vmsgs[imageDescription])"/>
+                        </x:div>
                     </n:div>
                 </n:div>
 
                 <n:div class="row">
                     <n:div class="col-lg-6 col-md-6 col-xs-6">
-                        <n:div class="form-group">
-                            <n:label for="imageTags">Tags</n:label>
+                        <x:div sclass="@load(empty vmsgs[imageTags] ? 'form-group' : 'form-group has-error has-feedback')" >
+                            <n:label class="control-label" for="imageTags">Tags</n:label>
                             <textbox type="text" zclass="form-control" id ="imageTags" value="@save(uploadVM.tags, before='submit') @validator('edu.norbertzardin.validators.TagValidator')"
                                      placeholder="Enter tags separated by commas..."/>
-                        </n:div>
+                            <x:span style="color: #a94442;" visible="@load(!empty vmsgs[imageTags])" textContent="@load(vmsgs[imageTags])"/>
+                        </x:div>
                     </n:div>
                 </n:div>
 
@@ -84,10 +73,12 @@
 
                 <n:div class="row">
                     <n:div class="col-lg-6 col-md-6 col-xs-6">
-                        <n:div class="form-group">
+                        <x:div sclass="@load(empty vmsgs[imagePreview] ? 'form-group' : 'form-group has-error has-feedback')" >
                             <n:label for="selectImage"/>
-                            <button zclass="btn btn-default" label="Upload image" upload="true,maxsize=1000000" onUpload="@command('onUpload', upEvent=event)"/>
-                        </n:div>
+                            <button zclass="btn btn-default control-label" label="Upload image" upload="true,maxsize=1000000" onUpload="@command('onUpload', upEvent=event)"/>
+                            <x:span style="color: #a94442;" visible="@load(!empty vmsgs[imagePreview])" textContent="@load(vmsgs[imagePreview])"/>
+
+                        </x:div>
                     </n:div>
                 </n:div>
 
@@ -101,14 +92,12 @@
                     </n:div>
                 </n:div>
 
-
             <n:div class="row top-buffer">
                 <n:div class="col-lg-6 col-md-6 col-xs-6">
                     <x:button class="btn btn-success" width="250px" onClick="@command('submit')">Submit</x:button>
                 </n:div>
             </n:div>
             </x:form>
-
         </n:div>
     </x:div>
 </zk>

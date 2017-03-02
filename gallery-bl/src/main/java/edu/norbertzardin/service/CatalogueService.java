@@ -44,4 +44,7 @@ public class CatalogueService {
 
     public CatalogueEntity getCatalogueByIdMediumFetch(Long id) { return catalogueDao.getCatalogueByIdMediumFetch(id); }
 
+    public CatalogueEntity getCatalogueByNameNoFetch(String name) { return catalogueDao.getCatalogueByNameNoFetch(name); }
+
+    public Long getPageCount(Integer pageMax) { return catalogueDao.getPageCount(pageMax); }
 }

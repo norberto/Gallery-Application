@@ -1,6 +1,5 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" ?>
-
 <?link rel="stylesheet" type="text/css" href="css/style.css" ?>
 <?page zscriptLanguage="javascript"?>
 
@@ -50,8 +49,8 @@
                                     <x:label visible="@load(modalVM.editMode)">Tags</x:label>
                                     <x:div children="@load(modalVM.tagList)" style="margin-bottom: 20px; padding-bootom: 20px">
                                         <template name="children" var="tag">
-                                            <x:span class="label label-primary" textContent="@load(tag.name)" style="margin:1px;">
-                                                <x:a onClick="@command('deleteTag', selectedTag=tag)" visible="@load(modalVM.editMode)">×</x:a>
+                                            <x:span class="label label-primary custom-label" textContent="@load(tag.name)">
+                                                <x:a style="cursor:pointer;" onClick="@command('deleteTag', selectedTag=tag)" visible="@load(modalVM.editMode)">×</x:a>
                                             </x:span>
                                         </template>
                                     </x:div>

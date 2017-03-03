@@ -22,4 +22,6 @@ public interface CatalogueDao {
     CatalogueEntity getCatalogueByIdMediumFetch(Long id);
 
     Long getPageCount(Integer pageMax);
+
+    List<CatalogueEntity> getCatalogueListByKey(String key);
 }

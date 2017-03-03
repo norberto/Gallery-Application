@@ -19,9 +19,11 @@ import org.zkoss.image.Image;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
 import java.util.Date;
@@ -32,7 +34,7 @@ public class UploadVM {
     private final String defaultCatalogueName = "Non-categorized";
 
     private CatalogueEntity defaultCatalogue;
-
+    private String filter;
     private String name;
     private String description;
     private String tags;
@@ -71,6 +73,11 @@ public class UploadVM {
     }
 
     @Command
+    public void tags(@ContextParam(ContextType.TRIGGER_EVENT) Event event) {
+        System.out.println(event.getData());
+    }
+
+    @Command
     public void submit(){
         ImageEntity ie = new ImageEntity();
         ie.setName(name);
@@ -103,6 +110,7 @@ public class UploadVM {
     @Command
     @NotifyChange({"thumbnail", "uploaded"})
     public void onUpload(@BindingParam("upEvent") UploadEvent event){
+
         Media media = event.getMedia();
         if (media instanceof Image) {
             Image img = (Image) media;
@@ -122,7 +130,11 @@ public class UploadVM {
         this.selectedCatalogue = ce;
     }
 
-
+    @Command
+    @NotifyChange("catalogueList")
+    public void filter() {
+        setCatalogueList(catalogueService.getCatalogueListByKey(getFilter()));
+    }
 
     public void setImageService(ImageService imageService){
         this.imageService = imageService;
@@ -210,5 +222,15 @@ public class UploadVM {
 
     public void setUploaded(Boolean uploaded) {
         this.uploaded = uploaded;
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+
+    @Command
+    public void setFilter(String filter) {
+        this.filter = filter;
     }
 }

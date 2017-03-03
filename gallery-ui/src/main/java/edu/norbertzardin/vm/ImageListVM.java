@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageListVM {
-    private final Integer pageMax = 5;
+    private Integer pageMax;
     private String searchString;
 
     private Integer page;
@@ -43,8 +43,9 @@ public class ImageListVM {
     }
 
     @Init
-    public void init(@ContextParam(ContextType.VIEW) Component view) {
+    public void init(@ContextParam(ContextType.VIEW) Component view, @BindingParam("pageMax") Integer max) {
         Selectors.wireComponents(view, this, false);
+        setPageMax(max);
         setPage(1);
         setPageCount(imageService.getPageCount(pageMax));
         loadImages();
@@ -62,12 +63,14 @@ public class ImageListVM {
     }
 
     @GlobalCommand
-    @NotifyChange({"imageList", "page"})
+    @NotifyChange({"imageList", "page", "pageCount"})
     public void reload () {
-        if(page < 0 || page > pageCount) {
-            page = 1;
-        }
         loadImages();
+        if(imageList.isEmpty() || page < 0 || page > pageCount) {
+            setPageCount(imageService.getPageCount(pageMax));
+            setPage(getPageCount());
+            loadImages();
+        }
     }
 
     public List<ImageEntity> getImageList() {
@@ -90,12 +93,16 @@ public class ImageListVM {
     }
 
     @Command
-    @NotifyChange({"page", "imageList"})
+    @NotifyChange({"page", "imageList", "pageCount"})
     public void nextPage() {
+        setPageCount(imageService.getPageCount(pageMax));
         if (!page.equals(pageCount)) {
             page++;
-            loadImages();
+        } else if(page >= pageCount) {
+            setPage(getPageCount());
         }
+        loadImages();
+
     }
 
     private void loadImages() {
@@ -147,4 +154,7 @@ public class ImageListVM {
         this.page = page;
     }
 
+    public void setPageMax(Integer pageMax) {
+        this.pageMax = pageMax;
+    }
 }

@@ -47,4 +47,6 @@ public class CatalogueService {
     public CatalogueEntity getCatalogueByNameNoFetch(String name) { return catalogueDao.getCatalogueByNameNoFetch(name); }
 
     public Long getPageCount(Integer pageMax) { return catalogueDao.getPageCount(pageMax); }
+
+    public List<CatalogueEntity> getCatalogueListByKey(String key) { return  catalogueDao.getCatalogueListByKey(key); }
 }

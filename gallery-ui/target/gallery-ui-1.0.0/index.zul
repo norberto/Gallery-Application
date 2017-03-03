@@ -1,0 +1,20 @@
+<?page title="Gallery Application - Home"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
+<zk xmlns:n="native">
+    <div self="@define(content)">
+        <!-- Image -->
+        <n:div class="row" align="center">
+            <n:div class="col-md-12">
+                <n:img alt="Home page" src="images/home_icon.png" />
+            </n:div>
+        </n:div>
+        <!-- Page title-->
+        <n:div class="row" align="center">
+            <n:div class="col-md-12">
+                <n:h1 class="col-md-12"> GALLERY APPLICATION</n:h1>
+            </n:div>
+        </n:div>
+    </div>
+</zk>

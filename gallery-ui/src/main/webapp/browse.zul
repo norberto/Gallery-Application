@@ -62,11 +62,11 @@
                             <x:div id="load2" children="@load(vm.imageList)">
                                 <template name="children" var="image">
                                     <n:div class="col-lg-2 col-md-3 col-xs-4 thumb" style="margin:10px; height:230px;">
-                                        <x:a onClick="@command('viewImage', selectedImage=image)"
+                                        <x:span onClick="@command('viewImage', selectedImage=image)"
                                              class="" href="#viewImageModal" data-toggle="modal"
                                              data-target="#viewImageModal">
                                             <image content="@load(image.thumbnail.data) @converter('edu.norbertzardin.util.ImageConverter')"/>
-                                        </x:a>
+                                        </x:span>
                                     </n:div>
                                 </template>
                             </x:div>
@@ -74,16 +74,19 @@
                     </n:div>
                 </n:div>
             </n:div>
-            <n:div class="row">
-                <n:div class="col-md-12" align="center">
-                    <x:button class="@load(vm.page eq 1 ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
-                              style="width:100px" onClick="@command('previousPage')" disabled="@load(vm.page eq 1 ? true : false)"><n:b>Previous</n:b></x:button>
-                    <intbox value="@bind(vm.page)" style="text-align:center" width="40px" onOK="@global-command('reload')"/>
-                    /<x:label textContent="@load(vm.pageCount)"/>
-                    <x:button class="@load(vm.page eq vm.pageCount ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
-                              style="width:100px" onClick="@command('nextPage')" disabled="@load(vm.page eq vm.pageCount ? true : false)">${vm.page eq vm.pageCount ? true : false}</x:button>
-                </n:div>
+            <x:div class="row" visible="@load(!empty vm.imageList)">
+                <n:div class="btn-group">
+                    <x:span type="button" class="@load(vm.page eq 1 ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
+                            style="@load(vm.page eq 1 ? 'width:100px; cursor:default;' : 'width:100px')" onClick="@command(vm.page ne 1? 'previousPage' : '' )">Previous</x:span>
+
+                    <n:span type="button" class="btn btn-default disabled" style="text-align:center; cursor:default;" width="40px">
+                        <x:span textContent="@load(c:cat(c:cat(vm.page, ' of '), vm.pageCount))"/>
+                    </n:span>
+
+                    <x:span type="button" class="@load(vm.page eq vm.pageCount ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
+                            style="@load(vm.page eq vm.pageCount ? 'width:100px; cursor:default;' : 'width:100px')" onClick="@command(vm.page ne vm.pageCount? 'nextPage' : '' )">Next</x:span>
             </n:div>
+            </x:div>
         </n:div>
 
 

@@ -1,0 +1,57 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?evaluator name="zel"?>
+<zk xmlns:x="xhtml" xmlns:n="native" self="@define(content)">
+    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ImageListVM', pageMax=15)">
+
+        <n:div class="container-fluid top-buffer">
+            <n:div class="row" style="margin-bottom:50px">
+                <n:div class="col-lg-4 col-md-4 col-xs-12  col-lg-push-7 col-md-push-7">
+                    <n:div class="input-group">
+                        <textbox zclass="form-control" value="@bind(vm.searchString)" onOK="@command('doSearch')"/>
+                        <n:span class="input-group-btn">
+                            <x:button class="btn btn-default" type="button" onClick="@command('doSearch')">Search</x:button>
+                        </n:span>
+                    </n:div><!-- /input-group -->
+                </n:div><!-- /.col-lg-6 -->
+            </n:div>
+
+            <x:div class="row" visible="@load(!empty vm.imageList)">
+                <div viewModel="@id('modalVM') @init('edu.norbertzardin.vm.ViewImageVM')">
+                    <!--  VIEW IMAGE Modal -->
+                    <include src="image.zul"/>
+                    <x:div id="load" children="@load(vm.imageList)">
+                        <template name="children" var="image">
+                            <n:div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="margin:10px; height:230px;" align="center">
+                                <x:span data-toggle="modal" data-target="#viewImageModal" onClick="@command('viewImage', selectedImage=image)">
+                                <image content="@load(image.thumbnail.data) @converter('edu.norbertzardin.util.ImageConverter')"/>
+                                </x:span>
+                            </n:div>
+                        </template>
+                    </x:div>
+                </div>
+            </x:div>
+
+            <n:div class="row">
+                <n:div class="col-md-12" align="center" >
+                    <n:div class="btn-group">
+
+                        <x:span type="button" class="@load(vm.page eq 1 ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
+                                style="@load(vm.page eq 1 ? 'width:100px; cursor:default;' : 'width:100px')" onClick="@command(vm.page ne 1? 'previousPage' : '' )">Previous</x:span>
+
+                        <n:span type="button" class="btn btn-default disabled" style="text-align:center; cursor:default;" width="40px">
+                            <x:span textContent="@bind(vm.page)" />
+                        </n:span>
+
+                        <x:span type="button" class="@load(vm.page eq vm.pageCount ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
+                                style="width:100px" onClick="@command(vm.page ne vm.pageCount? 'nextPage' : '' )">Next</x:span>
+                    </n:div>
+                </n:div>
+            </n:div>
+        </n:div>
+        <include src="image.zul"/>
+    </div>
+</zk>
+

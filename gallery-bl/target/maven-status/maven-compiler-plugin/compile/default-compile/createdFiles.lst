@@ -1,0 +1,12 @@
+edu\norbertzardin\service\CatalogueService.class
+edu\norbertzardin\dao\ImageDao.class
+edu\norbertzardin\service\ImageService.class
+edu\norbertzardin\dao\impl\CatalogueDAOImpl.class
+edu\norbertzardin\dao\ByteDataDao.class
+edu\norbertzardin\dao\impl\ByteDataDAOImpl.class
+edu\norbertzardin\dao\impl\TagDAOImpl.class
+edu\norbertzardin\dao\TagDao.class
+edu\norbertzardin\dao\CatalogueDao.class
+edu\norbertzardin\service\DataService.class
+edu\norbertzardin\service\TagService.class
+edu\norbertzardin\dao\impl\ImageDAOImpl.class

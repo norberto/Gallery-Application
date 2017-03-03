@@ -1,0 +1,60 @@
+<zk xmlns:n="native" xmlns:x="xhtml">
+    <n:nav class="navbar navbar-default navbar-static-top body">
+        <n:div class="container">
+            <n:div class="navbar-header">
+                <x:button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+                    <n:span class="sr-only">Toggle navigation</n:span>
+                    <n:span class="icon-bar"/>
+                    <n:span class="icon-bar"/>
+                    <n:span class="icon-bar"/>
+                </x:button>
+                <n:a class="navbar-brand" href="index.zul">Gallery Application</n:a>
+            </n:div>
+
+            <x:div  class="navbar-collapse collapse">
+                <n:ul class="nav navbar-nav">
+                    <n:li><n:a href="upload.zul">Upload</n:a></n:li>
+                    <n:li><n:a href="view.zul">View Images</n:a></n:li>
+                    <n:li><n:a href="browse.zul">Browse</n:a></n:li>
+                </n:ul>
+
+                <n:ul class="nav navbar-nav navbar-right">
+                    <n:li><n:p class="navbar-text">Already have an account?</n:p></n:li>
+                    <n:li class="dropdown">
+                        <n:a href="#" class="dropdown-toggle" data-toggle="dropdown"><n:b>Login</n:b> <n:span class="caret"/></n:a>
+                        <n:ul id="login-dp" class="dropdown-menu">
+                            <n:li>
+                                <n:div class="row">
+                                    <n:div class="col-md-12">
+                                        <n:form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                            <n:div class="form-group">
+                                                <n:label class="sr-only" for="exampleInputEmail2">Email address</n:label>
+                                                <n:input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address"/>
+                                            </n:div>
+                                            <n:div class="form-group">
+                                                <n:label class="sr-only" for="exampleInputPassword2">Password</n:label>
+                                                <n:input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"/>
+                                                <n:div class="help-block text-right"><n:a href="">Forget the password ?</n:a></n:div>
+                                            </n:div>
+                                            <n:div class="form-group">
+                                                <n:button type="submit" class="btn btn-primary btn-block">Sign in</n:button>
+                                            </n:div>
+                                            <n:div class="checkbox">
+                                                <n:label>
+                                                    <n:input type="checkbox"> Remember me</n:input>
+                                                </n:label>
+                                            </n:div>
+                                        </n:form>
+                                    </n:div>
+                                    <n:div class="bottom text-center">
+                                        Don't have an account? <n:a href="#"><n:b>Register</n:b></n:a>
+                                    </n:div>
+                                </n:div>
+                            </n:li>
+                        </n:ul>
+                    </n:li>
+                </n:ul>
+            </x:div>
+        </n:div>
+    </n:nav>
+</zk>

@@ -48,9 +48,8 @@ public class CatalogueDAOImpl implements CatalogueDao {
 
     @Transactional
     public CatalogueEntity getCatalogueByName(String name) {
-        cb = entityManager.getCriteriaBuilder();
-        cq = cb.createQuery(CatalogueEntity.class);
-        catalogue = cq.from(CatalogueEntity.class);
+        setUpCriteriaBuilderForCatalogue();
+
         catalogue.fetch(CatalogueEntity_.images, JoinType.LEFT).fetch(ImageEntity_.thumbnail, JoinType.LEFT);
 
         Predicate name_ = cb.equal(catalogue.get(CatalogueEntity_.title), name);
@@ -60,10 +59,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
 
     @Transactional
     public CatalogueEntity getCatalogueByNameNoFetch(String name) {
-        cb = entityManager.getCriteriaBuilder();
-        cq = cb.createQuery(CatalogueEntity.class);
-        catalogue = cq.from(CatalogueEntity.class);
-//        catalogue.fetch(CatalogueEntity_.images, JoinType.LEFT).fetch(ImageEntity_.thumbnail, JoinType.LEFT);
+        setUpCriteriaBuilderForCatalogue();
 
         Predicate name_ = cb.equal(catalogue.get(CatalogueEntity_.title), name);
         cq.where(name_).select(catalogue);
@@ -71,9 +67,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
     }
 
     public CatalogueEntity getCatalogueById(Long id) {
-        cb = entityManager.getCriteriaBuilder();
-        cq = cb.createQuery(CatalogueEntity.class);
-        catalogue = cq.from(CatalogueEntity.class);
+        setUpCriteriaBuilderForCatalogue();
 
         catalogue.fetch(CatalogueEntity_.images, JoinType.LEFT).fetch(ImageEntity_.thumbnail, JoinType.LEFT);
         Predicate name_ = cb.equal(catalogue.get(CatalogueEntity_.id), id);
@@ -82,9 +76,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
     }
 
     public CatalogueEntity getCatalogueByIdMediumFetch(Long id) {
-        cb = entityManager.getCriteriaBuilder();
-        cq = cb.createQuery(CatalogueEntity.class);
-        catalogue = cq.from(CatalogueEntity.class);
+        setUpCriteriaBuilderForCatalogue();
 
         catalogue.fetch(CatalogueEntity_.images, JoinType.LEFT).fetch(ImageEntity_.mediumImage, JoinType.LEFT);
         Predicate name_ = cb.equal(catalogue.get(CatalogueEntity_.id), id);
@@ -93,7 +85,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
     }
 
     // Set up criteria builder for CatalogueEntity model
-    private void setUpCriteriaBuilderForImage() {
+    private void setUpCriteriaBuilderForCatalogue() {
         cb = entityManager.getCriteriaBuilder();
         cq = cb.createQuery(CatalogueEntity.class);
         catalogue = cq.from(CatalogueEntity.class);
@@ -111,5 +103,15 @@ public class CatalogueDAOImpl implements CatalogueDao {
         } else {
             return pageCount;
         }
+    }
+
+    public List<CatalogueEntity> getCatalogueListByKey(String key) {
+        setUpCriteriaBuilderForCatalogue();
+        String keyword = (key == null) ? "%" : ( "%" + key.toLowerCase() + "%");
+
+        Predicate name = cb.like(cb.lower(catalogue.get(CatalogueEntity_.title)), keyword);
+        cq.select(catalogue).where(cb.or(name));
+
+        return entityManager.createQuery(cq).getResultList();
     }
 }

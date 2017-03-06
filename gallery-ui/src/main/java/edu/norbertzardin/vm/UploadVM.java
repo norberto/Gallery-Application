@@ -133,6 +133,7 @@ public class UploadVM {
     @Command
     @NotifyChange("catalogueList")
     public void filter() {
+        System.out.println(getFilter());
         setCatalogueList(catalogueService.getCatalogueListByKey(getFilter()));
     }
 

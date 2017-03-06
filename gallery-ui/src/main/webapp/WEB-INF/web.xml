@@ -13,9 +13,17 @@
         <param-value>classpath:spring/applicationContext.xml</param-value>
     </context-param>
 
+    <!-- Spring configuration -->
+    <!-- Initialize spring context -->
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    <!-- Enable webapp Scopes-->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
         </listener-class>
     </listener>
 </web-app>

@@ -23,11 +23,44 @@
         <spring.version>4.3.6.RELEASE</spring.version>
 
         <zk.groupid>org.zkoss.zk</zk.groupid>
-        <zk.version>8.0.2.2</zk.version>
+        <zk.version>8.0.3-Eval</zk.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- ZK Framework -->
+            <dependency>
+                <groupId>${zk.groupid}</groupId>
+                <artifactId>zkbind</artifactId>
+                <version>${zk.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${zk.groupid}</groupId>
+                <artifactId>zul</artifactId>
+                <version>${zk.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${zk.groupid}</groupId>
+                <artifactId>zkplus</artifactId>
+                <version>${zk.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${zk.groupid}</groupId>
+                <artifactId>zhtml</artifactId>
+                <version>${zk.version}</version>
+            </dependency>
+
+
+            <!-- Oracle JDBC -->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>11.2.0.3</version>
+            </dependency>
+
             <!-- Hibernate -->
             <dependency>
                 <groupId>${hibernate.groupid}</groupId>
@@ -65,12 +98,6 @@
                 <groupId>${spring.groupid}</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
-                <!--<exclusions>-->
-                <!--<exclusion>-->
-                <!--<groupId>commons-logging</groupId>-->
-                <!--<artifactId>commons-logging</artifactId>-->
-                <!--</exclusion>-->
-                <!--</exclusions>-->
             </dependency>
 
             <dependency>
@@ -97,39 +124,6 @@
                 <version>${spring.version}</version>
             </dependency>
 
-
-            <!-- ZK Framework -->
-            <dependency>
-                <groupId>${zk.groupid}</groupId>
-                <artifactId>zkbind</artifactId>
-                <version>${zk.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>${zk.groupid}</groupId>
-                <artifactId>zul</artifactId>
-                <version>${zk.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>${zk.groupid}</groupId>
-                <artifactId>zkplus</artifactId>
-                <version>${zk.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>${zk.groupid}</groupId>
-                <artifactId>zhtml</artifactId>
-                <version>${zk.version}</version>
-            </dependency>
-
-            <!-- Oracle JDBC -->
-            <dependency>
-                <groupId>com.oracle</groupId>
-                <artifactId>ojdbc6</artifactId>
-                <version>11.2.0.3</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -138,8 +132,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArguments>
                         <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
                     </compilerArguments>
@@ -156,14 +150,13 @@
         </repository>
 
         <repository>
+            <id>ZK CE</id>
+            <url>http://mavensync.zkoss.org/maven2</url>
+        </repository>
+        <repository>
             <id>ZK EVAL</id>
             <name>ZK Evaluation Repository</name>
             <url>http://mavensync.zkoss.org/eval</url>
-        </repository>
-
-        <repository>
-            <id>ZK CE</id>
-            <url>http://mavensync.zkoss.org/maven2</url>
         </repository>
     </repositories>
 </project>

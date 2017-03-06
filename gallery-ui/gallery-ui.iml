@@ -16,21 +16,8 @@
         </sourceRoots>
       </configuration>
     </facet>
-    <facet type="Spring" name="Spring">
-      <configuration />
-    </facet>
-    <facet type="jpa" name="JPA">
-      <configuration>
-        <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="" />
-        <datasource-mapping>
-          <factory-entry name="imagePersistence" value="dataSource" />
-        </datasource-mapping>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/webapp/META-INF/persistence.xml" />
-      </configuration>
-    </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -48,7 +35,6 @@
     <orderEntry type="library" name="Maven: org.zkoss.zk:zk:8.0.3-Eval" level="project" />
     <orderEntry type="library" name="Maven: org.zkoss.common:zweb:8.0.3-Eval" level="project" />
     <orderEntry type="library" name="Maven: org.zkoss.common:zcommon:8.0.3-Eval" level="project" />
-    <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.zkoss.common:zel:8.0.3-Eval" level="project" />
     <orderEntry type="library" name="Maven: org.zkoss.zk:zuti:8.0.3-Eval" level="project" />
     <orderEntry type="module" module-name="gallery-model" />
@@ -78,18 +64,18 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.3.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.oracle:ojdbc6:11.2.0.3" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zkbind:8.0.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zkbind:8.0.4.2-Eval" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.18.2-GA" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zhtml:8.0.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zhtml:8.0.4.2-Eval" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="Maven: org.zkoss:zsoup:1.8.2.5" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zkplus:8.0.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zul:8.0.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zk:8.0.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.common:zweb:8.0.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.common:zcommon:8.0.2.2" level="project" />
-    <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.common:zel:8.0.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zkplus:8.0.4.2-Eval" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zul:8.0.4.2-Eval" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zk:8.0.4.2-Eval" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.common:zweb:8.0.4.2-Eval" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.common:zcommon:8.0.4.2-Eval" level="project" />
+    <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.3.2" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.common:zel:8.0.4.2-Eval" level="project" />
     <orderEntry type="library" name="Maven: org.apache-extras.beanshell:bsh:2.0b6" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-jdk14:1.7.5" level="project" />

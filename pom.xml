@@ -23,7 +23,7 @@
         <spring.version>4.3.6.RELEASE</spring.version>
 
         <zk.groupid>org.zkoss.zk</zk.groupid>
-        <zk.version>8.0.2.2</zk.version>
+        <zk.version>8.0.4.2-Eval</zk.version>
     </properties>
 
     <dependencyManagement>
@@ -138,8 +138,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArguments>
                         <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
                     </compilerArguments>

@@ -2,6 +2,7 @@ package edu.norbertzardin.vm;
 
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
+import edu.norbertzardin.form.CatalogueForm;
 import edu.norbertzardin.service.CatalogueService;
 import edu.norbertzardin.service.ImageService;
 import edu.norbertzardin.service.TagService;
@@ -36,6 +37,8 @@ public class BrowseVM {
     private Boolean backButton;
     private CatalogueEntity defaultCatalogue;
 
+    private CatalogueForm catalogueForm;
+
     @WireVariable
     private CatalogueService catalogueService;
 
@@ -47,7 +50,10 @@ public class BrowseVM {
 
     // Initializers
     @Init
-    public void init() {
+    public void init(@ContextParam(ContextType.VIEW) Component view) {
+        Selectors.wireComponents(view, this, false);
+
+        catalogueForm = new CatalogueForm();
         String defaultCatalogueName = "Non-categorized";
         setPage(1);
         setPageCount(catalogueService.getPageCount(5));
@@ -69,7 +75,7 @@ public class BrowseVM {
     @NotifyChange({"catalogueList", "name"})
     public void createCatalogue() {
         CatalogueEntity ce = new CatalogueEntity();
-        ce.setTitle(name);
+        ce.setTitle(catalogueForm.getTitle());
         ce.setCreatedDate(new Date());
         catalogueService.createCatalogue(ce);
         catalogueList = catalogueService.getCatalogueList();
@@ -118,8 +124,11 @@ public class BrowseVM {
     }
 
     @Command
+    @NotifyChange({"editCatalogue", "catalogueList"})
     public void editCatalogue() {
+        editCatalogue.setTitle(catalogueForm.getTitle());
         catalogueService.editCatalogue(editCatalogue);
+        setCatalogueList(catalogueService.getCatalogueList());
     }
 
     public void loadImages() {
@@ -244,4 +253,10 @@ public class BrowseVM {
     public void setPageLabels(List<Integer> pageLabels) {
         this.pageLabels = pageLabels;
     }
+
+    public void setCatalogueForm(CatalogueForm catalogueForm) {
+        this.catalogueForm = catalogueForm;
+    }
+
+    public CatalogueForm getCatalogueForm() { return this.catalogueForm; }
 }

@@ -3,6 +3,7 @@ package edu.norbertzardin.vm;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
+import edu.norbertzardin.form.UploadForm;
 import edu.norbertzardin.service.CatalogueService;
 import edu.norbertzardin.service.ImageService;
 import edu.norbertzardin.service.TagService;
@@ -12,11 +13,13 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+
 import java.util.List;
 
 public class ViewImageVM {
@@ -25,6 +28,8 @@ public class ViewImageVM {
     private List<TagEntity> tagList;
     private boolean editMode;
     private String tags;
+
+    private UploadForm editForm;
 
     @WireVariable
     private TagService tagService;
@@ -36,26 +41,27 @@ public class ViewImageVM {
     private ImageService imageService;
 
     @Init
-    public void init (@ContextParam(ContextType.VIEW) Component view) {
+    public void init(@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
         setEditMode(false);
     }
 
 
     @AfterCompose
-    public void afterCompose (@ContextParam(ContextType.VIEW) Component view) {
+    public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
     }
 
-    @Command
-    @NotifyChange({"selectedImage","catalogueList","tagList","editMode"})
+    @GlobalCommand
+    @NotifyChange({"selectedImage", "catalogueList", "tagList", "editMode", "editForm"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
         // If selected image is not null - fetch image with all contents
-        if(image != null) {
+        if (image != null) {
             setSelectedImage(imageService.getImageByIdFullFetch(image.getId()));
+            editForm = new UploadForm(selectedImage.getName(), selectedImage.getDescription());
         }
         // If fetched image is not null, load its tags to local contents
-        if(getSelectedImage() != null) {
+        if (getSelectedImage() != null) {
             loadTags();
         }
         // Disable edit mode on modal open
@@ -65,7 +71,7 @@ public class ViewImageVM {
     @Command
     public void loadTags() {
         // If selected image is not null - fetch tags
-        if(selectedImage != null) {
+        if (selectedImage != null) {
             setTagList(selectedImage.getTags());
         }
     }
@@ -74,11 +80,11 @@ public class ViewImageVM {
     @NotifyChange({"tagList", "selectedImage"})
     public void deleteTag(@BindingParam("selectedTag") TagEntity tag) {
         // If selected tag is not null delete it
-        if(tag != null) {
+        if (tag != null) {
             // Look up the tag
             TagEntity tag_ = tagService.getTagById(tag.getId());
             // If tag found start deleting process
-            if(tag_ != null) {
+            if (tag_ != null) {
                 tagService.removeTag(tag_);
                 // Update local content
                 setSelectedImage(imageService.getImageByIdWithFetch(selectedImage.getId()));
@@ -96,12 +102,14 @@ public class ViewImageVM {
     @Command
     @NotifyChange({"selectedImage", "editMode", "tagList", "tags"})
     public void editImage() {
+        selectedImage.setName(editForm.getName());
+        selectedImage.setDescription(editForm.getDescription());
         // If selected image is not null process data
-        if(selectedImage != null) {
+        if (selectedImage != null) {
             // Parse tags
-            String[] parsed_tags = ImageUtil.parseTags(tags);
+            String[] parsed_tags = ImageUtil.parseTags(editForm.getTags());
             // Lookup and update OR create new tags and add them to image
-            for(String tag : parsed_tags) {
+            for (String tag : parsed_tags) {
                 tagService.createTag(tag, selectedImage);
             }
             // Update image
@@ -124,11 +132,11 @@ public class ViewImageVM {
     @Command
     public void onDownload() {
         // Check if currently selected image is not null, if not - fetch image again with its contents
-        if(selectedImage != null) {
+        if (selectedImage != null) {
             setSelectedImage(imageService.getImageByIdFullFetch(selectedImage.getId()));
         }
         // Check if fetched image is not null, if not, start downloading
-        if(selectedImage != null) {
+        if (selectedImage != null) {
             ImageUtil.download(selectedImage);
         }
 
@@ -150,38 +158,47 @@ public class ViewImageVM {
         return selectedImage;
     }
 
+    public void setSelectedImage(ImageEntity selectedImage) {
+        this.selectedImage = selectedImage;
+    }
 
     public List<CatalogueEntity> getCatalogueList() {
         return catalogueList;
-    }
-
-    public void setEditMode(boolean editMode) { this.editMode = editMode; }
-
-    public Boolean getEditMode() {
-        return editMode;
-    }
-
-    public void setSelectedImage(ImageEntity selectedImage) {
-        this.selectedImage = selectedImage;
     }
 
     public void setCatalogueList(List<CatalogueEntity> catalogueList) {
         this.catalogueList = catalogueList;
     }
 
-    public void setTagList(List<TagEntity> tagList) {
-        this.tagList = tagList;
+    public Boolean getEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
     }
 
     public List<TagEntity> getTagList() {
         return tagList;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
+    public void setTagList(List<TagEntity> tagList) {
+        this.tagList = tagList;
+    }
+
+    public UploadForm getEditForm() {
+        return editForm;
+    }
+
+    public void setEditForm(UploadForm editForm) {
+        this.editForm = editForm;
     }
 
     public String getTags() {
-        return this.tags;
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }

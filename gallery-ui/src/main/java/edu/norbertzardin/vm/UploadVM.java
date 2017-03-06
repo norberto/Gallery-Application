@@ -3,11 +3,12 @@ package edu.norbertzardin.vm;
 import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
-import edu.norbertzardin.entities.TagEntity;
+import edu.norbertzardin.form.UploadForm;
 import edu.norbertzardin.service.CatalogueService;
 import edu.norbertzardin.service.ImageService;
 import edu.norbertzardin.service.TagService;
 import edu.norbertzardin.util.ImageUtil;
+import edu.norbertzardin.util.TagsStringFromJson;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -23,15 +24,18 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
+import javax.script.ScriptException;
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
 public class UploadVM {
 
     private final String defaultCatalogueName = "Non-categorized";
+
+    private UploadForm uploadForm;
 
     private CatalogueEntity defaultCatalogue;
     private String filter;
@@ -68,6 +72,7 @@ public class UploadVM {
         Selectors.wireComponents(view, this, false);
         catalogueList = catalogueService.getCatalogueList();
         defaultCatalogue = catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName);
+        uploadForm = new UploadForm();
         setSelectedCatalogue(defaultCatalogue);
         setUploaded(false);
     }
@@ -80,8 +85,8 @@ public class UploadVM {
     @Command
     public void submit(){
         ImageEntity ie = new ImageEntity();
-        ie.setName(name);
-        ie.setDescription(description);
+        ie.setName(uploadForm.getName());
+        ie.setDescription(uploadForm.getDescription());
         ie.setCatalogue(selectedCatalogue);
 
         ByteData thumbnail_ = new ByteData();
@@ -100,7 +105,7 @@ public class UploadVM {
 
         imageService.createImage(ie);
 
-        String[] tagList = ImageUtil.parseTags(tags);
+        String[] tagList = ImageUtil.parseTags(uploadForm.getTags());
         for(String tag : tagList){
             tagService.createTag(tag, ie);
         }
@@ -110,6 +115,15 @@ public class UploadVM {
     @Command
     @NotifyChange({"thumbnail", "uploaded"})
     public void onUpload(@BindingParam("upEvent") UploadEvent event){
+        try {
+            TagsStringFromJson.convert();
+        } catch(ScriptException e ) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e ) {
+            e.printStackTrace();
+        }
 
         Media media = event.getMedia();
         if (media instanceof Image) {
@@ -232,5 +246,13 @@ public class UploadVM {
     @Command
     public void setFilter(String filter) {
         this.filter = filter;
+    }
+
+    public UploadForm getUploadForm() {
+        return uploadForm;
+    }
+
+    public void setUploadForm(UploadForm uploadForm) {
+        this.uploadForm = uploadForm;
     }
 }

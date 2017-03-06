@@ -3,8 +3,9 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
-<zk xmlns:n="native" xmlns:x="xhtml" xmlns:z="zul">
-    <div self="@define(content)" align="center" viewModel="@id('vm') @init('edu.norbertzardin.vm.BrowseVM')">
+<zk xmlns:n="native" xmlns:x="xhtml">
+    <div self="@define(content)" align="center" viewModel="@id('vm') @init('edu.norbertzardin.vm.BrowseVM')"
+         validationMessages="@id('vmsgs')">
         <n:div class="container-fluid">
             <n:div class="row">
                 <n:div class="col-md-9" align="left">
@@ -55,37 +56,45 @@
                 <n:div class="col-md-12">
                     <n:div id="image-container" class="container-fluid top-buffer" width="auto"
                            style="margin-left:50px">
-                        <div viewModel="@id('modalVM') @init('edu.norbertzardin.vm.ViewImageVM')">
-                            <!--  VIEW IMAGE Modal -->
-                            <include src="image.zul"/>
 
-                            <x:div id="load2" children="@load(vm.imageList)">
-                                <template name="children" var="image">
-                                    <n:div class="col-lg-2 col-md-3 col-xs-4 thumb" style="margin:10px; height:230px;">
-                                        <x:span onClick="@command('viewImage', selectedImage=image)"
-                                             class="" href="#viewImageModal" data-toggle="modal"
-                                             data-target="#viewImageModal">
-                                            <image content="@load(image.thumbnail.data) @converter('edu.norbertzardin.util.ImageConverter')"/>
-                                        </x:span>
-                                    </n:div>
-                                </template>
-                            </x:div>
-                        </div>
+                        <!--  VIEW IMAGE Modal -->
+                        <include src="image.zul"/>
+
+                        <x:div id="load2" children="@load(vm.imageList)">
+                            <template name="children" var="image">
+                                <n:div class="col-lg-2 col-md-3 col-xs-4 thumb"
+                                       style="margin:10px; height:230px;">
+                                    <x:span onClick="@global-command('viewImage', selectedImage=image)"
+                                            href="#viewImageModal" data-toggle="modal"
+                                            data-target="#viewImageModal">
+                                        <image content="@load(image.thumbnail.data) @converter('edu.norbertzardin.util.ImageConverter')"/>
+                                    </x:span>
+                                </n:div>
+                            </template>
+                        </x:div>
+
                     </n:div>
                 </n:div>
             </n:div>
             <x:div class="row" visible="@load(!empty vm.imageList)">
                 <n:div class="btn-group">
-                    <x:span type="button" class="@load(vm.page eq 1 ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
-                            style="@load(vm.page eq 1 ? 'width:100px; cursor:default;' : 'width:100px')" onClick="@command(vm.page ne 1? 'previousPage' : '' )">Previous</x:span>
+                    <x:span type="button"
+                            class="@load(vm.page eq 1 ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
+                            style="@load(vm.page eq 1 ? 'width:100px; cursor:default;' : 'width:100px')"
+                            onClick="@command(vm.page ne 1? 'previousPage' : '' )">Previous
+                    </x:span>
 
-                    <n:span type="button" class="btn btn-default disabled" style="text-align:center; cursor:default;" width="40px">
+                    <n:span type="button" class="btn btn-default disabled" style="text-align:center; cursor:default;"
+                            width="40px">
                         <x:span textContent="@load(c:cat(c:cat(vm.page, ' of '), vm.pageCount))"/>
                     </n:span>
 
-                    <x:span type="button" class="@load(vm.page eq vm.pageCount ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
-                            style="@load(vm.page eq vm.pageCount ? 'width:100px; cursor:default;' : 'width:100px')" onClick="@command(vm.page ne vm.pageCount? 'nextPage' : '' )">Next</x:span>
-            </n:div>
+                    <x:span type="button"
+                            class="@load(vm.page eq vm.pageCount ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
+                            style="@load(vm.page eq vm.pageCount ? 'width:100px; cursor:default;' : 'width:100px')"
+                            onClick="@command(vm.page ne vm.pageCount? 'nextPage' : '' )">Next
+                    </x:span>
+                </n:div>
             </x:div>
         </n:div>
 
@@ -121,7 +130,8 @@
                             <n:div class="row top-buffer">
                                 <n:div class="input-group">
                                     <n:span class="input-group-addon">Catalogue Name:</n:span>
-                                    <textbox class="form-control" id="catalogueName" value="@save(vm.name)" cols="50"/>
+                                    <textbox class="editForm-control" id="catalogueName" value="@save(vm.name)"
+                                             cols="50"/>
                                 </n:div>
                             </n:div>
                         </n:div>
@@ -160,16 +170,20 @@
                     </n:div>
 
                     <n:div class="modal-body">
-                        <n:div class="form-group">
+                        <n:div class="editForm-group">
                             <n:div class="container-fluid">
                                 <n:div class="row top-buffer">
-                                    <n:div class="col-md-12" align="center">
-                                        <n:div class="input-group">
-                                            <span class="input-group-addon">Catalogue Name:</span>
-                                            <textbox zclass="form-control" value="@save(vm.editCatalogue.title)"
-                                                       placeholder="@load(c:cat('Enter a new name for ', vm.editCatalogue.title))"/>
-                                        </n:div>
-                                    </n:div>
+                                    <x:div class="col-md-12" align="left"
+                                           editForm="@id('cat') @save(vm.catalogueForm, before='editCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=32)">
+                                        <x:div sclass="@load(empty vmsgs['title'] ? 'editForm-group' : 'editForm-group has-error has-feedback')">
+                                            <n:label class="control-label" for="newTitle">Catalogue title</n:label>
+                                            <x:input id="newTitle" type="text" class="editForm-control"
+                                                     value="@save(cat.title)"
+                                                     placeholder="@load(c:cat('Enter a new name for ', vm.editCatalogue.title))"/>
+                                            <x:span id="nameStatus" class="help-block"
+                                                    textContent="@load(vmsgs['title'])"/>
+                                        </x:div>
+                                    </x:div>
                                 </n:div>
 
                             </n:div>
@@ -180,8 +194,7 @@
                                   onClick="@command('deleteCatalogue')">
                             <n:span class="glyphicon glyphicon-trash"/>
                         </x:button>
-                        <x:button type="button" class="btn btn-success" data-dismiss="modal"
-                                  onClick="@command('editCatalogue')">
+                        <x:button type="button" class="btn btn-success" onClick="@command('editCatalogue')">
                             <n:span class="glyphicon glyphicon-ok"/>
                             Save
                         </x:button>

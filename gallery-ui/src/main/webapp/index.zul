@@ -1,7 +1,7 @@
 <?page title="Gallery Application - Home"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
 <zk xmlns:n="native">
     <div self="@define(content)">
         <!-- Image -->

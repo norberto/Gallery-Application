@@ -24,7 +24,7 @@ public class BrowseVM {
     private final Integer PAGE_MAX = 5;
 
     // Properties
-    private String name;
+    private String title;
 
     private Integer page;
     private Long pageCount;
@@ -36,8 +36,6 @@ public class BrowseVM {
     private CatalogueEntity editCatalogue;
     private Boolean backButton;
     private CatalogueEntity defaultCatalogue;
-
-    private CatalogueForm catalogueForm;
 
     @WireVariable
     private CatalogueService catalogueService;
@@ -52,14 +50,12 @@ public class BrowseVM {
     @Init
     public void init(@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
-
-        catalogueForm = new CatalogueForm();
         String defaultCatalogueName = "Non-categorized";
         setPage(1);
-        setPageCount(catalogueService.getPageCount(5));
         setDefaultCatalogue(catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName));
         setSelectedCatalogue(defaultCatalogue);
         setCatalogueList(catalogueService.getCatalogueList());
+        setPageCount(catalogueService.getPageCount(selectedCatalogue.getId(), 5));
         setBackButton(false);
         loadImages();
     }
@@ -72,20 +68,20 @@ public class BrowseVM {
 
     // Commands
     @Command
-    @NotifyChange({"catalogueList", "name"})
+    @NotifyChange({"catalogueList", "title"})
     public void createCatalogue() {
         CatalogueEntity ce = new CatalogueEntity();
-        ce.setTitle(catalogueForm.getTitle());
+        ce.setTitle(title);
         ce.setCreatedDate(new Date());
         catalogueService.createCatalogue(ce);
         catalogueList = catalogueService.getCatalogueList();
-        setName(""); // clear name property after catalogue is created
     }
 
-    @NotifyChange({"imageList", "selectedCatalogue", "backButton"})
+    @NotifyChange({"imageList", "selectedCatalogue", "backButton", "pageCount"})
     @Command
     public void selectCatalogue(@BindingParam("selectedCatalogue") CatalogueEntity ce) {
         setSelectedCatalogue(catalogueService.getCatalogueById(ce.getId()));
+        setPageCount(catalogueService.getPageCount(selectedCatalogue.getId(), PAGE_MAX));
         loadImages();
         setBackButton(true);
     }
@@ -126,7 +122,7 @@ public class BrowseVM {
     @Command
     @NotifyChange({"editCatalogue", "catalogueList"})
     public void editCatalogue() {
-        editCatalogue.setTitle(catalogueForm.getTitle());
+        editCatalogue.setTitle(editCatalogue.getTitle());
         catalogueService.editCatalogue(editCatalogue);
         setCatalogueList(catalogueService.getCatalogueList());
     }
@@ -193,8 +189,11 @@ public class BrowseVM {
         this.catalogueService = catalogueService;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
+    }
+    public String getTitle() {
+        return title;
     }
 
     // Getters
@@ -253,10 +252,4 @@ public class BrowseVM {
     public void setPageLabels(List<Integer> pageLabels) {
         this.pageLabels = pageLabels;
     }
-
-    public void setCatalogueForm(CatalogueForm catalogueForm) {
-        this.catalogueForm = catalogueForm;
-    }
-
-    public CatalogueForm getCatalogueForm() { return this.catalogueForm; }
 }

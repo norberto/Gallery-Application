@@ -8,7 +8,6 @@ import edu.norbertzardin.service.CatalogueService;
 import edu.norbertzardin.service.ImageService;
 import edu.norbertzardin.service.TagService;
 import edu.norbertzardin.util.ImageUtil;
-import edu.norbertzardin.util.TagsStringFromJson;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -24,19 +23,21 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.Messagebox;
 
-import javax.script.ScriptException;
-import java.io.FileNotFoundException;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLConnection;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
 
 public class UploadVM {
-
     private final String defaultCatalogueName = "Non-categorized";
 
     private UploadForm uploadForm;
-
     private CatalogueEntity defaultCatalogue;
     private String filter;
     private String name;
@@ -46,7 +47,6 @@ public class UploadVM {
     private byte[] thumbnail;
     private byte[] mediumSize;
     private byte[] download;
-    private Boolean uploaded;
     private CatalogueEntity selectedCatalogue;
 
     private List<CatalogueEntity> catalogueList;
@@ -59,22 +59,30 @@ public class UploadVM {
 
     @WireVariable
     private CatalogueService catalogueService;
+    private boolean allowSubmit;
+    private String errorMessage;
+    private byte[] imagePlaceholder;
 
     @AfterCompose
-    public void afterCompose(@ContextParam(ContextType.VIEW) Component view){
+    public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
     }
 
-    public UploadVM() {}
-
     @Init
-    public void init(@ContextParam(ContextType.VIEW) Component view){
+    public void init(@ContextParam(ContextType.VIEW) Component view) {
+        setAllowSubmit(false);
+        try {
+            File f = new File("META-INF/resources/images/noimage.gif");
+            imagePlaceholder = Files.readAllBytes(f.toPath());
+        } catch (IOException e) {
+            System.err.println("No image placeholder found.");
+        }
+        setThumbnail(imagePlaceholder);
         Selectors.wireComponents(view, this, false);
         catalogueList = catalogueService.getCatalogueList();
         defaultCatalogue = catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName);
         uploadForm = new UploadForm();
         setSelectedCatalogue(defaultCatalogue);
-        setUploaded(false);
     }
 
     @Command
@@ -83,7 +91,7 @@ public class UploadVM {
     }
 
     @Command
-    public void submit(){
+    public void submit() {
         ImageEntity ie = new ImageEntity();
         ie.setName(uploadForm.getName());
         ie.setDescription(uploadForm.getDescription());
@@ -106,35 +114,35 @@ public class UploadVM {
         imageService.createImage(ie);
 
         String[] tagList = ImageUtil.parseTags(uploadForm.getTags());
-        for(String tag : tagList){
+        for (String tag : tagList) {
             tagService.createTag(tag, ie);
         }
 
         Executions.getCurrent().sendRedirect("/view.zul");
     }
-    @Command
-    @NotifyChange({"thumbnail", "uploaded"})
-    public void onUpload(@BindingParam("upEvent") UploadEvent event){
-        try {
-            TagsStringFromJson.convert();
-        } catch(ScriptException e ) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e ) {
-            e.printStackTrace();
-        }
 
+    @Command
+    @NotifyChange({"thumbnail", "uploaded", "allowSubmit", "errorMessage"})
+    public void onUpload(@BindingParam("upEvent") UploadEvent event) {
         Media media = event.getMedia();
-        if (media instanceof Image) {
-            Image img = (Image) media;
-            setDownload(img.getByteData());
-            setMediumSize(ImageUtil.scaleImageToSize(img, 500));
-            setThumbnail(ImageUtil.scaleImageToSize(img, 200));
-            setDatatype(img.getFormat());
-            setUploaded(true);
-        } else {
-            Messagebox.show("Not an image: " + media, "Error", Messagebox.OK, Messagebox.ERROR);
+        InputStream is = new BufferedInputStream(new ByteArrayInputStream(media.getByteData()));
+        try {
+            String mimeType = URLConnection.guessContentTypeFromStream(is);
+            if (mimeType != null && media instanceof Image) {
+                Image img = (Image) media;
+                setDownload(img.getByteData());
+                setMediumSize(ImageUtil.scaleImageToSize(img, 500));
+                setThumbnail(ImageUtil.scaleImageToSize(img, 200));
+                setDatatype(img.getFormat());
+                setAllowSubmit(true);
+                errorMessage = null;
+            } else {
+                errorMessage = "Selected item is not an image.";
+                setAllowSubmit(false);
+                setThumbnail(imagePlaceholder);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -150,11 +158,13 @@ public class UploadVM {
         setCatalogueList(catalogueService.getCatalogueListByKey(getFilter()));
     }
 
-    public void setImageService(ImageService imageService){
-        this.imageService = imageService;
+    public ImageService getImageService() {
+        return imageService;
     }
 
-    public ImageService getImageService(){ return imageService; }
+    public void setImageService(ImageService imageService) {
+        this.imageService = imageService;
+    }
 
     public String getName() {
         return name;
@@ -208,10 +218,12 @@ public class UploadVM {
         this.tagService = tagService;
     }
 
-    public void setThumbnail(byte[] thumbnail) { this.thumbnail = thumbnail; }
-
-    public byte[] getThumbnail () {
+    public byte[] getThumbnail() {
         return thumbnail;
+    }
+
+    public void setThumbnail(byte[] thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public void setMediumSize(byte[] mediumSize) {
@@ -230,14 +242,6 @@ public class UploadVM {
         this.datatype = datatype;
     }
 
-    public Boolean getUploaded() {
-        return uploaded;
-    }
-
-    public void setUploaded(Boolean uploaded) {
-        this.uploaded = uploaded;
-    }
-
     public String getFilter() {
         return filter;
     }
@@ -254,5 +258,21 @@ public class UploadVM {
 
     public void setUploadForm(UploadForm uploadForm) {
         this.uploadForm = uploadForm;
+    }
+
+    public boolean getAllowSubmit() {
+        return this.allowSubmit;
+    }
+
+    public void setAllowSubmit(boolean allowSubmit) {
+        this.allowSubmit = allowSubmit;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

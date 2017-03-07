@@ -1,10 +1,12 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?evaluator name="zel"?>
+<?page zscriptLanguage="javascript"?>
+
 <zk xmlns:x="xhtml" xmlns:n="native">
-    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ImageListVM', pageMax=15)" self="@define(content)">
+    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewVM', pageMax=15)" self="@define(content)">
 
         <n:div class="container-fluid top-buffer">
             <n:div class="row" style="margin-bottom:50px">
@@ -60,6 +62,5 @@
                 </n:div>
             </n:div>
         </n:div>
-
     </div>
 </zk>

@@ -1,9 +1,22 @@
-<?page title="Gallery Application - Browse"?>
-<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
+<?page title="Gallery Application - Browse"?>
+<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
 <zk xmlns:n="native" xmlns:x="xhtml">
+    <x:script type="text/javascript">
+        $(function(){
+
+            $('#addCatalogueModal').on('hidden.bs.modal', function () {
+
+            });
+
+            $('#editCatalogue').on('hidden.bs.modal', function () {
+
+            });
+        });
+    </x:script>
     <div self="@define(content)" align="center" viewModel="@id('vm') @init('edu.norbertzardin.vm.BrowseVM')"
          validationMessages="@id('vmsgs')">
         <n:div class="container-fluid">
@@ -100,8 +113,9 @@
 
 
         <!-- CREATION Modal -->
-        <n:div class="modal fade" id="addCatalogueModal" tabindex="-1" role="dialog" aria-hidden="true" width="800px">
-            <n:div class="modal-dialog" role="document">
+        <n:div class="modal fade" id="addCatalogueModal" tabindex="-1" width="800px">
+
+            <n:div class="modal-dialog">
                 <n:div class="modal-content">
                     <n:div class="modal-header">
                         <n:div class="container-fluid">
@@ -130,7 +144,7 @@
                             <n:div class="row top-buffer">
                                 <n:div class="input-group">
                                     <n:span class="input-group-addon">Catalogue Name:</n:span>
-                                    <textbox class="editForm-control" id="catalogueName" value="@save(vm.name)"
+                                    <textbox zclass="form-control" id="catalogueName" value="@load(vm.title) @save(vm.title, before='createCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=32)"
                                              cols="50"/>
                                 </n:div>
                             </n:div>
@@ -147,8 +161,8 @@
         </n:div>
 
         <!-- EDITION Modal -->
-        <n:div class="modal fade" id="editCatalogue" tabindex="-1" role="dialog" aria-hidden="true" width="800px">
-            <n:div class="modal-dialog" role="document">
+        <n:div class="modal fade" id="editCatalogue" tabindex="-1" width="800px">
+            <n:div class="modal-dialog">
                 <n:div class="modal-content">
                     <n:div class="modal-header">
                         <n:div class="container-fluid">
@@ -173,13 +187,11 @@
                         <n:div class="editForm-group">
                             <n:div class="container-fluid">
                                 <n:div class="row top-buffer">
-                                    <x:div class="col-md-12" align="left"
-                                           editForm="@id('cat') @save(vm.catalogueForm, before='editCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=32)">
+                                    <x:div class="col-md-12" align="left">
                                         <x:div sclass="@load(empty vmsgs['title'] ? 'editForm-group' : 'editForm-group has-error has-feedback')">
                                             <n:label class="control-label" for="newTitle">Catalogue title</n:label>
-                                            <x:input id="newTitle" type="text" class="editForm-control"
-                                                     value="@save(cat.title)"
-                                                     placeholder="@load(c:cat('Enter a new name for ', vm.editCatalogue.title))"/>
+                                            <textbox id="newTitle" type="text" zclass="form-control"
+                                                     value="@load(vm.editCatalogue.title) @save(vm.editCatalogue.title, before='editCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=32)"/>
                                             <x:span id="nameStatus" class="help-block"
                                                     textContent="@load(vmsgs['title'])"/>
                                         </x:div>
@@ -201,6 +213,9 @@
                     </n:div>
                 </n:div>
             </n:div>
+
         </n:div>
     </div>
+
+
 </zk>

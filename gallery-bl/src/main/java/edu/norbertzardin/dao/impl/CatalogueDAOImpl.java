@@ -91,10 +91,11 @@ public class CatalogueDAOImpl implements CatalogueDao {
         catalogue = cq.from(CatalogueEntity.class);
     }
 
-    public Long getPageCount(Integer pageMax) {
+    public Long getPageCount(Long id, Integer pageMax) {
         cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
         criteria.select(cb.count(criteria.from(CatalogueEntity.class)));
+        criteria.where( cb.equal(catalogue.get(CatalogueEntity_.id), id));
         Long imageCount = entityManager.createQuery(criteria).getSingleResult();
 
         Long pageCount = imageCount / pageMax;

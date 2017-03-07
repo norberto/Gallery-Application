@@ -9,27 +9,16 @@ import java.util.Map;
 
 public class UploadValidator extends AbstractValidator{
 
-    private String name;
-    private String description;
-    private String tags;
-    private Long maxLength;
-
     @Override
-    public void validate(ValidationContext validationContext) {
-        Map<String,Property> beanProps = validationContext.getProperties(validationContext.getProperty().getBase());
+    public void validate(ValidationContext ctx) {
+        Map<String,Property> beanProps = ctx.getProperties(ctx.getProperty().getBase());
 
-        name = (String) beanProps.get("name").getValue();
-        description = (String) beanProps.get("description").getValue();
-        tags = (String) beanProps.get("tags").getValue();
-
-        maxLength = (Long) validationContext.getValidatorArg("maxLength");
-
-        validateName(validationContext);
-        validateDescription(validationContext);
-        validateTags(validationContext);
+        validateName(ctx, (String) beanProps.get("name").getValue(), (Long) ctx.getValidatorArg("maxLength"));
+        validateDescription(ctx, (String) beanProps.get("description").getValue());
+        validateTags(ctx, (String) beanProps.get("tags").getValue());
     }
 
-    private void validateName(ValidationContext ctx){
+    private void validateName(ValidationContext ctx, String name, Long maxLength){
         if(name == null || name.equals("")) {
             addInvalidMessage(ctx, "name", "Name is required.");
         }
@@ -38,11 +27,11 @@ public class UploadValidator extends AbstractValidator{
         }
     }
 
-    private void validateDescription(ValidationContext ctx) {
+    private void validateDescription(ValidationContext ctx, String description) {
         // do nothing
     }
 
-    private void validateTags(ValidationContext ctx) {
+    private void validateTags(ValidationContext ctx, String tags) {
         String[] tagList = ImageUtil.parseTags(tags);
         if(tagList.length == 0) {
             addInvalidMessage(ctx, "tags", "At least ONE tag is required.");

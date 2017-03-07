@@ -1,0 +1,30 @@
+<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
+<zk xmlns:n="xhtml">
+    <n:head>
+        <n:link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.js"/>
+
+            <n:script>
+                $(".nav li").on("click", function() {
+                $(".nav li").removeClass("active");
+                $(this).addClass("active");
+                });
+            </n:script>
+    </n:head>
+
+    <n:div>
+        <n:div class="container-fluid">
+            <!-- ********** Navbar ********** -->
+            <n:div class="row">
+                <n:div id="navbar" class="col-md">
+                    <include src="WEB-INF/layout/navbar.zul"/>
+                </n:div>
+            </n:div>
+            <!-- ********** Content ********** -->
+            <n:div class="row">
+                <n:div class="container-fluid" self="@insert(content)"/>
+            </n:div>
+        </n:div>
+    </n:div>
+</zk>
+

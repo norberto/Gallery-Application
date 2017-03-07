@@ -1,10 +1,9 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" ?>
 <?link rel="stylesheet" type="text/css" href="css/style.css" ?>
-<?page zscriptLanguage="javascript"?>
 
 <zk xmlns:n="native" xmlns="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul">
-    <zul:div viewModel="@id('modalVM') @init('edu.norbertzardin.vm.ViewImageVM')"
+    <zul:div viewModel="@id('modalVM') @init('edu.norbertzardin.vm.ImageVM')"
              validationMessages="@id('errors')"
              form="@id('editForm') @load(modalVM.editForm) @save(modalVM.editForm, before='editImage')
                    @validator('edu.norbertzardin.validators.EditImageValidator', maxLength=32)">

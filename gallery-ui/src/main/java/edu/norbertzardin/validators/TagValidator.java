@@ -10,7 +10,10 @@ public class TagValidator extends AbstractValidator{
         String tags = (String) ctx.getProperty().getValue();
         String[] tagList = ImageUtil.parseTags(tags);
         if(tagList.length == 0) {
-            addInvalidMessage(ctx, "At least ONE tag is required.");
+            addInvalidMessage(ctx, "At least one tag is required. (maximum 5)");
+        }
+        if(tagList.length > 5) {
+            addInvalidMessage(ctx, "Too many tags. (maximum 5)");
         }
     }
 }

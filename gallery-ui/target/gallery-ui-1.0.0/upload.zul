@@ -1,16 +1,18 @@
-<?page title="Gallery Application - Upload"?>
-<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
-<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-tagsinput.css"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="layout/template.zul"?>
+<?imagePage title="Gallery Application - Upload"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
+<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
 <?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"?>
-<?link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css"?>
+<!--<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-tokenfield.css" ?>-->
+<!--<?script type="text/javascript" src="bootstrap/js/bootstrap-tokenfield.js"?>-->
 
-<zk xmlns:n="native" xmlns="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:wa="http://www.zkoss.org/2005/zk/client/attribute">
-    <script src="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"/>
+<zk xmlns:n="native" xmlns="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul">
+    <!--<script src="js/tags.js"/>-->
 
-    <div viewModel="@id('uploadVM') @init('edu.norbertzardin.vm.UploadVM')" validationMessages="@id('vmsgs')"
-         self="@define(content)">
+    <div viewModel="@id('uploadVM') @init('edu.norbertzardin.vm.UploadVM')"
+         self="@define(content)"
+         validationMessages="@id('vmsgs')"
+         form="@id('fx') @load(uploadVM.uploadForm) @save(uploadVM.uploadForm, before='submit') @validator('edu.norbertzardin.validators.UploadValidator', maxLength=32)">
 
         <n:div class="container">
             <n:div class="row top-buffer">
@@ -22,13 +24,11 @@
             <n:form class="form-horizontal">
                 <n:div class="row">
                     <n:div class="col-lg-6 col-md-6 col-xs-6">
-                        <div sclass="@load(empty vmsgs[imageName] ? 'form-group' : 'form-group has-error has-feedback')">
+                        <div sclass="@load(empty vmsgs['name'] ? 'form-group' : 'form-group has-error has-feedback')">
                             <n:label class="control-label" for="imageName">Name</n:label>
-                            <zul:textbox zclass="form-control" id="imageName" type="text"
-                                         placeholder="Enter a name for the image..."
-                                         value="@save(uploadVM.name, before='submit') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=32)"/>
-                            <span style="color: #a94442;" visible="@load(!empty vmsgs[imageName])"
-                                  textContent="@load(vmsgs[imageName])"/>
+                            <input type="text" id="imageName" class="form-control" placeholder="Enter a name for the image..."
+                                   value="@save(fx.name)"/>
+                            <span id="nameStatus" class="help-block" textContent="@load(vmsgs['name'])"/>
                         </div>
                     </n:div>
                 </n:div>
@@ -37,28 +37,22 @@
                     <n:div class="col-lg-6 col-md-6 col-xs-6">
                         <div sclass="@load(empty vmsgs[imageDescription] ? 'form-group' : 'form-group has-error has-feedback')">
                             <n:label class="control-label" for="imageDescription">Description</n:label>
-                            <zul:textbox type="text" zclass="form-control" id="imageDescription"
-                                     value="@save(uploadVM.description)"
-                                     placeholder="Enter a short description that would describe the picture you are willing to upload..."
-                                     rows="3"/>
+                            <textarea type="text" class="form-control" id="imageDescription"
+                                   value="@save(fx.description)" maxlength="500" rows="5"
+                                   placeholder="Enter a short description that would describe the picture you are willing to upload..."/>
                         </div>
                     </n:div>
                 </n:div>
 
                 <n:div class="row">
                     <n:div class="col-lg-6 col-md-6 col-xs-6">
-                        <div sclass="@load(empty vmsgs[imageTags] ? 'form-group' : 'form-group has-error has-feedback')">
-
+                        <div id="tagsBox" sclass="@load(empty vmsgs['tags'] ? 'form-group' : 'form-group has-error has-feedback')">
                             <n:label class="control-label" for="imageTags">Tags</n:label>
-                            <br />
-                            <zul:textbox sclass="form-control" id="imageTags" wa:data-role="tagsinput"
-                            value="@save(uploadVM.tags, before='submit') @validator('edu.norbertzardin.validators.TagValidator')"/>
-
-                            <span id="imageStatus" class="help-block" textContent="@load(vmsgs[imageTags])"/>
+                            <input type="text" class="form-control" id="imageTags" name="imageTags"
+                                   value="@save(fx.tags)" placeholder="Add your tags here..."/>
+                            <span id="imageStatus" class="help-block" textContent="@load(vmsgs['tags'])"/>
                         </div>
                     </n:div>
-
-
                 </n:div>
 
                 <n:div class="row">
@@ -75,15 +69,17 @@
                 <n:div class="row">
                     <n:div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <n:div class="form-group">
-                            <zul:textbox id="textbox1" name="textbox1" type="text" zclass="form-control"
-                                     value="@load(uploadVM.filter) @save(uploadVM.filter, before='filter')"
-                                     placeholder="Specify a key to filter catalogues, leave empty to show all..."
-                                     style="margin-bottom:30px" onOK="@command('filter')"/>
+                            <input type="text" class="form-control"
+                                   value="@save(uploadVM.filter, before='filter')"
+                                   placeholder="Specify a key to filter catalogues, leave empty to show all..."
+                                   style="margin-bottom:30px" onChange="@command('filter')"/>
 
                             <n:div class="catalogueSelection" id="catalogueSelection">
                                 <div id="load" children="@load(uploadVM.catalogueList)">
                                     <zul:template name="children" var="cat">
-                                        <button sclass="btn btn-default" onClick="@command('selectCatalogue', selectedCatalogue=cat)">${cat.title}</button>
+                                        <button sclass="btn btn-default"
+                                                onClick="@command('selectCatalogue', selectedCatalogue=cat)">${cat.title}
+                                        </button>
                                     </zul:template>
                                 </div>
                             </n:div>
@@ -93,34 +89,32 @@
 
                 <n:div zclass="row">
                     <n:div zclass="col-lg-6 col-md-6 col-xs-6">
-                        <div sclass="@load(empty vmsgs[imagePreview] ? 'form-group' : 'form-group has-error has-feedback')">
+                        <div sclass="@load(uploadVM.errorMessage eq null ? 'form-group' : 'form-group has-error has-feedback')">
                             <n:label for="selectImage"/>
-                            <button sclass="btn btn-default control-label" upload="true,maxsize=1000000"
-                                    onUpload="@command('onUpload', upEvent=event)">Upload Image</button>
-                            <span style="color: #a94442;" visible="@load(!empty vmsgs[imagePreview])"
-                                  textContent="@load(vmsgs[imagePreview])"/>
+
+                            <zul:button zclass="btn btn-default control-label" upload="true,maxsize=1000000"
+                                        onUpload="@command('onUpload', upEvent=event, messages=vmsgs))" label="Choose image"/>
+
+                            <span style="color: #a94442;" visible="@load(uploadVM.errorMessage ne null ? 'true' : 'false')"
+                                  textContent="@load(uploadVM.errorMessage)"/>
 
                         </div>
                     </n:div>
                 </n:div>
-
-                <n:div zclass="row top-buffer">
-                    <n:div zclass="col-lg-6 col-md-6 col-xs-6">
-                        <image content="@load(uploadVM.thumbnail, after='onUpload') @converter('edu.norbertzardin.util.ImageConverter')"
-                               visible="@load(uploadVM.uploaded)"/>
-                        <zul:textbox id="imagePreview" visible="false"
-                                 value="@load(uploadVM.uploaded)
-                                        @save(uploadVM.uploaded, before='submit')
-                                        @validator('edu.norbertzardin.validators.ImageValidator')"/>
+                <n:div class="row top-buffer">
+                    <n:div class="col-lg-6 col-md-6 col-xs-6">
+                        <zul:image content="@load(uploadVM.thumbnail) @converter('edu.norbertzardin.util.ImageConverter')"/>
                     </n:div>
                 </n:div>
 
-                <n:div zclass="row top-buffer">
-                    <n:div zclass="col-lg-6 col-md-6 col-xs-6">
-                        <button sclass="btn btn-success" width="250px" onClick="@command('submit')">Submit</button>
+                <n:div class="row top-buffer">
+                    <n:div class="col-lg-6 col-md-6 col-xs-6">
+                        <zul:button zclass="btn btn-success" width="50%" onClick="@command('submit')" disabled="@load(uploadVM.allowSubmit ? 'false' : 'true')">Submit</zul:button>
                     </n:div>
                 </n:div>
+
             </n:form>
         </n:div>
     </div>
+    <!--<script>$('#imageTags').tokenfield()</script>-->
 </zk>

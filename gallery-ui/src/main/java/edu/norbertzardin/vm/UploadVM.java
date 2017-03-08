@@ -79,9 +79,9 @@ public class UploadVM {
         }
         setThumbnail(imagePlaceholder);
         Selectors.wireComponents(view, this, false);
-        catalogueList = catalogueService.getCatalogueList();
-        defaultCatalogue = catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName);
-        uploadForm = new UploadForm();
+        setCatalogueList(catalogueService.getCatalogueList());
+        setDefaultCatalogue(catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName));
+        setUploadForm(new UploadForm());
         setSelectedCatalogue(defaultCatalogue);
     }
 
@@ -274,5 +274,9 @@ public class UploadVM {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public void setDefaultCatalogue(CatalogueEntity catalogue) {
+        this.defaultCatalogue = catalogue;
     }
 }

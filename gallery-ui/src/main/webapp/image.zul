@@ -3,6 +3,14 @@
 <?link rel="stylesheet" type="text/css" href="css/style.css" ?>
 
 <zk xmlns:n="native" xmlns="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul">
+    <script>
+        $(function(){
+
+        $('#viewImageModal').on('hidden.bs.modal', function () {
+            $(this).find("input,textarea,textbox,select").val('').end();
+        });
+        });
+    </script>
     <zul:div viewModel="@id('modalVM') @init('edu.norbertzardin.vm.ImageVM')"
              validationMessages="@id('errors')"
              form="@id('editForm') @load(modalVM.editForm) @save(modalVM.editForm, before='editImage')

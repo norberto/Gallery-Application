@@ -32,17 +32,17 @@
                                 <n:div class="row">
                                     <n:div class="col-md-12">
 
-                                        <n:form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                            <n:div class="form-group">
+                                        <n:editForm class="editForm" role="editForm" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                            <n:div class="editForm-group">
                                                 <n:label class="sr-only" for="exampleInputEmail2">Email address</n:label>
-                                                <n:input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address"/>
+                                                <n:input type="email" class="editForm-control" id="exampleInputEmail2" placeholder="Email address"/>
                                             </n:div>
-                                            <n:div class="form-group">
+                                            <n:div class="editForm-group">
                                                 <n:label class="sr-only" for="exampleInputPassword2">Password</n:label>
-                                                <n:input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"/>
+                                                <n:input type="password" class="editForm-control" id="exampleInputPassword2" placeholder="Password"/>
                                                 <n:div class="help-block text-right"><n:a href="">Forget the password ?</n:a></n:div>
                                             </n:div>
-                                            <n:div class="form-group">
+                                            <n:div class="editForm-group">
                                                 <n:button type="submit" class="btn btn-primary btn-block">Sign in</n:button>
                                             </n:div>
                                             <n:div class="checkbox">
@@ -50,7 +50,7 @@
                                                     <n:input type="checkbox"> Remember me</n:input>
                                                 </n:label>
                                             </n:div>
-                                        </n:form>
+                                        </n:editForm>
                                     </n:div>
                                     <n:div class="bottom text-center">
                                         Don't have an account? <n:a href="#"><n:b>Register</n:b></n:a>

@@ -1,7 +1,9 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?page title="Gallery Application - Upload"?>
+<?imagePage title="Gallery Application - Upload"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
+<?link rel="stylesheet" type="text/css" href="css/style.css"?>
+
 <?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"?>
 <!--<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-tokenfield.css" ?>-->
 <!--<?script type="text/javascript" src="bootstrap/js/bootstrap-tokenfield.js"?>-->
@@ -77,7 +79,7 @@
                             <n:div class="catalogueSelection" id="catalogueSelection">
                                 <div id="load" children="@load(uploadVM.catalogueList)">
                                     <zul:template name="children" var="cat">
-                                        <button sclass="btn btn-default"
+                                        <button class="btn btn-default" style="margin:3px"
                                                 onClick="@command('selectCatalogue', selectedCatalogue=cat)">${cat.title}
                                         </button>
                                     </zul:template>

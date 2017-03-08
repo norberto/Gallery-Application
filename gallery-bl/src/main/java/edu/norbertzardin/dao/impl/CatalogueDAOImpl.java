@@ -34,10 +34,22 @@ public class CatalogueDAOImpl implements CatalogueDao {
         entityManager.persist(ce);
     }
 
+    public List<CatalogueEntity> getCatalogueListByPage(Integer cataloguePage, Integer pageCatalogueMax) {
+        setUpCriteriaBuilderForCatalogue();
+        Predicate predicate = cb.equal(catalogue.get(CatalogueEntity_.title), "Non-categorized");
+        CriteriaQuery<CatalogueEntity> select = cq.select(catalogue).where(predicate.not());
+        TypedQuery<CatalogueEntity> typedQuery = entityManager.createQuery(select);
+
+        typedQuery.setFirstResult((cataloguePage - 1) * pageCatalogueMax);
+        typedQuery.setMaxResults(pageCatalogueMax);
+        return  typedQuery.getResultList();
+    }
+
     public List<CatalogueEntity> getCatalogueList() {
         List<CatalogueEntity> result = entityManager.createQuery("from CatalogueEntity ", CatalogueEntity.class).getResultList();
         return result;
     }
+
     @Transactional
     public void editCatalogue(CatalogueEntity ce) {
         entityManager.merge(ce);
@@ -91,11 +103,15 @@ public class CatalogueDAOImpl implements CatalogueDao {
         catalogue = cq.from(CatalogueEntity.class);
     }
 
-    public Long getPageCount(Long id, Integer pageMax) {
+    public Long getPageCount(CatalogueEntity catalogue, Integer pageMax) {
         cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
-        criteria.select(cb.count(criteria.from(CatalogueEntity.class)));
-        criteria.where( cb.equal(catalogue.get(CatalogueEntity_.id), id));
+
+        Root<ImageEntity> image = criteria.from(ImageEntity.class);
+
+        criteria.select(cb.count(image));
+        criteria.where( cb.equal(image.get(ImageEntity_.catalogue), catalogue));
+
         Long imageCount = entityManager.createQuery(criteria).getSingleResult();
 
         Long pageCount = imageCount / pageMax;
@@ -114,5 +130,20 @@ public class CatalogueDAOImpl implements CatalogueDao {
         cq.select(catalogue).where(cb.or(name));
 
         return entityManager.createQuery(cq).getResultList();
+    }
+
+    @Override
+    public Long getCataloguePageCount(Integer pageMax) {
+        cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
+        criteria.select(cb.count(criteria.from(CatalogueEntity.class)));
+        Long catalogueCount = entityManager.createQuery(criteria).getSingleResult() - 1;                                // Catalogue count - default catalogue = catalogue count that is shown
+
+        Long pageCount = catalogueCount / pageMax;
+        if(pageCount * pageMax < catalogueCount) {
+            return pageCount + 1;
+        } else {
+            return pageCount;
+        }
     }
 }

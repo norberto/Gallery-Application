@@ -2,10 +2,8 @@ package edu.norbertzardin.vm;
 
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
-import edu.norbertzardin.form.CatalogueForm;
 import edu.norbertzardin.service.CatalogueService;
 import edu.norbertzardin.service.ImageService;
-import edu.norbertzardin.service.TagService;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -14,28 +12,34 @@ import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.bind.impl.ValidationMessagesImpl;
+import org.zkoss.bind.sys.ValidationMessages;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zk.ui.util.Clients;
+
 import java.util.Date;
 import java.util.List;
 
 public class BrowseVM {
-    private final Integer PAGE_MAX = 5;
-
-    // Properties
     private String title;
 
-    private Integer page;
-    private Long pageCount;
-    private List<Integer> pageLabels;
-
-    private List<CatalogueEntity> catalogueList;
+    private Integer imagePage;
+    private Long imagePageCount;
+    private Integer pageImageMax;
     private List<ImageEntity> imageList;
+
+    private Integer cataloguePage;
+    private Long cataloguePageCount;
+    private Integer pageCatalogueMax;
+    private List<CatalogueEntity> catalogueList;
+
+    private CatalogueEntity defaultCatalogue;
     private CatalogueEntity selectedCatalogue;
     private CatalogueEntity editCatalogue;
+
     private Boolean backButton;
-    private CatalogueEntity defaultCatalogue;
 
     @WireVariable
     private CatalogueService catalogueService;
@@ -43,21 +47,27 @@ public class BrowseVM {
     @WireVariable
     private ImageService imageService;
 
-    @WireVariable
-    private TagService tagService;
-
     // Initializers
     @Init
-    public void init(@ContextParam(ContextType.VIEW) Component view) {
+    public void init(@ContextParam(ContextType.VIEW) Component view,
+                     @BindingParam("pageImageMax") Integer imageMax,
+                     @BindingParam("pageCatalogueMax") Integer folderMax) {
+
         Selectors.wireComponents(view, this, false);
         String defaultCatalogueName = "Non-categorized";
-        setPage(1);
+
+        setImagePage(1);
+        setCataloguePage(1);
+
+        setPageImageMax(imageMax);
+        setPageCatalogueMax(folderMax);
+
         setDefaultCatalogue(catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName));
         setSelectedCatalogue(defaultCatalogue);
-        setCatalogueList(catalogueService.getCatalogueList());
-        setPageCount(catalogueService.getPageCount(selectedCatalogue.getId(), 5));
+
+        updateCatalogues();
+        updateImages();
         setBackButton(false);
-        loadImages();
     }
 
 
@@ -68,48 +78,71 @@ public class BrowseVM {
 
     // Commands
     @Command
-    @NotifyChange({"catalogueList", "title"})
+    @NotifyChange({"catalogueList", "cataloguePageCount", "title"})
     public void createCatalogue() {
         CatalogueEntity ce = new CatalogueEntity();
         ce.setTitle(title);
         ce.setCreatedDate(new Date());
         catalogueService.createCatalogue(ce);
-        catalogueList = catalogueService.getCatalogueList();
+        updateCatalogues();
+//        setCataloguePage(cataloguePageCount.intValue());
     }
 
-    @NotifyChange({"imageList", "selectedCatalogue", "backButton", "pageCount"})
     @Command
+    @NotifyChange({"imageList", "selectedCatalogue", "backButton", "imagePageCount"})
     public void selectCatalogue(@BindingParam("selectedCatalogue") CatalogueEntity ce) {
-        setSelectedCatalogue(catalogueService.getCatalogueById(ce.getId()));
-        setPageCount(catalogueService.getPageCount(selectedCatalogue.getId(), PAGE_MAX));
-        loadImages();
-        setBackButton(true);
+        setImagePage(1);                                                                                                     // Reset imagePage back to first
+        setSelectedCatalogue(catalogueService.getCatalogueById(ce.getId()));                                            // Set current catalogue to the selected one
+        updateImages();                                                                                                   // Load images from the selected folder
+        setBackButton(true);                                                                                            // Enable "Go back" button
     }
 
     @Command
-    @NotifyChange({"page", "imageList"})
+    @NotifyChange({"imagePage", "imageList", "imagePageCount"})
     public void previousPage() {
-        if (page != 1) {
-            page--;
-            loadImages();
+        if (imagePage != 1) {
+            imagePage--;
+            updateImages();
         }
     }
 
     @Command
-    @NotifyChange({"page", "imageList"})
+    @NotifyChange({"cataloguePage", "catalogueList", "cataloguePageCount"})
+    public void previousCataloguePage() {
+        if (cataloguePage > 1) {
+            cataloguePage--;
+            updateCatalogues();
+        }
+    }
+
+    @Command
+    @NotifyChange({"cataloguePage", "catalogueList", "cataloguePageCount"})
+    public void nextCataloguePage() {
+        setCataloguePageCount(catalogueService.getCataloguePageCount(pageCatalogueMax));
+        if (cataloguePage < cataloguePageCount.intValue()) {
+            cataloguePage++;
+            setCatalogueList(catalogueService.getCatalogueListByPage(getCataloguePage(), pageCatalogueMax));
+        }
+    }
+
+
+
+    @Command
+    @NotifyChange({"imagePage", "imageList", "imagePageCount"})
     public void nextPage() {
-        if (!page.equals(pageCount.intValue())) {
-            page++;
-            loadImages();
-
+        if (!imagePage.equals(imagePageCount.intValue())) {
+            imagePage++;
+            updateImages();
         }
     }
 
     @Command
-    @NotifyChange({"selectedCatalogue", "backButton", "imageList"})
+    @NotifyChange({"selectedCatalogue", "backButton", "imageList", "imagePageCount", "catalogueList", "cataloguePageCount"})
     public void goBack() {
         setSelectedCatalogue(defaultCatalogue);
-        loadImages();
+        setImagePage(1);
+        updateCatalogues();
+        updateImages();
         setBackButton(false);
     }
 
@@ -124,12 +157,13 @@ public class BrowseVM {
     public void editCatalogue() {
         editCatalogue.setTitle(editCatalogue.getTitle());
         catalogueService.editCatalogue(editCatalogue);
-        setCatalogueList(catalogueService.getCatalogueList());
+        setCatalogueList(catalogueService.getCatalogueListByPage(cataloguePage, pageCatalogueMax));
     }
 
-    public void loadImages() {
+    private void updateImages() {
         if (selectedCatalogue != null) {
-            setImageList(imageService.getImagesFromFolderForPage(getPage(), PAGE_MAX, selectedCatalogue));
+            setImagePageCount(catalogueService.getPageCount(selectedCatalogue, pageImageMax));
+            setImageList(imageService.getImagesFromFolderForPage(getImagePage(), pageImageMax, selectedCatalogue));
         }
     }
 
@@ -137,63 +171,44 @@ public class BrowseVM {
         return imageList;
     }
 
-    @Command
-    @NotifyChange({"selectedCatalogue", "catalogueList", "backButton", "imageList"})
-    public void deleteCatalogue() {
-        if (selectedCatalogue.getId().equals(editCatalogue.getId())) {
-            setSelectedCatalogue(defaultCatalogue);
-            loadImages();
-            setImageList(selectedCatalogue.getImages());
-            setBackButton(false);
-        }
-        catalogueService.deleteCatalogue(editCatalogue);
-        setCatalogueList(catalogueService.getCatalogueList());
-    }
-
-    @GlobalCommand
-    @NotifyChange("imageList")
-    public void reload () {
-        loadImages();
-    }
-
-    // Setters
-    public void setEditCatalogue(CatalogueEntity editCatalogue) {
-        this.editCatalogue = editCatalogue;
-    }
-
-    public void setDefaultCatalogue(CatalogueEntity defaultCatalogue) {
-        this.defaultCatalogue = defaultCatalogue;
-    }
-
-    public void setBackButton(Boolean backButton) {
-        this.backButton = backButton;
-    }
-
     public void setImageList(List<ImageEntity> imageList) {
         this.imageList = imageList;
     }
 
-    public void setCatalogueList(List<CatalogueEntity> catalogueList) {
-        this.catalogueList = catalogueList;
+    @Command
+    @NotifyChange({"selectedCatalogue", "catalogueList", "cataloguePage", "cataloguePageCount", "backButton", "imageList", "imagePageCount", "imagePage"})
+    public void deleteCatalogue() {
+        catalogueService.deleteCatalogue(editCatalogue);
+        updateCatalogues();
+
+        if(catalogueList.isEmpty()) {
+            previousCataloguePage();
+        }
+
+        if (selectedCatalogue.getId().equals(editCatalogue.getId())) {
+            setSelectedCatalogue(defaultCatalogue);
+            updateImages();
+            setBackButton(false);
+        }
     }
 
-    public void setImageService(ImageService imageService) {
-        this.imageService = imageService;
+    @GlobalCommand
+    @NotifyChange({"imageList", "imagePageCount"})
+    public void reload() {
+        updateImages();
     }
 
-    public void setSelectedCatalogue(CatalogueEntity selectedCatalogue) {
-        this.selectedCatalogue = selectedCatalogue;
+    @Command
+    public void clearMessages(@BindingParam("errors") ValidationMessagesImpl messages){
+        messages.clearAllMessages();
     }
 
-    public void setCatalogueService(CatalogueService catalogueService) {
-        this.catalogueService = catalogueService;
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String name) {
         this.title = name;
-    }
-    public String getTitle() {
-        return title;
     }
 
     // Getters
@@ -201,55 +216,101 @@ public class BrowseVM {
         return editCatalogue;
     }
 
+    // Setters
+    public void setEditCatalogue(CatalogueEntity editCatalogue) {
+        this.editCatalogue = editCatalogue;
+    }
+
     public Boolean getBackButton() {
         return backButton;
+    }
+
+    public void setBackButton(Boolean backButton) {
+        this.backButton = backButton;
     }
 
     public List<CatalogueEntity> getCatalogueList() {
         return catalogueList;
     }
 
+    public void setCatalogueList(List<CatalogueEntity> catalogueList) {
+        this.catalogueList = catalogueList;
+    }
+
     public CatalogueEntity getDefaultCatalogue() {
         return defaultCatalogue;
+    }
+
+    public void setDefaultCatalogue(CatalogueEntity defaultCatalogue) {
+        this.defaultCatalogue = defaultCatalogue;
     }
 
     public CatalogueEntity getSelectedCatalogue() {
         return selectedCatalogue;
     }
 
+    public void setSelectedCatalogue(CatalogueEntity selectedCatalogue) {
+        this.selectedCatalogue = selectedCatalogue;
+    }
+
     public ImageService getImageService() {
         return imageService;
+    }
+
+    public void setImageService(ImageService imageService) {
+        this.imageService = imageService;
     }
 
     public CatalogueService getCatalogueService() {
         return catalogueService;
     }
 
-    public void setTagService(TagService tagService) {
-        this.tagService = tagService;
+    public void setCatalogueService(CatalogueService catalogueService) {
+        this.catalogueService = catalogueService;
     }
 
-    public Integer getPage() {
-        return page;
+    public Integer getImagePage() {
+        return imagePage;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setImagePage(Integer imagePage) {
+        this.imagePage = imagePage;
     }
 
-    public Long getPageCount() {
-        return pageCount;
+    public Long getImagePageCount() {
+        return imagePageCount;
     }
 
-    public void setPageCount(Long pageCount) {
-        this.pageCount = pageCount;
+    public void setImagePageCount(Long imagePageCount) {
+        this.imagePageCount = imagePageCount;
     }
 
-    public List<Integer> getPageLabels() {
-        return pageLabels;
+    public void setPageImageMax(Integer pageMax) {
+        this.pageImageMax = pageMax;
     }
 
-    public void setPageLabels(List<Integer> pageLabels) {
-        this.pageLabels = pageLabels;
+    public void setPageCatalogueMax(Integer pageCatalogueMax) {
+        this.pageCatalogueMax = pageCatalogueMax;
+    }
+
+    public Long getCataloguePageCount() {
+        return cataloguePageCount;
+    }
+
+    public Integer getCataloguePage() {
+        return cataloguePage;
+    }
+
+    public void setCataloguePageCount(Long cataloguePageCount) {
+        this.cataloguePageCount = cataloguePageCount;
+    }
+
+    public void setCataloguePage(Integer cataloguePage) {
+        this.cataloguePage = cataloguePage;
+    }
+
+    private void updateCatalogues() {
+        setCataloguePageCount(catalogueService.getCataloguePageCount(pageCatalogueMax));
+        setCatalogueList(catalogueService.getCatalogueListByPage(getCataloguePage(), pageCatalogueMax));
     }
 }

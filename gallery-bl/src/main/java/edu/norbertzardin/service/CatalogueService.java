@@ -26,6 +26,10 @@ public class CatalogueService {
     public CatalogueEntity getCatalogueById(Long id) { return catalogueDao.getCatalogueById(id); }
 
 
+    public List<CatalogueEntity> getCatalogueListByPage(Integer cataloguePage, Integer pageCatalogueMax) {
+        return catalogueDao.getCatalogueListByPage(cataloguePage, pageCatalogueMax);
+    }
+
     public List<CatalogueEntity> getCatalogueList() {
         return catalogueDao.getCatalogueList();
     }
@@ -46,7 +50,11 @@ public class CatalogueService {
 
     public CatalogueEntity getCatalogueByNameNoFetch(String name) { return catalogueDao.getCatalogueByNameNoFetch(name); }
 
-    public Long getPageCount(Long id, Integer pageMax) { return catalogueDao.getPageCount(id, pageMax); }
+    public Long getPageCount(CatalogueEntity catalogue, Integer pageMax) { return catalogueDao.getPageCount(catalogue, pageMax); }
 
     public List<CatalogueEntity> getCatalogueListByKey(String key) { return  catalogueDao.getCatalogueListByKey(key); }
+
+    public Long getCataloguePageCount(Integer pageMax) {
+        return catalogueDao.getCataloguePageCount(pageMax);
+    }
 }

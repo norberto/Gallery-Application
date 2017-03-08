@@ -7,6 +7,8 @@ import java.util.List;
 public interface CatalogueDao {
     void createCatalogue(CatalogueEntity ce);
 
+    List<CatalogueEntity> getCatalogueListByPage(Integer cataloguePage, Integer pageCatalogueMax);
+
     List<CatalogueEntity> getCatalogueList();
 
     void editCatalogue(CatalogueEntity ce);
@@ -21,7 +23,9 @@ public interface CatalogueDao {
 
     CatalogueEntity getCatalogueByIdMediumFetch(Long id);
 
-    Long getPageCount(Long id, Integer pageMax);
+    Long getPageCount(CatalogueEntity catalogue, Integer pageMax);
 
     List<CatalogueEntity> getCatalogueListByKey(String key);
+
+    Long getCataloguePageCount(Integer pageMax);
 }

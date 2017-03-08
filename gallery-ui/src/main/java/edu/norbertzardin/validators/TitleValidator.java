@@ -11,13 +11,13 @@ public class TitleValidator extends AbstractValidator {
     public void validate(ValidationContext ctx) {
         Map<String,Property> beanProps = ctx.getProperties(ctx.getProperty().getBase());
 
-        String name = (String) beanProps.get("title").getValue();
+        String name = (String) ctx.getProperty().getValue();
         Number maxLength = (Number) ctx.getBindContext().getValidatorArg("maxLength");
         if(name == null || name.equals("")) {
-            addInvalidMessage(ctx, "title", "Name is required.");
+            addInvalidMessage(ctx, "Name is required.");
         }
         if(name != null && name.length() > maxLength.intValue()) {
-            addInvalidMessage(ctx, "title", "Name is too long.");
+            addInvalidMessage(ctx, "Name is too long.");
         }
     }
 }

@@ -37,9 +37,6 @@
     width: 50px !important;
 }
 
-
-
-
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
@@ -89,4 +86,12 @@
         background-color: inherit;
         border-top:0 none;
     }
+}
+.custom-label{
+    margin-right: 5px;
+    display:inline-block;
+    font-weight:bold;
+    padding: 2px 4px 2px 4px;
+    line-height:14px;
+    font-size: 12px;
 }

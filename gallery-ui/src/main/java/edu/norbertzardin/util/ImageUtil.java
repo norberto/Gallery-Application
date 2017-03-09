@@ -1,11 +1,8 @@
 package edu.norbertzardin.util;
 
 import edu.norbertzardin.entities.ImageEntity;
-import edu.norbertzardin.entities.TagEntity;
-import org.zkoss.image.AImage;
 import org.zkoss.image.Image;
 import org.zkoss.zul.Filedownload;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,27 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ImageUtil {
-    public static AImage byteArrayToImageConverter(byte[] data){
-        try{
-            return new AImage("", data);
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static double getScalingRatio(AImage image, double maxSize){
-        double scale = 1;
-        if(image == null) return 1;
-        if(image.getHeight() >= image.getWidth()) {
-            if (image.getHeight() > maxSize) scale = maxSize / image.getHeight();
-        } else {
-            if(image.getWidth() > maxSize) scale = maxSize / image.getWidth();
-        }
-        return scale;
-    }
-
-    public static Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {
+    private static Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {
 
         int original_width = imgSize.width;
         int original_height = imgSize.height;
@@ -68,15 +45,14 @@ public class ImageUtil {
     }
 
 
-    public static BufferedImage getScaledInstance(BufferedImage img,
-                                           int targetWidth,
-                                           int targetHeight,
-                                           Object hint,
-                                           boolean higherQuality)
-    {
+    private static BufferedImage getScaledInstance(BufferedImage img,
+                                                   int targetWidth,
+                                                   int targetHeight,
+                                                   Object hint,
+                                                   boolean higherQuality) {
         int type = (img.getTransparency() == Transparency.OPAQUE) ?
                 BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
-        BufferedImage ret = (BufferedImage)img;
+        BufferedImage ret = img;
         int w, h;
         if (higherQuality) {
             // Use multi-step technique: start with original size, then
@@ -145,27 +121,18 @@ public class ImageUtil {
     }
 
     public static String[] parseTags(String tags) {
-        if(tags == null || tags.equals("")) return new String[0];
+        if (tags == null || tags.equals("")) return new String[0];
         String[] tagList = tags.split("\\W+");
 
-        List<String> list = new ArrayList<String>(Arrays.asList(tagList));
+        List<String> list = new ArrayList<>(Arrays.asList(tagList));
         return removeDuplicates(list);
     }
 
     private static String[] removeDuplicates(List<String> array) {
-        Set set = new HashSet<String>(array); //values must default to false
+        Set set = new HashSet<>(array); //values must default to false
         return (String[]) set.toArray(new String[set.size()]);
     }
 
-    public static String tagsToString(List<TagEntity> tags) {
-        String tagString = "";
-
-        for(TagEntity tag : tags) {
-            tagString = tagString.concat(tag.getName() + ", ");
-        }
-
-        return tagString.substring(0, tagString.length() - 2);
-    }
 
     public static void download(ImageEntity image) {
         Filedownload.save(image.getDownload().getData(),

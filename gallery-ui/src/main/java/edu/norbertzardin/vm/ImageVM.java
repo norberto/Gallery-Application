@@ -4,7 +4,6 @@ import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.form.UploadForm;
-import edu.norbertzardin.service.CatalogueService;
 import edu.norbertzardin.service.ImageService;
 import edu.norbertzardin.service.TagService;
 import edu.norbertzardin.util.ImageUtil;
@@ -29,6 +28,8 @@ public class ImageVM {
     private boolean editMode;
     private String tags;
     private Boolean removeConfirmation;
+    private Integer tagsLeft;
+    private Integer tagLimit;
 
 
     private UploadForm editForm;
@@ -37,14 +38,11 @@ public class ImageVM {
     private TagService tagService;
 
     @WireVariable
-    private CatalogueService catalogueService;
-
-    @WireVariable
     private ImageService imageService;
 
     @Init
-    public void init(@ContextParam(ContextType.VIEW) Component view) {
-        Selectors.wireComponents(view, this, false);
+    public void init(@BindingParam("tagLimit") Integer limit) {
+        setTagLimit(limit);
         setRemoveConfirmation(false);
         setEditMode(false);
     }
@@ -56,12 +54,13 @@ public class ImageVM {
     }
 
     @GlobalCommand
-    @NotifyChange({"selectedImage", "catalogueList", "tagList", "editMode", "editForm", "removeConfirmation"})
+    @NotifyChange({"selectedImage", "tagList", "editMode", "editForm", "removeConfirmation", "tagsLeft"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
         // If selected image is not null - fetch image with all contents
         if (image != null) {
             setSelectedImage(imageService.getImageByIdFullFetch(image.getId()));
             editForm = new UploadForm(selectedImage.getName(), selectedImage.getDescription());
+            setTagsLeft(getTagLimit() - selectedImage.getTags().size());
         }
         // If fetched image is not null, load its tags to local contents
         if (getSelectedImage() != null) {
@@ -106,7 +105,7 @@ public class ImageVM {
     }
 
     @Command
-    @NotifyChange({"selectedImage", "editMode", "tagList", "tags"})
+    @NotifyChange({"selectedImage", "editMode", "tagList", "tags", "tagsLeft"})
     public void editImage() {
         selectedImage.setName(editForm.getName());
         selectedImage.setDescription(editForm.getDescription());
@@ -118,6 +117,7 @@ public class ImageVM {
             for (String tag : parsed_tags) {
                 tagService.createTag(tag, selectedImage);
             }
+            setTagsLeft(getTagsLeft() - parsed_tags.length);
             // Update image
             imageService.editImage(selectedImage);
             // Update local content
@@ -145,7 +145,6 @@ public class ImageVM {
         if (selectedImage != null) {
             ImageUtil.download(selectedImage);
         }
-
     }
 
     @Command
@@ -156,10 +155,6 @@ public class ImageVM {
 
     public void setTagService(TagService tagService) {
         this.tagService = tagService;
-    }
-
-    public void setCatalogueService(CatalogueService catalogueService) {
-        this.catalogueService = catalogueService;
     }
 
     public void setImageService(ImageService imageService) {
@@ -220,5 +215,21 @@ public class ImageVM {
 
     public void setRemoveConfirmation(Boolean removeConfirmation) {
         this.removeConfirmation = removeConfirmation;
+    }
+
+    public Integer getTagsLeft() {
+        return tagsLeft;
+    }
+
+    public void setTagsLeft(Integer tagsLeft) {
+        this.tagsLeft = tagsLeft;
+    }
+
+    public Integer getTagLimit() {
+        return tagLimit;
+    }
+
+    public void setTagLimit(Integer tagLimit) {
+        this.tagLimit = tagLimit;
     }
 }

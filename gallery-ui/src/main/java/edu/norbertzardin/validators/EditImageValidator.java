@@ -7,40 +7,44 @@ import org.zkoss.bind.validator.AbstractValidator;
 
 import java.util.Map;
 
-public class EditImageValidator extends AbstractValidator{
-
-    private String name;
-    private String description;
-    private String tags;
-    private Long maxLength;
+public class EditImageValidator extends AbstractValidator {
 
     @Override
-    public void validate(ValidationContext validationContext) {
-        Map<String,Property> beanProps = validationContext.getProperties(validationContext.getProperty().getBase());
+    public void validate(ValidationContext ctx) {
+        Map<String, Property> beanProps = ctx.getProperties(ctx.getProperty().getBase());
 
-        name = (String) beanProps.get("name").getValue();
-        description = (String) beanProps.get("description").getValue();
-        tags = (String) beanProps.get("tags").getValue();
-
-        maxLength = (Long) validationContext.getValidatorArg("maxLength");
-
-        validateName(validationContext);
+        validateName(ctx, (String) beanProps.get("name").getValue(), (Long) ctx.getValidatorArg("maxLength"));
+        validateDescription(ctx, (String) beanProps.get("description").getValue(),(Long) ctx.getValidatorArg("maxDescription"));
+        validateTags(ctx, (String) beanProps.get("tags").getValue(), (Integer) ctx.getValidatorArg("tagLimit"));
     }
 
-    private void validateName(ValidationContext ctx){
-        if(name == null || name.equals("")) {
+    private void validateName(ValidationContext ctx, String name, Long maxLength) {
+        if (name == null || name.equals("")) {
             addInvalidMessage(ctx, "name", "Name is required.");
         }
-        if(name != null && name.length() > maxLength.intValue()) {
+        if (name != null && name.length() > maxLength) {
             addInvalidMessage(ctx, "name", "Name is too long.");
         }
     }
 
-    private void validateDescription(ValidationContext ctx) {
-        // do nothing
+    private void validateDescription(ValidationContext ctx, String description, Long maxLength) {
+        if(description.length() > maxLength) {
+            addInvalidMessage(ctx, "description", "Description is too long. (maximum " + maxLength + " characters)");
+        }
     }
 
-    private void validateTags(ValidationContext ctx) {
-        // TO DO validate tag limit
+    private void validateTags(ValidationContext ctx, String tags, Integer limit) {
+        String[] tagList = ImageUtil.parseTags(tags);
+        String error;
+        if(limit == 0) {
+            error = "No more tags allowed.";
+        } else if(limit == 1) {
+            error = "Too many tags specified, only one more tag is allowed.";
+        } else {
+            error = "Too many tags specified, only " + limit + " tags are allowed.";
+        }
+        if(tagList.length > limit) {
+            addInvalidMessage(ctx, "tags", error);
+        }
     }
 }

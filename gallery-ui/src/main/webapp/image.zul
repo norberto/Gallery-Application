@@ -11,10 +11,10 @@
         });
         });
     </script>
-    <zul:div viewModel="@id('modalVM') @init('edu.norbertzardin.vm.ImageVM')"
+    <zul:div viewModel="@id('modalVM') @init('edu.norbertzardin.vm.ImageVM', tagLimit=5)"
              validationMessages="@id('errors')"
              form="@id('editForm') @load(modalVM.editForm) @save(modalVM.editForm, before='editImage')
-                   @validator('edu.norbertzardin.validators.EditImageValidator', maxLength=32)">
+                   @validator('edu.norbertzardin.validators.EditImageValidator', maxLength=32, tagLimit=modalVM.tagsLeft, maxDescription=200)">
         <n:div id="viewImageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="View Image Modal" data-backdrop="static"
                aria-hidden="true" width="800px">
 

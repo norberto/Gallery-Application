@@ -15,16 +15,13 @@ import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.bind.sys.ValidationMessages;
 import org.zkoss.image.Image;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -70,25 +67,23 @@ public class UploadVM {
     }
 
     @Init
-    public void init(@ContextParam(ContextType.VIEW) Component view) {
+    public void init() {
         setAllowSubmit(false);
-        try {
-            File f = new File("META-INF/resources/images/noimage.gif");
-            imagePlaceholder = Files.readAllBytes(f.toPath());
-        } catch (IOException e) {
-            System.err.println("No image placeholder found.");
-        }
+        loadImagePlaceholder();
         setThumbnail(imagePlaceholder);
-        Selectors.wireComponents(view, this, false);
         setCatalogueList(catalogueService.getCatalogueList());
         setDefaultCatalogue(catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName));
         setUploadForm(new UploadForm());
         setSelectedCatalogue(defaultCatalogue);
     }
 
-    @Command
-    public void tags(@ContextParam(ContextType.TRIGGER_EVENT) Event event) {
-        System.out.println(event.getData());
+    private void loadImagePlaceholder() {
+        try {
+            File f = new File("META-INF/resources/images/noimage.gif");
+            imagePlaceholder = Files.readAllBytes(f.toPath());
+        } catch (IOException e) {
+            System.err.println("No image placeholder found.");
+        }
     }
 
     @Command
@@ -247,8 +242,6 @@ public class UploadVM {
         return filter;
     }
 
-
-    @Command
     public void setFilter(String filter) {
         this.filter = filter;
     }

@@ -50,11 +50,9 @@ public class BrowseVM {
 
     // Initializers
     @Init
-    public void init(@ContextParam(ContextType.VIEW) Component view,
-                     @BindingParam("pageImageMax") Integer imageMax,
+    public void init(@BindingParam("pageImageMax") Integer imageMax,
                      @BindingParam("pageCatalogueMax") Integer folderMax) {
 
-        Selectors.wireComponents(view, this, false);
         String defaultCatalogueName = "Non-categorized";
 
         setRemoveConfirmation(false);
@@ -92,9 +90,9 @@ public class BrowseVM {
     @Command
     @NotifyChange({"imageList", "selectedCatalogue", "backButton", "imagePageCount"})
     public void selectCatalogue(@BindingParam("selectedCatalogue") CatalogueEntity ce) {
-        setImagePage(1);                                                                                                     // Reset imagePage back to first
+        setImagePage(1);                                                                                                // Reset imagePage back to first
         setSelectedCatalogue(catalogueService.getCatalogueById(ce.getId()));                                            // Set current catalogue to the selected one
-        updateImages();                                                                                                   // Load images from the selected folder
+        updateImages();                                                                                                 // Load images from the selected folder
         setBackButton(true);                                                                                            // Enable "Go back" button
     }
 
@@ -125,7 +123,6 @@ public class BrowseVM {
             setCatalogueList(catalogueService.getCatalogueListByPage(getCataloguePage(), pageCatalogueMax));
         }
     }
-
 
 
     @Command
@@ -183,7 +180,7 @@ public class BrowseVM {
         setRemoveConfirmation(false);
         updateCatalogues();
 
-        if(catalogueList.isEmpty()) {
+        if (catalogueList.isEmpty()) {
             previousCataloguePage();
         }
 
@@ -207,7 +204,7 @@ public class BrowseVM {
     }
 
     @Command
-    public void clearMessages(@BindingParam("errors") ValidationMessagesImpl messages){
+    public void clearMessages(@BindingParam("errors") ValidationMessagesImpl messages) {
         messages.clearAllMessages();
     }
 

@@ -29,6 +29,7 @@ public class BrowseVM {
     private Long imagePageCount;
     private Integer pageImageMax;
     private List<ImageEntity> imageList;
+    private Boolean removeConfirmation;
 
     private Integer cataloguePage;
     private Long cataloguePageCount;
@@ -56,6 +57,7 @@ public class BrowseVM {
         Selectors.wireComponents(view, this, false);
         String defaultCatalogueName = "Non-categorized";
 
+        setRemoveConfirmation(false);
         setImagePage(1);
         setCataloguePage(1);
 
@@ -85,7 +87,6 @@ public class BrowseVM {
         ce.setCreatedDate(new Date());
         catalogueService.createCatalogue(ce);
         updateCatalogues();
-//        setCataloguePage(cataloguePageCount.intValue());
     }
 
     @Command
@@ -176,9 +177,10 @@ public class BrowseVM {
     }
 
     @Command
-    @NotifyChange({"selectedCatalogue", "catalogueList", "cataloguePage", "cataloguePageCount", "backButton", "imageList", "imagePageCount", "imagePage"})
+    @NotifyChange({"selectedCatalogue", "catalogueList", "cataloguePage", "cataloguePageCount", "backButton", "imageList", "imagePageCount", "imagePage", "removeConfirmation"})
     public void deleteCatalogue() {
         catalogueService.deleteCatalogue(editCatalogue);
+        setRemoveConfirmation(false);
         updateCatalogues();
 
         if(catalogueList.isEmpty()) {
@@ -196,6 +198,12 @@ public class BrowseVM {
     @NotifyChange({"imageList", "imagePageCount"})
     public void reload() {
         updateImages();
+    }
+
+    @Command
+    @NotifyChange({"removeConfirmation"})
+    public void changeConfirmationState(@BindingParam("confirm") Boolean state) {
+        setRemoveConfirmation(state);
     }
 
     @Command
@@ -312,5 +320,13 @@ public class BrowseVM {
     private void updateCatalogues() {
         setCataloguePageCount(catalogueService.getCataloguePageCount(pageCatalogueMax));
         setCatalogueList(catalogueService.getCatalogueListByPage(getCataloguePage(), pageCatalogueMax));
+    }
+
+    public Boolean getRemoveConfirmation() {
+        return removeConfirmation;
+    }
+
+    public void setRemoveConfirmation(Boolean removeConfirmation) {
+        this.removeConfirmation = removeConfirmation;
     }
 }

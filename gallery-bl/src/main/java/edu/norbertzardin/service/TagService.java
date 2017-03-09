@@ -7,7 +7,6 @@ import edu.norbertzardin.entities.TagEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.Date;
 import java.util.List;
 
@@ -24,19 +23,19 @@ public class TagService {
         // Before creating or updating tags - check if an image already has one
         List<TagEntity> tags = ie.getTags();
         boolean contains = false;
-        if(tags != null) {
-            for(TagEntity t : tags) {
-                if(t.getName().equals(tag_name)){
+        if (tags != null) {
+            for (TagEntity t : tags) {
+                if (t.getName().equals(tag_name)) {
                     contains = true;
                     break;
                 }
             }
         }
         // If already has - do nothing
-        if(!contains) {
+        if (!contains) {
             TagEntity tag_ = getTagByName(tag_name);
             // If tag does not exist yet - create it
-            if(tag_ == null){
+            if (tag_ == null) {
                 TagEntity te = new TagEntity();
                 te.setName(tag_name);
                 te.addImage(ie);
@@ -49,25 +48,35 @@ public class TagService {
         }
     }
 
-    public TagEntity getTagByName(String name) { return tagDao.getTagByName(name); }
+    public TagEntity getTagByName(String name) {
+        if (name != null && !name.isEmpty()) {
+            return tagDao.getTagByName(name);
+        } else {
+            return null;
+        }
+    }
 
-    public TagEntity getTagById(Long id) { return tagDao.getTagById(id); }
+    public TagEntity getTagById(Long id) {
+        return tagDao.getTagById(id);
+    }
 
     public List<TagEntity> getTagList() {
         return tagDao.getTagList();
     }
 
-    public void setTagDao(TagDao tagDao){
-        this.tagDao = tagDao;
+    public TagDao getTagDao() {
+        return tagDao;
     }
 
-    public TagDao getTagDao(){
-        return tagDao;
+    public void setTagDao(TagDao tagDao) {
+        this.tagDao = tagDao;
     }
 
     public void updateTag(TagEntity tag) {
         tagDao.updateTag(tag);
     }
 
-    public void removeTag(TagEntity tag) { tagDao.remove(tag);}
+    public void removeTag(TagEntity tag) {
+        tagDao.remove(tag);
+    }
 }

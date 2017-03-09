@@ -28,6 +28,8 @@ public class ImageVM {
     private List<TagEntity> tagList;
     private boolean editMode;
     private String tags;
+    private Boolean removeConfirmation;
+
 
     private UploadForm editForm;
 
@@ -43,6 +45,7 @@ public class ImageVM {
     @Init
     public void init(@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
+        setRemoveConfirmation(false);
         setEditMode(false);
     }
 
@@ -53,7 +56,7 @@ public class ImageVM {
     }
 
     @GlobalCommand
-    @NotifyChange({"selectedImage", "catalogueList", "tagList", "editMode", "editForm"})
+    @NotifyChange({"selectedImage", "catalogueList", "tagList", "editMode", "editForm", "removeConfirmation"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
         // If selected image is not null - fetch image with all contents
         if (image != null) {
@@ -66,6 +69,7 @@ public class ImageVM {
         }
         // Disable edit mode on modal open
         setEditMode(false);
+        setRemoveConfirmation(false);
     }
 
     @Command
@@ -95,7 +99,9 @@ public class ImageVM {
     }
 
     @Command
+    @NotifyChange({"removeConfirmation"})
     public void deleteImage() {
+        setRemoveConfirmation(false);
         imageService.deleteImage(selectedImage);
     }
 
@@ -108,7 +114,7 @@ public class ImageVM {
         if (selectedImage != null) {
             // Parse tags
             String[] parsed_tags = ImageUtil.parseTags(editForm.getTags());
-            // Lookup and update OR create new tags and add them to image
+            // Lookup and updatePageContent OR create new tags and add them to image
             for (String tag : parsed_tags) {
                 tagService.createTag(tag, selectedImage);
             }
@@ -140,6 +146,12 @@ public class ImageVM {
             ImageUtil.download(selectedImage);
         }
 
+    }
+
+    @Command
+    @NotifyChange({"removeConfirmation"})
+    public void changeConfirmationState(@BindingParam("confirm") Boolean state) {
+        setRemoveConfirmation(state);
     }
 
     public void setTagService(TagService tagService) {
@@ -200,5 +212,13 @@ public class ImageVM {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public Boolean getRemoveConfirmation() {
+        return removeConfirmation;
+    }
+
+    public void setRemoveConfirmation(Boolean removeConfirmation) {
+        this.removeConfirmation = removeConfirmation;
     }
 }

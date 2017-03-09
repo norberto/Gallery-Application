@@ -42,16 +42,16 @@ public class ImageService {
         return imageDao.getImageList(page, pageMax);
     }
 
-    public Long getPageCount(Integer pageMax) {
-        return imageDao.getPageCount(pageMax);
+    public Integer getImageCount() {
+        return imageDao.getImageCount().intValue();
     }
 
     public ImageEntity getImageById(Long id) {
         return imageDao.getImageById(id);
     }
 
-    public List<ImageEntity> findImagesByKeys(String key, TagEntity tag) {
-        return imageDao.findImagesByKeys(key, tag);
+    public List<ImageEntity> findImagesByKeys(String key, TagEntity tag, Integer page, Integer pageMax) {
+        return imageDao.findImagesByKeys(key, tag, page, pageMax);
     }
 
     public void editImage(ImageEntity ie) { imageDao.updateImage(ie); }
@@ -60,5 +60,12 @@ public class ImageService {
 
     public List<ImageEntity> getImagesFromFolderForPage(Integer page,Integer pageMax, CatalogueEntity catalogue) {
         return imageDao.getImageListFromFolderForPage(page, pageMax, catalogue);
+    }
+
+    public Long getImageCountSearch(String searchString, TagEntity searchTag) {
+        if(searchString != null && !searchString.equals("")) {
+            return imageDao.getImageCountSearch(searchString, searchTag);
+        }
+        return null;
     }
 }

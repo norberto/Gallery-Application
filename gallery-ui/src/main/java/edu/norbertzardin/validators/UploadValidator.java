@@ -14,8 +14,8 @@ public class UploadValidator extends AbstractValidator{
         Map<String,Property> beanProps = ctx.getProperties(ctx.getProperty().getBase());
 
         validateName(ctx, (String) beanProps.get("name").getValue(), (Long) ctx.getValidatorArg("maxLength"));
-        validateDescription(ctx, (String) beanProps.get("description").getValue());
-        validateTags(ctx, (String) beanProps.get("tags").getValue());
+        validateTags(ctx, (String) beanProps.get("tags").getValue(), (Long) ctx.getValidatorArg("maxTags"));
+        validateDescription(ctx, (String) beanProps.get("description").getValue(), (Long) ctx.getValidatorArg("maxDescription"));
     }
 
     private void validateName(ValidationContext ctx, String name, Long maxLength){
@@ -23,18 +23,23 @@ public class UploadValidator extends AbstractValidator{
             addInvalidMessage(ctx, "name", "Name is required.");
         }
         if(name != null && name.length() > maxLength.intValue()) {
-            addInvalidMessage(ctx, "name", "Name is too long.");
+            addInvalidMessage(ctx, "name", "Name is too long. (maximum " + maxLength + " characters allowed)");
         }
     }
 
-    private void validateDescription(ValidationContext ctx, String description) {
-        // do nothing
+    private void validateDescription(ValidationContext ctx, String description, Long maxLength) {
+        if(description != null && description.length() > maxLength) {
+            addInvalidMessage(ctx, "description", "Description is too long. (maximum " + maxLength + " characters allowed)");
+        }
     }
 
-    private void validateTags(ValidationContext ctx, String tags) {
+    private void validateTags(ValidationContext ctx, String tags, Long maxTags) {
         String[] tagList = ImageUtil.parseTags(tags);
         if(tagList.length == 0) {
-            addInvalidMessage(ctx, "tags", "At least ONE tag is required.");
+            addInvalidMessage(ctx, "tags","At least one tag is required. (maximum " + maxTags + " tags allowed)");
+        }
+        if(tagList.length > 5) {
+            addInvalidMessage(ctx, "tags", "Too many tags. (maximum " + maxTags + " tags allowed)");
         }
     }
 }

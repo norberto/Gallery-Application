@@ -17,7 +17,7 @@ public class TitleValidator extends AbstractValidator {
             addInvalidMessage(ctx, "Name is required.");
         }
         if(name != null && name.length() > maxLength.intValue()) {
-            addInvalidMessage(ctx, "Name is too long.");
+            addInvalidMessage(ctx, "Name is too long. (max. " + maxLength + " characters)");
         }
     }
 }

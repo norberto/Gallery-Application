@@ -1,11 +1,13 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?imagePage title="Gallery Application - Browse"?>
+<?page title="Gallery Application - Browse Images"?>
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?link rel="stylesheet" type="text/css" href="css/style.css"/?>
 
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
 <zk xmlns:n="native" xmlns:x="xhtml">
     <x:script type="text/javascript">
+
         $(function(){
 
         $('#addCatalogueModal').on('hidden.bs.modal', function () {
@@ -14,9 +16,18 @@
         });
     </x:script>
 
-    <x:div id="holyshit" class="container-fluid" self="@define(content)" align="center"
+    <x:div class="container-fluid" self="@define(content)" align="center"
            viewModel="@id('vm') @init('edu.norbertzardin.vm.BrowseVM', pageImageMax = 10, pageCatalogueMax = 6)"
            validationMessages="@id('vmsgs')">
+
+        <x:script type="text/javascript">
+            $('editCatalogue').on('hide',function(e){
+                if(yourConditionNotToCloseMet){
+                    e.preventDefault();
+                }
+            });
+        </x:script>
+
         <n:div class="row-fluid">
             <n:div class="col-md-9" align="left">
                 <n:h3>
@@ -140,7 +151,7 @@
 
 
         <!-- CREATION Modal -->
-        <n:div class="modal fade" id="addCatalogueModal" tabindex="-1" width="800px">
+        <n:div class="modal fade" id="addCatalogueModal" tabindex="-1" width="800px" data-backdrop="static">
 
             <n:div class="modal-dialog">
                 <n:div class="modal-content">
@@ -175,7 +186,7 @@
                                             <n:label class="control-label" for="title">Catalogue title</n:label>
                                             <textbox id="title" type="text" zclass="form-control"
                                                      placeholder="Specify catalogue title..."
-                                                     value=" @save(vm.title, before='createCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=32)"/>
+                                                     value=" @save(vm.title, before='createCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=12)"/>
                                             <x:span id="titleStatus" class="help-block"
                                                     textContent="@load(vmsgs[title])"/>
 
@@ -200,7 +211,7 @@
         </n:div>
 
         <!-- EDITION Modal -->
-        <n:div class="modal fade" id="editCatalogue" tabindex="-1" width="800px">
+        <n:div class="modal fade" id="editCatalogue" tabindex="-1" width="800px" data-backdrop="static">
             <n:div class="modal-dialog">
                 <n:div class="modal-content">
                     <n:div class="modal-header">
@@ -231,7 +242,7 @@
                                             <n:label class="control-label" for="newTitle">Catalogue title</n:label>
                                             <textbox id="newTitle" type="text" zclass="form-control"
                                                      placeholder="Specify catalogue title..."
-                                                     value="@load(vm.editCatalogue.title) @save(vm.editCatalogue.title, before='editCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=32)"/>
+                                                     value="@load(vm.editCatalogue.title) @save(vm.editCatalogue.title, before='editCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=12)"/>
                                             <x:span id="newTitleStatus" class="help-block"
                                                     textContent="@load(vmsgs[newTitle])"/>
 
@@ -243,11 +254,22 @@
                         </n:div>
                     </n:div>
                     <n:div class="modal-footer">
-                        <x:button type="button" class="btn btn-danger pull-left " data-dismiss="modal"
-                                  onClick="@command('deleteCatalogue')">
-                            <n:span class="glyphicon glyphicon-trash"/>
+                        <x:button type="button" class="btn btn-danger pull-left" visible="@load(not vm.removeConfirmation)"
+                                  onClick="@command('changeConfirmationState', confirm='true')">
+                            <n:span class="glyphicon glyphicon-trash"/> Remove
                         </x:button>
-                        <x:button type="button" class="btn btn-success" onClick="@command('editCatalogue')">
+
+                        <x:div visible="@load(vm.removeConfirmation)" style="vertical-align: middle;">
+                            <x:buton type="button" class="btn btn-success pull-left" data-dismiss="modal" onClick="@command('deleteCatalogue')">
+                                <n:span class="glyphicon glyphicon-ok"/> Yes
+                            </x:buton>
+                            <x:button type="button" class="btn btn-danger pull-left" onClick="@command('changeConfirmationState', confirm='false')">
+                                <n:span class="glyphicon glyphicon-remove"/> No
+                            </x:button>
+                            <n:div class="pull-left" style="margin-left: 20px;">Are you sure?</n:div>
+                        </x:div>
+
+                        <x:button type="button" class="btn btn-success" onClick="@command('editCatalogue')" data-dismiss="@load(empty vmsgs[newTitle] ? 'modal' : '')">
                             <n:span class="glyphicon glyphicon-ok"/>
                             Save
                         </x:button>

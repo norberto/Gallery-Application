@@ -1,18 +1,22 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
+<?page title="Gallery Application - View Images"?>
+
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?evaluator name="zel"?>
+<?link rel="stylesheet" type="text/css" href="css/style.css" ?>
+
 <?imagePage zscriptLanguage="javascript"?>
 
 <zk xmlns:x="xhtml" xmlns:n="native">
     <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewVM', pageMax=15)" self="@define(content)">
 
         <n:div class="container-fluid top-buffer">
-            <n:div class="row" style="margin-bottom:50px">
+            <n:div class="row" style="margin-bottom:30px">
                 <n:div class="col-lg-4 col-md-4 col-xs-12  col-lg-push-7 col-md-push-7">
                     <n:div class="input-group">
-                        <textbox zclass="form-control" value="@bind(vm.searchString)" onOK="@command('doSearch')"/>
+                        <textbox zclass="form-control" value="@save(vm.searchString, before='doSearch')" onOK="@command('doSearch')"/>
                         <n:span class="input-group-btn">
                             <x:button class="btn btn-default" type="button" onClick="@command('doSearch')">Search
                             </x:button>
@@ -38,14 +42,15 @@
                 </x:div>
             </x:div>
 
-            <n:div class="row">
+            <x:div class="row" visible="@load(not empty vm.imageList)">
                 <n:div class="col-md-12" align="center">
                     <n:div class="btn-group">
 
                         <x:span type="button"
-                                class="@load(vm.page eq 1 ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
-                                style="@load(vm.page eq 1 ? 'width:100px; cursor:default;' : 'width:100px')"
-                                onClick="@command(vm.page ne 1? 'previousPage' : '' )">Previous
+                                class="@load(vm.page eq 1 ? 'btn btn-default btn-round-lg btn-md disabled' : 'btn btn-default btn-round-lg btn-md')"
+                                style="@load(vm.page eq 1 ? 'width:50px; cursor:default;' : 'width:50px')"
+                                onClick="@command(vm.page ne 1? 'previousPage' : '' )">
+                            <n:span class="glyphicon glyphicon-chevron-left"/>
                         </x:span>
 
                         <n:span type="button" class="btn btn-default disabled"
@@ -54,13 +59,21 @@
                         </n:span>
 
                         <x:span type="button"
-                                class="@load(vm.page eq vm.pageCount ? 'btn btn-primary btn-round-lg btn-md disabled' : 'btn btn-primary btn-round-lg btn-md active')"
-                                style="@load(vm.page eq vm.pageCount ? 'width:100px; cursor:default;' : 'width:100px')"
-                                onClick="@command(vm.page ne vm.pageCount? 'nextPage' : '' )">Next
+                                class="@load(vm.page eq vm.pageCount ? 'btn btn-default btn-round-lg btn-md disabled' : 'btn btn-default btn-round-lg btn-md')"
+                                style="@load(vm.page eq vm.pageCount ? 'width:50px; cursor:default;' : 'width:50px')"
+                                onClick="@command(vm.page ne vm.pageCount? 'nextPage' : '' )">
+                            <n:span class="glyphicon glyphicon-chevron-right"/>
                         </x:span>
                     </n:div>
                 </n:div>
-            </n:div>
+            </x:div>
+            <x:div class="row" visible="@load(empty vm.imageList and empty vm.searchString)">
+                <n:h5 align="center">No images to show.</n:h5>
+            </x:div>
+
+            <x:div class="row" visible="@load(empty vm.imageList and not empty vm.searchString)">
+                <x:h5 align="center" textContent="@load(c:cat('No search results found for &quot;'.concat(vm.searchString), '&quot;.'))"/>
+            </x:div>
         </n:div>
     </div>
 </zk>

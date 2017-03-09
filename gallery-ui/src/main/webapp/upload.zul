@@ -1,20 +1,14 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?imagePage title="Gallery Application - Upload"?>
+<?page title="Gallery Application - Upload"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
-<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
 <?link rel="stylesheet" type="text/css" href="css/style.css"?>
-
+<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
 <?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"?>
-<!--<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-tokenfield.css" ?>-->
-<!--<?script type="text/javascript" src="bootstrap/js/bootstrap-tokenfield.js"?>-->
-
 <zk xmlns:n="native" xmlns="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul">
-    <!--<script src="js/tags.js"/>-->
-
     <div viewModel="@id('uploadVM') @init('edu.norbertzardin.vm.UploadVM')"
          self="@define(content)"
          validationMessages="@id('vmsgs')"
-         form="@id('fx') @load(uploadVM.uploadForm) @save(uploadVM.uploadForm, before='submit') @validator('edu.norbertzardin.validators.UploadValidator', maxLength=32)">
+         form="@id('fx') @load(uploadVM.uploadForm) @save(uploadVM.uploadForm, before='submit') @validator('edu.norbertzardin.validators.UploadValidator', maxLength=32, maxTags=5, maxDescription=200)">
 
         <n:div class="container">
             <n:div class="row top-buffer">
@@ -37,11 +31,13 @@
 
                 <n:div class="row">
                     <n:div class="col-lg-6 col-md-6 col-xs-6">
-                        <div sclass="@load(empty vmsgs[imageDescription] ? 'form-group' : 'form-group has-error has-feedback')">
+                        <div sclass="@load(empty vmsgs['description'] ? 'form-group' : 'form-group has-error has-feedback')">
                             <n:label class="control-label" for="imageDescription">Description</n:label>
                             <textarea type="text" class="form-control" id="imageDescription"
                                    value="@save(fx.description)" maxlength="500" rows="5"
                                    placeholder="Enter a short description that would describe the picture you are willing to upload..."/>
+                            <span id="descriptionStatus" class="help-block" textContent="@load(vmsgs['description'])"/>
+
                         </div>
                     </n:div>
                 </n:div>
@@ -52,7 +48,7 @@
                             <n:label class="control-label" for="imageTags">Tags</n:label>
                             <input type="text" class="form-control" id="imageTags" name="imageTags"
                                    value="@save(fx.tags)" placeholder="Add your tags here..."/>
-                            <span id="imageStatus" class="help-block" textContent="@load(vmsgs['tags'])"/>
+                            <span id="tagStatus" class="help-block" textContent="@load(vmsgs['tags'])"/>
                         </div>
                     </n:div>
                 </n:div>
@@ -94,10 +90,10 @@
                         <div sclass="@load(uploadVM.errorMessage eq null ? 'form-group' : 'form-group has-error has-feedback')">
                             <n:label for="selectImage"/>
 
-                            <zul:button zclass="btn btn-default control-label" upload="true,maxsize=1000000"
-                                        onUpload="@command('onUpload', upEvent=event, messages=vmsgs))" label="Choose image"/>
+                            <zul:button zclass="btn btn-default control-label" upload="true, maxsize=5120"
+                                        onUpload="@command('onUpload', upEvent=event)" label="Choose image"/>
 
-                            <span style="color: #a94442;" visible="@load(uploadVM.errorMessage ne null ? 'true' : 'false')"
+                            <span style="color: #a94442;" visible="@load(uploadVM.errorMessage ne null)"
                                   textContent="@load(uploadVM.errorMessage)"/>
 
                         </div>
@@ -111,7 +107,7 @@
 
                 <n:div class="row top-buffer">
                     <n:div class="col-lg-6 col-md-6 col-xs-6">
-                        <zul:button zclass="btn btn-success" width="50%" onClick="@command('submit')" disabled="@load(uploadVM.allowSubmit ? 'false' : 'true')">Submit</zul:button>
+                        <zul:button zclass="btn btn-success" width="50%" onClick="@command('submit')" disabled="@load(uploadVM.allowSubmit)">Submit</zul:button>
                     </n:div>
                 </n:div>
 

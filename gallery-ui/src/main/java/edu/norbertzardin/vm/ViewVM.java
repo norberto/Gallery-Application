@@ -6,18 +6,16 @@ import edu.norbertzardin.service.ImageService;
 import edu.norbertzardin.service.TagService;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ViewVM {
     private Integer pageMax;
     private String searchString;
+    private TagEntity searchTag;
 
     private Integer page;
     private Integer pageCount;
@@ -33,48 +31,41 @@ public class ViewVM {
 
     private List<ImageEntity> imageList;
 
+    @Init
+    public void init(@BindingParam("pageMax") Integer max) {
+        setPage(1);
+        setPageMax(max);
+        updatePageCount();
+        loadImages();
+    }
+
     @AfterCompose
-    @NotifyChange({"page", "pageCount"})
     public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
-        setPage(1);
-        setPageCount(imageService.getPageCount(pageMax));
-        loadImages();
     }
 
-    @Init
-    public void init(@ContextParam(ContextType.VIEW) Component view, @BindingParam("pageMax") Integer max) {
-        Selectors.wireComponents(view, this, false);
-        setPageMax(max);
-        setPage(1);
-        setPageCount(imageService.getPageCount(pageMax));
-        loadImages();
-    }
-
-    @NotifyChange("imageList")
     @Command
-    public void doSearch(@ContextParam(ContextType.TRIGGER_EVENT) Event event) {
-        if ((getSearchString() != null) && !getSearchString().equals("")) {
-            TagEntity tag = tagService.getTagByName(searchString);
-            setImageList(imageService.findImagesByKeys(getSearchString(), tag));
+    @NotifyChange({"imageList", "page", "pageCount", "searchString"})
+    public void doSearch() {
+        setPage(1);
+        setSearchString(searchString.replaceAll("%", ""));
+        if (isSearch()) {
+            searchTag = tagService.getTagByName(searchString);
+            setImageList(imageService.findImagesByKeys(getSearchString(), searchTag, getPage(), pageMax));
         } else {
-            setImageList(imageService.getImageList(1, pageMax));
+            setImageList(imageService.getImageList(getPage(), pageMax));
         }
+        updatePageCount();
     }
 
     @GlobalCommand
     @NotifyChange({"imageList", "page", "pageCount"})
     public void reload () {
-        loadImages();
         if(imageList.isEmpty() || page < 0 || page > pageCount) {
-            setPageCount(imageService.getPageCount(pageMax));
+            updatePageCount();
             setPage(getPageCount());
-            loadImages();
         }
-    }
-
-    public List<ImageEntity> getImageList() {
-        return imageList;
+        loadImages();
     }
 
     @Command
@@ -88,21 +79,46 @@ public class ViewVM {
     public void previousPage() {
         if (page != 1) {
             page--;
-            loadImages();
+            updatePageContent();
         }
     }
 
     @Command
     @NotifyChange({"page", "imageList", "pageCount"})
     public void nextPage() {
-        setPageCount(imageService.getPageCount(pageMax));
         if (!page.equals(pageCount)) {
             page++;
         } else if(page >= pageCount) {
             setPage(getPageCount());
         }
-        loadImages();
+        updatePageContent();
+    }
 
+    public boolean isSearch() { return searchString != null && !searchString.equals(""); }
+
+    private void updatePageCount() {
+        Integer imageCount;
+        if(isSearch()) {
+            imageCount = imageService.getImageCountSearch(getSearchString(), searchTag).intValue();
+        } else {
+            imageCount = imageService.getImageCount();
+        }
+
+        Integer count = imageCount / pageMax;
+        if(count * pageMax < imageCount) {
+            setPageCount(count + 1);
+        } else {
+            setPageCount(count);
+        }
+    }
+
+    private void updatePageContent() {
+        if(!isSearch()){
+            loadImages();
+        } else {
+            setImageList(imageService.findImagesByKeys(searchString, searchTag, page, pageMax));
+        }
+        updatePageCount();
     }
 
     private void loadImages() {
@@ -129,6 +145,9 @@ public class ViewVM {
         this.selectedImage = image;
     }
 
+    public List<ImageEntity> getImageList() {
+        return imageList;
+    }
 
     public String getSearchString() {
         return searchString;
@@ -142,8 +161,8 @@ public class ViewVM {
         return pageCount;
     }
 
-    public void setPageCount(Long pageCount) {
-        this.pageCount = pageCount.intValue();
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
     }
 
     public Integer getPage() {

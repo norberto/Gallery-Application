@@ -17,7 +17,6 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.awt.*;
 import java.util.List;
 // TODO Re-do criteria building
 
@@ -43,17 +42,16 @@ public class ImageDAOImpl implements ImageDao {
         setUpCriteriaBuilderForImage();
         fetchThumbnail();
         CriteriaQuery<ImageEntity> select = cq.select(image);
-        TypedQuery<ImageEntity> typedQuery = entityManager.createQuery(select);
-        typedQuery.setFirstResult((page - 1) * pageMax);
-        typedQuery.setMaxResults(pageMax);
-         return  typedQuery.getResultList();
+        return pageContent(page, pageMax, entityManager.createQuery(select));
+//        return null;
     }
 
     public List<ImageEntity> getImageList() {
+//        return null;
         return entityManager.createQuery("from ImageEntity ", ImageEntity.class).getResultList();
     }
 
-    public ImageEntity getImageById(Long id){
+    public ImageEntity getImageById(Long id) {
         return entityManager.find(ImageEntity.class, id);
     }
 
@@ -61,53 +59,56 @@ public class ImageDAOImpl implements ImageDao {
         setUpCriteriaBuilderForImage();
         image.fetch(ImageEntity_.mediumImage, JoinType.INNER);
         image.fetch(ImageEntity_.tags, JoinType.INNER);
-
         Predicate name_ = cb.equal(image.get(ImageEntity_.id), id);
-
         return entityManager
-                .createQuery( cq.where(name_).select(image))
+                .createQuery(cq.where(name_).select(image))
                 .getSingleResult();
     }
 
-    public List<ImageEntity> findImagesByKeys(String keyword, TagEntity tag) {
+    public List<ImageEntity> findImagesByKeys(String keyword, TagEntity tag, Integer page, Integer pageMax) {
         Expression<List<TagEntity>> tagList = image.get("tags");
-
         setUpCriteriaBuilderForImage();
         fetchThumbnail();
-        String key = (keyword == null) ? "%" : (keyword.toLowerCase() + "%");
-
-        Predicate name = cb.like(cb.lower(image.get(ImageEntity_.name)), key);
-        Predicate description = cb.like(cb.lower(image.get(ImageEntity_.description)), key);
-
-        if(tag != null) {
+        Predicate name = cb.like(cb.lower(image.get(ImageEntity_.name)), keyword.toLowerCase());
+        Predicate description = cb.like(cb.lower(image.get(ImageEntity_.description)), keyword.toLowerCase());
+        CriteriaQuery<ImageEntity> select;
+        if (tag != null) {
             Predicate key_tag = cb.isMember(tag, tagList);
-            cq.select(image).where(cb.or(name, description, key_tag));
+            select = cq.select(image).where(cb.or(name, description, key_tag));
         } else {
-            cq.select(image).where(cb.or(name, description));
+            select = cq.select(image).where(cb.or(name, description));
         }
 
-        return entityManager.createQuery(cq).getResultList();
+        return pageContent(page, pageMax, entityManager.createQuery(select));
     }
 
-    public Long getPageCount(Integer pageMax) {
+    public Long getImageCountSearch(String searchString, TagEntity searchTag) {
+        cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
+        Root<ImageEntity> root = criteria.from(ImageEntity.class);
+        Expression<List<TagEntity>> tagList = root.get("tags");
+
+        Predicate name = cb.like(cb.lower(root.get(ImageEntity_.name)), searchString.toLowerCase());
+        Predicate description = cb.like(cb.lower(root.get(ImageEntity_.description)), searchString.toLowerCase());
+        if (searchTag != null) {
+            Predicate key_tag = cb.isMember(searchTag, tagList);
+            criteria.select(cb.count(root)).where(cb.or(name, description, key_tag));
+        } else {
+            criteria.select(cb.count(root)).where(cb.or(name, description));
+        }
+        return entityManager.createQuery(criteria).getSingleResult();
+    }
+
+    public Long getImageCount() {
         cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
         criteria.select(cb.count(criteria.from(ImageEntity.class)));
-        Long imageCount = entityManager.createQuery(criteria).getSingleResult();
-
-        Long pageCount = imageCount / pageMax;
-        if(pageCount * pageMax < imageCount) {
-            return pageCount + 1;
-        } else {
-            return pageCount;
-        }
+        return entityManager.createQuery(criteria).getSingleResult();
     }
-
 
     public ImageEntity getImageByIdFullFetch(Long id) {
         setUpCriteriaBuilderForImage();
         fetchAll();
-
         Predicate name_ = cb.equal(image.get(ImageEntity_.id), id);
         cq.where(name_).select(image);
         return entityManager.createQuery(cq).getSingleResult();
@@ -125,11 +126,9 @@ public class ImageDAOImpl implements ImageDao {
 
         Predicate p = cb.equal(image.get(ImageEntity_.catalogue), catalogue);
         CriteriaQuery<ImageEntity> select = cq.select(image).where(p);
-        TypedQuery<ImageEntity> typedQuery = entityManager.createQuery(select);
-        typedQuery.setFirstResult((page - 1) * pageMax);
-        typedQuery.setMaxResults(pageMax);
-        return  typedQuery.getResultList();
+        return pageContent(page, pageMax, entityManager.createQuery(select));
     }
+
 
     // Set up criteria builder for ImageEntity model
     private void setUpCriteriaBuilderForImage() {
@@ -137,7 +136,6 @@ public class ImageDAOImpl implements ImageDao {
         cq = cb.createQuery(ImageEntity.class);
         image = cq.from(ImageEntity.class);
     }
-
 
     // Fetches all contents of an Entity, for viewing an image
     private void fetchAll() {
@@ -147,17 +145,23 @@ public class ImageDAOImpl implements ImageDao {
         image.fetch(ImageEntity_.tags, JoinType.LEFT);
     }
 
+    private List<ImageEntity> pageContent(Integer page, Integer pageMax, TypedQuery<ImageEntity> typedQuery) {
+        typedQuery.setFirstResult((page - 1) * pageMax);
+        typedQuery.setMaxResults(pageMax);
+        return typedQuery.getResultList();
+    }
+
     // Fetches only thumbnail - for listing images
     private void fetchThumbnail() {
         image.fetch(ImageEntity_.thumbnail, JoinType.INNER);
     }
 
     @PersistenceContext
-    public void setEntityManagerFactory(EntityManager entityManager){
+    public void setEntityManagerFactory(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    public EntityManager getEntityManager(){
+    public EntityManager getEntityManager() {
         return entityManager;
     }
 }

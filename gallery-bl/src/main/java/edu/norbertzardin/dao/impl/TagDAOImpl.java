@@ -55,8 +55,7 @@ public class TagDAOImpl implements TagDao {
         CriteriaQuery<TagEntity> cq = cb.createQuery(TagEntity.class);
         Root<TagEntity> root = cq.from(TagEntity.class);
         root.fetch(TagEntity_.images, JoinType.INNER);
-        String nameSearchTerm = (name == null) ? "%" : (name.toLowerCase() + "%");
-        Predicate name_ = cb.like(cb.lower(root.get(TagEntity_.name)), nameSearchTerm);
+        Predicate name_ = cb.like(cb.lower(root.get(TagEntity_.name)), name.toLowerCase());
 
         cq.where(name_).select(root);
 

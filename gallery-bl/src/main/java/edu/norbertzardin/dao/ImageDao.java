@@ -22,11 +22,13 @@ public interface ImageDao {
 
     ImageEntity getImageByIdFullFetch(Long id);
 
-    List<ImageEntity> findImagesByKeys(String keyword, TagEntity tag);
+    List<ImageEntity> findImagesByKeys(String keyword, TagEntity tag, Integer page, Integer pageMax);
 
-    Long getPageCount(Integer pageMax);
+    Long getImageCount();
 
     void updateImage(ImageEntity ie);
 
     List<ImageEntity> getImageListFromFolderForPage(Integer page, Integer pageMax, CatalogueEntity catalogue);
+
+    Long getImageCountSearch(String searchString, TagEntity searchTag);
 }

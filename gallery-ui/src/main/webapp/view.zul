@@ -10,7 +10,7 @@
 <?imagePage zscriptLanguage="javascript"?>
 
 <zk xmlns:x="xhtml" xmlns:n="native">
-    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewVM', pageMax=15)" self="@define(content)">
+    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewVM', pageMax=5)" self="@define(content)">
 
         <n:div class="container-fluid top-buffer">
             <n:div class="row" style="margin-bottom:30px">
@@ -42,7 +42,7 @@
                 </x:div>
             </x:div>
 
-            <x:div class="row" visible="@load(not empty vm.imageList)">
+            <x:div class="row" visible="@load(vm.pageCount gt 1)">
                 <n:div class="col-md-12" align="center">
                     <n:div class="btn-group">
 

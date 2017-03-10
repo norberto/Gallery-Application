@@ -28,7 +28,7 @@ public class EditImageValidator extends AbstractValidator {
     }
 
     private void validateDescription(ValidationContext ctx, String description, Long maxLength) {
-        if(description.length() > maxLength) {
+        if(description != null && description.length() > maxLength) {
             addInvalidMessage(ctx, "description", "Description is too long. (maximum " + maxLength + " characters)");
         }
     }

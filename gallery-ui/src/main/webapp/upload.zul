@@ -107,7 +107,7 @@
 
                 <n:div class="row top-buffer">
                     <n:div class="col-lg-6 col-md-6 col-xs-6">
-                        <zul:button zclass="btn btn-success" width="50%" onClick="@command('submit')" disabled="@load(uploadVM.allowSubmit)">Submit</zul:button>
+                        <zul:button zclass="btn btn-success" width="50%" onClick="@command('submit')" disabled="@load(!uploadVM.allowSubmit)">Submit</zul:button>
                     </n:div>
                 </n:div>
 

@@ -1,5 +1,6 @@
 package edu.norbertzardin.vm;
 
+import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
@@ -25,11 +26,12 @@ public class ImageVM {
     private ImageEntity selectedImage;
     private List<CatalogueEntity> catalogueList;
     private List<TagEntity> tagList;
-    private boolean editMode;
+    private Boolean editMode;
     private String tags;
     private Boolean removeConfirmation;
     private Integer tagsLeft;
     private Integer tagLimit;
+    private boolean changed;
 
 
     private UploadForm editForm;
@@ -46,7 +48,6 @@ public class ImageVM {
         setRemoveConfirmation(false);
         setEditMode(false);
     }
-
 
     @AfterCompose
     public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
@@ -89,10 +90,10 @@ public class ImageVM {
             // If tag found start deleting process
             if (tag_ != null) {
                 tagService.removeTag(tag_);
-                // Update local content
-                setSelectedImage(imageService.getImageByIdWithFetch(selectedImage.getId()));
-                setTagList(selectedImage.getTags());
             }
+            // Update local content
+            setSelectedImage(imageService.getImageByIdWithFetch(selectedImage.getId()));
+            setTagList(selectedImage.getTags());
         }
 
     }
@@ -115,15 +116,15 @@ public class ImageVM {
             String[] parsed_tags = ImageUtil.parseTags(editForm.getTags());
             // Lookup and updatePageContent OR create new tags and add them to image
             for (String tag : parsed_tags) {
-                tagService.createTag(tag, selectedImage);
+                if(tagService.createTag(tag, selectedImage)) {
+                    setTagsLeft(getTagsLeft() - 1);
+                }
             }
-            setTagsLeft(getTagsLeft() - parsed_tags.length);
             // Update image
             imageService.editImage(selectedImage);
             // Update local content
             setSelectedImage(imageService.getImageByIdWithFetch(selectedImage.getId()));
             loadTags();
-            setTags(null);
         }
         // Disable edit mode
         setEditMode(false);
@@ -137,13 +138,12 @@ public class ImageVM {
 
     @Command
     public void onDownload() {
-        // Check if currently selected image is not null, if not - fetch image again with its contents
         if (selectedImage != null) {
-            setSelectedImage(imageService.getImageByIdFullFetch(selectedImage.getId()));
-        }
-        // Check if fetched image is not null, if not, start downloading
-        if (selectedImage != null) {
-            ImageUtil.download(selectedImage);
+            ByteData data = imageService.getDownloadById(selectedImage.getId());
+            // Check if fetched image is not null, if not, start downloading
+            if (data != null) {
+                ImageUtil.download(data, selectedImage);
+            }
         }
     }
 
@@ -181,7 +181,7 @@ public class ImageVM {
         return editMode;
     }
 
-    public void setEditMode(boolean editMode) {
+    public void setEditMode(Boolean editMode) {
         this.editMode = editMode;
     }
 

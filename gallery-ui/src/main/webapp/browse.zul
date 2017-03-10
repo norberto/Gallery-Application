@@ -5,14 +5,12 @@
 <?link rel="stylesheet" type="text/css" href="css/style.css"/?>
 
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
-<zk xmlns:n="native" xmlns:x="xhtml">
+<zk xmlns:n="native" xmlns:x="xhtml" xmlns:a="client/attribute" xmlns:w="client" a:myAttribute="hello">
     <x:script type="text/javascript">
-
         $(function(){
-
-        $('#addCatalogueModal').on('hidden.bs.modal', function () {
-        $(this).find("input,textarea,textbox,select").val('').end();
-        });
+            $('#addCatalogueModal').on('hidden.bs.modal', function () {
+                $(this).find("input,textarea,textbox,select").val('').end();
+            });
         });
     </x:script>
 
@@ -36,13 +34,16 @@
             </n:div>
             <n:div class="col-md-3">
                 <n:div id="buttons" align="right">
-                    <button zclass="btn btn-danger" label="Go Back" visible="@load(vm.backButton)"
-                            onClick="@command('goBack')"/>
-                    <x:button type="button" class="btn btn-primary" data-toggle="modal" onClick="@command('clearMessages', errors=vmsgs)"
-                              data-target="#addCatalogueModal">
-                        <n:span class="glyphicon glyphicon-plus"/>
-                        Create Catalogue
-                    </x:button>
+                    <x:span class="btn btn-primary btn-danger" visible="@load(vm.backButton)"
+                            onClick="@command('goBack')">
+                        <span class="glyphicon glyphicon-chevron-left"/> Go Back
+                    </x:span>
+
+
+                    <x:span class="btn btn-primary btn-primary" data-toggle="modal" onClick="@command('clearMessages', errors=vmsgs)"
+                         data-target="#addCatalogueModal">
+                        <span class="glyphicon glyphicon-plus"/> Create  a catalogue
+                    </x:span>
                 </n:div>
             </n:div>
         </n:div>
@@ -152,7 +153,13 @@
 
         <!-- CREATION Modal -->
         <n:div class="modal fade" id="addCatalogueModal" tabindex="-1" width="800px" data-backdrop="static">
-
+            <!--<script type="text/javascript">-->
+                <!--jQuery(function() {-->
+                    <!--$(".submitButton").bind('click'), function() {-->
+                        <!--if(-->
+                    <!--}-->
+                <!--}-->
+            <!--</script>-->
             <n:div class="modal-dialog">
                 <n:div class="modal-content">
                     <n:div class="modal-header">
@@ -168,7 +175,7 @@
                                 </n:div>
 
                                 <n:div class="col-md-1">
-                                    <n:button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <n:button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <n:span aria-hidden="true">×</n:span>
                                     </n:button>
                                 </n:div>
@@ -182,14 +189,15 @@
                             <n:div class="container-fluid">
                                 <n:div class="row top-buffer">
                                     <x:div class="col-md-12" align="left">
-                                        <x:div sclass="@load(empty vmsgs[title] ? 'form-group' : 'form-group has-error has-feedback')">
+                                        <x:div sclass="@load(empty vmsgs[title] and empty vmsgs['new_title'] ? 'form-group' : 'form-group has-error has-feedback')">
                                             <n:label class="control-label" for="title">Catalogue title</n:label>
                                             <textbox id="title" type="text" zclass="form-control"
                                                      placeholder="Specify catalogue title..."
                                                      value=" @save(vm.title, before='createCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=12)"/>
                                             <x:span id="titleStatus" class="help-block"
                                                     textContent="@load(vmsgs[title])"/>
-
+                                            <x:span id="titleStatus2" class="help-block"
+                                                    textContent="@load(vmsgs['new_title'])"/>
                                         </x:div>
 
                                     </x:div>
@@ -201,10 +209,9 @@
 
                     </n:div>
                     <n:div class="modal-footer">
-                        <x:button tyhpe="button" class="btn btn-success" width="200px"
+                        <x:button id="submitButton" type="button" class="btn btn-success" width="200px"
                                   onClick="@command('createCatalogue')">Submit
                         </x:button>
-                        <!--<n:button type="button" class="btn btn-default" data-dismiss="modal">Close</n:button>-->
                     </n:div>
                 </n:div>
             </n:div>
@@ -240,7 +247,7 @@
                                     <x:div class="col-md-12" align="left">
                                         <x:div sclass="@load(empty vmsgs[newTitle] ? 'form-group' : 'form-group has-error has-feedback')">
                                             <n:label class="control-label" for="newTitle">Catalogue title</n:label>
-                                            <textbox id="newTitle" type="text" zclass="form-control"
+                                            <textbox id="newTitle" type="text" zclass="form-control" onChanging="@command('changed')"
                                                      placeholder="Specify catalogue title..."
                                                      value="@load(vm.editCatalogue.title) @save(vm.editCatalogue.title, before='editCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=12)"/>
                                             <x:span id="newTitleStatus" class="help-block"
@@ -269,7 +276,11 @@
                             <n:div class="pull-left" style="margin-left: 20px;">Are you sure?</n:div>
                         </x:div>
 
-                        <x:button type="button" class="btn btn-success" onClick="@command('editCatalogue')" data-dismiss="@load(empty vmsgs[newTitle] ? 'modal' : '')">
+                        <x:button type="button" class="btn btn-success" onClick="@command('editCatalogue')" visible="@load(!empty vmsgs[newTitle])">
+                            <n:span class="glyphicon glyphicon-ok"/>
+                            Save
+                        </x:button>
+                        <x:button type="button" class="btn btn-success" data-dismiss="modal" onClick="@command('editCatalogue')" visible="@load(empty vmsgs[newTitle])">
                             <n:span class="glyphicon glyphicon-ok"/>
                             Save
                         </x:button>

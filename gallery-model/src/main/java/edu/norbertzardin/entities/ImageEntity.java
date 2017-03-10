@@ -69,7 +69,7 @@ public class ImageEntity implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long messageId) {

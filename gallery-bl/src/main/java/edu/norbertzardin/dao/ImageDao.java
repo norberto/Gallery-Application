@@ -1,5 +1,6 @@
 package edu.norbertzardin.dao;
 
+import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
@@ -31,4 +32,6 @@ public interface ImageDao {
     List<ImageEntity> getImageListFromFolderForPage(Integer page, Integer pageMax, CatalogueEntity catalogue);
 
     Long getImageCountSearch(String searchString, TagEntity searchTag);
+
+    ByteData getDownloadById(Long id);
 }

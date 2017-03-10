@@ -1,5 +1,6 @@
 package edu.norbertzardin.util;
 
+import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.ImageEntity;
 import org.zkoss.image.Image;
 import org.zkoss.zul.Filedownload;
@@ -134,8 +135,8 @@ public class ImageUtil {
     }
 
 
-    public static void download(ImageEntity image) {
-        Filedownload.save(image.getDownload().getData(),
+    public static void download(ByteData data, ImageEntity image) {
+        Filedownload.save(data.getData(),
                 "image/" + image.getDatatype(),
                 "download_" + image.toString());
     }

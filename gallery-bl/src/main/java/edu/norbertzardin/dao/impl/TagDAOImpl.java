@@ -47,7 +47,11 @@ public class TagDAOImpl implements TagDao {
     }
 
     public TagEntity getTagByIdWithFetch(Long id) {
-        return entityManager.find(TagEntity.class, id);
+        try {
+            return entityManager.find(TagEntity.class, id);
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     public TagEntity getTagByName(String name) {

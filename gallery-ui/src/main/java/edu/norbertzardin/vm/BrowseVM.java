@@ -4,6 +4,7 @@ import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.service.CatalogueService;
 import edu.norbertzardin.service.ImageService;
+import org.zkoss.bind.Binder;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -13,6 +14,7 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.impl.ValidationMessagesImpl;
+import org.zkoss.bind.sys.BinderCtrl;
 import org.zkoss.bind.sys.ValidationMessages;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
@@ -26,13 +28,14 @@ public class BrowseVM {
     private String title;
 
     private Integer imagePage;
-    private Long imagePageCount;
+    private Integer imagePageCount;
     private Integer pageImageMax;
     private List<ImageEntity> imageList;
     private Boolean removeConfirmation;
+    private Boolean changed;
 
     private Integer cataloguePage;
-    private Long cataloguePageCount;
+    private Integer cataloguePageCount;
     private Integer pageCatalogueMax;
     private List<CatalogueEntity> catalogueList;
 
@@ -54,7 +57,7 @@ public class BrowseVM {
                      @BindingParam("pageCatalogueMax") Integer folderMax) {
 
         String defaultCatalogueName = "Non-categorized";
-
+        setChanged(false);
         setRemoveConfirmation(false);
         setImagePage(1);
         setCataloguePage(1);
@@ -79,11 +82,16 @@ public class BrowseVM {
     // Commands
     @Command
     @NotifyChange({"catalogueList", "cataloguePageCount", "title"})
-    public void createCatalogue() {
+    public void createCatalogue(@ContextParam(ContextType.BINDER) Binder binder) {
+        ValidationMessages vmsgs = ((BinderCtrl) binder).getValidationMessages();
         CatalogueEntity ce = new CatalogueEntity();
         ce.setTitle(title);
         ce.setCreatedDate(new Date());
-        catalogueService.createCatalogue(ce);
+        if(!catalogueService.createCatalogue(ce)) {
+            vmsgs.addMessages(null, null, "new_title", new String[] {"Catalogue already exists."});
+        } else {
+            vmsgs.clearKeyMessages("new_title");
+        }
         updateCatalogues();
     }
 
@@ -145,17 +153,24 @@ public class BrowseVM {
     }
 
     @Command
+    @NotifyChange("changed")
+    public void changed() {
+        setChanged(true);
+    }
+
+    @Command
     @NotifyChange("editCatalogue")
     public void selectEditCatalogue(@BindingParam("editCatalogue") CatalogueEntity edit) {
         setEditCatalogue(edit);
     }
 
     @Command
-    @NotifyChange({"editCatalogue", "catalogueList"})
+    @NotifyChange({"editCatalogue", "catalogueList", "changed"})
     public void editCatalogue() {
         editCatalogue.setTitle(editCatalogue.getTitle());
         catalogueService.editCatalogue(editCatalogue);
         setCatalogueList(catalogueService.getCatalogueListByPage(cataloguePage, pageCatalogueMax));
+        setChanged(false);
     }
 
     private void updateImages() {
@@ -282,11 +297,11 @@ public class BrowseVM {
         this.imagePage = imagePage;
     }
 
-    public Long getImagePageCount() {
+    public Integer getImagePageCount() {
         return imagePageCount;
     }
 
-    public void setImagePageCount(Long imagePageCount) {
+    public void setImagePageCount(Integer imagePageCount) {
         this.imagePageCount = imagePageCount;
     }
 
@@ -298,7 +313,7 @@ public class BrowseVM {
         this.pageCatalogueMax = pageCatalogueMax;
     }
 
-    public Long getCataloguePageCount() {
+    public Integer getCataloguePageCount() {
         return cataloguePageCount;
     }
 
@@ -306,7 +321,7 @@ public class BrowseVM {
         return cataloguePage;
     }
 
-    public void setCataloguePageCount(Long cataloguePageCount) {
+    public void setCataloguePageCount(Integer cataloguePageCount) {
         this.cataloguePageCount = cataloguePageCount;
     }
 
@@ -325,5 +340,13 @@ public class BrowseVM {
 
     public void setRemoveConfirmation(Boolean removeConfirmation) {
         this.removeConfirmation = removeConfirmation;
+    }
+
+    public boolean getChanged() {
+        return changed;
+    }
+
+    public void setChanged(boolean changed) {
+        this.changed = changed;
     }
 }

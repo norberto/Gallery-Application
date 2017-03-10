@@ -2,6 +2,7 @@ package edu.norbertzardin.service;
 
 import edu.norbertzardin.dao.ImageDao;
 import edu.norbertzardin.dao.TagDao;
+import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
@@ -67,5 +68,9 @@ public class ImageService {
             return imageDao.getImageCountSearch(searchString, searchTag);
         }
         return null;
+    }
+
+    public ByteData getDownloadById(Long id) {
+        return imageDao.getDownloadById(id);
     }
 }

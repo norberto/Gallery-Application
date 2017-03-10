@@ -1,6 +1,8 @@
 package edu.norbertzardin.dao.impl;
 
 import edu.norbertzardin.dao.ImageDao;
+import edu.norbertzardin.entities.ByteData;
+import edu.norbertzardin.entities.ByteData_;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.ImageEntity_;
@@ -43,11 +45,9 @@ public class ImageDAOImpl implements ImageDao {
         fetchThumbnail();
         CriteriaQuery<ImageEntity> select = cq.select(image);
         return pageContent(page, pageMax, entityManager.createQuery(select));
-//        return null;
     }
 
     public List<ImageEntity> getImageList() {
-//        return null;
         return entityManager.createQuery("from ImageEntity ", ImageEntity.class).getResultList();
     }
 
@@ -139,10 +139,19 @@ public class ImageDAOImpl implements ImageDao {
 
     // Fetches all contents of an Entity, for viewing an image
     private void fetchAll() {
-        image.fetch(ImageEntity_.thumbnail, JoinType.INNER);
+//        image.fetch(ImageEntity_.thumbnail, JoinType.INNER);
+//        image.fetch(ImageEntity_.download, JoinType.INNER);
+
         image.fetch(ImageEntity_.mediumImage, JoinType.INNER);
-        image.fetch(ImageEntity_.download, JoinType.INNER);
         image.fetch(ImageEntity_.tags, JoinType.LEFT);
+    }
+
+    public ByteData getDownloadById(Long id) {
+        setUpCriteriaBuilderForImage();
+        image.fetch(ImageEntity_.download, JoinType.INNER);
+        Predicate name_ = cb.equal(image.get(ImageEntity_.id), id);
+        cq.where(name_).select(image);
+        return entityManager.createQuery(cq).getSingleResult().getDownload();
     }
 
     private List<ImageEntity> pageContent(Integer page, Integer pageMax, TypedQuery<ImageEntity> typedQuery) {

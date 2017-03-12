@@ -42,6 +42,7 @@ public class BrowseVM {
     private CatalogueEntity defaultCatalogue;
     private CatalogueEntity selectedCatalogue;
     private CatalogueEntity editCatalogue;
+    private ValidationMessages vmsgs;
 
     private Boolean backButton;
 
@@ -50,11 +51,13 @@ public class BrowseVM {
 
     @WireVariable
     private ImageService imageService;
+    private Boolean saved;
 
     // Initializers
     @Init
     public void init(@BindingParam("pageImageMax") Integer imageMax,
-                     @BindingParam("pageCatalogueMax") Integer folderMax) {
+                     @BindingParam("pageCatalogueMax") Integer folderMax,
+                     @ContextParam(ContextType.BINDER) Binder binder) {
 
         String defaultCatalogueName = "Non-categorized";
         setChanged(false);
@@ -64,6 +67,7 @@ public class BrowseVM {
 
         setPageImageMax(imageMax);
         setPageCatalogueMax(folderMax);
+        setSaved(false);
 
         setDefaultCatalogue(catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName));
         setSelectedCatalogue(defaultCatalogue);
@@ -71,6 +75,7 @@ public class BrowseVM {
         updateCatalogues();
         updateImages();
         setBackButton(false);
+        vmsgs = ((BinderCtrl) binder).getValidationMessages();
     }
 
 
@@ -81,18 +86,20 @@ public class BrowseVM {
 
     // Commands
     @Command
-    @NotifyChange({"catalogueList", "cataloguePageCount", "title"})
-    public void createCatalogue(@ContextParam(ContextType.BINDER) Binder binder) {
-        ValidationMessages vmsgs = ((BinderCtrl) binder).getValidationMessages();
+    @NotifyChange({"catalogueList", "cataloguePageCount", "title", "changed", "saved"})
+    public void createCatalogue() {
         CatalogueEntity ce = new CatalogueEntity();
         ce.setTitle(title);
         ce.setCreatedDate(new Date());
+        clearMessages();
         if(!catalogueService.createCatalogue(ce)) {
             vmsgs.addMessages(null, null, "new_title", new String[] {"Catalogue already exists."});
         } else {
             vmsgs.clearKeyMessages("new_title");
         }
         updateCatalogues();
+        setChanged(false);
+        setSaved(true);
     }
 
     @Command
@@ -126,7 +133,7 @@ public class BrowseVM {
     @NotifyChange({"cataloguePage", "catalogueList", "cataloguePageCount"})
     public void nextCataloguePage() {
         setCataloguePageCount(catalogueService.getCataloguePageCount(pageCatalogueMax));
-        if (cataloguePage < cataloguePageCount.intValue()) {
+        if (cataloguePage < cataloguePageCount) {
             cataloguePage++;
             setCatalogueList(catalogueService.getCatalogueListByPage(getCataloguePage(), pageCatalogueMax));
         }
@@ -136,7 +143,7 @@ public class BrowseVM {
     @Command
     @NotifyChange({"imagePage", "imageList", "imagePageCount"})
     public void nextPage() {
-        if (!imagePage.equals(imagePageCount.intValue())) {
+        if (!imagePage.equals(imagePageCount)) {
             imagePage++;
             updateImages();
         }
@@ -153,24 +160,29 @@ public class BrowseVM {
     }
 
     @Command
-    @NotifyChange("changed")
-    public void changed() {
-        setChanged(true);
+    @NotifyChange({"changed", "saved"})
+    public void changed(@BindingParam("state") Boolean value) {
+        setChanged((value != null) ? value : true);
+        setSaved(false);
     }
 
     @Command
-    @NotifyChange("editCatalogue")
+    @NotifyChange({"editCatalogue", "saved", "changed", "removeConfirmation"})
     public void selectEditCatalogue(@BindingParam("editCatalogue") CatalogueEntity edit) {
+        setSaved(false);
+        setChanged(false);
+        setRemoveConfirmation(false);
         setEditCatalogue(edit);
     }
 
     @Command
-    @NotifyChange({"editCatalogue", "catalogueList", "changed"})
+    @NotifyChange({"editCatalogue", "catalogueList", "changed", "saved"})
     public void editCatalogue() {
         editCatalogue.setTitle(editCatalogue.getTitle());
         catalogueService.editCatalogue(editCatalogue);
         setCatalogueList(catalogueService.getCatalogueListByPage(cataloguePage, pageCatalogueMax));
         setChanged(false);
+        setSaved(true);
     }
 
     private void updateImages() {
@@ -219,8 +231,8 @@ public class BrowseVM {
     }
 
     @Command
-    public void clearMessages(@BindingParam("errors") ValidationMessagesImpl messages) {
-        messages.clearAllMessages();
+    public void clearMessages() {
+        vmsgs.clearAllMessages();
     }
 
     public String getTitle() {
@@ -348,5 +360,13 @@ public class BrowseVM {
 
     public void setChanged(boolean changed) {
         this.changed = changed;
+    }
+
+    public void setSaved(Boolean saved) {
+        this.saved = saved;
+    }
+
+    public Boolean getSaved() {
+        return saved;
     }
 }

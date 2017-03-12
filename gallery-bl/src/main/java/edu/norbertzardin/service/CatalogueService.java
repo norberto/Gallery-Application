@@ -15,16 +15,26 @@ public class CatalogueService {
     private CatalogueDao catalogueDao;
 
     public Boolean createCatalogue(CatalogueEntity ce) {
-        CatalogueEntity catalogue = catalogueDao.getCatalogueByNameNoFetch(ce.getTitle());
-        if (catalogue == null) {
+        try{
+            catalogueDao.getCatalogueByNameNoFetch(ce.getTitle());
+        } catch(NoResultException e){
             catalogueDao.createCatalogue(ce);
             return true;
         }
+
         return false;
     }
 
     public void deleteCatalogue(CatalogueEntity ce) {
-        catalogueDao.deleteCatalogue(ce.getId());
+        try {
+            if(catalogueDao.getCatalogueById(ce.getId()) != null) {
+                catalogueDao.deleteCatalogue(ce.getId());
+//                return true; // successfully deleted
+            }
+        } catch(NoResultException e ){
+            // Selected catalogue doesnt exist, therewore cannot be deleted. Do logging.
+        }
+//        return false;
     }
 
     public CatalogueEntity getCatalogueByName(String name) {

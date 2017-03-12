@@ -13,19 +13,19 @@
     <context:component-scan base-package="edu.norbertzardin"/>
     <context:annotation-config/>
 
-    <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
-        <property name="URL" value="jdbc:oracle:thin:@oracle.insoft.dev:1521:dev" />
-        <property name="user" value="mokymai"/>
-        <property name="password" value="insoft_mokymai"/>
-        <property name="dataSourceName" value="MOKYMAI"/>
-    </bean>
-
     <!--<bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">-->
-        <!--<property name="URL" value="jdbc:oracle:thin:@localhost:1521:XE" />-->
-        <!--<property name="user" value="system"/>-->
-        <!--<property name="password" value="asadas123Q"/>-->
-        <!--<property name="dataSourceName" value="SYSTEM"/>-->
+        <!--<property name="URL" value="jdbc:oracle:thin:@oracle.insoft.dev:1521:dev" />-->
+        <!--<property name="user" value="mokymai"/>-->
+        <!--<property name="password" value="insoft_mokymai"/>-->
+        <!--<property name="dataSourceName" value="MOKYMAI"/>-->
     <!--</bean>-->
+
+    <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
+        <property name="URL" value="jdbc:oracle:thin:@localhost:1521:XE" />
+        <property name="user" value="system"/>
+        <property name="password" value="asadas123Q"/>
+        <property name="dataSourceName" value="SYSTEM"/>
+    </bean>
 
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="dataSource" ref="dataSource" />

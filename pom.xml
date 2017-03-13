@@ -97,6 +97,13 @@
                 <version>${spring.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>${spring.groupid}</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+
 
             <!-- ZK Framework -->
             <dependency>
@@ -128,6 +135,19 @@
                 <groupId>com.oracle</groupId>
                 <artifactId>ojdbc6</artifactId>
                 <version>11.2.0.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.5.6</version>
             </dependency>
 
         </dependencies>

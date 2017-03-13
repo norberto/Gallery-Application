@@ -105,10 +105,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
 
     @Override
     public Long count(String searchString) {
-        String[] escapedChars = {
-                "%", "_", "!", "~", ";", "-", "[", "]", 
-                "{", "}", "?", "&", ",", "|", "*"
-        };
+        String[] escapedChars = { "%", "_" };
 
         cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
@@ -119,7 +116,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
                 searchString = searchString.replace(c, "\\" + c);
             }
 
-            criteria.where(cb.like(cb.lower(catalogue.get(CatalogueEntity_.title)), searchString.toLowerCase() + "%", '\\'));
+            criteria.where(cb.like(cb.lower(catalogue.get(CatalogueEntity_.title)), searchString.toLowerCase() , '\\'));
         }
         return entityManager.createQuery(criteria).getSingleResult();
 

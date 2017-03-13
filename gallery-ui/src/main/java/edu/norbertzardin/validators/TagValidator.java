@@ -9,11 +9,18 @@ public class TagValidator extends AbstractValidator{
     public void validate(ValidationContext ctx) {
         String tags = (String) ctx.getProperty().getValue();
         String[] tagList = ImageUtil.parseTags(tags);
-        if(tagList.length == 0) {
-            addInvalidMessage(ctx, "At least one tag is required. (maximum 5)");
+        Integer limit = (Integer) ctx.getValidatorArg("tagsLeft");
+        String error;
+        if(limit == 0) {
+            error = "No more tags allowed.";
+        } else if(limit == 1) {
+            error = "Too many tags specified, only one more tag is allowed.";
+        } else {
+            error = "Too many tags specified, only " + limit + " tags are allowed.";
         }
-        if(tagList.length > 5) {
-            addInvalidMessage(ctx, "Too many tags. (maximum 5)");
+        if(tagList.length > limit) {
+            addInvalidMessage(ctx, "tags", error);
         }
+
     }
 }

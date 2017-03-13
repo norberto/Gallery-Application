@@ -1,0 +1,4 @@
+<library-property>
+    <name>org.zkoss.zul.progressbox.position</name>
+    <value>center,center</value>
+</library-property>

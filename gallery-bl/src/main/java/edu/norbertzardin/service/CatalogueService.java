@@ -14,84 +14,76 @@ public class CatalogueService {
     @Autowired
     private CatalogueDao catalogueDao;
 
-    public Boolean createCatalogue(CatalogueEntity ce) {
-        try{
-            catalogueDao.getCatalogueByNameNoFetch(ce.getTitle());
-        } catch(NoResultException e){
-            catalogueDao.createCatalogue(ce);
+    public Boolean create(CatalogueEntity ce) {
+        try {
+            catalogueDao.loadNoFetch(ce.getTitle());
+        } catch (NoResultException e) {
+            catalogueDao.save(ce);
             return true;
         }
 
         return false;
     }
 
-    public void deleteCatalogue(CatalogueEntity ce) {
+    public void remove(CatalogueEntity ce) {
         try {
-            if(catalogueDao.getCatalogueById(ce.getId()) != null) {
-                catalogueDao.deleteCatalogue(ce.getId());
+            if (catalogueDao.load(ce.getId()) != null) {
+                catalogueDao.remove(ce.getId());
 //                return true; // successfully deleted
             }
-        } catch(NoResultException e ){
+        } catch (NoResultException e) {
             // Selected catalogue doesnt exist, therewore cannot be deleted. Do logging.
         }
 //        return false;
     }
 
-    public CatalogueEntity getCatalogueByName(String name) {
+    public CatalogueEntity load(String name) {
         try {
-            return catalogueDao.getCatalogueByName(name);
+            return catalogueDao.load(name);
         } catch (NoResultException e) {
             return null;
         }
     }
 
-    public CatalogueEntity getCatalogueById(Long id) {
-        return catalogueDao.getCatalogueById(id);
+    public CatalogueEntity load(Long id) {
+        return catalogueDao.load(id);
     }
 
 
-    public List<CatalogueEntity> getCatalogueListByPage(Integer cataloguePage, Integer pageCatalogueMax) {
-        return catalogueDao.getCatalogueListByPage(cataloguePage, pageCatalogueMax);
-    }
-
-    public List<CatalogueEntity> getCatalogueList() {
-        return catalogueDao.getCatalogueList();
-    }
-
-    public CatalogueDao getCatalogueDao() {
-        return catalogueDao;
+    public List<CatalogueEntity> loadByPage(Integer cataloguePage, Integer pageCatalogueMax, String searchString, Boolean includeDefault) {
+        return catalogueDao.loadByPage(cataloguePage, pageCatalogueMax, searchString, includeDefault);
     }
 
     public void setCatalogueDao(CatalogueDao catalogueDao) {
         this.catalogueDao = catalogueDao;
     }
 
-    public void editCatalogue(CatalogueEntity ce) {
-        catalogueDao.editCatalogue(ce);
+    public void update(CatalogueEntity ce) {
+        catalogueDao.update(ce);
     }
 
-    public CatalogueEntity getCatalogueByIdMediumFetch(Long id) {
-        return catalogueDao.getCatalogueByIdMediumFetch(id);
-    }
-
-    public CatalogueEntity getCatalogueByNameNoFetch(String name) {
+    public CatalogueEntity loadNoFetch(String name) {
         try {
-            return catalogueDao.getCatalogueByNameNoFetch(name);
+            return catalogueDao.loadNoFetch(name);
         } catch (NoResultException e) {
             return null;
         }
     }
 
-    public Integer getPageCount(CatalogueEntity catalogue, Integer pageMax) {
-        return countPages(catalogueDao.getPageCount(catalogue), pageMax);
+    public Integer imageCount(CatalogueEntity catalogue, Integer pageMax) {
+        return countPages(catalogueDao.imageCount(catalogue), pageMax);
     }
 
-    public List<CatalogueEntity> getCatalogueListByKey(String key) {
-        return catalogueDao.getCatalogueListByKey(key);
+    public List<CatalogueEntity> loadByKey(String key) {
+        return catalogueDao.loadByKey(key);
     }
 
-    public Integer getCataloguePageCount(Integer pageMax) {
-        return countPages(catalogueDao.getCatalogueCount() - 1, pageMax);
+    public Integer count(Integer pageMax, String searchString, Boolean includeDefault) {
+        Long result = catalogueDao.count(searchString);
+        if (!includeDefault) {
+            result--;
+        }
+        return countPages(result, pageMax);
     }
 
     private Integer countPages(Long count, Integer max) {

@@ -13,11 +13,11 @@ public class TitleValidator extends AbstractValidator {
 
         String name = (String) ctx.getProperty().getValue();
         Number maxLength = (Number) ctx.getBindContext().getValidatorArg("maxLength");
-        if(name == null || name.equals("")) {
-            addInvalidMessage(ctx, "Name is required.");
+        if (name == null || name.equals("")) {
+            addInvalidMessage(ctx, "name", "Name is required.");
         }
-        if(name != null && name.length() > maxLength.intValue()) {
-            addInvalidMessage(ctx, "Name is too long. (max. " + maxLength + " characters)");
+        if (name != null && name.length() > maxLength.intValue()) {
+            addInvalidMessage(ctx, "name", "Name is too long.");
         }
     }
 }

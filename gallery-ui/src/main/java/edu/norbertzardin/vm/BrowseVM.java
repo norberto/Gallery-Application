@@ -13,13 +13,11 @@ import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.bind.impl.ValidationMessagesImpl;
 import org.zkoss.bind.sys.BinderCtrl;
 import org.zkoss.bind.sys.ValidationMessages;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zk.ui.util.Clients;
 
 import java.util.Date;
 import java.util.List;
@@ -69,7 +67,7 @@ public class BrowseVM {
         setPageCatalogueMax(folderMax);
         setSaved(false);
 
-        setDefaultCatalogue(catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName));
+        setDefaultCatalogue(catalogueService.loadNoFetch(defaultCatalogueName));
         setSelectedCatalogue(defaultCatalogue);
 
         updateCatalogues();
@@ -92,7 +90,7 @@ public class BrowseVM {
         ce.setTitle(title);
         ce.setCreatedDate(new Date());
         clearMessages();
-        if(!catalogueService.createCatalogue(ce)) {
+        if(!catalogueService.create(ce)) {
             vmsgs.addMessages(null, null, "new_title", new String[] {"Catalogue already exists."});
         } else {
             vmsgs.clearKeyMessages("new_title");
@@ -106,7 +104,7 @@ public class BrowseVM {
     @NotifyChange({"imageList", "selectedCatalogue", "backButton", "imagePageCount"})
     public void selectCatalogue(@BindingParam("selectedCatalogue") CatalogueEntity ce) {
         setImagePage(1);                                                                                                // Reset imagePage back to first
-        setSelectedCatalogue(catalogueService.getCatalogueById(ce.getId()));                                            // Set current catalogue to the selected one
+        setSelectedCatalogue(catalogueService.load(ce.getId()));                                            // Set current catalogue to the selected one
         updateImages();                                                                                                 // Load images from the selected folder
         setBackButton(true);                                                                                            // Enable "Go back" button
     }
@@ -132,10 +130,10 @@ public class BrowseVM {
     @Command
     @NotifyChange({"cataloguePage", "catalogueList", "cataloguePageCount"})
     public void nextCataloguePage() {
-        setCataloguePageCount(catalogueService.getCataloguePageCount(pageCatalogueMax));
+        setCataloguePageCount(catalogueService.count(pageCatalogueMax, null, false));
         if (cataloguePage < cataloguePageCount) {
             cataloguePage++;
-            setCatalogueList(catalogueService.getCatalogueListByPage(getCataloguePage(), pageCatalogueMax));
+            setCatalogueList(catalogueService.loadByPage(getCataloguePage(), pageCatalogueMax, null, false));
         }
     }
 
@@ -179,16 +177,16 @@ public class BrowseVM {
     @NotifyChange({"editCatalogue", "catalogueList", "changed", "saved"})
     public void editCatalogue() {
         editCatalogue.setTitle(editCatalogue.getTitle());
-        catalogueService.editCatalogue(editCatalogue);
-        setCatalogueList(catalogueService.getCatalogueListByPage(cataloguePage, pageCatalogueMax));
+        catalogueService.update(editCatalogue);
+        setCatalogueList(catalogueService.loadByPage(cataloguePage, pageCatalogueMax, null, false));
         setChanged(false);
         setSaved(true);
     }
 
     private void updateImages() {
         if (selectedCatalogue != null) {
-            setImagePageCount(catalogueService.getPageCount(selectedCatalogue, pageImageMax));
-            setImageList(imageService.getImagesFromFolderForPage(getImagePage(), pageImageMax, selectedCatalogue));
+            setImagePageCount(catalogueService.imageCount(selectedCatalogue, pageImageMax));
+            setImageList(imageService.loadCatalogueImages(getImagePage(), pageImageMax, selectedCatalogue));
         }
     }
 
@@ -203,7 +201,7 @@ public class BrowseVM {
     @Command
     @NotifyChange({"selectedCatalogue", "catalogueList", "cataloguePage", "cataloguePageCount", "backButton", "imageList", "imagePageCount", "imagePage", "removeConfirmation"})
     public void deleteCatalogue() {
-        catalogueService.deleteCatalogue(editCatalogue);
+        catalogueService.remove(editCatalogue);
         setRemoveConfirmation(false);
         updateCatalogues();
 
@@ -342,8 +340,8 @@ public class BrowseVM {
     }
 
     private void updateCatalogues() {
-        setCataloguePageCount(catalogueService.getCataloguePageCount(pageCatalogueMax));
-        setCatalogueList(catalogueService.getCatalogueListByPage(getCataloguePage(), pageCatalogueMax));
+        setCataloguePageCount(catalogueService.count(pageCatalogueMax, null, false));
+        setCatalogueList(catalogueService.loadByPage(getCataloguePage(), pageCatalogueMax, null, false));
     }
 
     public Boolean getRemoveConfirmation() {

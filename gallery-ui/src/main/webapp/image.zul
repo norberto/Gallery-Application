@@ -3,19 +3,11 @@
 <?link rel="stylesheet" type="text/css" href="css/style.css" ?>
 
 <zk xmlns:n="native" xmlns="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul">
-    <script>
-        $(function(){
 
-        $('#viewImageModal').on('hidden.bs.modal', function () {
-            $(this).find("input,textarea,textbox,select").val('').end();
-        });
-        });
-    </script>
     <zul:div viewModel="@id('modalVM') @init('edu.norbertzardin.vm.ImageVM', tagLimit=5)"
-             validationMessages="@id('errors')"
-             form="@id('editForm') @load(modalVM.editForm) @save(modalVM.editForm, before='editImage')
-                   @validator('edu.norbertzardin.validators.EditImageValidator', maxLength=32, tagLimit=modalVM.tagsLeft, maxDescription=200)">
-        <n:div id="viewImageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="View Image Modal" data-backdrop="static"
+             validationMessages="@id('errors')">
+        <n:div id="viewImageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="View Image Modal"
+               data-backdrop="static"
                aria-hidden="true" width="800px">
 
             <n:div class="modal-dialog modal-lg" role="document">
@@ -51,12 +43,12 @@
                                 <n:div class="col-md-5" align="left">
                                     <n:div id="nameContainter">
                                         <div visible="@load(modalVM.editMode)">
-                                            <div sclass="@load(empty errors['name'] ? 'editForm-group' : 'editForm-group has-error has-feedback')">
+                                            <div sclass="@load(empty errors[nameBox] ? 'form-group' : 'form-group has-error has-feedback')">
                                                 <n:label class="control-label" for="modalImageName">Name</n:label>
-                                                <zul:textbox type="text" zclass="form-control"
-                                                       placeholder="Enter a name for the image..."
-                                                       value="@load(modalVM.selectedImage.name) @save(editForm.name, before='editImage')"/>
-                                                <span class="help-block" textContent="@load(errors['name'])"/>
+                                                <zul:textbox id="nameBox" type="text" zclass="form-control"
+                                                             placeholder="Enter a name for the image..."
+                                                             value="@load(modalVM.selectedImage.name) @save(modalVM.name, before='editImage') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=32)"/>
+                                                <span class="help-block" textContent="@load(errors[nameBox])"/>
                                             </div>
                                         </div>
 
@@ -81,11 +73,11 @@
                                         </zul:template>
                                     </div>
                                     <div visible="@load(modalVM.editMode)">
-                                        <div sclass="@load(empty errors['tags'] ? 'editForm-group' : 'editForm-group has-error has-feedback')">
+                                        <div sclass="@load(empty errors['tags'] ? 'form-group' : 'form-group has-error has-feedback')">
                                             <n:label class="control-label" for="newTags">New tags</n:label>
                                             <zul:textbox id="newTags" type="text" zclass="form-control"
-                                                   placeholder="Add new tags..."
-                                                   value="@save(editForm.tags, before='editImage')"/>
+                                                         placeholder="Add new tags..."
+                                                         value="@load(modal.tags, before='editMode') @save(modalVM.tags, before='editImage') @validator('edu.norbertzardin.validators.TagValidator', tagsLeft=modalVM.tagsLeft)"/>
                                             <span class="help-block" textContent="@load(errors['tags'])"/>
                                         </div>
                                     </div>
@@ -95,7 +87,7 @@
                                         <div visible="@load(modalVM.editMode)">
                                             <n:label>Description</n:label>
                                             <zul:textbox rows="5" zclass="form-control"
-                                                   value="@load(modalVM.selectedImage.description) @save(editForm.description, before='editImage')"/>
+                                                         value="@load(modalVM.selectedImage.description) @save(modalVM.description, before='editImage') @validator('edu.norbertzardin.validators.DescriptionValidator', maxLength=200)"/>
                                         </div>
                                         <p textContent="@load(modalVM.selectedImage.description)"
                                            placeholder="Add description..." visible="@load(!modalVM.editMode)"/>
@@ -119,33 +111,48 @@
                         </button>
 
                         <div visible="@load(modalVM.removeConfirmation)" style="vertical-align: middle;">
-                            <buton type="button" class="btn btn-success btn-sm pull-left" data-dismiss="modal" style="margin-left:5px;"
-                                     onClick="@command('deleteImage') @global-command('reload')">
-                                <n:span class="glyphicon glyphicon-ok"/> Yes
+                            <buton type="button" class="btn btn-success btn-sm pull-left" data-dismiss="modal"
+                                   style="margin-left:5px;"
+                                   onClick="@command('deleteImage') @global-command('reload')">
+                                <n:span class="glyphicon glyphicon-ok"/>
+                                Yes
                             </buton>
-                            <button type="button" class="btn btn-danger btn-sm pull-left" onClick="@command('changeConfirmationState', confirm='false')">
-                                <n:span class="glyphicon glyphicon-remove"/> No
+                            <button type="button" class="btn btn-danger btn-sm pull-left"
+                                    onClick="@command('changeConfirmationState', confirm='false')">
+                                <n:span class="glyphicon glyphicon-remove"/>
+                                No
                             </button>
                             <n:div class="pull-left" style="margin-left: 20px;">Are you sure?</n:div>
                         </div>
 
 
                         <div class="btn-group" role="group" visible="@load(modalVM.editMode)">
-                            <button type="button" class="btn btn-success btn-sm custom" onClick="@command('editImage')">
+                            <button id="submit" type="button" class="btn btn-success btn-sm custom"
+                                    onClick="@command('editImage')">
                                 <span class="glyphicon glyphicon-ok"/>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm custom" onClick="@command('editMode')">
+                            <button id="cancel" type="button" class="btn btn-danger btn-sm custom"
+                                    onClick="@command('editMode')">
                                 <n:span class="glyphicon glyphicon-remove"/>
                             </button>
                         </div>
 
-                        <zul:button type="button" zclass="btn btn-primary btn-sm" onClick="@command('editMode')"
-                                    visible="@load(!modalVM.editMode)" width="100px">Edit
-                        </zul:button>
+                        <button id="changeMode" type="button" class="btn btn-primary btn-sm"
+                                    onClick="@command('editMode')"
+                                    visible="@load(!modalVM.editMode)" style="width:100px">Edit
+                        </button>
                         <n:button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</n:button>
                     </n:div>
                 </n:div>
             </n:div>
         </n:div>
     </zul:div>
+
+    <script type="text/javascript">
+        $(function(){
+            $('#viewImageModal').on('hidden.bs.modal', function () {
+                $(this).find("input, textarea, textbox").val('').end();
+            });
+        });
+    </script>
 </zk>

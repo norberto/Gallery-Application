@@ -1,6 +1,5 @@
 package edu.norbertzardin.dao;
 
-import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
@@ -9,29 +8,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 @Transactional
 public interface ImageDao {
-    void createImage(ImageEntity image);
+    void save(ImageEntity image);
 
-    void deleteImage(ImageEntity ie);
+    void remove(ImageEntity ie);
 
-    List<ImageEntity> getImageList(Integer page, Integer pageMax);
+    void update(ImageEntity ie);
 
-    List<ImageEntity> getImageList();
+    Long count(String searchString, TagEntity searchTag);
 
-    ImageEntity getImageById(Long id);
+    ImageEntity load(Long id, Boolean thumbnail, Boolean medium, Boolean download, Boolean tags);
 
-    ImageEntity getImageByIdWithFetch(Long id);
+    List<ImageEntity> loadImages(Integer page, Integer pageMax);
 
-    ImageEntity getImageByIdFullFetch(Long id);
+    List<ImageEntity> find(String keyword, TagEntity tag, Integer page, Integer pageMax);
 
-    List<ImageEntity> findImagesByKeys(String keyword, TagEntity tag, Integer page, Integer pageMax);
-
-    Long getImageCount();
-
-    void updateImage(ImageEntity ie);
-
-    List<ImageEntity> getImageListFromFolderForPage(Integer page, Integer pageMax, CatalogueEntity catalogue);
-
-    Long getImageCountSearch(String searchString, TagEntity searchTag);
-
-    ByteData getDownloadById(Long id);
+    List<ImageEntity> loadFromCatalogue(Integer page, Integer pageMax, CatalogueEntity catalogue);
 }

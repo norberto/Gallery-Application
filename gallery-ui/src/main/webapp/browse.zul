@@ -8,9 +8,9 @@
 <zk xmlns:n="native" xmlns:x="xhtml">
     <x:script type="text/javascript">
         $(function(){
-        $('#addCatalogueModal').on('hidden.bs.modal', function () {
-        $(this).find("input,textarea,textbox,select").val('').end();
-        });
+            $('#addCatalogueModal').on('hidden.bs.modal', function () {
+            $(this).find("input,textarea,textbox,select").val('').end();
+            });
         });
     </x:script>
 

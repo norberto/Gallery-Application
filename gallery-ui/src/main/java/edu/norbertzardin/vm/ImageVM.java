@@ -8,6 +8,7 @@ import edu.norbertzardin.form.UploadForm;
 import edu.norbertzardin.service.ImageService;
 import edu.norbertzardin.service.TagService;
 import edu.norbertzardin.util.ImageUtil;
+import org.zkoss.bind.Binder;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -16,6 +17,8 @@ import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.bind.sys.BinderCtrl;
+import org.zkoss.bind.sys.ValidationMessages;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -23,6 +26,9 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import java.util.List;
 
 public class ImageVM {
+    private String name;
+    private String description;
+
     private ImageEntity selectedImage;
     private List<CatalogueEntity> catalogueList;
     private List<TagEntity> tagList;
@@ -41,6 +47,7 @@ public class ImageVM {
 
     @WireVariable
     private ImageService imageService;
+    private ValidationMessages validationMessages;
 
     @Init
     public void init(@BindingParam("tagLimit") Integer limit) {
@@ -50,16 +57,20 @@ public class ImageVM {
     }
 
     @AfterCompose
-    public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
+    public void afterCompose(@ContextParam(ContextType.VIEW) Component view,
+                             @ContextParam(ContextType.BINDER) Binder binder) {
         Selectors.wireComponents(view, this, false);
+        validationMessages = ((BinderCtrl) binder).getValidationMessages();
+
     }
 
     @GlobalCommand
     @NotifyChange({"selectedImage", "tagList", "editMode", "editForm", "removeConfirmation", "tagsLeft"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
+        clearMessages();
         // If selected image is not null - fetch image with all contents
         if (image != null) {
-            setSelectedImage(imageService.getImageByIdFullFetch(image.getId()));
+            setSelectedImage(imageService.loadMedium(image.getId()));
             editForm = new UploadForm(selectedImage.getName(), selectedImage.getDescription());
             setTagsLeft(getTagLimit() - selectedImage.getTags().size());
         }
@@ -92,7 +103,7 @@ public class ImageVM {
                 tagService.removeTag(tag_);
             }
             // Update local content
-            setSelectedImage(imageService.getImageByIdWithFetch(selectedImage.getId()));
+            setSelectedImage(imageService.loadMedium(selectedImage.getId()));
             setTagList(selectedImage.getTags());
         }
 
@@ -102,7 +113,7 @@ public class ImageVM {
     @NotifyChange({"removeConfirmation"})
     public void deleteImage() {
         setRemoveConfirmation(false);
-        imageService.deleteImage(selectedImage);
+        imageService.remove(selectedImage);
     }
 
     @Command
@@ -113,7 +124,7 @@ public class ImageVM {
         // If selected image is not null process data
         if (selectedImage != null) {
             // Parse tags
-            String[] parsed_tags = ImageUtil.parseTags(editForm.getTags());
+            String[] parsed_tags = ImageUtil.parseTags(getTags());
             // Lookup and updatePageContent OR create new tags and add them to image
             for (String tag : parsed_tags) {
                 if(tagService.createTag(tag, selectedImage)) {
@@ -121,9 +132,9 @@ public class ImageVM {
                 }
             }
             // Update image
-            imageService.editImage(selectedImage);
+            imageService.update(selectedImage);
             // Update local content
-            setSelectedImage(imageService.getImageByIdWithFetch(selectedImage.getId()));
+            setSelectedImage(imageService.loadMedium(selectedImage.getId()));
             loadTags();
         }
         // Disable edit mode
@@ -133,13 +144,18 @@ public class ImageVM {
     @Command
     @NotifyChange("editMode")
     public void editMode() {
+        clearMessages();
         setEditMode(!editMode);
+    }
+
+    private void clearMessages() {
+        validationMessages.clearAllMessages();
     }
 
     @Command
     public void onDownload() {
         if (selectedImage != null) {
-            ByteData data = imageService.getDownloadById(selectedImage.getId());
+            ByteData data = imageService.download(selectedImage.getId());
             // Check if fetched image is not null, if not, start downloading
             if (data != null) {
                 ImageUtil.download(data, selectedImage);
@@ -231,5 +247,21 @@ public class ImageVM {
 
     public void setTagLimit(Integer tagLimit) {
         this.tagLimit = tagLimit;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

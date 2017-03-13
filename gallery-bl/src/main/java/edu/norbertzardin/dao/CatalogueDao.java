@@ -5,27 +5,26 @@ import edu.norbertzardin.entities.CatalogueEntity;
 import java.util.List;
 
 public interface CatalogueDao {
-    void createCatalogue(CatalogueEntity ce);
+    void save(CatalogueEntity ce);
 
-    List<CatalogueEntity> getCatalogueListByPage(Integer cataloguePage, Integer pageCatalogueMax);
+    void update(CatalogueEntity ce);
 
-    List<CatalogueEntity> getCatalogueList();
+    void remove(Long id);
 
-    void editCatalogue(CatalogueEntity ce);
+    Long count(String searchString);
 
-    void deleteCatalogue(Long id);
+    CatalogueEntity load(String name);
 
-    CatalogueEntity getCatalogueByName(String name);
+    CatalogueEntity load(Long id);
 
-    CatalogueEntity getCatalogueByNameNoFetch(String name);
+    CatalogueEntity loadNoFetch(String name);
 
-    CatalogueEntity getCatalogueById(Long id);
+    CatalogueEntity loadMediumFetch(Long id);
 
-    CatalogueEntity getCatalogueByIdMediumFetch(Long id);
+    Long imageCount(CatalogueEntity catalogue);
 
-    Long getPageCount(CatalogueEntity catalogue);
+    List<CatalogueEntity> loadByKey(String key);
 
-    List<CatalogueEntity> getCatalogueListByKey(String key);
+    List<CatalogueEntity> loadByPage(Integer cataloguePage, Integer pageCatalogueMax, String searchString, Boolean includeDefault);
 
-    Long getCatalogueCount();
 }

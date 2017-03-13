@@ -51,9 +51,9 @@ public class ViewVM {
         setSearchString(searchString.replaceAll("%", ""));
         if (isSearch()) {
             searchTag = tagService.getTagByName(searchString);
-            setImageList(imageService.findImagesByKeys(getSearchString(), searchTag, getPage(), pageMax));
+            setImageList(imageService.find(getSearchString(), searchTag, getPage(), pageMax));
         } else {
-            setImageList(imageService.getImageList(getPage(), pageMax));
+            setImageList(imageService.loadImages(getPage(), pageMax));
         }
         updatePageCount();
     }
@@ -71,7 +71,7 @@ public class ViewVM {
     @Command
     @NotifyChange({"selectedImage", "tagList"})
     public void viewImage(@BindingParam("selectedImage") ImageEntity image) {
-        setSelectedImage(imageService.getImageByIdWithFetch(image.getId()));
+        setSelectedImage(imageService.loadMedium(image.getId()));
     }
 
     @Command
@@ -99,9 +99,9 @@ public class ViewVM {
     private void updatePageCount() {
         Integer imageCount;
         if(isSearch()) {
-            imageCount = imageService.getImageCountSearch(getSearchString(), searchTag).intValue();
+            imageCount = imageService.count(getSearchString(), searchTag).intValue();
         } else {
-            imageCount = imageService.getImageCount();
+            imageCount = imageService.count(null, null).intValue();
         }
 
         Integer count = imageCount / pageMax;
@@ -116,21 +116,17 @@ public class ViewVM {
         if(!isSearch()){
             loadImages();
         } else {
-            setImageList(imageService.findImagesByKeys(searchString, searchTag, page, pageMax));
+            setImageList(imageService.find(searchString, searchTag, page, pageMax));
         }
         updatePageCount();
     }
 
     private void loadImages() {
-        setImageList(imageService.getImageList(getPage(), pageMax));
+        setImageList(imageService.loadImages(getPage(), pageMax));
     }
 
     public void setImageList(List<ImageEntity> list) {
         this.imageList = list;
-    }
-
-    public void setImageService(ImageService imageService) {
-        this.imageService = imageService;
     }
 
     public ImageService getImageService() {

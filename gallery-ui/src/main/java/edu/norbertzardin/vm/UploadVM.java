@@ -46,6 +46,10 @@ public class UploadVM {
     private byte[] mediumSize;
     private byte[] download;
     private CatalogueEntity selectedCatalogue;
+    private Integer page;
+    private Integer pageCount;
+    private Integer pageMax;
+
 
     private List<CatalogueEntity> catalogueList;
 
@@ -67,12 +71,15 @@ public class UploadVM {
     }
 
     @Init
-    public void init() {
+    public void init(@BindingParam("pageMax") Integer max) {
         setAllowSubmit(false);
+        setPage(1);
+        setPageMax(max);
+        updatePageCount();
         loadImagePlaceholder();
         setThumbnail(imagePlaceholder);
-        setCatalogueList(catalogueService.getCatalogueList());
-        setDefaultCatalogue(catalogueService.getCatalogueByNameNoFetch(defaultCatalogueName));
+        updateCataloguesList();
+        setDefaultCatalogue(catalogueService.loadNoFetch(defaultCatalogueName));
         setUploadForm(new UploadForm());
         setSelectedCatalogue(defaultCatalogue);
     }
@@ -107,7 +114,7 @@ public class UploadVM {
         ie.setDatatype(datatype);
         ie.setCreatedDate(new Date());
 
-        imageService.createImage(ie);
+        imageService.create(ie);
 
         String[] tagList = ImageUtil.parseTags(uploadForm.getTags());
         for (String tag : tagList) {
@@ -149,9 +156,47 @@ public class UploadVM {
     }
 
     @Command
-    @NotifyChange("catalogueList")
+    @NotifyChange({"catalogueList", "pageCount", "page"})
     public void filter() {
-        setCatalogueList(catalogueService.getCatalogueListByKey(getFilter()));
+        setCatalogueList(catalogueService.loadByPage(getPage(), getPageMax(), getFilter(), true));
+        setPageCount(catalogueService.count(getPageMax(), getFilter(), false));
+        setPage(1);
+    }
+
+    @Command
+    @NotifyChange({"page", "catalogueList"})
+    public void previousPage() {
+        if (page != 1) {
+            page--;
+            updatePageCount();
+            updateCataloguesList();
+        }
+    }
+
+    @Command
+    @NotifyChange({"page", "catalogueList", "pageCount"})
+    public void nextPage() {
+        updatePageCount();
+        if (!page.equals(pageCount)) {
+            page++;
+        } else if(page >= pageCount) {
+            setPage(getPageCount());
+        }
+        updateCataloguesList();
+    }
+
+
+
+    private void updatePageCount() {
+        setPageCount(catalogueService.count(getPageMax(), getFilter(), true));
+    }
+
+    public boolean isSearch() {
+        return filter != null;
+    }
+
+    private void updateCataloguesList() {
+        setCatalogueList(catalogueService.loadByPage(getPage(), getPageMax(), getFilter(), true));
     }
 
     public ImageService getImageService() {
@@ -272,5 +317,29 @@ public class UploadVM {
 
     public void setDefaultCatalogue(CatalogueEntity catalogue) {
         this.defaultCatalogue = catalogue;
+    }
+
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public Integer getPageCount() {
+        return pageCount;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public Integer getPageMax() {
+        return pageMax;
+    }
+
+    public void setPageMax(Integer pageMax) {
+        this.pageMax = pageMax;
     }
 }

@@ -1,7 +1,6 @@
 package edu.norbertzardin.service;
 
 import edu.norbertzardin.dao.ImageDao;
-import edu.norbertzardin.dao.TagDao;
 import edu.norbertzardin.entities.ByteData;
 import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.ImageEntity;
@@ -17,60 +16,39 @@ public class ImageService {
     @Autowired
     private ImageDao imageDao;
 
-    @Autowired
-    private TagDao tagDao;
-
-
-    public void createImage(ImageEntity image){
-        imageDao.createImage(image);
+    public void create(ImageEntity image){
+        imageDao.save(image);
     }
 
-    public ImageEntity getImageByIdWithFetch(Long id) { return imageDao.getImageByIdFullFetch(id); }
-
-    public void deleteImage(ImageEntity ie) { imageDao.deleteImage(ie); }
-
-    public void createTag(TagEntity tag) { tagDao.createTag(tag); }
-
-    public void setImageDao(ImageDao imageDao){
-        this.imageDao = imageDao;
+    public ImageEntity loadMedium(Long id) {
+        return imageDao.load(id, false, true, false, true);
     }
 
-    public List<ImageEntity> getImageList() {
-        return imageDao.getImageList();
+    public void remove(ImageEntity ie) { imageDao.remove(ie); }
+
+    public List<ImageEntity> loadImages(Integer page, Integer pageMax){
+        return imageDao.loadImages(page, pageMax);
     }
 
-    public List<ImageEntity> getImageList(Integer page, Integer pageMax){
-        return imageDao.getImageList(page, pageMax);
+    public ImageEntity load(Long id) {
+        return imageDao.load(id, false, false, false, false);
     }
 
-    public Integer getImageCount() {
-        return imageDao.getImageCount().intValue();
+    public List<ImageEntity> find(String key, TagEntity tag, Integer page, Integer pageMax) {
+        return imageDao.find(key, tag, page, pageMax);
     }
 
-    public ImageEntity getImageById(Long id) {
-        return imageDao.getImageById(id);
+    public void update(ImageEntity ie) { imageDao.update(ie); }
+
+    public List<ImageEntity> loadCatalogueImages(Integer page,Integer pageMax, CatalogueEntity catalogue) {
+        return imageDao.loadFromCatalogue(page, pageMax, catalogue);
     }
 
-    public List<ImageEntity> findImagesByKeys(String key, TagEntity tag, Integer page, Integer pageMax) {
-        return imageDao.findImagesByKeys(key, tag, page, pageMax);
+    public Long count(String searchString, TagEntity searchTag) {
+        return imageDao.count(searchString, searchTag);
     }
 
-    public void editImage(ImageEntity ie) { imageDao.updateImage(ie); }
-
-    public ImageEntity getImageByIdFullFetch(Long id) { return imageDao.getImageByIdFullFetch(id); }
-
-    public List<ImageEntity> getImagesFromFolderForPage(Integer page,Integer pageMax, CatalogueEntity catalogue) {
-        return imageDao.getImageListFromFolderForPage(page, pageMax, catalogue);
-    }
-
-    public Long getImageCountSearch(String searchString, TagEntity searchTag) {
-        if(searchString != null && !searchString.equals("")) {
-            return imageDao.getImageCountSearch(searchString, searchTag);
-        }
-        return null;
-    }
-
-    public ByteData getDownloadById(Long id) {
-        return imageDao.getDownloadById(id);
+    public ByteData download(Long id) {
+        return imageDao.load(id, false, false, true, false).getDownload();
     }
 }

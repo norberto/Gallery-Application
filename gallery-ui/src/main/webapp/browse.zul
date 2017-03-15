@@ -8,9 +8,9 @@
 <zk xmlns:n="native" xmlns:x="xhtml">
     <x:script type="text/javascript">
         $(function(){
-            $('#addCatalogueModal').on('hidden.bs.modal', function () {
-            $(this).find("input,textarea,textbox,select").val('').end();
-            });
+        $('#addCatalogueModal').on('hidden.bs.modal', function () {
+        $(this).find("input,textarea,textbox,select").val('').end();
+        });
         });
     </x:script>
 
@@ -179,7 +179,8 @@
                                     <x:div class="col-md-12" align="left">
                                         <x:div sclass="@load(empty vmsgs[title] and empty vmsgs['new_title'] ? 'form-group' : 'form-group has-error has-feedback')">
                                             <n:label class="control-label" for="title">Catalogue title</n:label>
-                                            <textbox id="title" type="text" zclass="form-control" onChanging="@command('changed')"
+                                            <textbox id="title" type="text" zclass="form-control"
+                                                     onChanging="@command('changed')"
                                                      placeholder="Specify catalogue title..."
                                                      value=" @save(vm.title, before='createCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=12)"/>
                                             <x:span id="titleStatus" class="help-block"
@@ -197,19 +198,21 @@
 
                     </n:div>
                     <n:div class="modal-footer">
-                        <x:button id="submitButton" type="button" class="btn btn-success bnt-sm" width="200px" visible="@load(vm.changed)"
+                        <x:button id="submitButton" type="button" class="btn btn-success btn-sm" width="200px"
+                                  visible="@load(vm.changed)"
                                   onClick="@command('createCatalogue')">Submit
                         </x:button>
 
-                        <x:button type="button" class="btn btn-secondary btn-sm pull-right" data-dismiss="modal" onClick="@command('changed', state='false')">Close
+                        <x:button type="button" class="btn btn-secondary btn-sm pull-right" data-dismiss="modal"
+                                  onClick="@command('changed', state='false')">Close
                         </x:button>
 
-                        <x:div class="text-success pull-right" visible="@load(vm.saved and !vm.changed and empty vmsgs[title] and empty vmsgs['new_title'])">
+                        <x:div class="text-success pull-right"
+                               visible="@load(vm.saved and !vm.changed and empty vmsgs[title] and empty vmsgs['new_title'])">
                             <n:span class="glyphicon glyphicon-ok"/>
                             Catalogue created successfully!
                         </x:div>
                     </n:div>
-
                 </n:div>
             </n:div>
         </n:div>

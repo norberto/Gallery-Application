@@ -11,20 +11,11 @@ public class DataService {
     @Autowired
     private ByteDataDao byteDataDao;
 
-    public void createByteData(ByteData bd) {
-        byteDataDao.createByteData(bd);
+    public void save(ByteData bd) {
+        byteDataDao.save(bd);
     }
 
-    public ByteData getByteDataById(Long id) {
-        return byteDataDao.getByteDataById(id);
-    }
-
-
-    public ByteDataDao getByteDataDao() {
-        return byteDataDao;
-    }
-
-    public void setByteDataDao(ByteDataDao byteDataDao) {
-        this.byteDataDao = byteDataDao;
+    public ByteData load(Long id) {
+        return byteDataDao.load(id);
     }
 }

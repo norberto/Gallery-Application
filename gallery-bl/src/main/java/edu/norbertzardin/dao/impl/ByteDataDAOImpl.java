@@ -8,22 +8,18 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+@Transactional
 @Repository
 public class ByteDataDAOImpl implements ByteDataDao {
 
     @PersistenceContext(name = "imagePersistence")
     private EntityManager entityManager;
 
-    public ByteData getByteDataById(Long id) {
+    public ByteData load(Long id) {
         return entityManager.find(ByteData.class, id);
     }
 
-    @Transactional
-    public void createByteData(ByteData bd) {
+    public void save(ByteData bd) {
         entityManager.persist(bd);
     }
-
-    public void setEntityManager(EntityManager entityManager) { this.entityManager = entityManager; }
-
-    public EntityManager getEntityManager() { return entityManager; }
 }

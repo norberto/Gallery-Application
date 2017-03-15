@@ -5,6 +5,7 @@ import edu.norbertzardin.dao.TagDao;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -12,8 +13,12 @@ import java.util.List;
 
 @Service("tagService")
 public class TagService {
+    private final TagDao tagDao;
+
     @Autowired
-    private TagDao tagDao;
+    public TagService(TagDao tagDao) {
+        this.tagDao = tagDao;
+    }
 
     public void createTag(TagEntity ce) {
         tagDao.createTag(ce);
@@ -29,15 +34,15 @@ public class TagService {
                 }
             }
         }
-        TagEntity tag_ = getTagByName(tag_name);
         // If tag does not exist yet - create it
-        if (tag_ == null) {
+        try {
             TagEntity te = new TagEntity();
             te.setName(tag_name);
             te.addImage(ie);
             te.setCreatedDate(new Date());
             createTag(te);
-        } else { // if tag exists assign it to an image;
+        } catch(JpaSystemException e) { // if tag exists assign it to an image
+            TagEntity tag_ = getTagByName(tag_name);
             tag_.addImage(ie);
             updateTag(tag_);
         }
@@ -58,14 +63,6 @@ public class TagService {
 
     public List<TagEntity> getTagList() {
         return tagDao.getTagList();
-    }
-
-    public TagDao getTagDao() {
-        return tagDao;
-    }
-
-    public void setTagDao(TagDao tagDao) {
-        this.tagDao = tagDao;
     }
 
     public void updateTag(TagEntity tag) {

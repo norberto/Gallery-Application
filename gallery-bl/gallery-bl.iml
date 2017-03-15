@@ -14,7 +14,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Entities" />
-          <factory-entry name="imagePersistence" value="2e304815-0f61-4a69-beb9-175c0d7f418d" />
+          <factory-entry name="imagePersistence" value="dceddb25-28a1-4a9a-a527-0ef6a5217023" />
           <factory-entry name="messagePersistance" value="2e304815-0f61-4a69-beb9-175c0d7f418d" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
@@ -27,9 +27,8 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -64,8 +63,7 @@
     <orderEntry type="library" name="Maven: com.oracle:ojdbc6:11.2.0.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.5.6" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.5.6" level="project" />
-    <orderEntry type="library" name="Maven: log4j:log4j:1.2.14" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.193" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
   </component>
 </module>

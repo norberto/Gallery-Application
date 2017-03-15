@@ -5,12 +5,16 @@ import edu.norbertzardin.entities.CatalogueEntity;
 import edu.norbertzardin.entities.CatalogueEntity_;
 import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.ImageEntity_;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -30,19 +34,22 @@ public class CatalogueDAOImpl implements CatalogueDao {
     private Root<CatalogueEntity> catalogue;
 
     @Transactional
-    public void save(CatalogueEntity ce) {
+    public void save(CatalogueEntity ce) throws JpaSystemException, PersistenceException {
         entityManager.persist(ce);
+        entityManager.flush();
     }
-
-
 
     @Transactional
     public void update(CatalogueEntity ce) {
         entityManager.merge(ce);
+        entityManager.flush();
     }
 
     @Transactional
-    public void remove(Long id) { entityManager.remove(entityManager.find(CatalogueEntity.class, id)); }
+    public void remove(Long id) throws IllegalArgumentException {
+        entityManager.remove(entityManager.find(CatalogueEntity.class, id));
+        entityManager.flush();
+    }
 
     @Transactional
     public CatalogueEntity load(String name) throws NoResultException {
@@ -53,7 +60,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
         return entityManager.createQuery(cq).getSingleResult();
     }
 
-    public CatalogueEntity load(Long id) {
+    public CatalogueEntity load(Long id) throws NoResultException {
         setUpCriteriaBuilderForCatalogue();
         catalogue.fetch(CatalogueEntity_.images, JoinType.LEFT).fetch(ImageEntity_.thumbnail, JoinType.LEFT);
         Predicate name_ = cb.equal(catalogue.get(CatalogueEntity_.id), id);
@@ -65,16 +72,6 @@ public class CatalogueDAOImpl implements CatalogueDao {
     public CatalogueEntity loadNoFetch(String name) throws NoResultException {
         setUpCriteriaBuilderForCatalogue();
         Predicate name_ = cb.equal(catalogue.get(CatalogueEntity_.title), name);
-        cq.where(name_).select(catalogue);
-        return entityManager.createQuery(cq).getSingleResult();
-    }
-
-
-
-    public CatalogueEntity loadMediumFetch(Long id) {
-        setUpCriteriaBuilderForCatalogue();
-        catalogue.fetch(CatalogueEntity_.images, JoinType.LEFT).fetch(ImageEntity_.mediumImage, JoinType.LEFT);
-        Predicate name_ = cb.equal(catalogue.get(CatalogueEntity_.id), id);
         cq.where(name_).select(catalogue);
         return entityManager.createQuery(cq).getSingleResult();
     }
@@ -93,14 +90,6 @@ public class CatalogueDAOImpl implements CatalogueDao {
         criteria.select(cb.count(image));
         criteria.where( cb.equal(image.get(ImageEntity_.catalogue), catalogue));
         return entityManager.createQuery(criteria).getSingleResult();
-    }
-
-    public List<CatalogueEntity> loadByKey(String key) {
-        setUpCriteriaBuilderForCatalogue();
-        String keyword = (key == null) ? "%" : ( "%" + key.toLowerCase() + "%");
-        Predicate name = cb.like(cb.lower(catalogue.get(CatalogueEntity_.title)), keyword);
-        cq.select(catalogue).where(cb.or(name));
-        return entityManager.createQuery(cq).getResultList();
     }
 
     @Override
@@ -126,17 +115,28 @@ public class CatalogueDAOImpl implements CatalogueDao {
         setUpCriteriaBuilderForCatalogue();
         TypedQuery<CatalogueEntity> typedQuery;
         CriteriaQuery<CatalogueEntity> select;
+
         if(searchString != null && !searchString.equals("")) {
+
             searchString = searchString.replace("%", "\\%").toLowerCase() + "%";
+
             Predicate search = cb.like(cb.lower(catalogue.get(CatalogueEntity_.title)), searchString, '\\');
+
             if(!includeDefault) {
                 Predicate predicate = cb.equal(catalogue.get(CatalogueEntity_.title), "Non-categorized");
                 select = cq.select(catalogue).where(cb.and(predicate.not(), search));
             } else {
                 select = cq.select(catalogue).where(search);
             }
+
         } else {
-            select = cq.select(catalogue);
+
+            if(includeDefault){
+                select = cq.select(catalogue);
+            } else {
+                select = cq.select(catalogue).where(cb.equal(catalogue.get(CatalogueEntity_.title), "Non-categorized").not());
+            }
+
         }
 
         typedQuery = entityManager.createQuery(select);

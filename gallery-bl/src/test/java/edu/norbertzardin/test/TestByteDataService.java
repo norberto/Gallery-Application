@@ -1,11 +1,7 @@
 package edu.norbertzardin.test;
 
-import edu.norbertzardin.dao.ByteDataDao;
-import edu.norbertzardin.dao.ImageDao;
-
-import java.util.List;
-
 import edu.norbertzardin.entities.ByteData;
+import edu.norbertzardin.service.DataService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,21 +11,21 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @ContextConfiguration(locations = "classpath:application-context-test.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TestByteDataDAO {
+public class TestByteDataService {
 
     @Autowired
-    private ByteDataDao byteDataDao;
+    private DataService dataService;
 
     @Test
-    @Transactional
-    @Rollback(true)
-    public void testCreateAndGetById() {
-        byte[] d = {1,0,1,0};
+    @Rollback
+    public void testDataSaveAndLoad() {
+        byte[] d = {1, 0, 1, 0};
         ByteData data = new ByteData();
         data.setData(d);
-        byteDataDao.createByteData(data);
-        Assert.assertEquals(d, byteDataDao.getByteDataById(data.getId()).getData());
+        dataService.save(data);
+        Assert.assertEquals(d, dataService.load(data.getId()).getData());
     }
 }

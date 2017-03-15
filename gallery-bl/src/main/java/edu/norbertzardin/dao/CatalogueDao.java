@@ -19,11 +19,7 @@ public interface CatalogueDao {
 
     CatalogueEntity loadNoFetch(String name);
 
-    CatalogueEntity loadMediumFetch(Long id);
-
     Long imageCount(CatalogueEntity catalogue);
-
-    List<CatalogueEntity> loadByKey(String key);
 
     List<CatalogueEntity> loadByPage(Integer cataloguePage, Integer pageCatalogueMax, String searchString, Boolean includeDefault);
 

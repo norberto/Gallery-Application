@@ -4,7 +4,7 @@ import edu.norbertzardin.entities.ByteData;
 
 public interface ByteDataDao {
 
-    ByteData getByteDataById(Long id);
+    void save(ByteData bd);
 
-    void createByteData(ByteData bd);
+    ByteData load(Long id);
 }

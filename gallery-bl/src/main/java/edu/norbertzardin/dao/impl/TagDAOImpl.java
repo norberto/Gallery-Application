@@ -3,6 +3,7 @@ package edu.norbertzardin.dao.impl;
 import edu.norbertzardin.dao.TagDao;
 import edu.norbertzardin.entities.TagEntity;
 import edu.norbertzardin.entities.TagEntity_;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +36,7 @@ public class TagDAOImpl implements TagDao {
     }
 
     @Transactional
-    public void createTag(TagEntity tag) {
+    public void createTag(TagEntity tag) throws JpaSystemException {
         entityManager.persist(tag);
     }
 

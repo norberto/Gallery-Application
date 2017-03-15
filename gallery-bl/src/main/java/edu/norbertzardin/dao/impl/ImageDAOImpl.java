@@ -31,6 +31,7 @@ public class ImageDAOImpl implements ImageDao {
 
     public void save(ImageEntity image) {
         entityManager.persist(image);
+        entityManager.flush();
     }
 
     public void remove(ImageEntity ie) {

@@ -7,7 +7,10 @@ import edu.norbertzardin.entities.TagEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 import java.util.Date;
 import java.util.List;
 
@@ -20,11 +23,16 @@ public class TagService {
         this.tagDao = tagDao;
     }
 
-    public void createTag(TagEntity ce) {
-        tagDao.createTag(ce);
+    public boolean create(TagEntity te) {
+        try {
+            tagDao.create(te);
+            return true;
+        } catch (JpaSystemException | PersistenceException e) {
+            return false;
+        }
     }
-
-    public Boolean createTag(String tag_name, ImageEntity ie) {
+    @Transactional
+    public Boolean create(String tag_name, ImageEntity ie) throws PersistenceException {
         // Before creating or updating tags - check if an image already has one
         List<TagEntity> tags = ie.getTags();
         if (tags != null) {
@@ -35,41 +43,39 @@ public class TagService {
             }
         }
         // If tag does not exist yet - create it
-        try {
-            TagEntity te = new TagEntity();
-            te.setName(tag_name);
-            te.addImage(ie);
-            te.setCreatedDate(new Date());
-            createTag(te);
-        } catch(JpaSystemException e) { // if tag exists assign it to an image
-            TagEntity tag_ = getTagByName(tag_name);
-            tag_.addImage(ie);
-            updateTag(tag_);
-        }
+        TagEntity te = new TagEntity();
+        te.setName(tag_name);
+        te.addImage(ie);
+        te.setCreatedDate(new Date());
+        tagDao.create(te);
         return true;
     }
 
-    public TagEntity getTagByName(String name) {
+    public TagEntity load(String name, Boolean fetch) throws PersistenceException {
         if (name != null && !name.isEmpty()) {
-            return tagDao.getTagByName(name);
-        } else {
-            return null;
+            try {
+                return tagDao.load(name, fetch);
+            } catch (NoResultException e){
+                return null;
+            }
         }
+        return null;
     }
 
-    public TagEntity getTagById(Long id) {
-        return tagDao.getTagById(id);
+    public TagEntity load(Long id) {
+        return tagDao.load(id);
     }
 
-    public List<TagEntity> getTagList() {
-        return tagDao.getTagList();
+
+    public List<TagEntity> loadAll() {
+        return tagDao.loadAll();
     }
 
-    public void updateTag(TagEntity tag) {
-        tagDao.updateTag(tag);
+    public void update(TagEntity tag) {
+        tagDao.update(tag);
     }
 
-    public void removeTag(TagEntity tag) {
+    public void remove(TagEntity tag) {
         tagDao.remove(tag);
     }
 }

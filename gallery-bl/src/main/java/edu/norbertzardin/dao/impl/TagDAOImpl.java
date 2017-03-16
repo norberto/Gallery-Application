@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+import javax.persistence.PersistenceException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
@@ -19,57 +21,58 @@ import java.util.List;
 
 @Repository
 public class TagDAOImpl implements TagDao {
-    @PersistenceContext(name = "imagePersistence")
+
     private EntityManager entityManager;
 
-    public TagEntity getTagById(Long id){
-        return entityManager.find(TagEntity.class, id);
-    }
+    private CriteriaBuilder cb;
+    private CriteriaQuery<TagEntity> cq;
+    private Root<TagEntity> tag;
 
-    @PersistenceContext
-    public void setEntityManagerFactory(EntityManager entityManager){
+    @PersistenceContext(type=PersistenceContextType.TRANSACTION)
+    public void setEntityManagerFactory(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    public EntityManager getEntityManager(){
-        return entityManager;
+    @Transactional
+    public TagEntity load(Long id) throws NoResultException {
+        return entityManager.find(TagEntity.class, id);
     }
 
     @Transactional
-    public void createTag(TagEntity tag) throws JpaSystemException {
-        entityManager.persist(tag);
+    public void create(TagEntity tag) throws PersistenceException, JpaSystemException {
+        {
+            entityManager.persist(tag);
+            entityManager.flush();
+        }
     }
 
     @Transactional
-    public void updateTag(TagEntity tag) { entityManager.merge(tag); }
-
-    public List<TagEntity> getTagList() {
-        return entityManager.createQuery("from TagEntity ", TagEntity.class).getResultList();
+    public void update(TagEntity tag) {
+        entityManager.merge(tag);
     }
 
-    public TagEntity getTagByIdWithFetch(Long id) {
-        try {
-            return entityManager.find(TagEntity.class, id);
-        } catch (NoResultException e) {
-            return null;
+    @Transactional
+    public List<TagEntity> loadAll() {
+        setUpCriteriaBuilderForTag();
+        return entityManager.createQuery(cq.select(tag)).getResultList();
+    }
+
+    @Transactional
+    public TagEntity load(String name, Boolean fetch) throws NoResultException {
+        setUpCriteriaBuilderForTag();
+        if (fetch) {
+            tag.fetch(TagEntity_.images, JoinType.INNER);
         }
+        Predicate name_ = cb.equal(cb.lower(tag.get(TagEntity_.name)), name.toLowerCase());
+        return entityManager.createQuery(cq.select(tag).where(name_)).getSingleResult();
     }
 
-    public TagEntity getTagByName(String name) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<TagEntity> cq = cb.createQuery(TagEntity.class);
-        Root<TagEntity> root = cq.from(TagEntity.class);
-        root.fetch(TagEntity_.images, JoinType.INNER);
-        Predicate name_ = cb.like(cb.lower(root.get(TagEntity_.name)), name.toLowerCase());
-
-        cq.where(name_).select(root);
-
-        try{
-            return entityManager.createQuery(cq).getSingleResult();
-        } catch(NoResultException e) {
-            return null;
-        }
+    private void setUpCriteriaBuilderForTag() {
+        cb = entityManager.getCriteriaBuilder();
+        cq = cb.createQuery(TagEntity.class);
+        tag = cq.from(TagEntity.class);
     }
+
     @Transactional
     public void remove(TagEntity tag) {
         entityManager.remove(entityManager.find(TagEntity.class, tag.getId()));

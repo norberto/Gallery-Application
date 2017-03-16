@@ -74,7 +74,7 @@ public class ImageVM {
             editForm = new UploadForm(selectedImage.getName(), selectedImage.getDescription());
             setTagsLeft(getTagLimit() - selectedImage.getTags().size());
         }
-        // If fetched image is not null, load its tags to local contents
+        // If fetched image is not null, loadFetch its tags to local contents
         if (getSelectedImage() != null) {
             loadTags();
         }
@@ -97,10 +97,10 @@ public class ImageVM {
         // If selected tag is not null delete it
         if (tag != null) {
             // Look up the tag
-            TagEntity tag_ = tagService.getTagById(tag.getId());
+            TagEntity tag_ = tagService.load(tag.getId());
             // If tag found start deleting process
             if (tag_ != null) {
-                tagService.removeTag(tag_);
+                tagService.remove(tag_);
             }
             // Update local content
             setSelectedImage(imageService.loadMedium(selectedImage.getId()));
@@ -113,7 +113,7 @@ public class ImageVM {
     @NotifyChange({"removeConfirmation"})
     public void deleteImage() {
         setRemoveConfirmation(false);
-        imageService.remove(selectedImage);
+        imageService.remove(selectedImage.getId());
     }
 
     @Command
@@ -127,7 +127,7 @@ public class ImageVM {
             String[] parsed_tags = ImageUtil.parseTags(getTags());
             // Lookup and updatePageContent OR create new tags and add them to image
             for (String tag : parsed_tags) {
-                if(tagService.createTag(tag, selectedImage)) {
+                if(tagService.create(tag, selectedImage)) {
                     setTagsLeft(getTagsLeft() - 1);
                 }
             }

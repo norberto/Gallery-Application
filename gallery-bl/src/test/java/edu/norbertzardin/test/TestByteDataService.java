@@ -11,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @ContextConfiguration(locations = "classpath:application-context-test.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestByteDataService {
@@ -26,6 +25,6 @@ public class TestByteDataService {
         ByteData data = new ByteData();
         data.setData(d);
         dataService.save(data);
-        Assert.assertEquals(d, dataService.load(data.getId()).getData());
+        Assert.assertEquals(d.length, dataService.load(data.getId()).getData().length);
     }
 }

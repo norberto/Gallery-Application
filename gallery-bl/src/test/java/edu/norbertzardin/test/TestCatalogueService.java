@@ -121,7 +121,7 @@ public class TestCatalogueService {
     @Test
     @Rollback
     public void testCountExcludeDefault() {
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 3; ++i) {
             CatalogueEntity cat = new CatalogueEntity();
             cat.setTitle(testTitle + i);
             cat.setCreatedDate(new Date());

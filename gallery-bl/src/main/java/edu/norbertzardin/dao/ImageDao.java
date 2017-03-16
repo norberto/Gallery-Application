@@ -5,12 +5,13 @@ import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 @Transactional
 public interface ImageDao {
     void save(ImageEntity image);
 
-    void remove(ImageEntity ie);
+    void remove(Long id);
 
     void update(ImageEntity ie);
 

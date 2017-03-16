@@ -6,17 +6,15 @@ import java.util.List;
 
 public interface TagDao {
 
-    void createTag(TagEntity tag);
+    void create(TagEntity tag);
 
-    List<TagEntity> getTagList();
+    List<TagEntity> loadAll();
 
-    TagEntity getTagById(Long id);
+    TagEntity load(Long id);
 
-    TagEntity getTagByIdWithFetch(Long id);
+    TagEntity load(String name, Boolean fetch);
 
-    TagEntity getTagByName(String name);
-
-    void updateTag(TagEntity tag);
+    void update(TagEntity tag);
 
     void remove(TagEntity tag);
 

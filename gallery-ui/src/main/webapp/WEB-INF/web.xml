@@ -19,4 +19,13 @@
         </listener-class>
     </listener>
 
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/error/404.zul</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/error/500.zul</location>
+    </error-page>
 </web-app>

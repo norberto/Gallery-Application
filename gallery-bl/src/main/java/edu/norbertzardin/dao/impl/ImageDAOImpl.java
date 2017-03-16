@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -29,19 +30,19 @@ public class ImageDAOImpl implements ImageDao {
     @PersistenceContext(name = "imagePersistence")
     private EntityManager entityManager;
 
-    public void save(ImageEntity image) {
+    public void save(ImageEntity image) throws PersistenceException {
         entityManager.persist(image);
+        entityManager.flush();
     }
 
-    public void remove(ImageEntity ie) {
-        entityManager.remove(entityManager.find(ImageEntity.class, ie.getId()));
+    public void remove(Long id) throws IllegalArgumentException {
+        entityManager.remove(entityManager.find(ImageEntity.class, id));
     }
 
-    public List<ImageEntity> loadImages(Integer page, Integer pageMax) {
+    public List<ImageEntity> loadAll(Integer page, Integer pageMax) {
         setUpCriteriaBuilderForImage();
         fetchThumbnail();
-        CriteriaQuery<ImageEntity> select = cq.select(image);
-        return pageContent(page, pageMax, entityManager.createQuery(select));
+        return pageContent(page, pageMax, entityManager.createQuery(cq.select(image)));
     }
 
     public ImageEntity load(Long id, Boolean thumbnail, Boolean medium, Boolean download, Boolean tags) {
@@ -65,11 +66,11 @@ public class ImageDAOImpl implements ImageDao {
     }
 
     public List<ImageEntity> find(String keyword, TagEntity tag, Integer page, Integer pageMax) {
-        Expression<List<TagEntity>> tagList = image.get("tags");
         setUpCriteriaBuilderForImage();
+        Expression<List<TagEntity>> tagList = image.get("tags");
         fetchThumbnail();
-        Predicate name = cb.like(cb.lower(image.get(ImageEntity_.name)), keyword.toLowerCase());
-        Predicate description = cb.like(cb.lower(image.get(ImageEntity_.description)), keyword.toLowerCase());
+        Predicate name = cb.like(cb.lower(image.get(ImageEntity_.name)), keyword.toLowerCase() + "%");
+        Predicate description = cb.like(cb.lower(image.get(ImageEntity_.description)), keyword.toLowerCase() + "%");
         CriteriaQuery<ImageEntity> select;
         if (tag != null) {
             Predicate key_tag = cb.isMember(tag, tagList);
@@ -77,7 +78,6 @@ public class ImageDAOImpl implements ImageDao {
         } else {
             select = cq.select(image).where(cb.or(name, description));
         }
-
         return pageContent(page, pageMax, entityManager.createQuery(select));
     }
 

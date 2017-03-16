@@ -8,6 +8,7 @@ import edu.norbertzardin.entities.TagEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 
 @Service("imageService")
@@ -16,18 +17,30 @@ public class ImageService {
     @Autowired
     private ImageDao imageDao;
 
-    public void create(ImageEntity image){
-        imageDao.save(image);
+    public Boolean create(ImageEntity image) {
+        try {
+            imageDao.save(image);
+        } catch (PersistenceException e) {
+            return false;
+        }
+        return true;
     }
 
     public ImageEntity loadMedium(Long id) {
         return imageDao.load(id, false, true, false, true);
     }
 
-    public void remove(ImageEntity ie) { imageDao.remove(ie); }
+    public Boolean remove(Long id) {
+        try {
+            imageDao.remove(id);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
 
-    public List<ImageEntity> loadImages(Integer page, Integer pageMax){
-        return imageDao.loadImages(page, pageMax);
+    public List<ImageEntity> loadImages(Integer page, Integer pageMax) {
+        return imageDao.loadAll(page, pageMax);
     }
 
     public ImageEntity load(Long id) {
@@ -38,9 +51,11 @@ public class ImageService {
         return imageDao.find(key, tag, page, pageMax);
     }
 
-    public void update(ImageEntity ie) { imageDao.update(ie); }
+    public void update(ImageEntity ie) {
+        imageDao.update(ie);
+    }
 
-    public List<ImageEntity> loadCatalogueImages(Integer page,Integer pageMax, CatalogueEntity catalogue) {
+    public List<ImageEntity> loadCatalogueImages(Integer page, Integer pageMax, CatalogueEntity catalogue) {
         return imageDao.loadFromCatalogue(page, pageMax, catalogue);
     }
 

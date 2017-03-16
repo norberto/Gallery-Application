@@ -18,7 +18,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "NORBERT_TAGS", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "TAG_ID")
+        @UniqueConstraint(columnNames = "TAG_ID"),
+        @UniqueConstraint(columnNames = "NAME")
 })
 public class TagEntity implements Serializable {
 

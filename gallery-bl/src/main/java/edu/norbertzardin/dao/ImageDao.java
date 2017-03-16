@@ -5,12 +5,13 @@ import edu.norbertzardin.entities.ImageEntity;
 import edu.norbertzardin.entities.TagEntity;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 @Transactional
 public interface ImageDao {
     void save(ImageEntity image);
 
-    void remove(ImageEntity ie);
+    void remove(Long id);
 
     void update(ImageEntity ie);
 
@@ -18,7 +19,7 @@ public interface ImageDao {
 
     ImageEntity load(Long id, Boolean thumbnail, Boolean medium, Boolean download, Boolean tags);
 
-    List<ImageEntity> loadImages(Integer page, Integer pageMax);
+    List<ImageEntity> loadAll(Integer page, Integer pageMax);
 
     List<ImageEntity> find(String keyword, TagEntity tag, Integer page, Integer pageMax);
 

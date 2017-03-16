@@ -118,7 +118,7 @@ public class UploadVM {
 
         String[] tagList = ImageUtil.parseTags(uploadForm.getTags());
         for (String tag : tagList) {
-            tagService.createTag(tag, ie);
+            tagService.create(tag, ie);
         }
 
         Executions.getCurrent().sendRedirect("/view.zul");

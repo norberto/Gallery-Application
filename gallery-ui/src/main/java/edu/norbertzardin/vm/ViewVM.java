@@ -50,7 +50,7 @@ public class ViewVM {
         setPage(1);
         setSearchString(searchString.replaceAll("%", ""));
         if (isSearch()) {
-            searchTag = tagService.getTagByName(searchString);
+            searchTag = tagService.load(searchString, true);
             setImageList(imageService.find(getSearchString(), searchTag, getPage(), pageMax));
         } else {
             setImageList(imageService.loadImages(getPage(), pageMax));

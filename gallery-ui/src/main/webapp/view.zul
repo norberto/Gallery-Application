@@ -6,7 +6,7 @@
 <?evaluator name="zel"?>
 <?link rel="stylesheet" type="text/css" href="css/style.css" ?>
 
-<?imagePage zscriptLanguage="javascript"?>
+<?page zscriptLanguage="javascript"?>
 
 <zk xmlns:x="xhtml" xmlns:n="native">
     <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewVM', pageMax=5)" self="@define(content)">

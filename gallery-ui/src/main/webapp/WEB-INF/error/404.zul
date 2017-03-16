@@ -1,0 +1,44 @@
+<?page title="Gallery Application - Home"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css" href="/../bootstrap/css/bootstrap.min.css"?>
+<zk xmlns:n="native" xmlns:x="xhtml">
+    <n:head>
+        <n:link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <script type="text/javascript" src="/../bootstrap/js/bootstrap.js"/>
+
+        <n:script>
+            $(".nav li").on("click", function() {
+            $(".nav li").removeClass("active");
+            $(this).addClass("active");
+            });
+        </n:script>
+    </n:head>
+
+    <n:div>
+        <n:div class="container-fluid">
+            <n:div class="row">
+                <n:div class="container-fluid">
+                    <n:div class="row" align="center">
+                        <n:div class="col-md-12">
+                            <n:h1 style="font-size:10em; margin-top:150px">
+                                <n:span class="label label-default">
+                                    code 404<n:span class="blink_text">_</n:span>
+                                </n:span>
+                            </n:h1>
+                        </n:div>
+                    </n:div>
+                    <n:div class="row" align="center">
+                        <n:div class="col-md-12">
+                            <n:h1 style="margin-top:50px">An error has occured!</n:h1>
+                            <n:p>The page you are trying to access does not exist.</n:p>
+                        </n:div>
+                    </n:div>
+
+                    <n:div class="row" align="center" style="margin-top:50px">
+                        <n:a href="/" class="btn btn-primary" role="button">Back to Application</n:a>
+                    </n:div>
+                </n:div>
+            </n:div>
+        </n:div>
+    </n:div>
+</zk>

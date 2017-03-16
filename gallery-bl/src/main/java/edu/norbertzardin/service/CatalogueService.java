@@ -2,39 +2,43 @@ package edu.norbertzardin.service;
 
 import edu.norbertzardin.dao.CatalogueDao;
 import edu.norbertzardin.entities.CatalogueEntity;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 import java.util.List;
 
 @Service("catalogueService")
 public class CatalogueService {
 
+    final static Logger logger = Logger.getLogger(CatalogueService.class);
+    private final CatalogueDao catalogueDao;
+
     @Autowired
-    private CatalogueDao catalogueDao;
+    public CatalogueService(CatalogueDao catalogueDao) {
+        this.catalogueDao = catalogueDao;
+    }
 
     public Boolean create(CatalogueEntity ce) {
         try {
-            catalogueDao.loadNoFetch(ce.getTitle());
-        } catch (NoResultException e) {
             catalogueDao.save(ce);
-            return true;
+        } catch (JpaSystemException | PersistenceException e) {
+            return false;
         }
+        return true;
 
-        return false;
     }
 
-    public void remove(CatalogueEntity ce) {
+    public Boolean remove(CatalogueEntity ce) {
         try {
-            if (catalogueDao.load(ce.getId()) != null) {
-                catalogueDao.remove(ce.getId());
-//                return true; // successfully deleted
-            }
-        } catch (NoResultException e) {
-            // Selected catalogue doesnt exist, therewore cannot be deleted. Do logging.
+            catalogueDao.remove(ce.getId());
+            return true; // successfully deleted
+        } catch (IllegalArgumentException e) {
+            return false;
         }
-//        return false;
     }
 
     public CatalogueEntity load(String name) {
@@ -46,16 +50,16 @@ public class CatalogueService {
     }
 
     public CatalogueEntity load(Long id) {
-        return catalogueDao.load(id);
+        try {
+            return catalogueDao.load(id);
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
 
     public List<CatalogueEntity> loadByPage(Integer cataloguePage, Integer pageCatalogueMax, String searchString, Boolean includeDefault) {
         return catalogueDao.loadByPage(cataloguePage, pageCatalogueMax, searchString, includeDefault);
-    }
-
-    public void setCatalogueDao(CatalogueDao catalogueDao) {
-        this.catalogueDao = catalogueDao;
     }
 
     public void update(CatalogueEntity ce) {
@@ -72,10 +76,6 @@ public class CatalogueService {
 
     public Integer imageCount(CatalogueEntity catalogue, Integer pageMax) {
         return countPages(catalogueDao.imageCount(catalogue), pageMax);
-    }
-
-    public List<CatalogueEntity> loadByKey(String key) {
-        return catalogueDao.loadByKey(key);
     }
 
     public Integer count(Integer pageMax, String searchString, Boolean includeDefault) {

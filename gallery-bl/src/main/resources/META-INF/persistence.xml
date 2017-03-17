@@ -15,6 +15,7 @@
         <class>edu.norbertzardin.entities.CatalogueEntity</class>
         <class>edu.norbertzardin.entities.ByteData</class>
         <class>edu.norbertzardin.entities.TagEntity</class>
+        <class>edu.norbertzardin.entities.UserEntity</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
             <!--<property name="hibernate.show_sql" value="true"/>-->

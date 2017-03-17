@@ -172,4 +172,8 @@ public class ViewVM {
     public void setPageMax(Integer pageMax) {
         this.pageMax = pageMax;
     }
+
+    public void setImageService(ImageService imageService) {
+        this.imageService = imageService;
+    }
 }

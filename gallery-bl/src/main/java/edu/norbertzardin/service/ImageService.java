@@ -66,4 +66,8 @@ public class ImageService {
     public ByteData download(Long id) {
         return imageDao.load(id, false, false, true, false).getDownload();
     }
+
+    public void setImageDao(ImageDao imageDao) {
+        this.imageDao = imageDao;
+    }
 }

@@ -47,6 +47,7 @@ public class TagDAOImpl implements TagDao {
     @Transactional
     public void update(TagEntity tag) {
         entityManager.merge(tag);
+        entityManager.flush();
     }
 
     @Transactional

@@ -68,7 +68,7 @@ public class TagEntity implements Serializable {
         this.name = name;
     }
 
-    public String getName(){return this.name; }
+    public String getName(){ return this.name; }
 
     public List<ImageEntity> getImages() {
         return images;

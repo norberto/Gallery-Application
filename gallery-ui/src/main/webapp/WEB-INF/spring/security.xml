@@ -1,0 +1,40 @@
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http auto-config="true" use-expressions="true">
+        <form-login login-page="/index.zul"
+                    authentication-failure-url="/index.zul?error"
+                    authentication-success-forward-url="/view.zul"
+                    default-target-url="/view.zul"
+                    always-use-default-target="true"/>
+        <logout logout-url="/logout"
+                logout-success-url="/index.zul?logout" />
+
+
+        <intercept-url pattern="/index.zul" access="permitAll"/>
+        <intercept-url pattern="/index.zul?error" access="permitAll"/>
+        <intercept-url pattern="/index.zul?logout" access="permitAll"/>
+        <intercept-url pattern="/view.zul**" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/upload.zul**" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/browse.zul**" access="hasRole('ROLE_USER')"/>
+
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="user" password="password" authorities="ROLE_USER" />
+                <user name="erikas" password="erikas" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+
+    <!--<authentication-manager>-->
+        <!--<authentication-provider user-service-ref="userService"/>-->
+    <!--</authentication-manager>-->
+
+</b:beans>

@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -145,6 +143,21 @@ public class TestTagService {
         tag.setCreatedDate(new Date());
         tag.setName("test");
         Assert.assertFalse("Tag got created, but shouldn't be.", tagService.create(tag));
+    }
+
+    @Test
+    @Rollback
+    public void testAddTagThatImageAlreadyContains() {
+        tagService.create(tagEntity);
+        ImageEntity img = getImage();
+        imageService.create(img);
+        entityManager.detach(img);
+        img = imageService.load(img.getId());
+        tagEntity.addImage(img);
+        tagService.update(tagEntity);
+
+        Assert.assertFalse("Tag has been added, although it already contains it.",
+                tagService.create(tagEntity.getName(), img));
     }
 
     public ImageEntity getImage() {

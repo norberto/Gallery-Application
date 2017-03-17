@@ -2,19 +2,46 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
-<zk xmlns:n="native">
+
+<zk xmlns:n="native" xmlns:x="http://www.w3.org/1999/xhtml">
     <div self="@define(content)">
         <!-- Image -->
         <n:div class="row" align="center">
             <n:div class="col-md-12">
-                <n:img alt="Home imagePage" src="images/home_icon.png" />
+                <n:img alt="Home imagePage" src="images/home_icon.png"/>
             </n:div>
         </n:div>
+
         <!-- Page title-->
         <n:div class="row" align="center">
             <n:div class="col-md-12">
-                <n:h1 class="col-md-12"> GALLERY APPLICATION</n:h1>
+                <n:h1 class="col-md-12">GALLERY APPLICATION</n:h1>
             </n:div>
+            <n:b style="color:red">
+            <x:div visible="${param.error != null}">
+                <n:p>
+                    Invalid username and password.
+                </n:p>
+            </x:div>
+            <x:div visible="${param.logout != null}">
+                <n:p>
+                    You have been logged out.
+                </n:p>
+            </x:div>
+            </n:b>
+            <x:div visible="${pageContext.request.remoteUser != null}">
+                <n:h1>
+                    Hello
+                    <n:b>
+                        <n:span>${pageContext.request.remoteUser}</n:span>
+                    </n:b>
+                </n:h1>
+                <n:form class="form-inline" action="/logout" method="post">
+                    <n:input type="submit" class="btn btn-primary" value="Log out"/>
+                    <n:input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </n:form>
+            </x:div>
+
         </n:div>
     </div>
 </zk>

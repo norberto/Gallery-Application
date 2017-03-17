@@ -22,6 +22,9 @@
         <spring.groupid>org.springframework</spring.groupid>
         <spring.version>4.3.6.RELEASE</spring.version>
 
+        <spring-security.groupid>org.springframework.security</spring-security.groupid>
+        <spring-security.version>4.2.2.RELEASE</spring-security.version>
+
         <zk.groupid>org.zkoss.zk</zk.groupid>
         <zk.version>8.0.4.2-Eval</zk.version>
 
@@ -131,6 +134,19 @@
                 <groupId>${zk.groupid}</groupId>
                 <artifactId>zhtml</artifactId>
                 <version>${zk.version}</version>
+            </dependency>
+
+            <!-- Spring Security -->
+            <dependency>
+                <groupId>${spring-security.groupid}</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${spring-security.groupid}</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${spring-security.version}</version>
             </dependency>
 
             <!-- Oracle JDBC -->

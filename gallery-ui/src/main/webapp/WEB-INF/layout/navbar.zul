@@ -2,7 +2,8 @@
     <n:nav class="navbar navbar-default navbar-static-top body">
         <n:div class="container">
             <n:div class="navbar-header">
-                <x:button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+                <x:button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                          data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
                     <n:span class="sr-only">Toggle navigation</n:span>
                     <n:span class="icon-bar"/>
                     <n:span class="icon-bar"/>
@@ -11,43 +12,62 @@
                 <n:a class="navbar-brand" href="index.zul">Gallery Application</n:a>
             </n:div>
 
-            <x:div  class="navbar-collapse collapse">
+            <x:div class="navbar-collapse collapse">
                 <n:ul class="nav navbar-nav">
-                    <n:li><n:a href="upload.zul">Upload</n:a></n:li>
-                    <n:li><n:a href="view.zul">View Images</n:a></n:li>
-                    <n:li><n:a href="browse.zul">Browse</n:a></n:li>
+                    <n:li>
+                        <n:a href="upload.zul">Upload</n:a>
+                    </n:li>
+                    <n:li>
+                        <n:a href="view.zul">View Images</n:a>
+                    </n:li>
+                    <n:li>
+                        <n:a href="browse.zul">Browse</n:a>
+                    </n:li>
                 </n:ul>
 
                 <n:ul class="nav navbar-nav navbar-right">
-                    <n:li><n:p class="navbar-text">Already have an account?</n:p></n:li>
+                    <n:li>
+                        <n:p class="navbar-text">Already have an account?</n:p>
+                    </n:li>
                     <n:li class="dropdown">
-                        <n:a href="#" class="dropdown-toggle" data-toggle="dropdown"><n:b>Login</n:b> <n:span class="caret"/></n:a>
+                        <n:a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <n:b>Login</n:b>
+                            <n:span class="caret"/>
+                        </n:a>
                         <n:ul id="login-dp" class="dropdown-menu">
                             <n:li>
                                 <n:div class="row">
                                     <n:div class="col-md-12">
-                                        <n:editForm class="editForm" role="editForm" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                            <n:div class="editForm-group">
-                                                <n:label class="sr-only" for="exampleInputEmail2">Email address</n:label>
-                                                <n:input type="email" class="editForm-control" id="exampleInputEmail2" placeholder="Email address"/>
+                                        <n:form action="/login" method="post">
+                                            <n:div class="form-group">
+                                                <n:label class="sr-only" for="username">Username</n:label>
+                                                <n:input type="text" class="form-control" id="username" name="username"
+                                                         placeholder="Username"/>
                                             </n:div>
-                                            <n:div class="editForm-group">
-                                                <n:label class="sr-only" for="exampleInputPassword2">Password</n:label>
-                                                <n:input type="password" class="editForm-control" id="exampleInputPassword2" placeholder="Password"/>
-                                                <n:div class="help-block text-right"><n:a href="">Forget the password ?</n:a></n:div>
+                                            <n:div class="form-group">
+                                                <n:label class="sr-only" for="password">Password</n:label>
+                                                <n:input type="password" class="form-control" id="password" name="password"
+                                                         placeholder="Password"/>
+                                                <!--<n:div class="help-block text-right"><n:a href="">Forget the password ?</n:a></n:div>-->
                                             </n:div>
-                                            <n:div class="editForm-group">
-                                                <n:button type="submit" class="btn btn-primary btn-block">Sign in</n:button>
+                                            <n:div class="form-group">
+                                                <n:button type="submit" class="btn btn-primary btn-block">Sign in
+                                                </n:button>
                                             </n:div>
                                             <n:div class="checkbox">
                                                 <n:label>
-                                                    <n:input type="checkbox"> Remember me</n:input>
+                                                    <n:input type="checkbox">Remember me</n:input>
                                                 </n:label>
                                             </n:div>
-                                        </n:editForm>
+                                            <x:input type="hidden" name="${_csrf.parameterName}"
+                                                     value="${_csrf.token}"/>
+                                        </n:form>
                                     </n:div>
                                     <n:div class="bottom text-center">
-                                        Don't have an account? <n:a href="#"><n:b>Register</n:b></n:a>
+                                        Don't have an account?
+                                        <n:a href="#">
+                                            <n:b>Register</n:b>
+                                        </n:a>
                                     </n:div>
                                 </n:div>
                             </n:li>

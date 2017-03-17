@@ -114,12 +114,35 @@ public class TestImageService {
         Assert.assertEquals("Update failed.", "WOAH.", imageService.load(imageEntity.getId()).getName());
 
     }
+
+    @Test
+    @Rollback
+    public void testFindImagesUsingTag() {
+        // Actually only one image
+        imageService.create(imageEntity);
+        entityManager.detach(imageEntity);
+        tagService.create(imageEntity.getName(), imageEntity);
+        TagEntity tag = tagService.load(imageEntity.getName(), true);
+        Assert.assertEquals("Wrong image found.", imageEntity.getName(),
+                imageService.find("", tag, 1, 1).get(0).getName());
+    }
+
     @Test
     @Rollback
     public void testCountImagesUsingKey() {
         imageService.create(imageEntity);
         entityManager.detach(imageEntity);
         Assert.assertEquals("Wrong image count.", 1, imageService.count(imageEntity.getName(), null).intValue());
+    }
+
+    @Test
+    @Rollback
+    public void testCountImagesUsingKeyAndTag() {
+        imageService.create(imageEntity);
+        entityManager.detach(imageEntity);
+        tagService.create(imageEntity.getName(), imageEntity);
+        TagEntity tag = tagService.load(imageEntity.getName(), true);
+        Assert.assertEquals("Wrong image count.", 1, imageService.count(imageEntity.getName(), tag).intValue());
     }
 
     @Test

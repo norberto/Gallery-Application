@@ -36,11 +36,10 @@ public class TagService {
         // Before creating or updating tags - check if an image already has one
         List<TagEntity> tags = ie.getTags();
         if (tags != null) {
-            for (TagEntity t : tags) {
+            for (TagEntity t : tags)
                 if (t.getName().equals(tag_name)) {
                     return false;
                 }
-            }
         }
 
         // If tag does not exist yet - create it

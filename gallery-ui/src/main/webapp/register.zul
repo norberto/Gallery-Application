@@ -1,0 +1,39 @@
+<?page title="Gallery Application - Registration"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="WEB-INF/layout/template.zul"?>
+
+<zk xmlns:n="native" xmlns="xhtml" xmlns:zul="zul">
+    <div class="container" viewModel="@id('vm') @init('edu.norbertzardin.vm.RegisterVM')" self="@define(content)">
+
+        <div visible="@load(not vm.error eq null or not empty vm.error)">
+            <h3>${vm.error}</h3>
+        </div>
+        <div visible="@load(not vm.message eq null or not empty vm.message)">
+            <h3>${vm.message}</h3>
+        </div>
+
+        <n:form >
+            <n:div class="form-group">
+                <n:label class="sr-only" for="username">Username</n:label>
+                <zul:textbox type="text" value="@save(vm.username, before='register')" placeholder="Username"/>
+
+            </n:div>
+            <n:div class="form-group">
+                <n:label class="sr-only" for="password">Password</n:label>
+                <zul:textbox type="password" value="@save(vm.password, before='register')" placeholder="password"/>
+
+            </n:div>
+
+            <n:div class="form-group">
+                <n:label class="sr-only" for="password">Repeat Password</n:label>
+                <zul:textbox type="password" value="@save(vm.password_r, before='register')" placeholder="Repeat password"/>
+            </n:div>
+
+            <n:div class="form-group">
+                <button id="register" type="submit" onClick="@command('register')">Register</button>
+
+            </n:div>
+        </n:form>
+    </div>
+</zk>

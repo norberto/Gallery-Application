@@ -170,3 +170,12 @@ body {
     50% { opacity: 0.0; }
     100% { opacity: 1.0; }
 }
+
+.custom-navbar {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 20px
+}

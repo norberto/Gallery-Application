@@ -24,56 +24,70 @@
                         <n:a href="browse.zul">Browse</n:a>
                     </n:li>
                 </n:ul>
+                <x:div class="navbar navbar-text navbar-right custom-navbar"
+                       visible="${pageContext.request.remoteUser != null}">
+                    Logged in as<n:b> ${pageContext.request.remoteUser}</n:b>
+                    <n:form class="form-inline" action="/logout" method="post" style="margin: 20px 0 0 0">
+                        <n:input type="submit" class="btn btn-sm btn-primary" value="Log out"/>
+                        <n:input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-                <n:ul class="nav navbar-nav navbar-right">
-                    <n:li>
-                        <n:p class="navbar-text">Already have an account?</n:p>
-                    </n:li>
-                    <n:li class="dropdown">
-                        <n:a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <n:b>Login</n:b>
-                            <n:span class="caret"/>
-                        </n:a>
-                        <n:ul id="login-dp" class="dropdown-menu">
-                            <n:li>
-                                <n:div class="row">
-                                    <n:div class="col-md-12">
-                                        <n:form action="/login" method="post">
-                                            <n:div class="form-group">
-                                                <n:label class="sr-only" for="username">Username</n:label>
-                                                <n:input type="text" class="form-control" id="username" name="username"
-                                                         placeholder="Username"/>
-                                            </n:div>
-                                            <n:div class="form-group">
-                                                <n:label class="sr-only" for="password">Password</n:label>
-                                                <n:input type="password" class="form-control" id="password" name="password"
-                                                         placeholder="Password"/>
-                                                <!--<n:div class="help-block text-right"><n:a href="">Forget the password ?</n:a></n:div>-->
-                                            </n:div>
-                                            <n:div class="form-group">
-                                                <n:button type="submit" class="btn btn-primary btn-block">Sign in
-                                                </n:button>
-                                            </n:div>
-                                            <n:div class="checkbox">
-                                                <n:label>
-                                                    <n:input type="checkbox">Remember me</n:input>
-                                                </n:label>
-                                            </n:div>
-                                            <x:input type="hidden" name="${_csrf.parameterName}"
-                                                     value="${_csrf.token}"/>
-                                        </n:form>
+                    </n:form>
+                </x:div>
+
+                <x:div visible="${pageContext.request.remoteUser == null}">
+                    <n:ul class="nav navbar-nav navbar-right">
+                        <n:li>
+                            <n:p class="navbar-text">Already have an account?</n:p>
+                        </n:li>
+                        <n:li class="dropdown">
+                            <n:a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <n:b>Login</n:b>
+                                <n:span class="caret"/>
+                            </n:a>
+                            <n:ul id="login-dp" class="dropdown-menu">
+                                <n:li>
+                                    <n:div class="row">
+                                        <n:div class="col-md-12">
+                                            <n:form action="/login" method="post">
+                                                <n:div class="form-group">
+                                                    <n:label class="sr-only" for="username">Username</n:label>
+                                                    <n:input type="text" class="form-control" id="username"
+                                                             name="username"
+                                                             placeholder="Username"/>
+                                                </n:div>
+                                                <n:div class="form-group">
+                                                    <n:label class="sr-only" for="password">Password</n:label>
+                                                    <n:input type="password" class="form-control" id="password"
+                                                             name="password"
+                                                             placeholder="Password"/>
+                                                    <!--<n:div class="help-block text-right"><n:a href="">Forget the password ?</n:a></n:div>-->
+                                                </n:div>
+                                                <n:div class="form-group">
+                                                    <n:button type="submit" class="btn btn-primary btn-block">Sign in
+                                                    </n:button>
+                                                </n:div>
+                                                <n:div class="checkbox">
+                                                    <n:label>
+                                                        <n:input type="checkbox">Remember me</n:input>
+                                                    </n:label>
+                                                </n:div>
+                                                <x:input type="hidden" name="${_csrf.parameterName}"
+                                                         value="${_csrf.token}"/>
+                                            </n:form>
+                                        </n:div>
+                                        <n:div class="bottom text-center">
+                                            Don't have an account?
+                                            <n:a class="btn btn-primary btm-xs" href="/register.zul">
+                                                <n:b>Register</n:b>
+                                            </n:a>
+                                        </n:div>
                                     </n:div>
-                                    <n:div class="bottom text-center">
-                                        Don't have an account?
-                                        <n:a href="#">
-                                            <n:b>Register</n:b>
-                                        </n:a>
-                                    </n:div>
-                                </n:div>
-                            </n:li>
-                        </n:ul>
-                    </n:li>
-                </n:ul>
+                                </n:li>
+                            </n:ul>
+                        </n:li>
+                    </n:ul>
+                </x:div>
+
             </x:div>
         </n:div>
     </n:nav>

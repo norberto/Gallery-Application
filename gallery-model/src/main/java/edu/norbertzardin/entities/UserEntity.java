@@ -3,48 +3,23 @@ package edu.norbertzardin.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "NORBERT_USERS", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"USER_ID", "USERNAME"})
+        @UniqueConstraint(columnNames = {"USERNAME"})
 })
 public class UserEntity implements Serializable {
 
-    @Id
-    @SequenceGenerator(name = "imageIdSeq", sequenceName = "NORBERT_IMAGE_ID_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imageIdSeq")
-    @Column(name = "USER_ID")
-    private Long id;
-
-    @Id
-    @Column(name = "USERNAME", unique = true,
-            nullable = false, length = 45)
     private String username;
-
-    @Column(name = "PASSWORD", nullable = false, length = 50)
     private String password;
-
-
-    @Column(name = "CREATED_DATE", length = 100)
-    private Date createdDate;
-
-    @Column(name = "enabled", nullable = false)
     private boolean enabled;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
     public UserEntity() {
@@ -64,7 +39,9 @@ public class UserEntity implements Serializable {
         this.userRole = userRole;
     }
 
-
+    @Id
+    @Column(name = "USERNAME", unique = true,
+            nullable = false, length = 45)
     public String getUsername() {
         return this.username;
     }
@@ -73,7 +50,8 @@ public class UserEntity implements Serializable {
         this.username = username;
     }
 
-
+    @Column(name = "PASSWORD",
+            nullable = false, length = 60)
     public String getPassword() {
         return this.password;
     }
@@ -82,6 +60,7 @@ public class UserEntity implements Serializable {
         this.password = password;
     }
 
+    @Column(name = "ENABLED", nullable = false)
     public boolean isEnabled() {
         return this.enabled;
     }
@@ -90,6 +69,7 @@ public class UserEntity implements Serializable {
         this.enabled = enabled;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     public Set<UserRole> getUserRole() {
         return this.userRole;
     }
@@ -97,4 +77,5 @@ public class UserEntity implements Serializable {
     public void setUserRole(Set<UserRole> userRole) {
         this.userRole = userRole;
     }
+
 }

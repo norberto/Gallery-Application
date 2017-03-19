@@ -1,12 +1,9 @@
 package edu.norbertzardin.dao.impl;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.norbertzardin.dao.UserDao;
 import edu.norbertzardin.entities.UserEntity;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.norbertzardin.entities.UserRole;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -39,6 +36,18 @@ public class UserDaoImpl implements UserDao {
             return null;
         }
 
+    }
+
+    @Override
+    public void create(UserEntity user) {
+        entityManager.persist(user);
+        entityManager.flush();
+    }
+
+    @Override
+    public void create(UserRole userRole) {
+        entityManager.persist(userRole);
+        entityManager.flush();
     }
 
     public void setEntityManager(EntityManager entityManager) {

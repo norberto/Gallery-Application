@@ -97,19 +97,12 @@ public class ViewVM {
     public boolean isSearch() { return searchString != null && !searchString.equals(""); }
 
     private void updatePageCount() {
-        Integer imageCount;
         if(isSearch()) {
-            imageCount = imageService.count(getSearchString(), searchTag).intValue();
+            pageCount = imageService.count(getSearchString(), searchTag, pageMax).intValue();
         } else {
-            imageCount = imageService.count(null, null).intValue();
+            pageCount= imageService.count(null, null, pageMax).intValue();
         }
 
-        Integer count = imageCount / pageMax;
-        if(count * pageMax < imageCount) {
-            setPageCount(count + 1);
-        } else {
-            setPageCount(count);
-        }
     }
 
     private void updatePageContent() {
@@ -122,6 +115,7 @@ public class ViewVM {
     }
 
     private void loadImages() {
+        List<ImageEntity> temp = imageService.loadImages(getPage(), pageMax);
         setImageList(imageService.loadImages(getPage(), pageMax));
     }
 

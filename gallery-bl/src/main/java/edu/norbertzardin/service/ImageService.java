@@ -59,8 +59,13 @@ public class ImageService {
         return imageDao.loadFromCatalogue(page, pageMax, catalogue);
     }
 
-    public Long count(String searchString, TagEntity searchTag) {
-        return imageDao.count(searchString, searchTag);
+    public Long count(String searchString, TagEntity searchTag, Integer pageMax) {
+        Long images = imageDao.count(searchString, searchTag);
+        Long count = images / pageMax;
+        if(count * pageMax < images) {
+            count++;
+        }
+        return count;
     }
 
     public ByteData download(Long id) {

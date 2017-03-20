@@ -132,7 +132,7 @@ public class TestImageService {
     public void testCountImagesUsingKey() {
         imageService.create(imageEntity);
         entityManager.detach(imageEntity);
-        Assert.assertEquals("Wrong image count.", 1, imageService.count(imageEntity.getName(), null).intValue());
+        Assert.assertEquals("Wrong image count.", 1, imageService.count(imageEntity.getName(), null, 100).intValue());
     }
 
     @Test
@@ -142,7 +142,7 @@ public class TestImageService {
         entityManager.detach(imageEntity);
         tagService.create(imageEntity.getName(), imageEntity);
         TagEntity tag = tagService.load(imageEntity.getName(), true);
-        Assert.assertEquals("Wrong image count.", 1, imageService.count(imageEntity.getName(), tag).intValue());
+        Assert.assertEquals("Wrong image count.", 1, imageService.count(imageEntity.getName(), tag, 100).intValue());
     }
 
     @Test

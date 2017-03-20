@@ -21,20 +21,20 @@ public class UserDaoImpl implements UserDao {
 
     @SuppressWarnings("unchecked")
     public UserEntity findByUserName(String username) {
-
-        List<UserEntity> users;
-
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
-        Root<UserEntity> user = cq.from(UserEntity.class);
-
-        users = entityManager.createQuery(cq.select(user)).getResultList();
-
-        if (users.size() > 0) {
-            return users.get(0);
-        } else {
-            return null;
-        }
+        return entityManager.find(UserEntity.class, username);
+//        List<UserEntity> users;
+//
+//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
+//        Root<UserEntity> user = cq.from(UserEntity.class);
+//
+//        users = entityManager.createQuery(cq.select(user)).getResultList();
+//
+//        if (users.size() > 0) {
+//            return users.get(0);
+//        } else {
+//            return null;
+//        }
 
     }
 

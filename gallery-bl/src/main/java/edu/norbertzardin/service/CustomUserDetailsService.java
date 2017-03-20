@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +24,8 @@ import java.util.Set;
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserDao userDao;
 
+    static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Autowired
     public CustomUserDetailsService(UserDao userDao) {
         this.userDao = userDao;
@@ -30,27 +34,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userDao.findByUserName(username);
-        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
-        return buildUserForAuthentication(user, authorities);
 
-    }
-
-    private User buildUserForAuthentication(UserEntity user, List<GrantedAuthority> authorities) {
-        return new User(user.getUsername(), user.getPassword(),
-                user.isEnabled(), true, true, true, authorities);
-    }
-
-    private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
-        Set<GrantedAuthority> setAuths = new HashSet<>();
-
-        // Build user's authorities
-        for (UserRole userRole : userRoles) {
-            setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        for (UserRole role : user.getUserRole()){
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
-
-        return new ArrayList<>(setAuths);
+        return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }

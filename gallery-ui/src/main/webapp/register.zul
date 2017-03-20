@@ -6,34 +6,82 @@
 <zk xmlns:n="native" xmlns="xhtml" xmlns:zul="zul">
     <div class="container" viewModel="@id('vm') @init('edu.norbertzardin.vm.RegisterVM')" self="@define(content)">
 
-        <div visible="@load(not vm.error eq null or not empty vm.error)">
-            <h3>${vm.error}</h3>
-        </div>
-        <div visible="@load(not vm.message eq null or not empty vm.message)">
-            <h3>${vm.message}</h3>
-        </div>
+        <zul:div visible="@load(not vm.error eq null or not empty vm.error)">
+            <h3>
+                <span textContent="@load(vm.error)"/>
+            </h3>
+        </zul:div>
+        <zul:div visible="@load(not vm.message eq null or not empty vm.message)">
+            <div class="alert alert-success" textContent="@load(vm.message)"/>
+        </zul:div>
 
-        <n:form >
-            <n:div class="form-group">
-                <n:label class="sr-only" for="username">Username</n:label>
-                <zul:textbox type="text" value="@save(vm.username, before='register')" placeholder="Username"/>
+        <n:div class="container">
+            <n:div class="row main">
+                <n:div class="panel-heading">
+                    <n:div class="panel-title text-center">
+                        <n:h1 class="title">Gallery Application</n:h1>
+                        <n:hr/>
+                    </n:div>
+                </n:div>
+                <n:div class="main-login main-center" align="left">
+                    <n:form class="form-horizontal">
 
+                        <n:div class="form-group">
+                            <n:label for="username" class="cols-sm-2 control-label">Username</n:label>
+                            <n:div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-custom">
+                                <n:div class="input-group">
+                                    <n:span class="input-group-addon">
+                                        <n:i class="glyphicon glyphicon-user" aria-hidden="true"/>
+                                    </n:span>
+                                    <zul:textbox type="text" class="form-control" name="username" id="username"
+                                                 placeholder="Enter your Username"
+                                                 value="@save(vm.username, before='register')"/>
+                                </n:div>
+                            </n:div>
+                        </n:div>
+
+                        <n:div class="form-group">
+                            <n:label for="password" class="cols-sm-2 control-label">Password</n:label>
+                            <n:div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-custom">
+                                <n:div class="input-group">
+                                    <n:span class="input-group-addon">
+                                        <n:i class="glyphicon glyphicon-lock" aria-hidden="true"/>
+                                    </n:span>
+                                    <zul:textbox type="password" class="form-control" name="password" id="password"
+                                                 placeholder="Enter your Password"
+                                                 value="@save(vm.password, before='register')"/>
+                                </n:div>
+                            </n:div>
+                        </n:div>
+
+                        <n:div class="form-group">
+                            <n:label for="confirm" class="cols-sm-2 control-label">Confirm Password</n:label>
+                            <n:div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-custom">
+                                <n:div class="input-group">
+                                    <n:span class="input-group-addon">
+                                        <n:i class="glyphicon glyphicon-lock" aria-hidden="true"/>
+                                    </n:span>
+                                    <zul:textbox type="password" class="form-control" name="confirm" id="confirm"
+                                                 placeholder="Confirm your Password"
+                                                 value="@save(vm.password_r, before='register')"/>
+                                </n:div>
+                            </n:div>
+                        </n:div>
+
+                        <n:div class="form-group ">
+                            <button type="button" class="btn btn-primary btn-lg btn-block login-button"
+                                    onClick="@command('register')">Register
+                            </button>
+                        </n:div>
+                        <n:div class="login-register" align="center">
+                            <n:span>Already have an account?</n:span>
+                            <b>
+                                <n:a href="login.zul">Login</n:a>
+                            </b>
+                        </n:div>
+                    </n:form>
+                </n:div>
             </n:div>
-            <n:div class="form-group">
-                <n:label class="sr-only" for="password">Password</n:label>
-                <zul:textbox type="password" value="@save(vm.password, before='register')" placeholder="password"/>
-
-            </n:div>
-
-            <n:div class="form-group">
-                <n:label class="sr-only" for="password">Repeat Password</n:label>
-                <zul:textbox type="password" value="@save(vm.password_r, before='register')" placeholder="Repeat password"/>
-            </n:div>
-
-            <n:div class="form-group">
-                <button id="register" type="submit" onClick="@command('register')">Register</button>
-
-            </n:div>
-        </n:form>
+        </n:div>
     </div>
 </zk>

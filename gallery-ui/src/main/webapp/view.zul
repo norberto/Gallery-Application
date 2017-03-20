@@ -9,7 +9,7 @@
 <?page zscriptLanguage="javascript"?>
 
 <zk xmlns:x="xhtml" xmlns:n="native">
-    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewVM', pageMax=5)" self="@define(content)">
+    <div viewModel="@id('vm') @init('edu.norbertzardin.vm.ViewVM', pageMax=10)" self="@define(content)">
 
         <n:div class="container-fluid top-buffer">
             <n:div class="row" style="margin-bottom:30px">

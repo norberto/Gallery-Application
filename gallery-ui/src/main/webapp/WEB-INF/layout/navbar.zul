@@ -26,8 +26,8 @@
                 </n:ul>
                 <x:div class="navbar navbar-text navbar-right custom-navbar"
                        visible="${pageContext.request.remoteUser != null}">
-                    Logged in as<n:b> ${pageContext.request.remoteUser}</n:b>
-                    <n:form class="form-inline" action="/logout" method="post" style="margin: 20px 0 0 0">
+                    Logged in as <n:b style="margin-left:5px; margin-right:5px;"> ${pageContext.request.remoteUser}</n:b>
+                    <n:form class="form-inline" action="/logout" method="post">
                         <n:input type="submit" class="btn btn-sm btn-primary" value="Log out"/>
                         <n:input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
@@ -66,18 +66,18 @@
                                                     <n:button type="submit" class="btn btn-primary btn-block">Sign in
                                                     </n:button>
                                                 </n:div>
-                                                <n:div class="checkbox">
-                                                    <n:label>
-                                                        <n:input type="checkbox">Remember me</n:input>
-                                                    </n:label>
-                                                </n:div>
+                                                <!--<n:div class="checkbox">-->
+                                                    <!--<n:label>-->
+                                                        <!--<n:input type="checkbox">Remember me</n:input>-->
+                                                    <!--</n:label>-->
+                                                <!--</n:div>-->
                                                 <x:input type="hidden" name="${_csrf.parameterName}"
                                                          value="${_csrf.token}"/>
                                             </n:form>
                                         </n:div>
                                         <n:div class="bottom text-center">
                                             Don't have an account?
-                                            <n:a class="btn btn-primary btm-xs" href="/register.zul">
+                                            <n:a href="/register.zul">
                                                 <n:b>Register</n:b>
                                             </n:a>
                                         </n:div>

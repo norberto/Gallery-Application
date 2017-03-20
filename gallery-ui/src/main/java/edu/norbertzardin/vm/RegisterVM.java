@@ -1,8 +1,13 @@
 package edu.norbertzardin.vm;
 
 import edu.norbertzardin.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.zkoss.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.ContextParam;
+import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -10,21 +15,16 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 public class RegisterVM {
 
-
+    private static final String SUCCESS = "User has been successfully registered.";
+    private final String REGISTRATION_FAILED = "Could not create user.";
     @WireVariable
     private UserService userService;
-
     private String username;
+    private final String USER_ALREADY_EXISTS = "User <b>" + username + "<b> already exists.";
     private String password;
     private String password_r;
-
     private String captcha;
     private String generated_captcha;
-
-    private final String USER_ALREADY_EXISTS = "User <b>" + username + "<b> already exists.";
-    private final String REGISTRATION_FAILED = "Could not create user.";
-    private static final String SUCCESS = "User has been successfully registered.";
-
     private String error;
     private String message;
 
@@ -41,7 +41,6 @@ public class RegisterVM {
     }
 
 
-
     @Command
     @NotifyChange({"error", "message"})
     public void register() {
@@ -50,20 +49,9 @@ public class RegisterVM {
             return;
         }
         Integer result = userService.register(username, password);
-        switch (result) {
-            case 100:
-                error = USER_ALREADY_EXISTS;
-                break;
-            case 101:
-                error = REGISTRATION_FAILED;
-                break;
-            case 200:
-                message = SUCCESS;
-            default:
-                break;
-
+        if (result == 200) {
+            message = SUCCESS;
         }
-
 
     }
 

@@ -81,7 +81,7 @@
     background-color:#59b5fa;
 }
 
-a {
+#tag a {
     color:white;
 }
 
@@ -178,4 +178,42 @@ body {
     margin-bottom: 0;
     margin-right: 0;
     margin-left: 20px
+}
+
+
+
+.main-center{
+ 	margin-top: 30px;
+ 	margin: 0 auto;
+ 	max-width: 630px;
+    padding: 40px 40px;
+
+}
+
+.login-button{
+	margin-top: 5px;
+}
+
+.login-register{
+	font-size: 11px;
+	text-align: center;
+}
+
+
+hr{
+	width: 10%;
+	color: #fff;
+}
+
+.form-group{
+	margin-bottom: 15px;
+}
+
+label{
+	margin-bottom: 15px;
+}
+
+.col-custom {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
 }

@@ -10,21 +10,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserDao userDao;
-
-    static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     public CustomUserDetailsService(UserDao userDao) {
@@ -33,12 +25,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
     @Override
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userDao.findByUserName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found.");
+        }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (UserRole role : user.getUserRole()){
+        for (UserRole role : user.getUserRole()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
         return new User(user.getUsername(), user.getPassword(), grantedAuthorities);

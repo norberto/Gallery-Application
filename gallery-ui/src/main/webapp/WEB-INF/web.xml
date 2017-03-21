@@ -9,12 +9,10 @@
          id="GalleryApp"
          version="2.5">
 
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:spring/application-context.xml,
-            /WEB-INF/spring/security.xml
+            classpath:spring/application-context.xml
         </param-value>
     </context-param>
 
@@ -29,12 +27,11 @@
     </filter-mapping>
 
     <listener>
-        <listener-class>
-            org.springframework.web.context.ContextLoaderListener
-        </listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-
-
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
 
     <!--<error-page>-->
         <!--<error-code>404</error-code>-->

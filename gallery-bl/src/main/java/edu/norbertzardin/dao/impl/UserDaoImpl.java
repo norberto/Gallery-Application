@@ -2,7 +2,9 @@ package edu.norbertzardin.dao.impl;
 import java.util.List;
 
 import edu.norbertzardin.dao.UserDao;
+import edu.norbertzardin.entities.TagEntity_;
 import edu.norbertzardin.entities.UserEntity;
+import edu.norbertzardin.entities.UserEntity_;
 import edu.norbertzardin.entities.UserRole;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 
@@ -22,20 +25,6 @@ public class UserDaoImpl implements UserDao {
     @SuppressWarnings("unchecked")
     public UserEntity findByUserName(String username) {
         return entityManager.find(UserEntity.class, username);
-//        List<UserEntity> users;
-//
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
-//        Root<UserEntity> user = cq.from(UserEntity.class);
-//
-//        users = entityManager.createQuery(cq.select(user)).getResultList();
-//
-//        if (users.size() > 0) {
-//            return users.get(0);
-//        } else {
-//            return null;
-//        }
-
     }
 
     @Override

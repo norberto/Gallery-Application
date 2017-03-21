@@ -23,6 +23,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImageVM {
@@ -37,7 +38,8 @@ public class ImageVM {
     private Boolean removeConfirmation;
     private Integer tagsLeft;
     private Integer tagLimit;
-    private boolean changed;
+    private List<TagEntity> removed;
+
 
 
     private UploadForm editForm;
@@ -51,6 +53,7 @@ public class ImageVM {
 
     @Init
     public void init(@BindingParam("tagLimit") Integer limit) {
+        removed = new ArrayList<>();
         setTagLimit(limit);
         setRemoveConfirmation(false);
         setEditMode(false);
@@ -91,22 +94,15 @@ public class ImageVM {
         }
     }
 
-    @Command
-    @NotifyChange({"tagList", "selectedImage"})
-    public void deleteTag(@BindingParam("selectedTag") TagEntity tag) {
-        // If selected tag is not null delete it
-        if (tag != null) {
-            // Look up the tag
-            TagEntity tag_ = tagService.load(tag.getId());
-            // If tag found start deleting process
-            if (tag_ != null) {
-                tagService.remove(tag_);
-            }
-            // Update local content
-            setSelectedImage(imageService.loadMedium(selectedImage.getId()));
-            setTagList(selectedImage.getTags());
-        }
 
+    @Command
+    @NotifyChange({"removed"})
+    public void deleteTag(@BindingParam("selectedTag") TagEntity tag) {
+        if(!removed.contains(tag)) {
+            removed.add(tag);
+        } else {
+            removed.remove(tag);
+        }
     }
 
     @Command
@@ -117,12 +113,21 @@ public class ImageVM {
     }
 
     @Command
-    @NotifyChange({"selectedImage", "editMode", "tagList", "tags", "tagsLeft"})
+    @NotifyChange({"selectedImage", "removed", "editMode", "tagList", "tags", "tagsLeft"})
     public void editImage() {
         selectedImage.setName(editForm.getName());
         selectedImage.setDescription(editForm.getDescription());
+
         // If selected image is not null process data
         if (selectedImage != null) {
+            for(TagEntity tag : removed) {
+                TagEntity tag_ = tagService.load(tag.getId());
+                if (tag_ != null) {
+                    tagService.remove(tag_);
+                }
+            }
+
+            setTagsLeft(getTagsLeft() + removed.size());
             // Parse tags
             String[] parsed_tags = ImageUtil.parseTags(getTags());
             // Lookup and updatePageContent OR create new tags and add them to image
@@ -137,6 +142,7 @@ public class ImageVM {
             setSelectedImage(imageService.loadMedium(selectedImage.getId()));
             loadTags();
         }
+        removed.clear();
         // Disable edit mode
         setEditMode(false);
     }
@@ -263,5 +269,9 @@ public class ImageVM {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getRemovedCount() {
+        return removed.size();
     }
 }

@@ -48,7 +48,7 @@
                                 <n:li>
                                     <n:div class="row">
                                         <n:div class="col-md-12">
-                                            <n:form action="/login" method="post">
+                                            <n:form action="/login.zul" method="post">
                                                 <n:div class="form-group">
                                                     <n:label class="sr-only" for="username">Username</n:label>
                                                     <n:input type="text" class="form-control" id="username"

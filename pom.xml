@@ -23,7 +23,7 @@
         <spring.version>4.3.6.RELEASE</spring.version>
 
         <spring-security.groupid>org.springframework.security</spring-security.groupid>
-        <spring-security.version>4.2.2.RELEASE</spring-security.version>
+        <spring-security.version>4.2.1.RELEASE</spring-security.version>
 
         <zk.groupid>org.zkoss.zk</zk.groupid>
         <zk.version>8.0.4.2-Eval</zk.version>
@@ -167,6 +167,13 @@
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.17</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <scope>provided</scope>
+                <version>2.5</version>
             </dependency>
 
             <!-- H2 DB -->

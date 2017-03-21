@@ -10,6 +10,8 @@ public class TagValidator extends AbstractValidator{
         String tags = (String) ctx.getProperty().getValue();
         String[] tagList = ImageUtil.parseTags(tags);
         Integer limit = (Integer) ctx.getValidatorArg("tagsLeft");
+        Integer removed = (Integer) ctx.getValidatorArg("removed");
+        limit += removed;
         String error;
         if(limit == 0) {
             error = "No more tags allowed.";

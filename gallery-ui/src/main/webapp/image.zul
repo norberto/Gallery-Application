@@ -60,7 +60,7 @@
                                         <h6 textContent="@load(modalVM.selectedImage.createdDate)"/>
                                     </n:div>
                                     <label visible="@load(modalVM.editMode)">Tags</label>
-                                    <div children="@load(modalVM.tagList)"
+                                    <div id="tagContainer" children="@load(modalVM.tagList)"
                                          style="margin-bottom: 20px; padding-bootom: 20px">
                                         <zul:template name="children" var="tag">
                                             <span class="label label-primary custom-label"
@@ -77,7 +77,7 @@
                                             <n:label class="control-label" for="newTags">New tags</n:label>
                                             <zul:textbox id="newTags" type="text" zclass="form-control"
                                                          placeholder="Add new tags..."
-                                                         value="@load(modal.tags, before='editMode') @save(modalVM.tags, before='editImage') @validator('edu.norbertzardin.validators.TagValidator', tagsLeft=modalVM.tagsLeft)"/>
+                                                         value="@load(modal.tags, before='editMode') @save(modalVM.tags, before='editImage') @validator('edu.norbertzardin.validators.TagValidator', tagsLeft=modalVM.tagsLeft, removed=modalVM.removedCount)"/>
                                             <span class="help-block" textContent="@load(errors['tags'])"/>
                                         </div>
                                     </div>

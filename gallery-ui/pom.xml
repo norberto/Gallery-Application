@@ -45,7 +45,10 @@
             <artifactId>zul</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>
@@ -59,6 +62,7 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
+
                 <configuration>
                     <path>/</path>
                     <port>8181</port>
@@ -66,5 +70,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

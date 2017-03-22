@@ -20,7 +20,6 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    @Transactional
     public Integer register(String username, String password) {
         if (username == null || username.equals("") ||
                 password == null || password.equals("")) {

@@ -10,11 +10,20 @@
          version="2.5">
 
     <context-param>
-        <param-name>contextConfigLocation</param-name>
+        <param-name>contextClass</param-name>
         <param-value>
-            classpath:spring/application-context.xml
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
         </param-value>
     </context-param>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>edu.norbertzardin.config.ApplicationContext</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
@@ -26,20 +35,18 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 
-    <!--<error-page>-->
-        <!--<error-code>404</error-code>-->
-        <!--<location>/WEB-INF/error/404.zul</location>-->
-    <!--</error-page>-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/error/404.zul</location>
+    </error-page>
 
-    <!--<error-page>-->
-        <!--<error-code>500</error-code>-->
-        <!--<location>/WEB-INF/error/500.zul</location>-->
-    <!--</error-page>-->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/error/500.zul</location>
+    </error-page>
 </web-app>

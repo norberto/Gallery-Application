@@ -17,12 +17,17 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 @Configuration
-@ComponentScan("edu.norbertzardin")
+@ComponentScan(basePackages = "edu.norbertzardin")
+@EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 public class ApplicationContext {
 
+    private final Environment env;
+
     @Autowired
-    Environment env;
+    public ApplicationContext(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource dataSource() {

@@ -28,15 +28,16 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aspects:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.9" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:4.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:4.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:4.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: com.oracle:ojdbc6:11.2.0.3" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: org.zkoss.zk:zkbind:8.0.4.2-Eval" />
@@ -55,6 +56,10 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.5" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-jdk14:1.7.5" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.8" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: com.h2database:h2:1.4.193" />
         </element>
       </element>

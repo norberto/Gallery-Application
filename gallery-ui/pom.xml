@@ -46,6 +46,11 @@
         </dependency>
 
         <dependency>
+            <groupId>${spring.groupid}</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
         </dependency>

@@ -13,7 +13,7 @@ public class TitleValidator extends AbstractValidator {
 
         String name = (String) ctx.getProperty().getValue();
         Number maxLength = (Number) ctx.getBindContext().getValidatorArg("maxLength");
-        if (name == null || name.equals("")) {
+        if (name == null || "".equals(name)) {
             addInvalidMessage(ctx, "name", "Name is required.");
         }
         if (name != null && name.length() > maxLength.intValue()) {

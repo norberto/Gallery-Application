@@ -90,8 +90,8 @@ public class BrowseVM {
         ce.setTitle(title);
         ce.setCreatedDate(new Date());
         clearMessages();
-        if(!catalogueService.create(ce)) {
-            vmsgs.addMessages(null, null, "new_title", new String[] {"Catalogue already exists."});
+        if (!catalogueService.create(ce)) {
+            vmsgs.addMessages(null, null, "new_title", new String[]{"Catalogue already exists."});
         } else {
             vmsgs.clearKeyMessages("new_title");
         }
@@ -141,9 +141,10 @@ public class BrowseVM {
     @Command
     @NotifyChange({"imagePage", "imageList", "imagePageCount"})
     public void nextPage() {
+        setImagePageCount(catalogueService.imageCount(selectedCatalogue, pageImageMax));
         if (!imagePage.equals(imagePageCount)) {
             imagePage++;
-            updateImages();
+            setImageList(imageService.loadCatalogueImages(getImagePage(), pageImageMax, selectedCatalogue));
         }
     }
 
@@ -174,20 +175,28 @@ public class BrowseVM {
     }
 
     @Command
-    @NotifyChange({"editCatalogue", "catalogueList", "changed", "saved"})
+    @NotifyChange({"editCatalogue", "catalogueList", "changed", "saved", "vmsgs"})
     public void editCatalogue() {
+        clearMessages();
+        if(editCatalogue == null) {
+            return;
+        }
         editCatalogue.setTitle(editCatalogue.getTitle());
-        catalogueService.update(editCatalogue);
-        setCatalogueList(catalogueService.loadByPage(cataloguePage, pageCatalogueMax, null, false));
-        setChanged(false);
-        setSaved(true);
+        if(!catalogueService.update(editCatalogue)) {
+            vmsgs.addMessages(null, null, "new_title", new String[]{"Catalogue already exists."});
+        } else {
+            setCatalogueList(catalogueService.loadByPage(cataloguePage, pageCatalogueMax, null, false));
+            setChanged(false);
+            setSaved(true);
+        }
     }
 
     private void updateImages() {
-        if (selectedCatalogue != null) {
-            setImagePageCount(catalogueService.imageCount(selectedCatalogue, pageImageMax));
-            setImageList(imageService.loadCatalogueImages(getImagePage(), pageImageMax, selectedCatalogue));
+        if (selectedCatalogue == null) {
+            return;
         }
+        setImagePageCount(catalogueService.imageCount(selectedCatalogue, pageImageMax));
+        setImageList(imageService.loadCatalogueImages(getImagePage(), pageImageMax, selectedCatalogue));
     }
 
     public List<ImageEntity> getImageList() {
@@ -217,9 +226,24 @@ public class BrowseVM {
     }
 
     @GlobalCommand
-    @NotifyChange({"imageList", "imagePageCount"})
+    @NotifyChange({"imageList", "imagePageCount", "imagePage"})
     public void reload() {
-        updateImages();
+        if (selectedCatalogue == null) {
+            return;
+        }
+        setImageList(imageService.loadCatalogueImages(getImagePage(), pageImageMax, getSelectedCatalogue()));
+        if (imageList.isEmpty() || imagePage < 0 || imagePage > imagePageCount) {
+            updateImagePageCount();
+            setImagePage(getImagePageCount());
+            setImageList(imageService.loadCatalogueImages(getImagePage(), pageImageMax, getSelectedCatalogue()));
+        }
+
+    }
+
+    private void updateImagePageCount() {
+        if (getCataloguePage() != null) {
+            setImagePageCount(catalogueService.imageCount(getSelectedCatalogue(), pageImageMax));
+        }
     }
 
     @Command
@@ -327,12 +351,12 @@ public class BrowseVM {
         return cataloguePageCount;
     }
 
-    public Integer getCataloguePage() {
-        return cataloguePage;
-    }
-
     public void setCataloguePageCount(Integer cataloguePageCount) {
         this.cataloguePageCount = cataloguePageCount;
+    }
+
+    public Integer getCataloguePage() {
+        return cataloguePage;
     }
 
     public void setCataloguePage(Integer cataloguePage) {
@@ -360,11 +384,11 @@ public class BrowseVM {
         this.changed = changed;
     }
 
-    public void setSaved(Boolean saved) {
-        this.saved = saved;
-    }
-
     public Boolean getSaved() {
         return saved;
+    }
+
+    public void setSaved(Boolean saved) {
+        this.saved = saved;
     }
 }

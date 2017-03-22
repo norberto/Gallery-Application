@@ -1,3 +1,4 @@
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
 <zk xmlns:n="native" xmlns:x="xhtml">
     <n:nav class="navbar navbar-default navbar-static-top body">
         <n:div class="container">
@@ -14,23 +15,24 @@
 
             <x:div class="navbar-collapse collapse">
                 <n:ul class="nav navbar-nav">
-                    <n:li>
+                    <x:li visible="${sec:isAllGranted('ROLE_USER')}">
                         <n:a href="upload.zul">Upload</n:a>
-                    </n:li>
-                    <n:li>
+                    </x:li>
+
+                    <x:li visible="${sec:isAllGranted('ROLE_USER')}">
                         <n:a href="view.zul">View Images</n:a>
-                    </n:li>
-                    <n:li>
+                    </x:li>
+                    <x:li visible="${sec:isAllGranted('ROLE_USER')}">
                         <n:a href="browse.zul">Browse</n:a>
-                    </n:li>
+                    </x:li>
                 </n:ul>
                 <x:div class="navbar navbar-text navbar-right custom-navbar"
                        visible="${pageContext.request.remoteUser != null}">
-                    Logged in as <n:b style="margin-left:5px; margin-right:5px;"> ${pageContext.request.remoteUser}</n:b>
+                    Logged in as
+                    <n:b style="margin-left:5px; margin-right:5px;">${pageContext.request.remoteUser}</n:b>
                     <n:form class="form-inline" action="/logout" method="post">
                         <n:input type="submit" class="btn btn-sm btn-primary" value="Log out"/>
                         <n:input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
                     </n:form>
                 </x:div>
 
@@ -67,9 +69,9 @@
                                                     </n:button>
                                                 </n:div>
                                                 <!--<n:div class="checkbox">-->
-                                                    <!--<n:label>-->
-                                                        <!--<n:input type="checkbox">Remember me</n:input>-->
-                                                    <!--</n:label>-->
+                                                <!--<n:label>-->
+                                                <!--<n:input type="checkbox">Remember me</n:input>-->
+                                                <!--</n:label>-->
                                                 <!--</n:div>-->
                                                 <x:input type="hidden" name="${_csrf.parameterName}"
                                                          value="${_csrf.token}"/>

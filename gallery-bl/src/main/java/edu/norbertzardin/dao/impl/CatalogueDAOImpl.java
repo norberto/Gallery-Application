@@ -40,7 +40,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
     }
 
     @Transactional
-    public void update(CatalogueEntity ce) {
+    public void update(CatalogueEntity ce) throws JpaSystemException, PersistenceException {
         entityManager.merge(ce);
         entityManager.flush();
     }
@@ -100,7 +100,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
         CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
         criteria.select(cb.count(criteria.from(CatalogueEntity.class)));
         
-        if(searchString != null && !searchString.equals("")) {
+        if(searchString != null && !"".equals(searchString)) {
             for(String c : escapedChars) {
                 searchString = searchString.replace(c, "\\" + c);
             }
@@ -116,7 +116,7 @@ public class CatalogueDAOImpl implements CatalogueDao {
         TypedQuery<CatalogueEntity> typedQuery;
         CriteriaQuery<CatalogueEntity> select;
 
-        if(searchString != null && !searchString.equals("")) {
+        if(searchString != null && !"".equals(searchString)) {
 
             searchString = searchString.replace("%", "\\%").toLowerCase() + "%";
 

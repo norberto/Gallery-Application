@@ -22,6 +22,8 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.Messagebox;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -126,26 +128,33 @@ public class UploadVM {
 
     @Command
     @NotifyChange({"thumbnail", "uploaded", "allowSubmit", "errorMessage"})
-    public void onUpload(@BindingParam("upEvent") UploadEvent event) {
-        Media media = event.getMedia();
-        InputStream is = new BufferedInputStream(new ByteArrayInputStream(media.getByteData()));
-        try {
-            String mimeType = URLConnection.guessContentTypeFromStream(is);
-            if (mimeType != null && media instanceof Image) {
-                Image img = (Image) media;
-                setDownload(img.getByteData());
-                setMediumSize(ImageUtil.scaleImageToSize(img, 500));
-                setThumbnail(ImageUtil.scaleImageToSize(img, 200));
-                setDatatype(img.getFormat());
-                setAllowSubmit(true);
-                errorMessage = null;
-            } else {
-                errorMessage = "Selected item is not an image.";
-                setAllowSubmit(false);
-                setThumbnail(imagePlaceholder);
+    public void onUpload(@BindingParam("upEvent") UploadEvent event) throws IOException{
+//    public void onUpload$fileUpload(UploadEvent event) throws IOException {
+        int fileSizeBytes = event.getMedia().getStreamData().available();
+
+        if (fileSizeBytes <= 5120) {
+            Media media = event.getMedia();
+            InputStream is = new BufferedInputStream(new ByteArrayInputStream(media.getByteData()));
+            try {
+                String mimeType = URLConnection.guessContentTypeFromStream(is);
+                if (mimeType != null && media instanceof Image) {
+                    Image img = (Image) media;
+                    setDownload(img.getByteData());
+                    setMediumSize(ImageUtil.scaleImageToSize(img, 500));
+                    setThumbnail(ImageUtil.scaleImageToSize(img, 200));
+                    setDatatype(img.getFormat());
+                    setAllowSubmit(true);
+                    errorMessage = null;
+                } else {
+                    errorMessage = "Selected item is not an image.";
+                    setAllowSubmit(false);
+                    setThumbnail(imagePlaceholder);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            Messagebox.show("WTF" + fileSizeBytes);
         }
     }
 
@@ -179,12 +188,11 @@ public class UploadVM {
         updatePageCount();
         if (!page.equals(pageCount)) {
             page++;
-        } else if(page >= pageCount) {
+        } else if (page >= pageCount) {
             setPage(getPageCount());
         }
         updateCataloguesList();
     }
-
 
 
     private void updatePageCount() {
@@ -319,20 +327,20 @@ public class UploadVM {
         this.defaultCatalogue = catalogue;
     }
 
-    public void setPageCount(Integer pageCount) {
-        this.pageCount = pageCount;
-    }
-
     public Integer getPageCount() {
         return pageCount;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
     }
 
     public Integer getPage() {
         return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
     }
 
     public Integer getPageMax() {

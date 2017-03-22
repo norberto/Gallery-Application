@@ -19,7 +19,7 @@ public class UploadValidator extends AbstractValidator{
     }
 
     private void validateName(ValidationContext ctx, String name, Long maxLength){
-        if(name == null || name.equals("")) {
+        if(name == null || "".equals(name)) {
             addInvalidMessage(ctx, "name", "Name is required.");
         }
         if(name != null && name.length() > maxLength.intValue()) {

@@ -61,11 +61,12 @@ public class ViewVM {
     @GlobalCommand
     @NotifyChange({"imageList", "page", "pageCount"})
     public void reload () {
+        loadImages();
         if(imageList.isEmpty() || page < 0 || page > pageCount) {
             updatePageCount();
             setPage(getPageCount());
+            loadImages();
         }
-        loadImages();
     }
 
     @Command
@@ -86,15 +87,14 @@ public class ViewVM {
     @Command
     @NotifyChange({"page", "imageList", "pageCount"})
     public void nextPage() {
+        updatePageCount();
         if (!page.equals(pageCount)) {
             page++;
-        } else if(page >= pageCount) {
-            setPage(getPageCount());
         }
         updatePageContent();
     }
 
-    public boolean isSearch() { return searchString != null && !searchString.equals(""); }
+    public boolean isSearch() { return searchString != null && !"".equals(searchString); }
 
     private void updatePageCount() {
         if(isSearch()) {

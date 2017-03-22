@@ -122,7 +122,7 @@ public class ImageUtil {
     }
 
     public static String[] parseTags(String tags) {
-        if (tags == null || tags.equals("")) return new String[0];
+        if (tags == null || "".equals(tags)) return new String[0];
         String[] tagList = tags.split("\\W+");
 
         List<String> list = new ArrayList<>(Arrays.asList(tagList));

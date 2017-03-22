@@ -1,15 +1,15 @@
 <?link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"?>
-<zk xmlns:n="xhtml">
+<zk xmlns:n="native" xmlns:x="xhtml">
     <n:head>
         <n:link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"/>
+        <n:script type="text/javascript" src="bootstrap/js/bootstrap.js"/>
 
-            <n:script>
-                $(".nav li").on("click", function() {
-                $(".nav li").removeClass("active");
-                $(this).addClass("active");
-                });
-            </n:script>
+        <n:script>
+            $(".nav li").on("click", function() {
+            $(".nav li").removeClass("active");
+            $(this).addClass("active");
+            });
+        </n:script>
     </n:head>
 
     <n:div>
@@ -22,7 +22,7 @@
             </n:div>
             <!-- ********** Content ********** -->
             <n:div class="row">
-                <n:div class="container-fluid" self="@insert(content)"/>
+                <x:div class="container-fluid" self="@insert(content)"/>
             </n:div>
         </n:div>
     </n:div>

@@ -3,6 +3,7 @@ package edu.norbertzardin.service;
 import edu.norbertzardin.dao.CatalogueDao;
 import edu.norbertzardin.entities.CatalogueEntity;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
@@ -62,8 +63,13 @@ public class CatalogueService {
         return catalogueDao.loadByPage(cataloguePage, pageCatalogueMax, searchString, includeDefault);
     }
 
-    public void update(CatalogueEntity ce) {
-        catalogueDao.update(ce);
+    public Boolean update(CatalogueEntity ce) {
+        try {
+            catalogueDao.update(ce);
+            return true;
+        } catch (PersistenceException | JpaSystemException e ) {
+            return false;
+        }
     }
 
     public CatalogueEntity loadNoFetch(String name) {

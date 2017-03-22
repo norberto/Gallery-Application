@@ -15,8 +15,8 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 public class RegisterVM {
 
-    private static final String SUCCESS = "User has been successfully registered.";
-    private final String REGISTRATION_FAILED = "Could not create user.";
+    private final String SUCCESS = "User has been successfully registered.";
+    private final String PASSWORD_FAILURE = "Passwords do not match.";
     @WireVariable
     private UserService userService;
     private String username;
@@ -51,6 +51,10 @@ public class RegisterVM {
         Integer result = userService.register(username, password);
         if (result == 200) {
             message = SUCCESS;
+        } else if (result == 102) {
+            error = USER_ALREADY_EXISTS;
+        } else if (result == 101) {
+            error = PASSWORD_FAILURE;
         }
 
     }

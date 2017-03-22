@@ -1,0 +1,32 @@
+<?page title="Gallery Application - Home"?>
+<?link rel="stylesheet" type="text/css" href="/../bootstrap/css/bootstrap.min.css"?>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <h1 style="font-size:10em; margin-top:150px">
+                        <span class="label label-default">
+                            JavaScript_Not_Found
+                            <span class="blink_text">_</span>
+                        </span>
+                    </h1>
+                </div>
+            </div>
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <h1 style="margin-top:50px">An error has occurred!</h1>
+                    <p>You need to have JavaScript enabled in order to use the application. If your browser does
+                        not support
+                        JavaScript please upgrade it. Reload the page after you fix the issue.
+                    </p>
+                </div>
+            </div>
+            <div class="row" align="center" style="margin-top:50px">
+                <a href="/" class="btn btn-primary" role="button">Reload</a>
+            </div>
+        </div>
+    </div>
+</div>
+

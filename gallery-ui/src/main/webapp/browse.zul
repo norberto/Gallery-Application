@@ -245,7 +245,7 @@
                             <n:div class="container-fluid">
                                 <n:div class="row top-buffer">
                                     <x:div class="col-md-12" align="left">
-                                        <x:div sclass="@load(empty vmsgs[newTitle] ? 'form-group' : 'form-group has-error has-feedback')">
+                                        <x:div sclass="@load(empty vmsgs[newTitle] and empty vmsgs['new_title'] ? 'form-group' : 'form-group has-error has-feedback')">
                                             <n:label class="control-label" for="newTitle">Catalogue title</n:label>
                                             <textbox id="newTitle" type="text" zclass="form-control"
                                                      onChanging="@command('changed')"
@@ -253,7 +253,8 @@
                                                      value="@load(vm.editCatalogue.title) @save(vm.editCatalogue.title, before='editCatalogue') @validator('edu.norbertzardin.validators.TitleValidator', maxLength=12)"/>
                                             <x:span id="newTitleStatus" class="help-block"
                                                     textContent="@load(vmsgs[newTitle])"/>
-
+                                            <x:span id="newTitleStatus2" class="help-block"
+                                                    textContent="@load(vmsgs['new_title'])"/>
                                         </x:div>
                                     </x:div>
                                 </n:div>

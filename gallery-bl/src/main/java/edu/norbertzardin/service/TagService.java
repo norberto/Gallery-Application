@@ -50,6 +50,7 @@ public class TagService {
             te.addImage(ie);
             te.setCreatedDate(new Date());
             tagDao.create(te);
+            System.out.println("LOXAS");
             return true;
         } else {
             te.addImage(ie);

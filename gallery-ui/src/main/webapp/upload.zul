@@ -17,6 +17,33 @@
                     <h1>Upload Image</h1>
                 </n:div>
             </n:div>
+            <script type="text/javascript">
+                var oldAlert = jq.alert;
+                jq.alert = function (msg, opts) {
+                if (!msg.indexOf('the request was rejected because its size')) {
+                var oldMsg = msg;
+
+                // get original number
+                msg = msg.replace('the request was rejected because its size (', '');
+                msg = msg.replace(') exceeds the configured maximum (', '_');
+                msg = msg.replace(')', '');
+                var v1 = msg.substring(0, msg.indexOf('_'));
+                var v2 = msg.substring(msg.indexOf('_')+1, msg.length);
+
+                // calculate MB
+                var n1 = (parseInt(v1)/1024/ 1024).toFixed(2) + '-MB';
+                var n2 = (parseInt(v2)/1024/ 1024).toFixed(2) + '-MB';
+
+                // replace original number with MB
+                oldMsg = oldMsg.replace(v1, n1);
+                oldMsg = oldMsg.replace(v2, n2);
+
+                oldAlert(oldMsg, opts); // use custom message here
+                }
+                else
+                oldAlert(msg, opts);
+                }
+            </script>
 
             <n:form class="form-horizontal">
                 <n:div class="row">
@@ -120,7 +147,7 @@
                         <div sclass="@load(uploadVM.errorMessage eq null ? 'form-group' : 'form-group has-error has-feedback')">
                             <n:label for="selectImage"/>
 
-                            <zul:button zclass="btn btn-default control-label" upload="true, maxsize=5120"
+                            <zul:button id="fileUpload" zclass="btn btn-default control-label" upload="true"
                                         onUpload="@command('onUpload', upEvent=event)" label="Choose image"/>
 
                             <span style="color: #a94442;" visible="@load(uploadVM.errorMessage ne null)"
